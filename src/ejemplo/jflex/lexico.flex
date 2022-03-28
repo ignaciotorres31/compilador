@@ -45,8 +45,9 @@ WhiteSpace     = {LineTerminator} | [ \t\f]
 
 Identifier = \^[\^\W\d\.\_][\^\W\.]*
 
-DecIntegerLiteral = \d+
-
+intLiteral = \d+
+floatLiteral = \d+\.\d* | \.\d+
+intLiteral = \d+
 
 %state STRING
 %state COMENTARIO
@@ -66,10 +67,6 @@ DecIntegerLiteral = \d+
 
   "if"                 { return token("IF", yytext());}
   "then"               { return token("THEN", yytext());}
-  
-  "boolean"            { return token("BOOLEAN", yytext()); }
-  "int"                { return token("INT", yytext()); }
-  "float"              { return token("FLOAT", yytext());}
 
   "display"             { return token("DISPLAY", yytext());}
   "declare\.section"    { return token("DECLARE.SECTION", yytext());}
@@ -107,7 +104,9 @@ DecIntegerLiteral = \d+
   {Identifier}                   { return token("IDENTIFIER", yytext()); }
 
   /* literals */
-  {DecIntegerLiteral}            { return token("INTEGER_LITERAL", yytext()); }
+  {intLiteral}                   { return token("INT", yytext()); }
+  "boolean"                      { return token("BOOLEAN", yytext()); }
+  <floatLiteral>                 { return token("FLOAT", yytext());}
   \"                             {  string.setLength(0); 
                                     yybegin(STRING); 
                                     string_yyline = this.yyline;
@@ -129,8 +128,8 @@ DecIntegerLiteral = \d+
   \\\"                           { string.append('\"'); }
   \\n                            { string.append('\n'); }
   \\t                            { string.append('\t'); }
-  \\                             { string.append('\'); }
   \\\\                           { string.append('\\'); }
+  \\                             { string.append('\'); }
   [^]                            { string.append( yytext() ); }
 }
 
