@@ -43,7 +43,7 @@ LineTerminator = \r|\n|\r\n
 
 WhiteSpace     = {LineTerminator} | [ \t\f]
 
-Identifier = ^[^\W\d\.\_][^\W\.]*
+Identifier = \^[\^\W\d\.\_][\^\W\.]*
 
 DecIntegerLiteral = \d+
 
@@ -71,13 +71,13 @@ DecIntegerLiteral = \d+
   "int"                { return token("INT", yytext()); }
   "float"              { return token("FLOAT", yytext());}
 
-  "display"            { return token("DISPLAY", yytext());}
-  "declare\.section"   { return token("DECLARE.SECTION", yytext());}
-  "enddeclare\.section"{ return token("ENDDECLARE.SECTION", yytext());}
-  "program\.section"   { return token("PROGRAM.SECTION", yytext());}
-  "endprogram\.section"{ return token("ENDPROGRAM.SECTION", yytext());}
+  "display"             { return token("DISPLAY", yytext());}
+  "declare\.section"    { return token("DECLARE.SECTION", yytext());}
+  "enddeclare\.section" { return token("ENDDECLARE.SECTION", yytext());}
+  "program\.section"    { return token("PROGRAM.SECTION", yytext());}
+  "endprogram\.section" { return token("ENDPROGRAM.SECTION", yytext());}
 
-  "sumaimpar"          { return token("SUMAIMPAR", yytext());}
+  "sumaimpar"           { return token("SUMAIMPAR", yytext());}
 
   /* operators */
 
