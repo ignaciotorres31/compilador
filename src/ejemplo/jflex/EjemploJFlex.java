@@ -25,10 +25,10 @@ public class EjemploJFlex {
         
         // TODO code application logic here
         
-        //FileReader entrada = new FileReader("./entrada.txt");
-        //MiLexico lexico = new MiLexico(entrada);
-        MiLexico lexico = new MiLexico(new InputStreamReader(System.in));
-        System.out.printf("Análisis léxico iniciado: %nIngrese por teclado:%n");
+        FileReader entrada = new FileReader("./entrada.txt");
+        MiLexico lexico = new MiLexico(entrada);
+        //MiLexico lexico = new MiLexico(new InputStreamReader(System.in));
+        //System.out.printf("Análisis léxico iniciado: %nIngrese por teclado:%n");
         while (true) {
             MiToken token = lexico.yylex();
             if (token == null)

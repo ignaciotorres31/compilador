@@ -1,1 +1,7 @@
-var =  9 + var
+declare.section {
+var = 1 + 2;
+if (var == 3){
+true;
+}
+}
+enddeclare.section

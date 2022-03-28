@@ -43,11 +43,11 @@ LineTerminator = \r|\n|\r\n
 
 WhiteSpace     = {LineTerminator} | [ \t\f]
 
-Identifier = \^[\^\W\d\.\_][\^\W\.]*
+Identifier = [a-zA-Z][a-zA-Z0-9_]*
 
 intLiteral = \d+
 floatLiteral = \d+\.\d* | \.\d+
-intLiteral = \d+
+boolean = true | false
 
 %state STRING
 %state COMENTARIO
@@ -101,11 +101,11 @@ intLiteral = \d+
   "\;"                           { return token("EOL", yytext()); }
 
   /* identifiers */
+  { boolean }                    { return token("BOOLEAN", yytext()); } 
   {Identifier}                   { return token("IDENTIFIER", yytext()); }
 
   /* literals */
   {intLiteral}                   { return token("INT", yytext()); }
-  "boolean"                      { return token("BOOLEAN", yytext()); }
   {floatLiteral}                 { return token("FLOAT", yytext());}
   \"                             {  string.setLength(0); 
                                     yybegin(STRING); 
