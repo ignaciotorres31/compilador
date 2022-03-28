@@ -91,7 +91,7 @@ intLiteral = \d+
   "<="                           { return token("MENOR_IGUAL", yytext()); }
 
   "\("                           { return token("PARENTESISA", yytext()); }
-  "\("                           { return token("PARENTESISC", yytext()); }
+  "\)"                           { return token("PARENTESISC", yytext()); }
   "\{"                           { return token("LLAVESA", yytext()); }
   "\}"                           { return token("LLAVESC", yytext()); }
   "\["                           { return token("CORCHETESA", yytext()); }
@@ -106,7 +106,7 @@ intLiteral = \d+
   /* literals */
   {intLiteral}                   { return token("INT", yytext()); }
   "boolean"                      { return token("BOOLEAN", yytext()); }
-  <floatLiteral>                 { return token("FLOAT", yytext());}
+  {floatLiteral}                 { return token("FLOAT", yytext());}
   \"                             {  string.setLength(0); 
                                     yybegin(STRING); 
                                     string_yyline = this.yyline;
@@ -128,8 +128,8 @@ intLiteral = \d+
   \\\"                           { string.append('\"'); }
   \\n                            { string.append('\n'); }
   \\t                            { string.append('\t'); }
-  \\\\                           { string.append('\\'); }
-  \\                             { string.append('\'); }
+  \\\\                           { string.append('\\'+'\\'); }
+  \\                             { string.append('\\'); }
   [^]                            { string.append( yytext() ); }
 }
 
