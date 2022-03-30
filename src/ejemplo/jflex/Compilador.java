@@ -21,7 +21,7 @@ import javax.swing.JFrame;
  *
  * @author Merce
  */
-public class EjemploJFlex extends javax.swing.JFrame {
+public class Compilador extends javax.swing.JFrame {
     
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButtonOk;
@@ -35,7 +35,7 @@ public class EjemploJFlex extends javax.swing.JFrame {
      * Creates new form prueba
      */
 
-    public EjemploJFlex() {
+    public Compilador() {
         this.setSize(400, 400);
         initComponents();
     }
@@ -65,7 +65,7 @@ public class EjemploJFlex extends javax.swing.JFrame {
                 try {
                     jToggleButtonImportarActionPerformed(evt);
                 } catch (IOException ex) {
-                    Logger.getLogger(EjemploJFlex.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Compilador.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -77,7 +77,7 @@ public class EjemploJFlex extends javax.swing.JFrame {
                 try {
                     jButtonOkActionPerformed(evt);
                 } catch (IOException ex) {
-                    Logger.getLogger(EjemploJFlex.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Compilador.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -165,7 +165,7 @@ public class EjemploJFlex extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFrame frame = new EjemploJFlex();
+                JFrame frame = new Compilador();
                 frame.setResizable(false);
                 frame.setVisible(true);
             }
