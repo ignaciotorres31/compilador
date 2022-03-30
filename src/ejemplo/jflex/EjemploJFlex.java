@@ -5,10 +5,16 @@
  */
 package ejemplo.jflex;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java_cup.runtime.Symbol;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 /**
@@ -18,11 +24,11 @@ import javax.swing.JFrame;
 public class EjemploJFlex extends javax.swing.JFrame {
     
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonOk;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JTextArea jTextArea;
+    private javax.swing.JToggleButton jToggleButtonImportar;
     // End of variables declaration                   
     
     /**
@@ -44,26 +50,34 @@ public class EjemploJFlex extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jToggleButtonImportar = new javax.swing.JToggleButton();
+        jButtonOk = new javax.swing.JButton();
+        jTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("PRUEBA");
 
-        jToggleButton1.setText("jToggleButton1");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        jToggleButtonImportar.setText("Importar");
+        jToggleButtonImportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                try {
+                    jToggleButtonImportarActionPerformed(evt);
+                } catch (IOException ex) {
+                    Logger.getLogger(EjemploJFlex.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
-        jButton1.setText("jButton1");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonOk.setText("Aceptar");
+        
+        jButtonOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                try {
+                    jButtonOkActionPerformed(evt);
+                } catch (IOException ex) {
+                    Logger.getLogger(EjemploJFlex.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -75,12 +89,12 @@ public class EjemploJFlex extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jToggleButton1)
+                        .addComponent(jToggleButtonImportar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(jButtonOk))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTextField1)))
+                        .addComponent(jTextArea)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(258, 258, 258)
@@ -92,11 +106,11 @@ public class EjemploJFlex extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
-                    .addComponent(jButton1))
+                    .addComponent(jToggleButtonImportar)
+                    .addComponent(jButtonOk))
                 .addGap(23, 23, 23))
         );
 
@@ -114,12 +128,35 @@ public class EjemploJFlex extends javax.swing.JFrame {
         pack();
     }
     
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
+    private void jToggleButtonImportarActionPerformed(java.awt.event.ActionEvent evt) throws IOException {                                               
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION)
+        {
+            File selectedFile = fileChooser.getSelectedFile();
+            selectedFile.createNewFile();
+            FileReader entrada = new FileReader(selectedFile);
+            MiLexico lexico = new MiLexico(entrada);
+            while (true) {
+                MiToken token = lexico.yylex();
+                if (token == null)
+                    break;
+                System.out.println("Token: " + token.toString());}
+            System.out.println("Análisis léxico terminado.");
+        }
     }                                              
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+    private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
+        InputStream is = new ByteArrayInputStream(jTextArea.getText().getBytes());
+        InputStreamReader reader = new InputStreamReader(is);
+        MiLexico lexico = new MiLexico(reader);
+        while (true) {
+            MiToken token = lexico.yylex();
+            if (token == null)
+                break;
+            System.out.println("Token: " + token.toString());
+        }
+        System.out.println("Análisis léxico terminado.");
     }
     
     public static void main(String[] args) throws IOException {
@@ -133,7 +170,7 @@ public class EjemploJFlex extends javax.swing.JFrame {
             }
         });
         
-        FileReader entrada = new FileReader("./entrada.txt");
+        /*FileReader entrada = new FileReader("./entrada.txt");
         MiLexico lexico = new MiLexico(entrada);
         //MiLexico lexico = new MiLexico(new InputStreamReader(System.in));
         //System.out.printf("Análisis léxico iniciado: %nIngrese por teclado:%n");
@@ -143,7 +180,7 @@ public class EjemploJFlex extends javax.swing.JFrame {
                 break;
             System.out.println("Token: " + token.toString());
         }
-        System.out.println("Análisis léxico terminado.");
+        System.out.println("Análisis léxico terminado.");*/
 
     }
 
