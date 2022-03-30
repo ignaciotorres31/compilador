@@ -41,7 +41,7 @@ package ejemplo.jflex;
 
 LineTerminator = \r|\n|\r\n
 WhiteSpace     = {LineTerminator} | [ \t\f]
-
+    
 while   = WHILE|while
 integer = INTEGER|Integer|integer
 float   = FLOAT|Float|float
@@ -60,10 +60,10 @@ programSection = PROGRAM\.SECTION | program\.section
 endprogramSection = ENDPROGRAM\.SECTION | endprogram\.section 
 sumaimpar = SUMAIMPAR | sumaimpar
 
-Identifier = [a-zA-Z][a-zA-Z0-9_]*
+Identifier = [a-zA-Z][a-zA-Z0-9_]*{1,20}
 
-intLiteral = \d+
-floatLiteral = \d+\.\d* | \.\d+
+intLiteral = \d+ {1,50}
+floatLiteral = \d+\.\d* | \.\d+ {1,50}
 booleanLiteral = true | false
 
 %state STRING
