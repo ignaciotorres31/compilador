@@ -772,6 +772,8 @@ public class MiLexico {
     } catch (ArrayIndexOutOfBoundsException e) {
       message = ZZ_ERROR_MSG[ZZ_UNKNOWN_ERROR];
     }
+    
+    Compilador.setJTextConsole(message);
 
     throw new Error(message);
   }

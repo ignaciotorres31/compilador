@@ -30,7 +30,7 @@ public class Compilador extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea;
-    private javax.swing.JTextPane jTextPane1;
+    private static javax.swing.JTextPane jTextPane1;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration                  
     
@@ -172,16 +172,24 @@ public class Compilador extends javax.swing.JFrame {
         InputStreamReader reader = new InputStreamReader(is);
         MiLexico lexico = new MiLexico(reader);
         String outpout = "Token: ";
-        while (true) {
-            MiToken token = lexico.yylex();
-            if (token == null)
-                break;
-           outpout  +=  token.toString() + "\n";
+        try{
+            while (true) {
+                MiToken token = lexico.yylex();
+                if (token == null)
+                    break;
+               outpout  +=  token.toString() + "\n";
+            }
+            System.out.println(outpout);
+            jTextPane1.setText(outpout);
         }
-        System.out.println(outpout);
-        jTextPane1.setText(outpout);
-        //PrintStream printStream = new PrintStream(new CustomOutputStream(textArea));
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }        
         System.out.println("Análisis léxico terminado.");
+    }
+    
+    public static void setJTextConsole(String message){
+        Compilador.jTextPane1.setText(message);
     }
     
     public static void main(String[] args) throws IOException {
