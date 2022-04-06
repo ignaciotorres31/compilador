@@ -5,6 +5,7 @@
  */
 package ejemplo.jflex;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileReader;
@@ -13,7 +14,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
@@ -24,12 +24,15 @@ import javax.swing.JFrame;
 public class Compilador extends javax.swing.JFrame {
     
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jButtonOk;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea;
-    private javax.swing.JToggleButton jToggleButtonImportar;
-    // End of variables declaration                   
+    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JToggleButton jToggleButton1;
+    // End of variables declaration                  
     
     /**
      * Creates new form prueba
@@ -51,16 +54,19 @@ public class Compilador extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jToggleButtonImportar = new javax.swing.JToggleButton();
-        jButtonOk = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("PRUEBA");
+        jLabel1.setText("Compilador");
 
-        jToggleButtonImportar.setText("Importar");
-        jToggleButtonImportar.addActionListener(new java.awt.event.ActionListener() {
+        jToggleButton1.setText("Importar");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     jToggleButtonImportarActionPerformed(evt);
@@ -70,9 +76,9 @@ public class Compilador extends javax.swing.JFrame {
             }
         });
 
-        jButtonOk.setText("Aceptar");
+        jButton1.setText("Aceptar");
         
-        jButtonOk.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     jButtonOkActionPerformed(evt);
@@ -82,37 +88,46 @@ public class Compilador extends javax.swing.JFrame {
             }
         });
 
+        jTextArea.setColumns(20);
+        jTextArea.setRows(5);
+        jTextPane1.setEditable(false);
+        jScrollPane1.setViewportView(jTextArea);
+
+        jScrollPane2.setViewportView(jTextPane1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jToggleButtonImportar)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jToggleButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonOk))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTextArea)))
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(258, 258, 258)
+                .addGap(484, 484, 484)
                 .addComponent(jLabel1)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addContainerGap(486, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButtonImportar)
-                    .addComponent(jButtonOk))
-                .addGap(23, 23, 23))
+                    .addComponent(jToggleButton1)
+                    .addComponent(jButton1))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -137,13 +152,18 @@ public class Compilador extends javax.swing.JFrame {
             File selectedFile = fileChooser.getSelectedFile();
             selectedFile.createNewFile();
             FileReader entrada = new FileReader(selectedFile);
-            MiLexico lexico = new MiLexico(entrada);
+            BufferedReader in;
+            in = new BufferedReader(entrada);
+            jTextArea.read(in, null);
+            in.close();
+            jTextArea.requestFocus();
+            /*MiLexico lexico = new MiLexico(entrada);
             while (true) {
                 MiToken token = lexico.yylex();
                 if (token == null)
                     break;
                 System.out.println("Token: " + token.toString());}
-            System.out.println("Análisis léxico terminado.");
+            System.out.println("Análisis léxico terminado.");*/
         }
     }                                              
 
@@ -151,12 +171,16 @@ public class Compilador extends javax.swing.JFrame {
         InputStream is = new ByteArrayInputStream(jTextArea.getText().getBytes());
         InputStreamReader reader = new InputStreamReader(is);
         MiLexico lexico = new MiLexico(reader);
+        String outpout = "Token: ";
         while (true) {
             MiToken token = lexico.yylex();
             if (token == null)
                 break;
-            System.out.println("Token: " + token.toString());
+           outpout  +=  token.toString() + "\n";
         }
+        System.out.println(outpout);
+        jTextPane1.setText(outpout);
+        //PrintStream printStream = new PrintStream(new CustomOutputStream(textArea));
         System.out.println("Análisis léxico terminado.");
     }
     
