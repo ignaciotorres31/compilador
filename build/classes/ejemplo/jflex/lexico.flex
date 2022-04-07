@@ -46,7 +46,6 @@ while   = WHILE|while
 integer = INTEGER|Integer|integer
 float   = FLOAT|Float|float
 boolean = BOOLEAN | Boolean | boolean
-write   = WRITE|write
 else    = ELSE|else
 if  = IF|if
 then = THEN | then
