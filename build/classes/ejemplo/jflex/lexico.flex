@@ -60,6 +60,7 @@ programSection = PROGRAM\.SECTION | program\.section
 endprogramSection = ENDPROGRAM\.SECTION | endprogram\.section 
 sumaimpar = SUMAIMPAR | sumaimpar
 
+
 Identifier = [^\W\d\.\_][^\W\.]*{1,20}
 
 intLiteral = \d+ {1,50}
