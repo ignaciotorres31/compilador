@@ -22,6 +22,14 @@ public class Generador {
     public static void main(String[] args) {
         String path = "./src/ejemplo/jflex/lexico.flex";
         generarLexer(path);
+        
+        String[] param = new String[5];
+        param[0] = "-destdir";
+        param[1] = "./src/ejemplo/jflex/";
+        param[2] = "-parser";
+        param[3] = "MiParser";
+        param[4] = "./src/ejemplo/jflex/parser.cup";
+        generarParser(param);
     }
     
     /**
@@ -36,4 +44,13 @@ public class Generador {
         generator.generate();
     }
     
+    public static void generarParser(String[] param){
+        try {
+            java_cup.Main.main(param);
+        } catch (IOException ex) {
+            Logger.getLogger(Generador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Generador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

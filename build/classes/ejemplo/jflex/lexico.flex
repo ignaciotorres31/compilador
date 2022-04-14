@@ -78,6 +78,9 @@ booleanLiteral = true | false
   {integer}            { return token("INTEGER",yytext());} 
   {float}              { return token("FLOAT", yytext());}
   {boolean}            { return token("BOOLEAN", yytext()); }
+  "input_int"          { return token("INPUT_INT", yytext()); }
+  "input_float"        { return token("INPUT_FLOAT", yytext()); }
+  "input_bool"         { return token("INPUT_BOOL", yytext()); }
 
   "and"                { return token("AND", yytext());}
   "or"                 { return token("OR", yytext());}
@@ -89,12 +92,13 @@ booleanLiteral = true | false
 
   {if}                 { return token("IF", yytext());}
   {then}               { return token("THEN", yytext());}
+  {else}               { return token("ELSE", yytext());}
 
   {display}             { return token("DISPLAY", yytext());}
-  {declareSection}    { return token("DECLARE.SECTION", yytext());}
-  {enddeclareSection} { return token("ENDDECLARE.SECTION", yytext());}
-  {programSection}    { return token("PROGRAM.SECTION", yytext());}
-  {endprogramSection} { return token("ENDPROGRAM.SECTION", yytext());}
+  {declareSection}    { return token("DECLARE_SECTION", yytext());}
+  {enddeclareSection} { return token("ENDDECLARE_SECTION", yytext());}
+  {programSection}    { return token("PROGRAM_SECTION", yytext());}
+  {endprogramSection} { return token("ENDPROGRAM_SECTION", yytext());}
 
   {sumaimpar}           { return token("SUMAIMPAR", yytext());}
 
@@ -120,8 +124,9 @@ booleanLiteral = true | false
   "\]"                           { return token("CORCHETESC", yytext()); }
   "\."                           { return token("PUNTO", yytext()); }
   "\,"                           { return token("COMA", yytext()); }
-  "\;"                           { return token("EOL", yytext()); }
+  "\;"                           { return token("PUNTOCOMA", yytext()); }
   ":"                            { return token("DOS_PUNTOS", yytext()); }
+  ":="                           {return token("ASIGNACION", yytext()); }   
 
   /* literals */
   {booleanLiteral}               { return token("BOOLEAN_LITERAL", yytext()); } 
@@ -142,7 +147,7 @@ booleanLiteral = true | false
   {WhiteSpace}                   { /* ignore */ }
 
   /* identifiers */
-  {Identifier}                   { return token("IDENTIFIER", yytext()); }
+  {Identifier}                   { return token("IDENTIFICADOR", yytext()); }
 }
 
 
