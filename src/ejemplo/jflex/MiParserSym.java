@@ -8,29 +8,107 @@ package ejemplo.jflex;
 /** CUP generated class containing symbol constants. */
 public class MiParserSym {
   /* terminals */
-  public static final int MENOS = 3;
-  public static final int MULT = 4;
-  public static final int ENTERO = 10;
-  public static final int MENOS_UNARIO = 8;
-  public static final int PAR_CIERRA = 7;
+  public static final int DISPLAY = 44;
+  public static final int SUMAIMPAR = 28;
+  public static final int ENDDECLARE_SECTION = 46;
+  public static final int CORCHETESC = 18;
+  public static final int CORCHETESA = 17;
+  public static final int LLAVESC = 16;
+  public static final int LLAVESA = 15;
+  public static final int RESTA = 3;
+  public static final int INTEGER = 29;
+  public static final int DOS_PUNTOS = 22;
+  public static final int PUNTOCOMA = 21;
+  public static final int PARENTESISC = 14;
+  public static final int PARENTESISA = 13;
+  public static final int BOOLEAN_LITERAL = 25;
+  public static final int NOT = 37;
+  public static final int AND = 35;
+  public static final int IDENTIFICADOR = 24;
+  public static final int IGUAL = 6;
+  public static final int OR = 36;
+  public static final int SUMA = 2;
+  public static final int IF = 41;
+  public static final int IGUAL_IGUAL = 7;
   public static final int EOF = 0;
-  public static final int MAS = 2;
-  public static final int PAR_ABRE = 6;
-  public static final int DIV = 5;
+  public static final int BOOLEAN = 31;
+  public static final int INPUT_INT = 32;
   public static final int error = 1;
-  public static final int IDENTIFICADOR = 9;
+  public static final int COMA = 20;
+  public static final int INPUT_BOOL = 34;
+  public static final int MENOR = 11;
+  public static final int DESIGUAL = 8;
+  public static final int ASIGNACION = 23;
+  public static final int MAYOR = 9;
+  public static final int ELSE = 43;
+  public static final int PUNTO = 19;
+  public static final int WHILE = 38;
+  public static final int MAYOR_IGUAL = 10;
+  public static final int FLOAT = 30;
+  public static final int THEN = 42;
+  public static final int PROGRAM_SECTION = 47;
+  public static final int END = 40;
+  public static final int INPUT_FLOAT = 33;
+  public static final int STRING = 49;
+  public static final int ENDPROGRAM_SECTION = 48;
+  public static final int MENOR_IGUAL = 12;
+  public static final int FLOAT_LITERAL = 27;
+  public static final int DIVISION = 5;
+  public static final int DO = 39;
+  public static final int DECLARE_SECTION = 45;
+  public static final int MULTIPLICACION = 4;
+  public static final int INTEGER_LITERAL = 26;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
-  "MAS",
-  "MENOS",
-  "MULT",
-  "DIV",
-  "PAR_ABRE",
-  "PAR_CIERRA",
-  "MENOS_UNARIO",
+  "SUMA",
+  "RESTA",
+  "MULTIPLICACION",
+  "DIVISION",
+  "IGUAL",
+  "IGUAL_IGUAL",
+  "DESIGUAL",
+  "MAYOR",
+  "MAYOR_IGUAL",
+  "MENOR",
+  "MENOR_IGUAL",
+  "PARENTESISA",
+  "PARENTESISC",
+  "LLAVESA",
+  "LLAVESC",
+  "CORCHETESA",
+  "CORCHETESC",
+  "PUNTO",
+  "COMA",
+  "PUNTOCOMA",
+  "DOS_PUNTOS",
+  "ASIGNACION",
   "IDENTIFICADOR",
-  "ENTERO"
+  "BOOLEAN_LITERAL",
+  "INTEGER_LITERAL",
+  "FLOAT_LITERAL",
+  "SUMAIMPAR",
+  "INTEGER",
+  "FLOAT",
+  "BOOLEAN",
+  "INPUT_INT",
+  "INPUT_FLOAT",
+  "INPUT_BOOL",
+  "AND",
+  "OR",
+  "NOT",
+  "WHILE",
+  "DO",
+  "END",
+  "IF",
+  "THEN",
+  "ELSE",
+  "DISPLAY",
+  "DECLARE_SECTION",
+  "ENDDECLARE_SECTION",
+  "PROGRAM_SECTION",
+  "ENDPROGRAM_SECTION",
+  "STRING"
   };
 }
 

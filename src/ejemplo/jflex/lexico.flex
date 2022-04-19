@@ -66,10 +66,10 @@ sumaimpar = SUMAIMPAR | sumaimpar
 
 Identifier = [^\W\d\.\_][^\W\.]*{1,20}
 
-intLiteral = \d+ {1,50}
-floatLiteral = \d+\.\d* | \.\d+ {1,50}
+intLiteral = \d+ 
+floatLiteral = \d+\.\d* | \.\d+ 
 booleanLiteral = true | false
-comentarioOnlyLine = #.*\n 
+comentarioOnlyLine = #.*\n? 
 
 %state STRING
 %state COMENTARIO

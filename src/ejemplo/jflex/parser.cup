@@ -16,6 +16,22 @@ action code {:
 
 parser code
 {:
+
+    public void tabla_simbolos(){
+        Hashtable<String, String> ht1 = new Hashtable<>();
+        //hacer que recorra las variables en el bloque de declaraciones y por cada variable, agregarla al hastable para la tabla
+        //de simbolos. por ejemplo:
+        //DECLARE.SECTION
+        //   INTEGER = a, b;
+        //   BOOLEAN = c
+        //ENDDECLARE.SECTION
+        // ahi hay que guardar en el hastable a:
+        //  ht1.put("INTEGER", "a"); 
+        //  ht1.put("INTEGER", "b");
+        //  ht1.put("BOOLEAN", "c");
+        System.out.println("Tabla de simbolos: " + ht1);
+    }
+
     public void syntax_error(Symbol s){
         System.out.println("Error en la linea "+ (s.left+1)+ " Columna "+ s.right+ ". Valor simbolo '"
         +s.value+"' . Simbolo n° "+s.sym+ " no reconocido." );
@@ -48,13 +64,13 @@ programa ::= bloque_declaraciones:bd bloque_programa: bp{:
             System.out.println("REGLA 0: programa -> bd bp");
             System.out.printf("REGLA 0: programa -> %s%n%n%s%n%n", bd,bp);
             RESULT = bd + bp;
-        :};
+        :}
         |
         bloque_declaraciones:bd {:
             System.out.println("REGLA 0.1: programa -> bd");
             System.out.printf("REGLA 0.1: programa -> %s%n%n", bd);
             RESULT = bd;
-        :};
+        :}
         |
         bloque_programa: bp{:
             System.out.println("REGLA 0.2: programa -> bp");
@@ -68,39 +84,52 @@ bloque_declaraciones ::= DECLARE_SECTION declaraciones:d ENDDECLARE_SECTION{:
             RESULT = "DECLARE_SECTION" + d + "ENDDECLARE_SECTION";
         :};
 
-declaraciones ::= tipos:t IDENTIFICADOR:id DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
-            System.out.println("REGLA 2: declaraciones -> t id DOS_PUNTOS tdi PUNTOCOMA");
-            System.out.printf("REGLA 2: declaraciones -> %s %s : %s ;",t,id,tdi);
+declaraciones ::= declaracion:dec declaraciones:decs{:
+            System.out.println("REGLA 1.1: declaraciones -> dec decs");
+            System.out.printf("REGLA 1.1: declaraciones -> %s %s%n%n",dec,decs);
+            RESULT = dec + decs;
+        :}
+        |
+        declaracion:dec{:
+            System.out.println("REGLA 1.1: declaraciones -> dec");
+            System.out.printf("REGLA 1.1: declaraciones -> %s %n%n",dec);
+            RESULT = dec;
+        :}
+
+
+declaracion ::= tipos:t IDENTIFICADOR:id DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
+            System.out.println("REGLA 1.2: declaracion -> t id DOS_PUNTOS tdi PUNTOCOMA");
+            System.out.printf("REGLA 1.2: declaracion -> %s %s : %s ;",t,id,tdi);
             RESULT = t +id+"DOS_PUNTOS" + tdi +"PUNTOCOMA";
         :};
 
 tipos ::= FLOAT{:
-            System.out.println("REGLA 2.1: tipos -> FLOAT");
-            System.out.printf("REGLA 2.1: tipos -> FLOAT");
+            System.out.println("REGLA 2: tipos -> FLOAT");
+            System.out.printf("REGLA 2: tipos -> FLOAT");
             RESULT = "FLOAT";
-        :};
+        :}
         |
         INTEGER{:
-            System.out.println("REGLA 2.1: tipos -> INTEGER");
-            System.out.printf("REGLA 2.1: tipos -> INTEGER");
+            System.out.println("REGLA 2: tipos -> INTEGER");
+            System.out.printf("REGLA 2: tipos -> INTEGER");
             RESULT = "INTEGER";
-        :};
+        :}
         |
         BOOLEAN{:
-            System.out.println("REGLA 2.1: tipos -> BOOLEAN");
-            System.out.printf("REGLA 2.1: tipos -> BOOLEAN");
+            System.out.println("REGLA 2: tipos -> BOOLEAN");
+            System.out.printf("REGLA 2: tipos -> BOOLEAN");
             RESULT = "BOOLEAN";
         :};
 
 tipos_datos_id ::= IDENTIFICADOR:id{:
-            System.out.println("REGLA 2.2: tipos_datos_id -> id ");
-            System.out.printf("REGLA 2.2: tipos_datos_id -> %s%n%n",id);
+            System.out.println("REGLA 2.1: tipos_datos_id -> id ");
+            System.out.printf("REGLA 2.1: tipos_datos_id -> %s%n%n",id);
             RESULT = id;
-        :};
+        :}
         |
         tipos_datos_id: tdi COMA IDENTIFICADOR:id {:
-            System.out.println("REGLA 2.2: tipos_datos_id -> tdi COMA id");
-            System.out.printf("REGLA 2.2: tipos_datos_id -> %s , %s", tdi,id);
+            System.out.println("REGLA 2.1: tipos_datos_id -> tdi COMA id");
+            System.out.printf("REGLA 2.1: tipos_datos_id -> %s , %s", tdi,id);
             RESULT = tdi + "COMA" +id;
         :};
 
@@ -114,7 +143,7 @@ bloque_sentencias ::= bloque_sentencias:bs sentencia:s {:
             System.out.println("REGLA 3.1: bloque_sentencias -> bs s");
             System.out.printf("REGLA 3.1: bloque_sentencias -> %s %s%n%n", bs, s);
             RESULT =bs + s;
-        :};
+        :}
         | 
         sentencia:s {:
             System.out.println("REGLA 3.1: bloque_sentencias -> s");
@@ -126,19 +155,19 @@ sentencia ::= sentencia_while: sw{:
             System.out.println("REGLA 3.2: sentencia -> sw");
             System.out.printf("REGLA 3.2: sentencia -> %s%n%n", sw);
             RESULT = sw;
-        :};
+        :}
         |
         sentencia_if: si{:
             System.out.println("REGLA 3.2: sentencia -> si");
             System.out.printf("REGLA 3.2: sentencia -> %s%n%n", si);
             RESULT = si;
-        :};
+        :}
         |
         sentencia_asignacion: sa{:
             System.out.println("REGLA 3.2: sentencia -> sa");
             System.out.printf("REGLA 3.2: sentencia -> %s%n%n", sa);
             RESULT = sa;
-        :};
+        :}
         |   
         sentencia_display: sd{:
             System.out.println("REGLA 3.2: sentencia -> sd");
@@ -156,7 +185,7 @@ expresion_or ::= expresion_or: eo OR expresion_and :ea{:
             System.out.println("REGLA 4.1: expresion_or -> eo OR ea ");
             System.out.printf("REGLA 4.1: expresion_or ->  %s OR %s%n%n",eo, ea);
             RESULT =eo +"OR"+ ea ;
-        :};
+        :}
         |
         expresion_and :ea{:
             System.out.println("REGLA 4.1: expresion_or -> ea ");
@@ -168,7 +197,7 @@ expresion_and ::= expresion_and: ea AND expresion_not :en{:
             System.out.println("REGLA 4.2: expresion_and -> ea AND en ");
             System.out.printf("REGLA 4.2: expresion_and ->  %s AND %s%n%n",ea, en);
             RESULT =ea +"AND"+ en;
-        :};
+        :}
         |
         expresion_not :en{:
             System.out.println("REGLA 4.2: expresion_and -> en");
@@ -180,7 +209,7 @@ expresion_not ::= NOT expresion_not :en{:
             System.out.println("REGLA 4.3: expresion_not -> NOT en ");
             System.out.printf("REGLA 4.3: expresion_not ->  NOT %s%n%n",en);
             RESULT ="NOT"+ en;
-        :};
+        :}
         |
         comparacion:c{:
             System.out.println("REGLA 4.3: expresion_not -> c");
@@ -188,41 +217,41 @@ expresion_not ::= NOT expresion_not :en{:
             RESULT = c;
         :};
 
-comparacion ::= expresion_sr :esr MAYOR expresion_sr: esr{:
-            System.out.println("REGLA 5: comparacion -> esr MAYOR esr");
-            System.out.printf("REGLA 5: comparacion -> %s > %s%n%n",esr);
-            RESULT = esr+">"+ esr;
-        :};
+comparacion ::= expresion_sr :esr1 MAYOR expresion_sr: esr2{:
+            System.out.println("REGLA 5: comparacion -> esr1 MAYOR esr2");
+            System.out.printf("REGLA 5: comparacion -> %s > %s%n%n",esr1,esr2);
+            RESULT = esr1+">"+ esr2;
+        :}
         |
-        expresion_sr :esr MAYOR_IGUAL expresion_sr: esr{:
-            System.out.println("REGLA 5: comparacion -> esr MAYOR_IGUAL esr");
-            System.out.printf("REGLA 5: comparacion ->  %s >= %s%n%n",esr);
-            RESULT = esr + ">=" + esr;
-        :};
+        expresion_sr :esr1 MAYOR_IGUAL expresion_sr: esr2{:
+            System.out.println("REGLA 5: comparacion -> esr1 MAYOR_IGUAL esr2");
+            System.out.printf("REGLA 5: comparacion ->  %s >= %s%n%n",esr1,esr2);
+            RESULT = esr1 + ">=" + esr2;
+        :}
         |
-        expresion_sr :esr MENOR expresion_sr: esr{:
-            System.out.println("REGLA 5: comparacion -> esr MENOR esr");
-            System.out.printf("REGLA 5: comparacion -> %s < %s%n%n",esr);
-            RESULT = esr+"<"+ esr;
-        :};
+        expresion_sr :esr1 MENOR expresion_sr: esr2{:
+            System.out.println("REGLA 5: comparacion -> esr1 MENOR esr2");
+            System.out.printf("REGLA 5: comparacion -> %s < %s%n%n",esr1,esr2);
+            RESULT = esr1+"<"+ esr2;
+        :}
         |
-        expresion_sr :esr MENOR_IGUAL expresion_sr: esr{:
-            System.out.println("REGLA 5: comparacion -> esr MENOR_IGUAL esr");
-            System.out.printf("REGLA 5: comparacion ->  %s <= %s%n%n",esr);
-            RESULT = esr + "<=" + esr;
-        :};
+        expresion_sr :esr1 MENOR_IGUAL expresion_sr: esr2{:
+            System.out.println("REGLA 5: comparacion -> esr1 MENOR_IGUAL esr2");
+            System.out.printf("REGLA 5: comparacion ->  %s <= %s%n%n",esr1,esr2);
+            RESULT = esr1 + "<=" + esr2;
+        :}
         |
-        expresion_sr :esr IGUAL_IGUAL expresion_sr: esr{:
-            System.out.println("REGLA 5: comparacion -> esr IGUAL_IGUAL esr");
-            System.out.printf("REGLA 5: comparacion -> %s == %s%n%n",esr);
-            RESULT = esr+"=="+ esr;
-        :};
+        expresion_sr :esr1 IGUAL_IGUAL expresion_sr: esr2{:
+            System.out.println("REGLA 5: comparacion -> esr1 IGUAL_IGUAL esr2");
+            System.out.printf("REGLA 5: comparacion -> %s == %s%n%n",esr1,esr2);
+            RESULT = esr1+"=="+ esr2;
+        :}
         |
-        expresion_sr :esr DESIGUAL expresion_sr: esr{:
-            System.out.println("REGLA 5: comparacion -> esr DESIGUAL esr");
-            System.out.printf("REGLA 5: comparacion ->  %s != %s%n%n",esr);
-            RESULT = esr + "!=" + esr;
-        :};
+        expresion_sr :esr1 DESIGUAL expresion_sr: esr2{:
+            System.out.println("REGLA 5: comparacion -> esr1 DESIGUAL esr2");
+            System.out.printf("REGLA 5: comparacion ->  %s != %s%n%n",esr1,esr2);
+            RESULT = esr1 + "!=" + esr2;
+        :}
         |
         expresion_sr :esr{:
             System.out.println("REGLA 5: comparacion -> esr");
@@ -233,14 +262,14 @@ comparacion ::= expresion_sr :esr MAYOR expresion_sr: esr{:
 expresion_sr ::= expresion_sr :esr SUMA expresion_md: emd{:
             System.out.println("REGLA 5.1: expresion_sr -> esr SUMA emd");
             System.out.printf("REGLA 5.1: expresion_sr-> %s + %s%n%n",esr,emd);
-            RESULT = esr+"+"+ esr;
-        :};
+            RESULT = esr+"+"+ emd;
+        :}
         |
         expresion_sr :esr RESTA expresion_md: emd{:
             System.out.println("REGLA 5.1: expresion_sr -> esr RESTA esr");
             System.out.printf("REGLA 5.1: expresion_sr ->  %s - %s%n%n",esr,emd);
-            RESULT = esr + "-" + esr;
-        :};
+            RESULT = esr + "-" + emd;
+        :}
         |
         expresion_md :emd{:
             System.out.println("REGLA 5.1: expresion_sr -> emd");
@@ -252,13 +281,13 @@ expresion_md ::= expresion_md :emd MULTIPLICACION menos_unario:mu{:
             System.out.println("REGLA 5.2: expresion_md -> emd MULTIPLICACION mu");
             System.out.printf("REGLA 5.2: expresion_md -> %s * %s%n%n",emd,mu);
             RESULT = emd + "*" + mu ;
-        :};
+        :}
         |
-        expresion_md :emd DIVISION menor_unario:mu{:
+        expresion_md :emd DIVISION menos_unario:mu{:
             System.out.println("REGLA 5.2: expresion_md -> emd DIVISION mu");
-            System.out.printf("REGLA 5.2: expresion_md ->  %s / %s%n%n",esr,emd);
+            System.out.printf("REGLA 5.2: expresion_md ->  %s / %s%n%n",emd,mu);
             RESULT = emd + "/" + mu ;
-        :};
+        :}
         |
         menos_unario:mu{:
             System.out.println("REGLA 5.2: expresion_md -> mu");
@@ -270,7 +299,7 @@ menos_unario ::= RESTA menos_unario:mu{:
             System.out.println("REGLA 5.3: menos_unario -> RESTA mu");
             System.out.printf("REGLA 5.3: menos_unario -> - %s%n%n",mu);
             RESULT = "-" + mu ;
-        :};
+        :}
         |
         factor:f {:
             System.out.println("REGLA 5.3: menos_unario -> f");
@@ -282,33 +311,33 @@ factor ::= BOOLEAN_LITERAL:bl{:
             System.out.println("REGLA 5.4: factor -> bl");
             System.out.printf("REGLA 5.4: factor -> %s%n%n",bl);
             RESULT = bl;
-        :};
+        :}
         |
         INTEGER_LITERAL:il{:
             System.out.println("REGLA 5.4: factor -> il");
             System.out.printf("REGLA 5.4: factor ->  %s%n%n",il);
             RESULT = il;
-        :};
+        :}
         |
         FLOAT_LITERAL:fl{:
             System.out.println("REGLA 5.4: factor -> fl");
             System.out.printf("REGLA 5.4: factor -> %s%n%n",fl);
             RESULT = fl;
-        :};
+        :}
         |
         funcion_especial:fe{:
             System.out.println("REGLA 5.4: factor -> fe");
             System.out.printf("REGLA 5.4: factor -> %s%n%n",fe);
             RESULT = fe;
-        :};
+        :}
         |
         PARENTESISA expresion_or:eo PARENTESISC{:
             System.out.println("REGLA 5.4: factor -> PARENTESISA eo PARENTESISC");
             System.out.printf("REGLA 5.4: factor ->(%s) %n%n",eo);
             RESULT = "(" + eo + ")";
-        :};
+        :}
         |
-        INDENTIFICADOR:id{:
+        IDENTIFICADOR:id{:
             System.out.println("REGLA 5.4: factor -> id");
             System.out.printf("REGLA 5.4: factor ->  %s%n%n",id);
             RESULT = id;
@@ -324,7 +353,7 @@ numeros_dentro_corchete ::= numeros_dentro_corchete:ndc COMA INTEGER_LITERAL:il{
             System.out.println("REGLA 6.1: numeros_dentro_corchete -> ndc COMA il");
             System.out.printf("REGLA 6.1: numeros_dentro_corchete -> %s , %s%n%n",ndc,il);
             RESULT = ndc + ","+ il;
-        :};
+        :}
         |
         INTEGER_LITERAL:il{:
             System.out.println("REGLA 6.1: factor -> il");
@@ -335,14 +364,14 @@ numeros_dentro_corchete ::= numeros_dentro_corchete:ndc COMA INTEGER_LITERAL:il{
 sentencia_while ::= WHILE PARENTESISA expresion_or:eo PARENTESISC DO bloque_sentencias:bs END{:
             System.out.println("REGLA 7: sentencia_while -> WHILE PARENTESISA eo PARENTESISC DO bs END");
             System.out.printf("REGLA 7: sentencia_while -> WHILE (%s)DO %s%n%n END",eo,bs);
-            RESULT = "WHILE" + "("+ eo + ")"+"DO"+s+"END";
+            RESULT = "WHILE" + "("+ eo + ")"+"DO"+bs+"END";
         :};
 
 sentencia_display ::= display:d {:
             System.out.println("REGLA 8: sentencia_display -> d ");
             System.out.printf("REGLA 8: sentencia_display -> %s%n%n",d);
             RESULT = d;
-        :};
+        :}
         |
         input:i {:
             System.out.println("REGLA 8: sentencia_display -> i ");
@@ -354,19 +383,19 @@ display ::= DISPLAY PARENTESISA STRING:str PARENTESISC{:
             System.out.println("REGLA 8.1: display -> DISPLAY PARENTESISA str PARENTESISC");
             System.out.printf("REGLA 8.1: display -> DISPLAY(%s) %n%n",str);
             RESULT = "DISPLAY" +"("+str+")";
-        :};
+        :}
         |
         DISPLAY PARENTESISA INTEGER_LITERAL:il PARENTESISC{:
             System.out.println("REGLA 8.1: display -> DISPLAY PARENTESISA il PARENTESISC");
             System.out.printf("REGLA 8.1: display -> DISPLAY(%s) %n%n",il);
             RESULT = "DISPLAY" +"("+il+")";
-        :};
+        :}
         |
         DISPLAY PARENTESISA FLOAT_LITERAL:fl PARENTESISC{:
             System.out.println("REGLA 8.1: display -> DISPLAY PARENTESISA fl PARENTESISC");
             System.out.printf("REGLA 8.1: display -> DISPLAY(%s) %n%n",fl);
             RESULT = "DISPLAY" +"("+fl+")";
-        :};
+        :}
         |
         DISPLAY PARENTESISA BOOLEAN_LITERAL:bl PARENTESISC{:
             System.out.println("REGLA 8.1: display -> DISPLAY PARENTESISA bl PARENTESISC");
@@ -378,13 +407,13 @@ input ::= input_int:ii {:
             System.out.println("REGLA 8.2: input -> ii ");
             System.out.printf("REGLA 8.2: input -> %s%n%n",ii);
             RESULT = ii;
-        :};
+        :}
         |
-        input_float:if {:
-            System.out.println("REGLA 8.2: input -> if ");
-            System.out.printf("REGLA 8.2: input -> %s%n%n",if);
-            RESULT = if;
-        :};
+        input_float:ifl {:
+            System.out.println("REGLA 8.2: input -> ifl ");
+            System.out.printf("REGLA 8.2: input -> %s%n%n",ifl);
+            RESULT = ifl;
+        :}
         |
         input_bool:ib {:
             System.out.println("REGLA 8.2: input -> ib ");
@@ -396,7 +425,7 @@ input_int ::= INPUT_INT PARENTESISA INTEGER_LITERAL:il PARENTESISC {:
             System.out.println("REGLA 8.3: input_int -> INPUT_INT PARENTESISA il PARENTESISC ");
             System.out.printf("REGLA 8.3: input_int -> INTPUT_INT (%s)%n%n",il);
             RESULT = "INPUT_INT"+"("+ il +")";
-        :};
+        :}
         |
         INPUT_INT PARENTESISA IDENTIFICADOR:id PARENTESISC {:
             System.out.println("REGLA 8.3: input_int -> INPUT_INT PARENTESISA id PARENTESISC ");
@@ -408,7 +437,7 @@ input_float ::= INPUT_FLOAT PARENTESISA FLOAT_LITERAL:fl PARENTESISC {:
             System.out.println("REGLA 8.4: input_float -> INPUT_FLOAT PARENTESISA fl PARENTESISC ");
             System.out.printf("REGLA 8.4: input_float -> INTPUT_FLOAT (%s)%n%n",fl);
             RESULT = "INPUT_FLOAT"+"("+ fl +")";
-        :};
+        :}
         |
         INPUT_FLOAT PARENTESISA IDENTIFICADOR:id PARENTESISC {:
             System.out.println("REGLA 8.4: input_float -> INPUT_FLOAT PARENTESISA id PARENTESISC ");
@@ -416,11 +445,11 @@ input_float ::= INPUT_FLOAT PARENTESISA FLOAT_LITERAL:fl PARENTESISC {:
             RESULT = "INPUT_FLOAT"+"("+ id +")";
         :};
 
-input_bool ::= INPUT_BOOL PARENTESISA BOOL_LITERAL:bl PARENTESISC {:
+input_bool ::= INPUT_BOOL PARENTESISA BOOLEAN_LITERAL:bl PARENTESISC {:
             System.out.println("REGLA 8.5: input_bool -> INPUT_BOOL PARENTESISA bl PARENTESISC ");
             System.out.printf("REGLA 8.5: input_bool -> INTPUT_BOOL (%s)%n%n",bl);
             RESULT = "INPUT_BOOL"+"("+ bl +")";
-        :};
+        :}
         |
         INPUT_BOOL PARENTESISA IDENTIFICADOR:id PARENTESISC {:
             System.out.println("REGLA 8.5: input_bool -> INPUT_BOOL PARENTESISA id PARENTESISC ");
@@ -432,10 +461,10 @@ sentencia_if ::= IF PARENTESISA expresion_or:eo PARENTESISC THEN bloque_sentenci
             System.out.println("REGLA 9: sentencia_if -> IF PARENTESISA eo PARENTESISC THEN bs END");
             System.out.printf("REGLA 9: sentencia_if -> IF (%s)THEN %s%n%n END",eo,bs);
             RESULT = "IF" + "("+ eo + ")"+"THEN"+bs+"END";
-        :};
+        :}
         |
-        IF PARENTESISA expresion_or:eo PARENTESISC THEN bloque_sentencias:bs ELSE bloque_sentencias:bs END{:
-            System.out.println("REGLA 9: sentencia_if -> IF PARENTESISA eo PARENTESISC THEN bs ELSE bs END");
-            System.out.printf("REGLA 9: sentencia_if -> IF (%s)THEN %s%n%n ELSE %s%n%n END",eo,bs);
-            RESULT = "IF" + "("+ eo + ")"+"THEN"+bs+"ELSE"+bs+"END";
+        IF PARENTESISA expresion_or:eo PARENTESISC THEN bloque_sentencias:bs1 ELSE bloque_sentencias:bs2 END{:
+            System.out.println("REGLA 9: sentencia_if -> IF PARENTESISA eo PARENTESISC THEN bs1 ELSE bs2 END");
+            System.out.printf("REGLA 9: sentencia_if -> IF (%s)THEN %s%n%n ELSE %s%n%n END",eo,bs1,bs2);
+            RESULT = "IF" + "("+ eo + ")"+"THEN"+bs1+"ELSE"+bs2+"END";
         :};
