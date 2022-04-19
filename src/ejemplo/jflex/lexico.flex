@@ -65,6 +65,7 @@ Identifier = [^\W\d\.\_][^\W\.]*{1,20}
 intLiteral = \d+ {1,50}
 floatLiteral = \d+\.\d* | \.\d+ {1,50}
 booleanLiteral = true | false
+comentarioOnlyLine = #.*\n 
 
 %state STRING
 %state COMENTARIO
@@ -101,6 +102,8 @@ booleanLiteral = true | false
   {endprogramSection} { return token("ENDPROGRAM_SECTION", yytext());}
 
   {sumaimpar}           { return token("SUMAIMPAR", yytext());}
+
+  {comentarioOnlyLine}  { return token("COMENTARIO_SOLA_LINEA", yytext());}
 
   /* operators */
 
