@@ -25,6 +25,7 @@ public class Compilador extends javax.swing.JFrame {
     
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -56,6 +57,7 @@ public class Compilador extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -76,7 +78,8 @@ public class Compilador extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Aceptar");
+        jButton1.setText("Análisis lexico");
+        jButton2.setText("Análisis sintactico");
         
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +88,12 @@ public class Compilador extends javax.swing.JFrame {
                 } catch (IOException ex) {
                     Logger.getLogger(Compilador.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+        });
+        
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -106,6 +115,8 @@ public class Compilador extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jToggleButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
@@ -126,7 +137,8 @@ public class Compilador extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton1)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap())
         );
 
@@ -186,6 +198,10 @@ public class Compilador extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }        
         System.out.println("Análisis léxico terminado.");
+    }
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
     }
     
     public static void setJTextConsole(String message){
