@@ -1,5 +1,8 @@
 /* JFlex example: partial Java language lexer specification */
 package ejemplo.jflex;
+import java.util.ArrayList;
+import java_cup.runtime.*;
+import java_cup.sym;
 
 /**
  * This class is a simple example lexer.
@@ -10,6 +13,7 @@ package ejemplo.jflex;
 %class MiLexico
 %unicode
 %type MiToken
+%cup
 %line
 %column
 
@@ -65,7 +69,6 @@ Identifier = [^\W\d\.\_][^\W\.]*{1,20}
 intLiteral = \d+ {1,50}
 floatLiteral = \d+\.\d* | \.\d+ {1,50}
 booleanLiteral = true | false
-comentarioOnlyLine = #.*\n 
 
 %state STRING
 %state COMENTARIO
@@ -102,8 +105,6 @@ comentarioOnlyLine = #.*\n
   {endprogramSection} { return token("ENDPROGRAM_SECTION", yytext());}
 
   {sumaimpar}           { return token("SUMAIMPAR", yytext());}
-
-  {comentarioOnlyLine}  { return token("COMENTARIO_SOLA_LINEA", yytext());}
 
   /* operators */
 

@@ -4,6 +4,9 @@
 
 /* JFlex example: partial Java language lexer specification */
 package ejemplo.jflex;
+import java.util.ArrayList;
+import java_cup.runtime.*;
+import java_cup.sym;
 
 /**
  * This class is a simple example lexer.
@@ -11,7 +14,7 @@ package ejemplo.jflex;
 
 // See https://github.com/jflex-de/jflex/issues/222
 @SuppressWarnings("FallThrough")
-public class MiLexico {
+public class MiLexico implements java_cup.runtime.Scanner {
 
   /** This character denotes the end of file. */
   public static final int YYEOF = -1;
@@ -728,7 +731,6 @@ public class MiLexico {
   private boolean zzAtBOL = true;
 
   /** Whether the user-EOF-code has already been executed. */
-  @SuppressWarnings("unused")
   private boolean zzEOFDone;
 
   /* user code: */
@@ -1000,6 +1002,18 @@ public class MiLexico {
   }
 
 
+  /**
+   * Contains user EOF-code, which will be executed exactly once,
+   * when the end of file is reached
+   */
+  private void zzDoEOF() throws java.io.IOException {
+    if (!zzEOFDone) {
+      zzEOFDone = true;
+    
+  yyclose();    }
+  }
+
+
 
 
   /**
@@ -1009,7 +1023,7 @@ public class MiLexico {
    * @return the next token.
    * @exception java.io.IOException if any I/O-Error occurs.
    */
-  public MiToken yylex() throws java.io.IOException {
+  @Override  public MiToken next_token() throws java.io.IOException {
     int zzInput;
     int zzAction;
 
@@ -1145,13 +1159,14 @@ public class MiLexico {
 
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
+            zzDoEOF();
             switch (zzLexicalState) {
             case COMENTARIO: {
               throw new Error("Comentario no balanceado");
             }  // fall though
             case 286: break;
             default:
-        return null;
+          { return new java_cup.runtime.Symbol(sym.EOF); }
         }
       }
       else {

@@ -1,5 +1,8 @@
 /* JFlex example: partial Java language lexer specification */
 package ejemplo.jflex;
+import java.util.ArrayList;
+import java_cup.runtime.*;
+import java_cup.sym;
 
 /**
  * This class is a simple example lexer.
@@ -10,6 +13,7 @@ package ejemplo.jflex;
 %class MiLexico
 %unicode
 %type MiToken
+%cup
 %line
 %column
 
