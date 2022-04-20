@@ -742,6 +742,9 @@ public class MiLexico implements java_cup.runtime.Scanner {
     int string_yyline = 0;
     int string_yycolumn = 0;
     int comentario_multilinea = 0;
+    int cotaInt = 1000000;
+    float cotaFloat = 1000000.0f;
+    int cotaString = 100
 
     StringBuffer string = new StringBuffer();
 
@@ -1231,7 +1234,10 @@ public class MiLexico implements java_cup.runtime.Scanner {
             // fall through
           case 72: break;
           case 12:
-            { return token("INTEGER_LITERAL", yytext());
+            { if( Integer.valueOf(yytext()) < cotaInt ){
+                                     return token("INTEGER_LITERAL", yytext());}
+                                    else{
+                                     throw new Error("Supera el entero determinado");}
             }
             // fall through
           case 73: break;
@@ -1261,7 +1267,10 @@ public class MiLexico implements java_cup.runtime.Scanner {
             // fall through
           case 78: break;
           case 18:
-            { return token("IDENTIFICADOR", yytext());
+            { if( yytext().length() < cotaString ){
+                                     return token("IDENTIFIER", yytext()); }
+                                    else{
+                                     throw new Error("Supera la cantidad de caracteres permitidos");}
             }
             // fall through
           case 79: break;
@@ -1323,7 +1332,10 @@ public class MiLexico implements java_cup.runtime.Scanner {
             // fall through
           case 90: break;
           case 30:
-            { return token("FLOAT_LITERAL", yytext());
+            { if( Float.valueOf(yytext()) < cotaFloat ){
+                                     return token("FLOAT_LITERAL", yytext());}
+                                    else{
+                                     throw new Error("Supera el float determinado");}
             }
             // fall through
           case 91: break;
