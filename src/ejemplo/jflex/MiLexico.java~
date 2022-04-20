@@ -744,7 +744,7 @@ public class MiLexico implements java_cup.runtime.Scanner {
     int comentario_multilinea = 0;
     int cotaInt = 1000000;
     float cotaFloat = 1000000.0f;
-    int cotaString = 100
+    int cotaString = 100;
 
     StringBuffer string = new StringBuffer();
 
