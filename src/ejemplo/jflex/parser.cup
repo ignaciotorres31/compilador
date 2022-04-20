@@ -18,7 +18,7 @@ parser code
 {:
 
     public void tabla_simbolos(){
-        Hashtable<String, String> ht1 = new Hashtable<>();
+        Hashtable<String, String> ht1 = new Hashtable<String,String>();
         //hacer que recorra las variables en el bloque de declaraciones y por cada variable, agregarla al hastable para la tabla
         //de simbolos. por ejemplo:
         //DECLARE.SECTION
@@ -46,7 +46,7 @@ parser code
 
 
 terminal SUMA, RESTA, MULTIPLICACION, DIVISION, IGUAL, IGUAL_IGUAL, DESIGUAL, MAYOR, MAYOR_IGUAL, MENOR,
-MENOR_IGUAL, PARENTESISA, PARENTESISC, LLAVESA, LLAVESC, CORCHETESA, CORCHETESC, PUNTO, COMA, PUNTOCOMA, DOS_PUNTOS,
+MENOR_IGUAL, PARENTESISA, PARENTESISC, CORCHETESA, CORCHETESC,  COMA, PUNTOCOMA, DOS_PUNTOS,
 ASIGNACION;
 
 terminal String IDENTIFICADOR, BOOLEAN_LITERAL, INTEGER_LITERAL, FLOAT_LITERAL,SUMAIMPAR, INTEGER, FLOAT, BOOLEAN, 
@@ -97,10 +97,10 @@ declaraciones ::= declaracion:dec declaraciones:decs{:
         :};
 
 
-declaracion ::= tipos:t IDENTIFICADOR:id DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
-            System.out.println("REGLA 1.2: declaracion -> t id DOS_PUNTOS tdi PUNTOCOMA");
-            System.out.printf("REGLA 1.2: declaracion -> %s %s : %s ;",t,id,tdi);
-            RESULT = t +id+"DOS_PUNTOS" + tdi +"PUNTOCOMA";
+declaracion ::= tipos:t DOS_PUNTOS IDENTIFICADOR:id tipos_datos_id:tdi PUNTOCOMA{:
+            System.out.println("REGLA 1.2: declaracion -> t DOS_PUNTOS id tdi PUNTOCOMA");
+            System.out.printf("REGLA 1.2: declaracion -> %s : %s %s ;",t,id,tdi);
+            RESULT = t +"DOS_PUNTOS"+ id + tdi +"PUNTOCOMA";
         :};
 
 tipos ::= FLOAT{:

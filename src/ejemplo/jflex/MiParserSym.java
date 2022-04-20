@@ -8,56 +8,53 @@ package ejemplo.jflex;
 /** CUP generated class containing symbol constants. */
 public class MiParserSym {
   /* terminals */
-  public static final int DISPLAY = 44;
-  public static final int SUMAIMPAR = 28;
-  public static final int ENDDECLARE_SECTION = 46;
-  public static final int CORCHETESC = 18;
-  public static final int CORCHETESA = 17;
-  public static final int LLAVESC = 16;
-  public static final int LLAVESA = 15;
+  public static final int DISPLAY = 41;
+  public static final int SUMAIMPAR = 25;
+  public static final int ENDDECLARE_SECTION = 43;
+  public static final int CORCHETESC = 16;
+  public static final int CORCHETESA = 15;
   public static final int RESTA = 3;
-  public static final int INTEGER = 29;
-  public static final int DOS_PUNTOS = 22;
-  public static final int PUNTOCOMA = 21;
+  public static final int INTEGER = 26;
+  public static final int DOS_PUNTOS = 19;
+  public static final int PUNTOCOMA = 18;
   public static final int PARENTESISC = 14;
   public static final int PARENTESISA = 13;
-  public static final int BOOLEAN_LITERAL = 25;
-  public static final int NOT = 37;
-  public static final int AND = 35;
-  public static final int IDENTIFICADOR = 24;
+  public static final int BOOLEAN_LITERAL = 22;
+  public static final int IDENTIFICADOR = 21;
+  public static final int NOT = 34;
+  public static final int AND = 32;
   public static final int IGUAL = 6;
-  public static final int OR = 36;
+  public static final int OR = 33;
   public static final int SUMA = 2;
-  public static final int IF = 41;
+  public static final int IF = 38;
   public static final int IGUAL_IGUAL = 7;
   public static final int EOF = 0;
-  public static final int BOOLEAN = 31;
-  public static final int INPUT_INT = 32;
+  public static final int BOOLEAN = 28;
+  public static final int INPUT_INT = 29;
   public static final int error = 1;
-  public static final int COMA = 20;
-  public static final int INPUT_BOOL = 34;
+  public static final int COMA = 17;
+  public static final int INPUT_BOOL = 31;
   public static final int MENOR = 11;
   public static final int DESIGUAL = 8;
-  public static final int ASIGNACION = 23;
+  public static final int ASIGNACION = 20;
   public static final int MAYOR = 9;
-  public static final int ELSE = 43;
-  public static final int PUNTO = 19;
-  public static final int WHILE = 38;
+  public static final int ELSE = 40;
+  public static final int WHILE = 35;
   public static final int MAYOR_IGUAL = 10;
-  public static final int FLOAT = 30;
-  public static final int THEN = 42;
-  public static final int PROGRAM_SECTION = 47;
-  public static final int END = 40;
-  public static final int INPUT_FLOAT = 33;
-  public static final int STRING = 49;
-  public static final int ENDPROGRAM_SECTION = 48;
+  public static final int FLOAT = 27;
+  public static final int THEN = 39;
+  public static final int PROGRAM_SECTION = 44;
+  public static final int END = 37;
+  public static final int INPUT_FLOAT = 30;
+  public static final int STRING = 46;
+  public static final int ENDPROGRAM_SECTION = 45;
   public static final int MENOR_IGUAL = 12;
-  public static final int FLOAT_LITERAL = 27;
+  public static final int FLOAT_LITERAL = 24;
   public static final int DIVISION = 5;
-  public static final int DO = 39;
-  public static final int DECLARE_SECTION = 45;
+  public static final int DO = 36;
+  public static final int DECLARE_SECTION = 42;
   public static final int MULTIPLICACION = 4;
-  public static final int INTEGER_LITERAL = 26;
+  public static final int INTEGER_LITERAL = 23;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -74,11 +71,8 @@ public class MiParserSym {
   "MENOR_IGUAL",
   "PARENTESISA",
   "PARENTESISC",
-  "LLAVESA",
-  "LLAVESC",
   "CORCHETESA",
   "CORCHETESC",
-  "PUNTO",
   "COMA",
   "PUNTOCOMA",
   "DOS_PUNTOS",

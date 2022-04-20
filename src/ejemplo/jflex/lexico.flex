@@ -129,11 +129,8 @@ comentarioOnlyLine = #.*\n?
 
   "\("                           { return token("PARENTESISA", yytext()); }
   "\)"                           { return token("PARENTESISC", yytext()); }
-  "\{"                           { return token("LLAVESA", yytext()); }
-  "\}"                           { return token("LLAVESC", yytext()); }
   "\["                           { return token("CORCHETESA", yytext()); }
   "\]"                           { return token("CORCHETESC", yytext()); }
-  "\."                           { return token("PUNTO", yytext()); }
   "\,"                           { return token("COMA", yytext()); }
   "\;"                           { return token("PUNTOCOMA", yytext()); }
   ":"                            { return token("DOS_PUNTOS", yytext()); }
