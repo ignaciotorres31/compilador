@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java_cup.runtime.*;
 import java_cup.sym;
 
-/**
- * This class is a simple example lexer.
- */
+
 
 // See https://github.com/jflex-de/jflex/issues/222
 @SuppressWarnings("FallThrough")
@@ -746,6 +744,8 @@ public class MiLexico implements java_cup.runtime.Scanner {
     int comentario_multilinea = 0;
 
     StringBuffer string = new StringBuffer();
+
+    public ArrayList<MiToken> tablaDeSimbolos = new ArrayList<>();
 
     private MiToken token(String nombre) {
         return new MiToken(nombre, this.yyline, this.yycolumn);

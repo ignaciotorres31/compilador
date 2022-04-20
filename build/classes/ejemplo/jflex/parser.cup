@@ -53,7 +53,7 @@ terminal String IDENTIFICADOR, BOOLEAN_LITERAL, INTEGER_LITERAL, FLOAT_LITERAL,S
 INPUT_INT, INPUT_FLOAT, INPUT_BOOL, AND, OR, NOT, WHILE, DO, END,IF, THEN, ELSE, DISPLAY, DECLARE_SECTION, 
 ENDDECLARE_SECTION, PROGRAM_SECTION, ENDPROGRAM_SECTION, STRING;
 
-nonterminal String programa, bloque_declaraciones, bloque_programa, declaraciones, tipos, tipos_datos_id,
+nonterminal String programa, bloque_declaraciones, bloque_programa, declaraciones,declaracion, tipos, tipos_datos_id,
 bloque_sentencias, sentencia, sentencia_while, sentencia_if, sentencia_asignacion, sentencia_display, factor, 
 expresion_or, expresion_and, expresion_not, comparacion, expresion_sr, expresion_md, menos_unario, funcion_especial,
 numeros_dentro_corchete, input, display, input_int, input_float, input_bool;
@@ -94,7 +94,7 @@ declaraciones ::= declaracion:dec declaraciones:decs{:
             System.out.println("REGLA 1.1: declaraciones -> dec");
             System.out.printf("REGLA 1.1: declaraciones -> %s %n%n",dec);
             RESULT = dec;
-        :}
+        :};
 
 
 declaracion ::= tipos:t IDENTIFICADOR:id DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:

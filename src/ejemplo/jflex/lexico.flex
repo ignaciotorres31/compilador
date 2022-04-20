@@ -4,16 +4,14 @@ import java.util.ArrayList;
 import java_cup.runtime.*;
 import java_cup.sym;
 
-/**
- * This class is a simple example lexer.
- */
+
 %%
 
 %public
 %class MiLexico
+%cup
 %unicode
 %type MiToken
-%cup
 %line
 %column
 
@@ -29,6 +27,8 @@ import java_cup.sym;
     int comentario_multilinea = 0;
 
     StringBuffer string = new StringBuffer();
+
+    public ArrayList<MiToken> tablaDeSimbolos = new ArrayList<>();
 
     private MiToken token(String nombre) {
         return new MiToken(nombre, this.yyline, this.yycolumn);

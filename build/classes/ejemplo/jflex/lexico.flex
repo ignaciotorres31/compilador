@@ -4,16 +4,14 @@ import java.util.ArrayList;
 import java_cup.runtime.*;
 import java_cup.sym;
 
-/**
- * This class is a simple example lexer.
- */
+
 %%
 
 %public
 %class MiLexico
+%cup
 %unicode
 %type MiToken
-%cup
 %line
 %column
 
@@ -27,11 +25,10 @@ import java_cup.sym;
     int string_yyline = 0;
     int string_yycolumn = 0;
     int comentario_multilinea = 0;
-    int cotaInt = 1000000;
-    float cotaFloat = 1000000.0f;
-    int cotaString = 100
 
     StringBuffer string = new StringBuffer();
+
+    public ArrayList<MiToken> tablaDeSimbolos = new ArrayList<>();
 
     private MiToken token(String nombre) {
         return new MiToken(nombre, this.yyline, this.yycolumn);
@@ -140,18 +137,8 @@ comentarioOnlyLine = #.*\n?
 
   /* literals */
   {booleanLiteral}               { return token("BOOLEAN_LITERAL", yytext()); } 
-  {intLiteral}                   { 
-                                    if( Integer.valueOf(yytext()) < cotaInt ){
-                                     return token("INTEGER_LITERAL", yytext());}
-                                    else{
-                                     throw new Error("Supera el entero determinado");} 
-                                 }
-  {floatLiteral}                 { 
-                                    if( Float.valueOf(yytext()) < cotaFloat ){
-                                     return token("FLOAT_LITERAL", yytext());}
-                                    else{
-                                     throw new Error("Supera el float determinado");} 
-                                 }
+  {intLiteral}                   { return token("INTEGER_LITERAL", yytext()); }
+  {floatLiteral}                 { return token("FLOAT_LITERAL", yytext());}
   
   \"                             {  string.setLength(0); 
                                     yybegin(STRING); 
@@ -167,12 +154,7 @@ comentarioOnlyLine = #.*\n?
   {WhiteSpace}                   { /* ignore */ }
 
   /* identifiers */
-  {Identifier}                   { 
-                                    if( yytext().length() < cotaString ){
-                                     return token("IDENTIFIER", yytext()); }
-                                    else{
-                                     throw new Error("Supera la cantidad de caracteres permitidos");} 
-                                 }
+  {Identifier}                   { return token("IDENTIFICADOR", yytext()); }
 }
 
 

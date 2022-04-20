@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import java_cup.runtime.Symbol;
 
 /**
  *
@@ -186,7 +187,7 @@ public class Compilador extends javax.swing.JFrame {
         String outpout = "Token: ";
         try{
             while (true) {
-                MiToken token = lexico.yylex();
+                Symbol token = lexico.next_token();
                 if (token == null)
                     break;
                outpout  +=  token.toString() + "\n";
