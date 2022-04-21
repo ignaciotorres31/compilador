@@ -394,7 +394,7 @@ public class MiParser extends java_cup.runtime.lr_parser {
 
 
     public void tabla_simbolos(){
-        Hashtable<String, String> ht1 = new Hashtable<>();
+        Hashtable<String, String> ht1 = new Hashtable<String,String>();
         //hacer que recorra las variables en el bloque de declaraciones y por cada variable, agregarla al hastable para la tabla
         //de simbolos. por ejemplo:
         //DECLARE.SECTION
@@ -580,7 +580,7 @@ class CUP$MiParser$actions {
 		
             System.out.println("REGLA 1.2: declaracion -> t DOS_PUNTOS id tdi PUNTOCOMA");
             System.out.printf("REGLA 1.2: declaracion -> %s : %s %s ;",t,id,tdi);
-            RESULT = t +"DOS_PUNTOS"+id + tdi +"PUNTOCOMA";
+            RESULT = t +"DOS_PUNTOS"+ id + tdi +"PUNTOCOMA";
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("declaracion",4, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-4)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
