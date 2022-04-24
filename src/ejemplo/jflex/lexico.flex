@@ -164,18 +164,17 @@ comentarioOnlyLine = #.*\n?
   {WhiteSpace}                   { /* ignore */ }
 
   /* identifiers */
-  {Identifier}                   { 
-                                    if( yytext().length() < cotaString ){
-                                     return token("IDENTIFIER", yytext()); }
-                                    else{
-                                     throw new Error("Supera la cantidad de caracteres permitidos");} 
-                                 }
+  {Identifier}                  { return token("IDENTIFIER", yytext()); } 
 }
 
 
 <STRING> {
   \"                             { yybegin(YYINITIAL);
-                                   return token("STRING_LITERAL", string_yyline, string_yycolumn, string.toString()); }
+                                   if( yytext().length() < cotaString ){
+                                     return token("STRING_LITERAL", string_yyline, string_yycolumn, string.toString()); }
+                                    else{
+                                     throw new Error("Supera la cantidad de caracteres permitidos");}}
+
   \\\"                           { string.append('\"'); }
   \\n                            { string.append('\n'); }
   \\t                            { string.append('\t'); }

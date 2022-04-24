@@ -18,7 +18,7 @@ parser code
 {:
 
     public void tabla_simbolos(){
-        Hashtable<String, String> ht1 = new Hashtable<String,String>();
+        Hashtable<String, String> ht = new Hashtable<String,String>();
         //hacer que recorra las variables en el bloque de declaraciones y por cada variable, agregarla al hastable para la tabla
         //de simbolos. por ejemplo:
         //DECLARE.SECTION
@@ -97,10 +97,10 @@ declaraciones ::= declaracion:dec declaraciones:decs{:
         :};
 
 
-declaracion ::= tipos:t DOS_PUNTOS IDENTIFICADOR:id tipos_datos_id:tdi PUNTOCOMA{:
-            System.out.println("REGLA 1.2: declaracion -> t DOS_PUNTOS id tdi PUNTOCOMA");
-            System.out.printf("REGLA 1.2: declaracion -> %s : %s %s ;",t,id,tdi);
-            RESULT = t +"DOS_PUNTOS"+ id + tdi +"PUNTOCOMA";
+declaracion ::= tipos:t DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
+            System.out.println("REGLA 1.2: declaracion -> t DOS_PUNTOS tdi PUNTOCOMA");
+            System.out.printf("REGLA 1.2: declaracion -> %s : %s ;",t,id,tdi);
+            RESULT = t +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
         :};
 
 tipos ::= FLOAT{:
