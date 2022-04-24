@@ -391,9 +391,9 @@ public class MiParser extends java_cup.runtime.lr_parser {
 
 
 
-
+    static Hashtable<String, String> ht;
     public void tabla_simbolos(){
-        Hashtable<String, String> ht = new Hashtable<String,String>();
+        ht = new Hashtable<String,String>();
         //hacer que recorra las variables en el bloque de declaraciones y por cada variable, agregarla al hastable para la tabla
         //de simbolos. por ejemplo:
         //DECLARE.SECTION
@@ -404,7 +404,7 @@ public class MiParser extends java_cup.runtime.lr_parser {
         //  ht1.put("INTEGER", "a"); 
         //  ht1.put("INTEGER", "b");
         //  ht1.put("BOOLEAN", "c");
-        System.out.println("Tabla de simbolos: " + ht1);
+        System.out.println("Tabla de simbolos: " + ht);
     }
 
     public void syntax_error(Symbol s){
@@ -422,10 +422,6 @@ public class MiParser extends java_cup.runtime.lr_parser {
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 class CUP$MiParser$actions {
-
-
-    Hashtable table = new Hashtable();
-
   private final MiParser parser;
 
   /** Constructor */
@@ -574,8 +570,9 @@ class CUP$MiParser$actions {
 		int tdiright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)).right;
 		String tdi = (String)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)).value;
 		
+            ht.put(t,tdi);
             System.out.println("REGLA 1.2: declaracion -> t DOS_PUNTOS tdi PUNTOCOMA");
-            System.out.printf("REGLA 1.2: declaracion -> %s : %s ;",t,id,tdi);
+            System.out.printf("REGLA 1.2: declaracion -> %s : %s ;",t,tdi);
             RESULT = t +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("declaracion",4, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
