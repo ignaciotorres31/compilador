@@ -160,12 +160,13 @@ comentarioOnlyLine = #.*\n?
                                    
   "\*\)"                         { throw new Error("Comentario no balanceado");}
 
-  /* whitespace */
-  {WhiteSpace}                   { /* ignore */ }
-
   /* identifiers */
   {Identifier}                  { return token("IDENTIFIER", yytext()); } 
+
+  /* whitespace */
+  {WhiteSpace}                   { /* ignore */ }
 }
+
 
 
 <STRING> {
@@ -193,4 +194,4 @@ comentarioOnlyLine = #.*\n?
 }
 
 /* error fallback */
-/*[^]                              { throw new Error("Illegal character <"+yytext()+">"); }*/
+[^]                              { throw new Error("Illegal character <"+yytext()+">"); }

@@ -210,9 +210,11 @@ public class Compilador extends javax.swing.JFrame {
         // TODO add your handling code here:
         ConsoleOutputCapturer consoleOutputCapturer = new ConsoleOutputCapturer();
         try {   
-            String path = "./src/ejemplo/jflex/entrada.txt";
+            //String path = "./src/ejemplo/jflex/entrada.txt";
+            InputStream is = new ByteArrayInputStream(jTextArea.getText().getBytes());
+            InputStreamReader reader = new InputStreamReader(is);
             System.out.println("Análisis sintáctico iniciado:");
-            MiLexico lexer = new MiLexico(new FileReader(path));
+            MiLexico lexer = new MiLexico(reader);
             MiParser parser = new MiParser((Scanner) lexer);
             consoleOutputCapturer.start();
             parser.parse();
