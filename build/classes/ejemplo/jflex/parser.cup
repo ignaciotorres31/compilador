@@ -10,38 +10,36 @@ import java.util.Hashtable;
 
 class MiParser;
 
+action code {:
+
+  Hashtable ht = new Hashtable();
+
+:};
+
 parser code
 {:
-    static Hashtable<String, String> ht;
-    public void tabla_simbolos(){
-        ht = new Hashtable<String,String>();
-        //hacer que recorra las variables en el bloque de declaraciones y por cada variable, agregarla al hastable para la tabla
-        //de simbolos. por ejemplo:
-        //DECLARE.SECTION
-        //   INTEGER = a, b;
-        //   BOOLEAN = c
-        //ENDDECLARE.SECTION
-        // ahi hay que guardar en el hastable a:
-        //  ht1.put("INTEGER", "a"); 
-        //  ht1.put("INTEGER", "b");
-        //  ht1.put("BOOLEAN", "c");
-        System.out.println("Tabla de simbolos: " + ht);
-    }
 
+    public void tabla_simbolos(Hashtable ht){
+            ht.forEach((k, v) -> {  
+            System.out.println("Tabla de simbolos: " + k.toString() + " " + v.toString());
+        });
+            
+    }
+    
     public void syntax_error(Symbol s){
-        System.out.println("Error en la linea "+ (s.left+1)+ " Columna "+ s.right+ ". Valor simbolo '"
+        System.out.println(" Error en la linea "+ (s.left+1)+ " Columna "+ s.right+ ". Valor simbolo '"
         +s.value+"' . Simbolo n° "+s.sym+ " no reconocido." );
     }
 
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
-        System.out.println("Error en la linea "+ (s.left+1)+ " Columna "+ s.right+ ". Valor simbolo '"
+        System.out.println(" Error en la linea "+ (s.left+1)+ " Columna "+ s.right+ ". Valor simbolo '"
         +s.value+"' . Simbolo n° "+s.sym+ " no reconocido." );
     }
 
 :};
 
 
-terminal SUMA, RESTA, MULTIPLICACION, DIVISION, IGUAL, IGUAL_IGUAL, DESIGUAL, MAYOR, MAYOR_IGUAL, MENOR,
+terminal SUMA, RESTA, MULTIPLICACION, DIVISION, IGUAL_IGUAL, DESIGUAL, MAYOR, MAYOR_IGUAL, MENOR,
 MENOR_IGUAL, PARENTESISA, PARENTESISC, CORCHETESA, CORCHETESC,  COMA, PUNTOCOMA, DOS_PUNTOS,
 ASIGNACION;
 
@@ -103,19 +101,19 @@ declaracion ::= tipos:t DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
 tipos ::= FLOAT{:
             System.out.println("REGLA 2: tipos -> FLOAT");
             System.out.printf("REGLA 2: tipos -> FLOAT");
-            RESULT = "FLOAT";
-        :}
-        |
-        INTEGER{:
+            RESULT = "FLOAT";        
+        :};
+
+tipos ::= INTEGER{:
             System.out.println("REGLA 2: tipos -> INTEGER");
             System.out.printf("REGLA 2: tipos -> INTEGER");
-            RESULT = "INTEGER";
-        :}
-        |
-        BOOLEAN{:
+            RESULT = "INTEGER";        
+        :};
+
+tipos ::= BOOLEAN{:
             System.out.println("REGLA 2: tipos -> BOOLEAN");
             System.out.printf("REGLA 2: tipos -> BOOLEAN");
-            RESULT = "BOOLEAN";
+            RESULT = "BOOLEAN";        
         :};
 
 tipos_datos_id ::= IDENTIFICADOR:id{:

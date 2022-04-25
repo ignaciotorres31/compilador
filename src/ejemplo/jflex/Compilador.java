@@ -17,6 +17,9 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import java_cup.runtime.Symbol;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java_cup.runtime.Scanner;
 
 /**
  *
@@ -203,6 +206,15 @@ public class Compilador extends javax.swing.JFrame {
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
+        try {   
+            String path = "./src/ejemplo/jflex/entrada.txt";
+            System.out.println("Análisis sintáctico iniciado:");
+            MiLexico lexer = new MiLexico(new FileReader(path));
+            MiParser parser = new MiParser((Scanner) lexer);
+            parser.parse();
+        } catch (Exception ex) {
+            Logger.getLogger(CompiladorJavaCup.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static void setJTextConsole(String message){
