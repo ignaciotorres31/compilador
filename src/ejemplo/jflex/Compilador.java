@@ -7,11 +7,13 @@ package ejemplo.jflex;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -206,12 +208,15 @@ public class Compilador extends javax.swing.JFrame {
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
+        ConsoleOutputCapturer consoleOutputCapturer = new ConsoleOutputCapturer();
         try {   
             String path = "./src/ejemplo/jflex/entrada.txt";
             System.out.println("Análisis sintáctico iniciado:");
             MiLexico lexer = new MiLexico(new FileReader(path));
             MiParser parser = new MiParser((Scanner) lexer);
+            consoleOutputCapturer.start();
             parser.parse();
+            jTextPane1.setText(consoleOutputCapturer.stop());
         } catch (Exception ex) {
             Logger.getLogger(CompiladorJavaCup.class.getName()).log(Level.SEVERE, null, ex);
         }
