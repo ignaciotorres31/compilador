@@ -40,25 +40,25 @@ public class MiParser extends java_cup.runtime.lr_parser {
     "\000\105\000\002\002\004\000\002\002\004\000\002\002" +
     "\003\000\002\002\003\000\002\003\005\000\002\005\004" +
     "\000\002\005\003\000\002\006\006\000\002\007\003\000" +
-    "\002\007\003\000\002\007\003\000\002\010\003\000\002" +
-    "\010\005\000\002\004\005\000\002\011\004\000\002\011" +
-    "\003\000\002\012\003\000\002\012\003\000\002\012\003" +
-    "\000\002\012\003\000\002\015\005\000\002\020\005\000" +
-    "\002\020\003\000\002\021\005\000\002\021\003\000\002" +
-    "\022\004\000\002\022\003\000\002\023\005\000\002\023" +
-    "\005\000\002\023\005\000\002\023\005\000\002\023\005" +
-    "\000\002\023\005\000\002\023\003\000\002\024\005\000" +
-    "\002\024\005\000\002\024\003\000\002\025\005\000\002" +
-    "\025\005\000\002\025\003\000\002\026\004\000\002\026" +
-    "\003\000\002\017\003\000\002\017\003\000\002\017\003" +
-    "\000\002\017\003\000\002\017\005\000\002\017\003\000" +
-    "\002\027\012\000\002\030\005\000\002\030\003\000\002" +
-    "\013\011\000\002\016\003\000\002\016\003\000\002\032" +
-    "\006\000\002\032\006\000\002\032\006\000\002\032\006" +
-    "\000\002\031\003\000\002\031\003\000\002\031\003\000" +
-    "\002\033\006\000\002\033\006\000\002\034\006\000\002" +
-    "\034\006\000\002\035\006\000\002\035\006\000\002\014" +
-    "\011\000\002\014\013" });
+    "\002\007\003\000\002\007\003\000\002\035\003\000\002" +
+    "\035\005\000\002\004\005\000\002\010\004\000\002\010" +
+    "\003\000\002\011\003\000\002\011\003\000\002\011\003" +
+    "\000\002\011\003\000\002\014\005\000\002\017\005\000" +
+    "\002\017\003\000\002\020\005\000\002\020\003\000\002" +
+    "\021\004\000\002\021\003\000\002\022\005\000\002\022" +
+    "\005\000\002\022\005\000\002\022\005\000\002\022\005" +
+    "\000\002\022\005\000\002\022\003\000\002\023\005\000" +
+    "\002\023\005\000\002\023\003\000\002\024\005\000\002" +
+    "\024\005\000\002\024\003\000\002\025\004\000\002\025" +
+    "\003\000\002\016\003\000\002\016\003\000\002\016\003" +
+    "\000\002\016\003\000\002\016\005\000\002\016\003\000" +
+    "\002\026\012\000\002\027\005\000\002\027\003\000\002" +
+    "\012\011\000\002\015\003\000\002\015\003\000\002\031" +
+    "\006\000\002\031\006\000\002\031\006\000\002\031\006" +
+    "\000\002\030\003\000\002\030\003\000\002\030\003\000" +
+    "\002\032\006\000\002\032\006\000\002\033\006\000\002" +
+    "\033\006\000\002\034\006\000\002\034\006\000\002\013" +
+    "\011\000\002\013\013" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -280,78 +280,78 @@ public class MiParser extends java_cup.runtime.lr_parser {
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
     "\000\211\000\010\002\004\003\003\004\006\001\001\000" +
-    "\004\004\212\001\001\000\002\001\001\000\030\011\032" +
-    "\012\037\013\044\014\031\015\042\016\040\031\036\032" +
-    "\041\033\035\034\026\035\027\001\001\000\002\001\001" +
+    "\004\004\212\001\001\000\002\001\001\000\030\010\032" +
+    "\011\037\012\044\013\031\014\042\015\040\030\036\031" +
+    "\041\032\035\033\026\034\027\001\001\000\002\001\001" +
     "\000\010\005\011\006\013\007\012\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\010\005\016" +
     "\006\013\007\012\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\004\010\020\001\001\000\002" +
+    "\001\000\002\001\001\000\004\035\020\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\026\012\172\013\044\014\031\015\042\016\040\031\036" +
-    "\032\041\033\035\034\026\035\027\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\026\011\172\012\044\013\031\014\042\015\040\030\036" +
+    "\031\041\032\035\033\026\034\027\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\024\017\106\020" +
-    "\103\021\104\022\077\023\101\024\074\025\110\026\102" +
-    "\027\076\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\024\017\106\020\141" +
-    "\021\104\022\077\023\101\024\074\025\110\026\102\027" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\024\016\106\017" +
+    "\103\020\104\021\077\022\101\023\074\024\110\025\102" +
+    "\026\076\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\024\016\106\017\141" +
+    "\020\104\021\077\022\101\023\074\024\110\025\102\026" +
     "\076\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\020\017\106\022\134\023\101\024\074\025\110" +
-    "\026\102\027\076\001\001\000\002\001\001\000\010\017" +
-    "\106\026\127\027\076\001\001\000\002\001\001\000\002" +
+    "\001\000\020\016\106\021\134\022\101\023\074\024\110" +
+    "\025\102\026\076\001\001\000\002\001\001\000\010\016" +
+    "\106\025\127\026\076\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\004\030\121\001\001\000\002" +
+    "\001\000\002\001\001\000\004\027\121\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\010\017\106\026\133\027\076\001\001\000\010\017" +
-    "\106\026\132\027\076\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\020\017\106\022\136\023" +
-    "\101\024\074\025\110\026\102\027\076\001\001\000\002" +
-    "\001\001\000\022\017\106\021\140\022\077\023\101\024" +
-    "\074\025\110\026\102\027\076\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\012\017\106\025" +
-    "\162\026\102\027\076\001\001\000\014\017\106\024\161" +
-    "\025\110\026\102\027\076\001\001\000\014\017\106\024" +
-    "\160\025\110\026\102\027\076\001\001\000\012\017\106" +
-    "\025\157\026\102\027\076\001\001\000\014\017\106\024" +
-    "\156\025\110\026\102\027\076\001\001\000\014\017\106" +
-    "\024\155\025\110\026\102\027\076\001\001\000\014\017" +
-    "\106\024\154\025\110\026\102\027\076\001\001\000\014" +
-    "\017\106\024\153\025\110\026\102\027\076\001\001\000" +
+    "\000\010\016\106\025\133\026\076\001\001\000\010\016" +
+    "\106\025\132\026\076\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\020\016\106\021\136\022" +
+    "\101\023\074\024\110\025\102\026\076\001\001\000\002" +
+    "\001\001\000\022\016\106\020\140\021\077\022\101\023" +
+    "\074\024\110\025\102\026\076\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\012\016\106\024" +
+    "\162\025\102\026\076\001\001\000\014\016\106\023\161" +
+    "\024\110\025\102\026\076\001\001\000\014\016\106\023" +
+    "\160\024\110\025\102\026\076\001\001\000\012\016\106" +
+    "\024\157\025\102\026\076\001\001\000\014\016\106\023" +
+    "\156\024\110\025\102\026\076\001\001\000\014\016\106" +
+    "\023\155\024\110\025\102\026\076\001\001\000\014\016" +
+    "\106\023\154\024\110\025\102\026\076\001\001\000\014" +
+    "\016\106\023\153\024\110\025\102\026\076\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\024\017\106\020\164\021\104" +
-    "\022\077\023\101\024\074\025\110\026\102\027\076\001" +
-    "\001\000\002\001\001\000\002\001\001\000\030\011\167" +
-    "\012\037\013\044\014\031\015\042\016\040\031\036\032" +
-    "\041\033\035\034\026\035\027\001\001\000\026\012\172" +
-    "\013\044\014\031\015\042\016\040\031\036\032\041\033" +
-    "\035\034\026\035\027\001\001\000\030\011\173\012\037" +
-    "\013\044\014\031\015\042\016\040\031\036\032\041\033" +
-    "\035\034\026\035\027\001\001\000\002\001\001\000\002" +
-    "\001\001\000\026\012\172\013\044\014\031\015\042\016" +
-    "\040\031\036\032\041\033\035\034\026\035\027\001\001" +
+    "\001\000\002\001\001\000\024\016\106\017\164\020\104" +
+    "\021\077\022\101\023\074\024\110\025\102\026\076\001" +
+    "\001\000\002\001\001\000\002\001\001\000\030\010\167" +
+    "\011\037\012\044\013\031\014\042\015\040\030\036\031" +
+    "\041\032\035\033\026\034\027\001\001\000\026\011\172" +
+    "\012\044\013\031\014\042\015\040\030\036\031\041\032" +
+    "\035\033\026\034\027\001\001\000\030\010\173\011\037" +
+    "\012\044\013\031\014\042\015\040\030\036\031\041\032" +
+    "\035\033\026\034\027\001\001\000\002\001\001\000\002" +
+    "\001\001\000\026\011\172\012\044\013\031\014\042\015" +
+    "\040\030\036\031\041\032\035\033\026\034\027\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\024\017\106\020\204\021\104\022\077\023" +
-    "\101\024\074\025\110\026\102\027\076\001\001\000\002" +
-    "\001\001\000\002\001\001\000\030\011\207\012\037\013" +
-    "\044\014\031\015\042\016\040\031\036\032\041\033\035" +
-    "\034\026\035\027\001\001\000\026\012\172\013\044\014" +
-    "\031\015\042\016\040\031\036\032\041\033\035\034\026" +
-    "\035\027\001\001\000\002\001\001\000\002\001\001\000" +
+    "\001\001\000\024\016\106\017\204\020\104\021\077\022" +
+    "\101\023\074\024\110\025\102\026\076\001\001\000\002" +
+    "\001\001\000\002\001\001\000\030\010\207\011\037\012" +
+    "\044\013\031\014\042\015\040\030\036\031\041\032\035" +
+    "\033\026\034\027\001\001\000\026\011\172\012\044\013" +
+    "\031\014\042\015\040\030\036\031\041\032\035\033\026" +
+    "\034\027\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
@@ -391,7 +391,7 @@ public class MiParser extends java_cup.runtime.lr_parser {
 
 
 
-
+    Hashtable ht = new Hashtable();
     public void tabla_simbolos(Hashtable ht){
             ht.forEach((k, v) -> {  
             System.out.println("Tabla de simbolos: " + k.toString() + " " + v.toString());
@@ -414,12 +414,6 @@ public class MiParser extends java_cup.runtime.lr_parser {
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 class CUP$MiParser$actions {
-
-
-
-  Hashtable ht = new Hashtable();
-
-
   private final MiParser parser;
 
   /** Constructor */
@@ -566,9 +560,10 @@ class CUP$MiParser$actions {
 		String t = (String)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)).value;
 		int tdileft = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)).left;
 		int tdiright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)).right;
-		String tdi = (String)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)).value;
+		List<String> tdi = (List<String>)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)).value;
 		
-            ht.put(t,tdi);
+            for(String i : tdi){
+                ht.put(i,t);}
             System.out.println("REGLA 1.2: declaracion -> t DOS_PUNTOS tdi PUNTOCOMA");
             System.out.printf("REGLA 1.2: declaracion -> %s : %s ;",t,tdi);
             RESULT = t +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
@@ -619,35 +614,39 @@ class CUP$MiParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 11: // tipos_datos_id ::= IDENTIFICADOR 
             {
-              String RESULT =null;
+              List<String> RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
             System.out.println("REGLA 2.1: tipos_datos_id -> id ");
-            System.out.printf("REGLA 2.1: tipos_datos_id -> %s%n%n",id);
-            RESULT = id;
+            System.out.printf("REGLA 2.1: tipos_datos_id -> %s%n%n",id); 
+            List<String> ident = new ArrayList<String>();
+            ident.add(id);
+            RESULT = ident;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("tipos_datos_id",6, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("tipos_datos_id",27, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 12: // tipos_datos_id ::= tipos_datos_id COMA IDENTIFICADOR 
             {
-              String RESULT =null;
+              List<String> RESULT =null;
 		int tdileft = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).left;
 		int tdiright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).right;
-		String tdi = (String)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).value;
+		List<String> tdi = (List<String>)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).value;
 		int idleft = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
             System.out.println("REGLA 2.1: tipos_datos_id -> tdi COMA id");
             System.out.printf("REGLA 2.1: tipos_datos_id -> %s , %s", tdi,id);
-            RESULT = tdi + "COMA" +id;
+            tdi.add(id);
+            RESULT = tdi;
+
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("tipos_datos_id",6, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("tipos_datos_id",27, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -682,7 +681,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 3.1: bloque_sentencias -> %s %s%n%n", bs, s);
             RESULT =bs + s;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("bloque_sentencias",7, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("bloque_sentencias",6, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -698,7 +697,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 3.1: bloque_sentencias -> %s%n%n", s);
             RESULT = s;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("bloque_sentencias",7, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("bloque_sentencias",6, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -714,7 +713,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 3.2: sentencia -> %s%n%n", sw);
             RESULT = sw;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia",8, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia",7, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -730,7 +729,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 3.2: sentencia -> %s%n%n", si);
             RESULT = si;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia",8, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia",7, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -746,7 +745,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 3.2: sentencia -> %s%n%n", sa);
             RESULT = sa;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia",8, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia",7, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -762,7 +761,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 3.2: sentencia -> %s%n%n", sd);
             RESULT = sd;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia",8, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia",7, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -781,7 +780,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 4: sentencia_asignacion -> %s := %s%n%n",id,eo);
             RESULT = id +":=" + eo ;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia_asignacion",11, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia_asignacion",10, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -800,7 +799,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 4.1: expresion_or ->  %s OR %s%n%n",eo, ea);
             RESULT =eo +"OR"+ ea ;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_or",14, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_or",13, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -816,7 +815,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 4.1: expresion_or ->  %s%n%n",ea);
             RESULT = ea;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_or",14, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_or",13, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -835,7 +834,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 4.2: expresion_and ->  %s AND %s%n%n",ea, en);
             RESULT =ea +"AND"+ en;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_and",15, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_and",14, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -851,7 +850,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 4.2: expresion_and ->  %s%n%n",en);
             RESULT = en;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_and",15, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_and",14, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -867,7 +866,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 4.3: expresion_not ->  NOT %s%n%n",en);
             RESULT ="NOT"+ en;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_not",16, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_not",15, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -883,7 +882,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 4.3: expresion_not ->  %s%n%n",c);
             RESULT = c;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_not",16, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_not",15, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -902,7 +901,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5: comparacion -> %s > %s%n%n",esr1,esr2);
             RESULT = esr1+">"+ esr2;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",17, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",16, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -921,7 +920,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5: comparacion ->  %s >= %s%n%n",esr1,esr2);
             RESULT = esr1 + ">=" + esr2;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",17, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",16, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -940,7 +939,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5: comparacion -> %s < %s%n%n",esr1,esr2);
             RESULT = esr1+"<"+ esr2;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",17, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",16, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -959,7 +958,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5: comparacion ->  %s <= %s%n%n",esr1,esr2);
             RESULT = esr1 + "<=" + esr2;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",17, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",16, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -978,7 +977,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5: comparacion -> %s == %s%n%n",esr1,esr2);
             RESULT = esr1+"=="+ esr2;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",17, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",16, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -997,7 +996,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5: comparacion ->  %s != %s%n%n",esr1,esr2);
             RESULT = esr1 + "!=" + esr2;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",17, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",16, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1013,7 +1012,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5: comparacion ->  %s%n%n",esr);
             RESULT = esr;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",17, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",16, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1032,7 +1031,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5.1: expresion_sr-> %s + %s%n%n",esr,emd);
             RESULT = esr+"+"+ emd;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_sr",18, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_sr",17, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1051,7 +1050,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5.1: expresion_sr ->  %s - %s%n%n",esr,emd);
             RESULT = esr + "-" + emd;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_sr",18, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_sr",17, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1067,7 +1066,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5.1: expresion_sr ->  %s%n%n",emd);
             RESULT = emd;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_sr",18, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_sr",17, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1086,7 +1085,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5.2: expresion_md -> %s * %s%n%n",emd,mu);
             RESULT = emd + "*" + mu ;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_md",19, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_md",18, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1105,7 +1104,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5.2: expresion_md ->  %s / %s%n%n",emd,mu);
             RESULT = emd + "/" + mu ;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_md",19, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_md",18, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1121,7 +1120,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5.2: expresion_md ->  %s%n%n",mu);
             RESULT = mu;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_md",19, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_md",18, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1137,7 +1136,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5.3: menos_unario -> - %s%n%n",mu);
             RESULT = "-" + mu ;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("menos_unario",20, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("menos_unario",19, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1153,7 +1152,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5.3: menos_unario ->  %s%n%n",f);
             RESULT = f ;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("menos_unario",20, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("menos_unario",19, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1169,7 +1168,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5.4: factor -> %s%n%n",bl);
             RESULT = bl;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("factor",13, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("factor",12, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1185,7 +1184,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5.4: factor ->  %s%n%n",il);
             RESULT = il;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("factor",13, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("factor",12, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1201,7 +1200,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5.4: factor -> %s%n%n",fl);
             RESULT = fl;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("factor",13, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("factor",12, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1217,7 +1216,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5.4: factor -> %s%n%n",fe);
             RESULT = fe;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("factor",13, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("factor",12, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1233,7 +1232,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5.4: factor ->(%s) %n%n",eo);
             RESULT = "(" + eo + ")";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("factor",13, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("factor",12, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1249,7 +1248,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 5.4: factor ->  %s%n%n",id);
             RESULT = id;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("factor",13, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("factor",12, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1271,7 +1270,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 6: funcion_especial -> %s ( %s ; [%s])%n%n",sim,il,ndc);
             RESULT = sim + "(" + il + ";"+ "[" + ndc + "]" + ")";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("funcion_especial",21, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-7)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("funcion_especial",20, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-7)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1290,7 +1289,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 6.1: numeros_dentro_corchete -> %s , %s%n%n",ndc,il);
             RESULT = ndc + ","+ il;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("numeros_dentro_corchete",22, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("numeros_dentro_corchete",21, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1306,7 +1305,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 6.1: factor ->  %s%n%n",il);
             RESULT = il ;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("numeros_dentro_corchete",22, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("numeros_dentro_corchete",21, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1325,7 +1324,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 7: sentencia_while -> WHILE (%s)DO %s%n%n END",eo,bs);
             RESULT = "WHILE" + "("+ eo + ")"+"DO"+bs+"END";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia_while",9, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-6)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia_while",8, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-6)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1341,7 +1340,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8: sentencia_display -> %s%n%n",d);
             RESULT = d;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia_display",12, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia_display",11, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1357,7 +1356,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8: sentencia_display -> %s%n%n",i);
             RESULT = i;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia_display",12, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia_display",11, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1373,7 +1372,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8.1: display -> DISPLAY(%s) %n%n",str);
             RESULT = "DISPLAY" +"("+str+")";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("display",24, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("display",23, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1389,7 +1388,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8.1: display -> DISPLAY(%s) %n%n",il);
             RESULT = "DISPLAY" +"("+il+")";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("display",24, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("display",23, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1405,7 +1404,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8.1: display -> DISPLAY(%s) %n%n",fl);
             RESULT = "DISPLAY" +"("+fl+")";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("display",24, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("display",23, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1421,7 +1420,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8.1: display -> DISPLAY(%s) %n%n",bl);
             RESULT = "DISPLAY" +"("+bl+")";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("display",24, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("display",23, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1437,7 +1436,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8.2: input -> %s%n%n",ii);
             RESULT = ii;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",23, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",22, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1453,7 +1452,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8.2: input -> %s%n%n",ifl);
             RESULT = ifl;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",23, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",22, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1469,7 +1468,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8.2: input -> %s%n%n",ib);
             RESULT = ib;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",23, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",22, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1485,7 +1484,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8.3: input_int -> INTPUT_INT (%s)%n%n",il);
             RESULT = "INPUT_INT"+"("+ il +")";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_int",25, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_int",24, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1501,7 +1500,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8.3: input_int -> INTPUT_INT (%s)%n%n",id);
             RESULT = "INPUT_INT"+"("+ id +")";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_int",25, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_int",24, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1517,7 +1516,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8.4: input_float -> INTPUT_FLOAT (%s)%n%n",fl);
             RESULT = "INPUT_FLOAT"+"("+ fl +")";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_float",26, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_float",25, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1533,7 +1532,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8.4: input_float -> INTPUT_FLOAT (%s)%n%n",id);
             RESULT = "INPUT_FLOAT"+"("+ id +")";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_float",26, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_float",25, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1549,7 +1548,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8.5: input_bool -> INTPUT_BOOL (%s)%n%n",bl);
             RESULT = "INPUT_BOOL"+"("+ bl +")";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_bool",27, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_bool",26, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1565,7 +1564,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 8.5: input_bool -> INTPUT_BOOL (%s)%n%n",id);
             RESULT = "INPUT_BOOL"+"("+ id +")";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_bool",27, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_bool",26, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1584,7 +1583,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 9: sentencia_if -> IF (%s)THEN %s%n%n END",eo,bs);
             RESULT = "IF" + "("+ eo + ")"+"THEN"+bs+"END";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia_if",10, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-6)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia_if",9, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-6)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1606,7 +1605,7 @@ class CUP$MiParser$actions {
             System.out.printf("REGLA 9: sentencia_if -> IF (%s)THEN %s%n%n ELSE %s%n%n END",eo,bs1,bs2);
             RESULT = "IF" + "("+ eo + ")"+"THEN"+bs1+"ELSE"+bs2+"END";
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia_if",10, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-8)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia_if",9, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-8)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 

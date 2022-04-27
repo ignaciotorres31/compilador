@@ -161,7 +161,7 @@ comentarioOnlyLine = #.*\n?
   "\*\)"                         { throw new Error("Comentario no balanceado");}
 
   /* identifiers */
-  {Identifier}                  { return token("IDENTIFIER", yytext()); } 
+  {Identifier}                  { return token("IDENTIFICADOR", yytext()); } 
 
   /* whitespace */
   {WhiteSpace}                   { /* ignore */ }

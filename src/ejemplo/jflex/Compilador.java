@@ -193,7 +193,7 @@ public class Compilador extends javax.swing.JFrame {
         try{
             while (true) {
                 Symbol token = lexico.next_token();
-                if (token == null)
+                if (token.sym == 0)
                     break;
                outpout  +=  token.toString() + "\n";
             }
@@ -218,6 +218,9 @@ public class Compilador extends javax.swing.JFrame {
             MiParser parser = new MiParser((Scanner) lexer);
             consoleOutputCapturer.start();
             parser.parse();
+            parser.ht.forEach((tipo, valor) -> {  
+            System.out.println("Tabla de simbolos: " + tipo.toString() + " " + valor.toString());
+            });
             jTextPane1.setText(consoleOutputCapturer.stop());
         } catch (Exception ex) {
             Logger.getLogger(CompiladorJavaCup.class.getName()).log(Level.SEVERE, null, ex);

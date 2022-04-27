@@ -10,15 +10,10 @@ import java.util.Hashtable;
 
 class MiParser;
 
-action code {:
-
-  Hashtable ht = new Hashtable();
-
-:};
 
 parser code
 {:
-
+    Hashtable ht = new Hashtable();
     public void tabla_simbolos(Hashtable ht){
             ht.forEach((k, v) -> {  
             System.out.println("Tabla de simbolos: " + k.toString() + " " + v.toString());
@@ -47,10 +42,12 @@ terminal String IDENTIFICADOR, BOOLEAN_LITERAL, INTEGER_LITERAL, FLOAT_LITERAL,S
 INPUT_INT, INPUT_FLOAT, INPUT_BOOL, AND, OR, NOT, WHILE, DO, END,IF, THEN, ELSE, DISPLAY, DECLARE_SECTION, 
 ENDDECLARE_SECTION, PROGRAM_SECTION, ENDPROGRAM_SECTION, STRING;
 
-nonterminal String programa, bloque_declaraciones, bloque_programa, declaraciones,declaracion, tipos, tipos_datos_id,
+nonterminal String programa, bloque_declaraciones, bloque_programa, declaraciones,declaracion, tipos,
 bloque_sentencias, sentencia, sentencia_while, sentencia_if, sentencia_asignacion, sentencia_display, factor, 
 expresion_or, expresion_and, expresion_not, comparacion, expresion_sr, expresion_md, menos_unario, funcion_especial,
 numeros_dentro_corchete, input, display, input_int, input_float, input_bool;
+
+nonterminal List<String>  tipos_datos_id;
 
 start with programa;
 
@@ -92,7 +89,8 @@ declaraciones ::= declaracion:dec declaraciones:decs{:
 
 
 declaracion ::= tipos:t DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
-            ht.put(t,tdi);
+            for(String i : tdi){
+                ht.put(i,t);}
             System.out.println("REGLA 1.2: declaracion -> t DOS_PUNTOS tdi PUNTOCOMA");
             System.out.printf("REGLA 1.2: declaracion -> %s : %s ;",t,tdi);
             RESULT = t +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
@@ -118,14 +116,18 @@ tipos ::= BOOLEAN{:
 
 tipos_datos_id ::= IDENTIFICADOR:id{:
             System.out.println("REGLA 2.1: tipos_datos_id -> id ");
-            System.out.printf("REGLA 2.1: tipos_datos_id -> %s%n%n",id);
-            RESULT = id;
+            System.out.printf("REGLA 2.1: tipos_datos_id -> %s%n%n",id); 
+            List<String> ident = new ArrayList<String>();
+            ident.add(id);
+            RESULT = ident;
         :}
         |
         tipos_datos_id: tdi COMA IDENTIFICADOR:id {:
             System.out.println("REGLA 2.1: tipos_datos_id -> tdi COMA id");
             System.out.printf("REGLA 2.1: tipos_datos_id -> %s , %s", tdi,id);
-            RESULT = tdi + "COMA" +id;
+            tdi.add(id);
+            RESULT = tdi;
+
         :};
 
 bloque_programa ::= PROGRAM_SECTION bloque_sentencias:bs ENDPROGRAM_SECTION{:
