@@ -1186,10 +1186,13 @@ public class MiLexico implements java_cup.runtime.Scanner {
             // fall through
           case 61: break;
           case 3:
-            { string.setLength(0); 
-                                    yybegin(STRING); 
-                                    string_yyline = this.yyline;
-                                    string_yycolumn = this.yycolumn;
+            { if( yytext().length() < cotaString ){
+                                        string.setLength(0); 
+                                        yybegin(STRING); 
+                                        string_yyline = this.yyline;
+                                        string_yycolumn = this.yycolumn;}
+                                    else{
+                                     throw new Error("Supera la cantidad de caracteres permitidos");}
             }
             // fall through
           case 62: break;
@@ -1288,10 +1291,7 @@ public class MiLexico implements java_cup.runtime.Scanner {
           case 80: break;
           case 22:
             { yybegin(YYINITIAL);
-                                   if( yytext().length() < cotaString ){
-                                     return token("STRING_LITERAL", string_yyline, string_yycolumn, string.toString()); }
-                                    else{
-                                     throw new Error("Supera la cantidad de caracteres permitidos");}
+                                   return token("STRING_LITERAL", string_yyline, string_yycolumn, string.toString());
             }
             // fall through
           case 81: break;

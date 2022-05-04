@@ -150,10 +150,14 @@ comentarioOnlyLine = #.*\n?
                                      throw new Error("Supera el float determinado");} 
                                  }
   
-  \"                             {  string.setLength(0); 
-                                    yybegin(STRING); 
-                                    string_yyline = this.yyline;
-                                    string_yycolumn = this.yycolumn; }
+  \"                             {  if( yytext().length() < cotaString ){
+                                        string.setLength(0); 
+                                        yybegin(STRING); 
+                                        string_yyline = this.yyline;
+                                        string_yycolumn = this.yycolumn;}
+                                    else{
+                                     throw new Error("Supera la cantidad de caracteres permitidos");}
+                                         }
 
   "\(\*"                         { yybegin(COMENTARIO);
                                    comentario_multilinea += 1; }
@@ -171,10 +175,7 @@ comentarioOnlyLine = #.*\n?
 
 <STRING> {
   \"                             { yybegin(YYINITIAL);
-                                   if( yytext().length() < cotaString ){
-                                     return token("STRING_LITERAL", string_yyline, string_yycolumn, string.toString()); }
-                                    else{
-                                     throw new Error("Supera la cantidad de caracteres permitidos");}}
+                                   return token("STRING_LITERAL", string_yyline, string_yycolumn, string.toString()); }
 
   \\\"                           { string.append('\"'); }
   \\n                            { string.append('\n'); }
