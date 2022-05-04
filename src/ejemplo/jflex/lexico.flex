@@ -27,7 +27,7 @@ import java_cup.sym;
     int comentario_multilinea = 0;
     int cotaInt = 1000000;
     float cotaFloat = 1000000.0f;
-    int cotaString = 5;
+    int cotaString = 100;
 
     StringBuffer string = new StringBuffer();
 
@@ -187,6 +187,7 @@ comentarioOnlyLine = #.*\n?
   \\n                            { string.append('\n'); }
   \\t                            { string.append('\t'); }
   \\                             { string.append('\\'); }
+  <<EOF>>                        { throw new Error("String no balanceado"); }
   [^]                            { string.append( yytext() ); }
 }
 

@@ -744,7 +744,7 @@ public class MiLexico implements java_cup.runtime.Scanner {
     int comentario_multilinea = 0;
     int cotaInt = 1000000;
     float cotaFloat = 1000000.0f;
-    int cotaString = 5;
+    int cotaString = 100;
 
     StringBuffer string = new StringBuffer();
 
@@ -1173,10 +1173,14 @@ public class MiLexico implements java_cup.runtime.Scanner {
         zzAtEOF = true;
             zzDoEOF();
             switch (zzLexicalState) {
+            case STRING: {
+              throw new Error("String no balanceado");
+            }  // fall though
+            case 287: break;
             case COMENTARIO: {
               throw new Error("Comentario no balanceado");
             }  // fall though
-            case 287: break;
+            case 288: break;
             default:
           { return new java_cup.runtime.Symbol(sym.EOF); }
         }
