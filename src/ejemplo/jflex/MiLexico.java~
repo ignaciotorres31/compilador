@@ -744,7 +744,7 @@ public class MiLexico implements java_cup.runtime.Scanner {
     int comentario_multilinea = 0;
     int cotaInt = 1000000;
     float cotaFloat = 1000000.0f;
-    int cotaString = 100;
+    int cotaString = 5;
 
     StringBuffer string = new StringBuffer();
 
@@ -759,6 +759,14 @@ public class MiLexico implements java_cup.runtime.Scanner {
     }
 
     private MiToken token(String nombre, int line, int column, Object valor) {
+        if(nombre.equals("STRING_LITERAL")){
+            if(valor.toString().length() <= cotaString){
+                return new MiToken(nombre, line, column, valor);
+            }else{
+                throw new Error("Supera la cantidad de caracteres permitidos");
+            }
+            
+        }
         return new MiToken(nombre, line, column, valor);
     }
 
@@ -1187,9 +1195,9 @@ public class MiLexico implements java_cup.runtime.Scanner {
           case 61: break;
           case 3:
             { string.setLength(0); 
-                                    yybegin(STRING); 
-                                    string_yyline = this.yyline;
-                                    string_yycolumn = this.yycolumn;
+                                        yybegin(STRING); 
+                                        string_yyline = this.yyline;
+                                        string_yycolumn = this.yycolumn;
             }
             // fall through
           case 62: break;
@@ -1288,10 +1296,7 @@ public class MiLexico implements java_cup.runtime.Scanner {
           case 80: break;
           case 22:
             { yybegin(YYINITIAL);
-                                   if( yytext().length() < cotaString ){
-                                     return token("STRING_LITERAL", string_yyline, string_yycolumn, string.toString()); }
-                                    else{
-                                     throw new Error("Supera la cantidad de caracteres permitidos");}
+                                   return token("STRING_LITERAL", string_yyline, string_yycolumn, string.toString());
             }
             // fall through
           case 81: break;

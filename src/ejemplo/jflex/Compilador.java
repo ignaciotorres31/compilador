@@ -200,9 +200,13 @@ public class Compilador extends javax.swing.JFrame {
             System.out.println(outpout);
             jTextPane1.setText(outpout);
         }
+        catch(Error e){
+            System.out.println("Error: " + e.getMessage());
+            jTextPane1.setText("Error: " + e.getMessage());
+        }
         catch(IOException e){
-            System.out.println(e.getMessage());
-        }        
+            System.out.println("Error: " + e.getMessage());
+        }             
         System.out.println("Análisis léxico terminado.");
     }
     

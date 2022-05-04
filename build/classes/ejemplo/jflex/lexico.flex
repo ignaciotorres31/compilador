@@ -27,7 +27,7 @@ import java_cup.sym;
     int comentario_multilinea = 0;
     int cotaInt = 1000000;
     float cotaFloat = 1000000.0f;
-    int cotaString = 100;
+    int cotaString = 5;
 
     StringBuffer string = new StringBuffer();
 
@@ -42,6 +42,14 @@ import java_cup.sym;
     }
 
     private MiToken token(String nombre, int line, int column, Object valor) {
+        if(nombre.equals("STRING_LITERAL")){
+            if(valor.toString().length() <= cotaString){
+                return new MiToken(nombre, line, column, valor);
+            }else{
+                throw new Error("Supera la cantidad de caracteres permitidos");
+            }
+            
+        }
         return new MiToken(nombre, line, column, valor);
     }
 %}
@@ -150,14 +158,12 @@ comentarioOnlyLine = #.*\n?
                                      throw new Error("Supera el float determinado");} 
                                  }
   
-  \"                             {  if( yytext().length() < cotaString ){
-                                        string.setLength(0); 
+  \"                             {      string.setLength(0); 
                                         yybegin(STRING); 
                                         string_yyline = this.yyline;
-                                        string_yycolumn = this.yycolumn;}
-                                    else{
-                                     throw new Error("Supera la cantidad de caracteres permitidos");}
-                                         }
+                                        string_yycolumn = this.yycolumn;
+                                 }
+                                    
 
   "\(\*"                         { yybegin(COMENTARIO);
                                    comentario_multilinea += 1; }
