@@ -45,7 +45,6 @@ public class MiParserSym {
   public static final int PROGRAM_SECTION = 43;
   public static final int END = 36;
   public static final int INPUT_FLOAT = 29;
-  public static final int STRING = 45;
   public static final int ENDPROGRAM_SECTION = 44;
   public static final int MENOR_IGUAL = 12;
   public static final int FLOAT_LITERAL = 23;
@@ -99,8 +98,7 @@ public class MiParserSym {
   "DECLARE_SECTION",
   "ENDDECLARE_SECTION",
   "PROGRAM_SECTION",
-  "ENDPROGRAM_SECTION",
-  "STRING"
+  "ENDPROGRAM_SECTION"
   };
 }
 

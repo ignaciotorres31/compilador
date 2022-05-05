@@ -39,7 +39,7 @@ MENOR_IGUAL, PARENTESISA, PARENTESISC, CORCHETESA, CORCHETESC,  COMA, PUNTOCOMA,
 
 terminal String IDENTIFICADOR, BOOLEAN_LITERAL, INTEGER_LITERAL, FLOAT_LITERAL,SUMAIMPAR, INTEGER, FLOAT, BOOLEAN, 
 INPUT_INT, INPUT_FLOAT, INPUT_BOOL, AND, OR, NOT, WHILE, DO, END,IF, THEN, ELSE, DISPLAY, DECLARE_SECTION, 
-ENDDECLARE_SECTION, PROGRAM_SECTION, ENDPROGRAM_SECTION, STRING;
+ENDDECLARE_SECTION, PROGRAM_SECTION, ENDPROGRAM_SECTION;
 
 nonterminal String programa, bloque_declaraciones, bloque_programa, declaraciones,declaracion, 
 bloque_sentencias, sentencia, sentencia_while, sentencia_if, sentencia_asignacion, sentencia_display, factor, 
@@ -375,28 +375,10 @@ sentencia_display ::= display:d {:
             RESULT = i;
         :};
 
-display ::= DISPLAY PARENTESISA STRING:str PARENTESISC{:
-            System.out.println("REGLA 8.1: display -> DISPLAY PARENTESISA str PARENTESISC");
-            System.out.printf("REGLA 8.1: display -> DISPLAY(%s) %n%n",str);
-            RESULT = "DISPLAY" +"("+str+")";
-        :}
-        |
-        DISPLAY PARENTESISA INTEGER_LITERAL:il PARENTESISC{:
-            System.out.println("REGLA 8.1: display -> DISPLAY PARENTESISA il PARENTESISC");
-            System.out.printf("REGLA 8.1: display -> DISPLAY(%s) %n%n",il);
-            RESULT = "DISPLAY" +"("+il+")";
-        :}
-        |
-        DISPLAY PARENTESISA FLOAT_LITERAL:fl PARENTESISC{:
-            System.out.println("REGLA 8.1: display -> DISPLAY PARENTESISA fl PARENTESISC");
-            System.out.printf("REGLA 8.1: display -> DISPLAY(%s) %n%n",fl);
-            RESULT = "DISPLAY" +"("+fl+")";
-        :}
-        |
-        DISPLAY PARENTESISA BOOLEAN_LITERAL:bl PARENTESISC{:
-            System.out.println("REGLA 8.1: display -> DISPLAY PARENTESISA bl PARENTESISC");
-            System.out.printf("REGLA 8.1: display -> DISPLAY(%s) %n%n",bl);
-            RESULT = "DISPLAY" +"("+bl+")";
+display ::= DISPLAY PARENTESISA expresion_or:eo PARENTESISC{:
+            System.out.println("REGLA 8.1: display -> DISPLAY PARENTESISA eo PARENTESISC");
+            System.out.printf("REGLA 8.1: display -> DISPLAY(%s) %n%n",eo);
+            RESULT = "DISPLAY" +"("+eo+")";
         :};
 
 input ::= input_int:ii {:
@@ -417,40 +399,22 @@ input ::= input_int:ii {:
             RESULT = ib;
         :};
 
-input_int ::= INPUT_INT PARENTESISA INTEGER_LITERAL:il PARENTESISC {:
-            System.out.println("REGLA 8.3: input_int -> INPUT_INT PARENTESISA il PARENTESISC ");
-            System.out.printf("REGLA 8.3: input_int -> INTPUT_INT (%s)%n%n",il);
-            RESULT = "INPUT_INT"+"("+ il +")";
-        :}
-        |
-        INPUT_INT PARENTESISA IDENTIFICADOR:id PARENTESISC {:
-            System.out.println("REGLA 8.3: input_int -> INPUT_INT PARENTESISA id PARENTESISC ");
-            System.out.printf("REGLA 8.3: input_int -> INTPUT_INT (%s)%n%n",id);
-            RESULT = "INPUT_INT"+"("+ id +")";
+input_int ::= INPUT_INT PARENTESISA PARENTESISC {:
+            System.out.println("REGLA 8.3: input_int -> INPUT_INT PARENTESISA PARENTESISC ");
+            System.out.printf("REGLA 8.3: input_int -> INTPUT_INT()%n%n");
+            RESULT = "INPUT_INT"+"(" +")";
         :};
 
-input_float ::= INPUT_FLOAT PARENTESISA FLOAT_LITERAL:fl PARENTESISC {:
-            System.out.println("REGLA 8.4: input_float -> INPUT_FLOAT PARENTESISA fl PARENTESISC ");
-            System.out.printf("REGLA 8.4: input_float -> INTPUT_FLOAT (%s)%n%n",fl);
-            RESULT = "INPUT_FLOAT"+"("+ fl +")";
-        :}
-        |
-        INPUT_FLOAT PARENTESISA IDENTIFICADOR:id PARENTESISC {:
-            System.out.println("REGLA 8.4: input_float -> INPUT_FLOAT PARENTESISA id PARENTESISC ");
-            System.out.printf("REGLA 8.4: input_float -> INTPUT_FLOAT (%s)%n%n",id);
-            RESULT = "INPUT_FLOAT"+"("+ id +")";
+input_float ::= INPUT_FLOAT PARENTESISA PARENTESISC {:
+            System.out.println("REGLA 8.4: input_float -> INPUT_FLOAT PARENTESISA PARENTESISC ");
+            System.out.printf("REGLA 8.4: input_float -> INTPUT_FLOAT()%n%n",fl);
+            RESULT = "INPUT_FLOAT"+"("+")";
         :};
 
 input_bool ::= INPUT_BOOL PARENTESISA BOOLEAN_LITERAL:bl PARENTESISC {:
-            System.out.println("REGLA 8.5: input_bool -> INPUT_BOOL PARENTESISA bl PARENTESISC ");
-            System.out.printf("REGLA 8.5: input_bool -> INTPUT_BOOL (%s)%n%n",bl);
-            RESULT = "INPUT_BOOL"+"("+ bl +")";
-        :}
-        |
-        INPUT_BOOL PARENTESISA IDENTIFICADOR:id PARENTESISC {:
-            System.out.println("REGLA 8.5: input_bool -> INPUT_BOOL PARENTESISA id PARENTESISC ");
-            System.out.printf("REGLA 8.5: input_bool -> INTPUT_BOOL (%s)%n%n",id);
-            RESULT = "INPUT_BOOL"+"("+ id +")";
+            System.out.println("REGLA 8.5: input_bool -> INPUT_BOOL PARENTESISA PARENTESISC ");
+            System.out.printf("REGLA 8.5: input_bool -> INTPUT_BOOL()%n%n",bl);
+            RESULT = "INPUT_BOOL"+"("+")";
         :};
 
 sentencia_if ::= IF PARENTESISA expresion_or:eo PARENTESISC THEN bloque_sentencias:bs END{:
