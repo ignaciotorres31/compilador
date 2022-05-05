@@ -89,26 +89,26 @@ declaraciones ::= declaracion:dec declaraciones:decs{:
 
 declaracion ::= FLOAT DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
             for(String i : tdi){
-                ht.put(i,t);}
-            System.out.println("REGLA 1.2: declaracion -> t DOS_PUNTOS tdi PUNTOCOMA");
-            System.out.printf("REGLA 1.2: declaracion -> %s : %s ;",t,tdi);
-            RESULT = t +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
+                ht.put(i,"FLOAT");}
+            System.out.println("REGLA 1.2: declaracion -> FLOAT DOS_PUNTOS tdi PUNTOCOMA");
+            System.out.printf("REGLA 1.2: declaracion -> FLOAT : %s ;",FLOAT,tdi);
+            RESULT = FLOAT +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
         :}
         | 
         INTEGER DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
             for(String i : tdi){
-                ht.put(i,t);}
-            System.out.println("REGLA 1.2: declaracion -> t DOS_PUNTOS tdi PUNTOCOMA");
-            System.out.printf("REGLA 1.2: declaracion -> %s : %s ;",t,tdi);
-            RESULT = t +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
+                ht.put(i,"INTEGER");}
+            System.out.println("REGLA 1.2: declaracion -> INTEGER DOS_PUNTOS tdi PUNTOCOMA");
+            System.out.printf("REGLA 1.2: declaracion -> INTEGER : %s ;",INTEGER,tdi);
+            RESULT = INTEGER +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
         :}
         | 
         BOOLEAN DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
             for(String i : tdi){
-                ht.put(i,t);}
-            System.out.println("REGLA 1.2: declaracion -> t DOS_PUNTOS tdi PUNTOCOMA");
-            System.out.printf("REGLA 1.2: declaracion -> %s : %s ;",t,tdi);
-            RESULT = t +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
+                ht.put(i,"BOOLEAN");}
+            System.out.println("REGLA 1.2: declaracion -> BOOLEAN DOS_PUNTOS tdi PUNTOCOMA");
+            System.out.printf("REGLA 1.2: declaracion -> BOOLEAN : %s ;",BOOLEAN,tdi);
+            RESULT = BOOLEAN +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
         :};
 
 tipos_datos_id ::= IDENTIFICADOR:id{:
