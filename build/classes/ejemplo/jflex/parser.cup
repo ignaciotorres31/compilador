@@ -34,18 +34,17 @@ parser code
 :};
 
 
-terminal SUMA, RESTA, MULTIPLICACION, DIVISION, IGUAL_IGUAL, DESIGUAL, MAYOR, MAYOR_IGUAL, MENOR,
-MENOR_IGUAL, PARENTESISA, PARENTESISC, CORCHETESA, CORCHETESC,  COMA, PUNTOCOMA, DOS_PUNTOS,
-ASIGNACION;
+terminal SUMA, RESTA, MULTIPLICACION, DIVISION,IGUAL, IGUAL_IGUAL, DESIGUAL, MAYOR, MAYOR_IGUAL, MENOR,
+MENOR_IGUAL, PARENTESISA, PARENTESISC, CORCHETESA, CORCHETESC,  COMA, PUNTOCOMA, DOS_PUNTOS;
 
 terminal String IDENTIFICADOR, BOOLEAN_LITERAL, INTEGER_LITERAL, FLOAT_LITERAL,SUMAIMPAR, INTEGER, FLOAT, BOOLEAN, 
 INPUT_INT, INPUT_FLOAT, INPUT_BOOL, AND, OR, NOT, WHILE, DO, END,IF, THEN, ELSE, DISPLAY, DECLARE_SECTION, 
 ENDDECLARE_SECTION, PROGRAM_SECTION, ENDPROGRAM_SECTION, STRING;
 
-nonterminal String programa, bloque_declaraciones, bloque_programa, declaraciones,declaracion, tipos,
+nonterminal String programa, bloque_declaraciones, bloque_programa, declaraciones,declaracion, 
 bloque_sentencias, sentencia, sentencia_while, sentencia_if, sentencia_asignacion, sentencia_display, factor, 
 expresion_or, expresion_and, expresion_not, comparacion, expresion_sr, expresion_md, menos_unario, funcion_especial,
-numeros_dentro_corchete, input, display, input_int, input_float, input_bool;
+lista_expresiones, input, display, input_int, input_float, input_bool;
 
 nonterminal List<String>  tipos_datos_id;
 
@@ -88,30 +87,28 @@ declaraciones ::= declaracion:dec declaraciones:decs{:
         :};
 
 
-declaracion ::= tipos:t DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
+declaracion ::= FLOAT DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
             for(String i : tdi){
                 ht.put(i,t);}
             System.out.println("REGLA 1.2: declaracion -> t DOS_PUNTOS tdi PUNTOCOMA");
             System.out.printf("REGLA 1.2: declaracion -> %s : %s ;",t,tdi);
             RESULT = t +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
-        :};
-
-tipos ::= FLOAT{:
-            System.out.println("REGLA 2: tipos -> FLOAT");
-            System.out.printf("REGLA 2: tipos -> FLOAT");
-            RESULT = "FLOAT";        
-        :};
-
-tipos ::= INTEGER{:
-            System.out.println("REGLA 2: tipos -> INTEGER");
-            System.out.printf("REGLA 2: tipos -> INTEGER");
-            RESULT = "INTEGER";        
-        :};
-
-tipos ::= BOOLEAN{:
-            System.out.println("REGLA 2: tipos -> BOOLEAN");
-            System.out.printf("REGLA 2: tipos -> BOOLEAN");
-            RESULT = "BOOLEAN";        
+        :}
+        | 
+        INTEGER DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
+            for(String i : tdi){
+                ht.put(i,t);}
+            System.out.println("REGLA 1.2: declaracion -> t DOS_PUNTOS tdi PUNTOCOMA");
+            System.out.printf("REGLA 1.2: declaracion -> %s : %s ;",t,tdi);
+            RESULT = t +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
+        :}
+        | 
+        BOOLEAN DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
+            for(String i : tdi){
+                ht.put(i,t);}
+            System.out.println("REGLA 1.2: declaracion -> t DOS_PUNTOS tdi PUNTOCOMA");
+            System.out.printf("REGLA 1.2: declaracion -> %s : %s ;",t,tdi);
+            RESULT = t +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
         :};
 
 tipos_datos_id ::= IDENTIFICADOR:id{:
@@ -172,10 +169,16 @@ sentencia ::= sentencia_while: sw{:
             RESULT = sd;
         :};
 
-sentencia_asignacion ::= IDENTIFICADOR:id ASIGNACION expresion_or: eo {:
+sentencia_asignacion ::= IDENTIFICADOR:id IGUAL expresion_or: eo {:
             System.out.println("REGLA 4: sentencia_asignacion -> id ASIGNACION eo ");
             System.out.printf("REGLA 4: sentencia_asignacion -> %s := %s%n%n",id,eo);
-            RESULT = id +":=" + eo ;
+            RESULT = id +"=" + eo ;
+        :}
+        |
+        IDENTIFICADOR:id IGUAL funcion_especial: fe {:
+            System.out.println("REGLA 4: sentencia_asignacion -> id IGUAL fe ");
+            System.out.printf("REGLA 4: sentencia_asignacion -> %s := %s%n%n",id,fe);
+            RESULT = id +"=" + fe ;
         :};
 
 expresion_or ::= expresion_or: eo OR expresion_and :ea{:
@@ -322,12 +325,6 @@ factor ::= BOOLEAN_LITERAL:bl{:
             RESULT = fl;
         :}
         |
-        funcion_especial:fe{:
-            System.out.println("REGLA 5.4: factor -> fe");
-            System.out.printf("REGLA 5.4: factor -> %s%n%n",fe);
-            RESULT = fe;
-        :}
-        |
         PARENTESISA expresion_or:eo PARENTESISC{:
             System.out.println("REGLA 5.4: factor -> PARENTESISA eo PARENTESISC");
             System.out.printf("REGLA 5.4: factor ->(%s) %n%n",eo);
@@ -340,23 +337,25 @@ factor ::= BOOLEAN_LITERAL:bl{:
             RESULT = id;
         :};
 
-funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORCHETESA numeros_dentro_corchete:ndc CORCHETESC PARENTESISC{:
+funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORCHETESA lista_expresiones:le CORCHETESC PARENTESISC{:
             System.out.println("REGLA 6: funcion_especial -> sim PARENTESISA il PUNTOCOMA CORCHETESA ndc CORCHETESC PARENTESISC");
-            System.out.printf("REGLA 6: funcion_especial -> %s ( %s ; [%s])%n%n",sim,il,ndc);
-            RESULT = sim + "(" + il + ";"+ "[" + ndc + "]" + ")";
+            System.out.printf("REGLA 6: funcion_especial -> %s ( %s ; [%s])%n%n",sim,il,le);
+            RESULT = sim + "(" + il + ";"+ "[" + le + "]" + ")";
         :};
 
-numeros_dentro_corchete ::= numeros_dentro_corchete:ndc COMA INTEGER_LITERAL:il{:
-            System.out.println("REGLA 6.1: numeros_dentro_corchete -> ndc COMA il");
-            System.out.printf("REGLA 6.1: numeros_dentro_corchete -> %s , %s%n%n",ndc,il);
-            RESULT = ndc + ","+ il;
+lista_expresiones ::= lista_expresiones:le COMA expresion_sr:esr{:
+            System.out.println("REGLA 6.1: numeros_dentro_corchete -> ndc COMA esr");
+            System.out.printf("REGLA 6.1: numeros_dentro_corchete -> %s , %s%n%n",le,esr);
+            RESULT = le + ","+ il;
         :}
         |
-        INTEGER_LITERAL:il{:
-            System.out.println("REGLA 6.1: factor -> il");
-            System.out.printf("REGLA 6.1: factor ->  %s%n%n",il);
-            RESULT = il ;
-        :};
+        expresion_sr:esr{:
+            System.out.println("REGLA 6.1: factor -> esr");
+            System.out.printf("REGLA 6.1: factor ->  %s%n%n",esr);
+            RESULT = esr ;
+        :}
+        |
+        {::};
 
 sentencia_while ::= WHILE PARENTESISA expresion_or:eo PARENTESISC DO bloque_sentencias:bs END{:
             System.out.println("REGLA 7: sentencia_while -> WHILE PARENTESISA eo PARENTESISC DO bs END");
