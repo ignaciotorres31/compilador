@@ -774,8 +774,8 @@ class CUP$MiParser$actions {
 		int eoright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		String eo = (String)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
-            System.out.println("REGLA 4: sentencia_asignacion -> id ASIGNACION eo ");
-            System.out.printf("REGLA 4: sentencia_asignacion -> %s := %s%n%n",id,eo);
+            System.out.println("REGLA 4: sentencia_asignacion -> id IGUAL eo ");
+            System.out.printf("REGLA 4: sentencia_asignacion -> %s = %s%n%n",id,eo);
             RESULT = id +"=" + eo ;
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia_asignacion",9, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
@@ -794,7 +794,7 @@ class CUP$MiParser$actions {
 		String fe = (String)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
             System.out.println("REGLA 4: sentencia_asignacion -> id IGUAL fe ");
-            System.out.printf("REGLA 4: sentencia_asignacion -> %s := %s%n%n",id,fe);
+            System.out.printf("REGLA 4: sentencia_asignacion -> %s = %s%n%n",id,fe);
             RESULT = id +"=" + fe ;
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("sentencia_asignacion",9, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
