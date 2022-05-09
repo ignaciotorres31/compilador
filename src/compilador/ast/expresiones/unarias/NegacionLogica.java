@@ -2,11 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package compilador.ast.expresiones.binarias;
+package compilador.ast.expresiones.unarias;
 
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.Tipo;
-import compilador.ast.expresiones.unarias.OperacionUnaria;
 import compilador.ast.expresiones.valor.Booleano;
 
 /**

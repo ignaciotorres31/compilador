@@ -4,6 +4,7 @@
  */
 package compilador.ast.expresiones.valor;
 
+import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.Tipo;
 
 /**
@@ -26,5 +27,10 @@ public class Booleano extends Literal {
     public String toString() {
         // Usamos las constantes de IR "true" y "false"
         return valor.toString();
+    }
+
+    @Override
+    public Expresion evaluar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

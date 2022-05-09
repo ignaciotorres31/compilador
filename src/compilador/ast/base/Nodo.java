@@ -1,5 +1,7 @@
 package compilador.ast.base;
 
+import compilador.ast.expresiones.Expresion;
+
 public abstract class  Nodo {
     private String nombre;
 
@@ -29,5 +31,7 @@ public abstract class  Nodo {
             grafico.append(String.format("%1$s--%2$s\n", idPadre, this.getId()));
         return grafico.toString();
     }
+    
+    public abstract Expresion evaluar();
 
 }
