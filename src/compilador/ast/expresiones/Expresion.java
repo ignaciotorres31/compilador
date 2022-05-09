@@ -12,6 +12,28 @@ import compilador.ast.base.Nodo;
  */
 public abstract class Expresion extends Nodo {
 
+    private Tipo tipo;
+
     public Expresion() {
+        this.tipo = Tipo.UNKNOWN;
     }
+
+    public Expresion(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
+    public Expresion(Tipo tipo, String nombre) {
+        super(nombre);
+        this.tipo = tipo;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+    
+    
 }
