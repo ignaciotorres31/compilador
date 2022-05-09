@@ -1,5 +1,5 @@
 /* JFlex example: partial Java language lexer specification */
-package ejemplo.jflex;
+package compilador.lexico;
 import java.util.ArrayList;
 import java_cup.runtime.*;
 import java_cup.sym;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ejemplo.jflex;
+package compilador;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,15 +20,15 @@ public class Generador {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String path = "./src/ejemplo/jflex/lexico.flex";
+        String path = "./src/compilador/lexico/lexico.flex";
         generarLexer(path);
         
         String[] param = new String[5];
         param[0] = "-destdir";
-        param[1] = "./src/ejemplo/jflex/";
+        param[1] = "./src/compilador/sintactico/";
         param[2] = "-parser";
         param[3] = "MiParser";
-        param[4] = "./src/ejemplo/jflex/parser.cup";
+        param[4] = "./src/compilador/sintactico/parser.cup";
         generarParser(param);
     }
     

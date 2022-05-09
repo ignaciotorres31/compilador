@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ejemplo.jflex;
+package compilador;
 
+import compilador.sintactico.MiParser;
+import compilador.lexico.MiLexico;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -203,10 +205,7 @@ public class Compilador extends javax.swing.JFrame {
         catch(Error e){
             System.out.println("Error: " + e.getMessage());
             jTextPane1.setText("Error: " + e.getMessage());
-        }
-        catch(IOException e){
-            System.out.println("Error: " + e.getMessage());
-        }             
+        }          
         System.out.println("Análisis léxico terminado.");
     }
     
@@ -227,7 +226,7 @@ public class Compilador extends javax.swing.JFrame {
             });
             jTextPane1.setText(consoleOutputCapturer.stop());
         } catch (Exception ex) {
-            Logger.getLogger(CompiladorJavaCup.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Compilador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

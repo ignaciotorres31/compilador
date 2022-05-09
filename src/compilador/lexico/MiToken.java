@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ejemplo.jflex;
+package compilador.lexico;
 
+import compilador.sintactico.MiParserSym;
 import java.util.Arrays;
 
 /**

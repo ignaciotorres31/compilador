@@ -1,4 +1,4 @@
-package ejemplo.jflex;
+package compilador.sintactico;
 
 import java_cup.runtime.*;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ class MiParser;
 
 parser code
 {:
-    Hashtable ht = new Hashtable();
+    public Hashtable ht = new Hashtable();
     public void tabla_simbolos(Hashtable ht){
             ht.forEach((k, v) -> {  
             System.out.println("Tabla de simbolos: " + k.toString() + " " + v.toString());
