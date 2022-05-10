@@ -24,6 +24,10 @@ public abstract class  Nodo {
         return name.substring(pos);
     }
     
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     public String graficar(String idPadre){
         StringBuilder grafico = new StringBuilder();
         grafico.append(String.format("%1$s[label=\"%2$s\"]\n", this.getId(), this.getEtiqueta()));
