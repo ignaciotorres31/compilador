@@ -5,19 +5,18 @@
  */
 package compilador;
 
+import compilador.ast.base.Impresion;
 import compilador.sintactico.MiParser;
 import compilador.lexico.MiLexico;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import java_cup.runtime.Symbol;
@@ -34,6 +33,7 @@ public class Compilador extends javax.swing.JFrame {
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -66,6 +66,7 @@ public class Compilador extends javax.swing.JFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -88,6 +89,7 @@ public class Compilador extends javax.swing.JFrame {
 
         jButton1.setText("Análisis lexico");
         jButton2.setText("Análisis sintactico");
+        jButton3.setText("AST");
         
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +104,16 @@ public class Compilador extends javax.swing.JFrame {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+        
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    jButton3ActionPerformed(evt);
+                } catch (Exception ex) {
+                    Logger.getLogger(Compilador.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -122,6 +134,8 @@ public class Compilador extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jToggleButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -146,7 +160,8 @@ public class Compilador extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton1)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addContainerGap())
         );
 
@@ -227,6 +242,24 @@ public class Compilador extends javax.swing.JFrame {
             jTextPane1.setText(consoleOutputCapturer.stop());
         } catch (Exception ex) {
             Logger.getLogger(Compilador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) throws Exception {                                   
+        FileReader entrada = new FileReader("./entrada.txt");
+        MiLexico lexico = new MiLexico(entrada);
+        MiParser sintactico= new MiParser(lexico);
+        Impresion impresion = (Impresion) sintactico.parse().value;
+     
+        try {
+            PrintWriter grafico = new PrintWriter(new FileWriter("arbol.dot"));
+            grafico.println(impresion.graficar());
+            grafico.close();
+            String cmdDot = "dot -Tpng arbol.dot -o arbol.png";
+            Runtime.getRuntime().exec(cmdDot);
+
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
     
