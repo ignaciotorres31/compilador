@@ -3,8 +3,8 @@ package compilador.ast.expresiones.binarias;
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.OperadorComparacion;
 import compilador.ast.expresiones.Tipo;
-import compilador.ast.expresiones.valor.Booleano;
-import compilador.ast.expresiones.valor.Literal;
+import compilador.ast.expresiones.factor.Booleano;
+import compilador.ast.expresiones.factor.Literal;
         
 
 public abstract class Relacion extends OperacionBinaria {
@@ -13,10 +13,9 @@ public abstract class Relacion extends OperacionBinaria {
         super(izquierda, derecha, nombre);
     }
 
-    @Override
     public Expresion evaluar() {
-        Expresion izquierda = getIzquierda().evaluar();
-        Expresion derecha = getDerecha().evaluar();
+        Expresion izquierda = getIzquierda();
+        Expresion derecha = getDerecha();
         if (!(izquierda instanceof Literal && derecha instanceof Literal)) {
             return this;
         }
@@ -37,6 +36,8 @@ public abstract class Relacion extends OperacionBinaria {
     }
 
     protected abstract boolean calcularResultado(double izq, double der);
+    
+    protected abstract boolean calcularResultado(int izq, int der);
 
     protected abstract boolean calcularResultado(boolean izq, boolean der);
 

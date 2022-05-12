@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package compilador.ast.expresiones.valor;
+package compilador.ast.expresiones.factor;
 
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.Tipo;
@@ -29,8 +29,4 @@ public class Booleano extends Literal {
         return valor.toString();
     }
 
-    @Override
-    public Expresion evaluar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

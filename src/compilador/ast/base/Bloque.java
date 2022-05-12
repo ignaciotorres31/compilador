@@ -32,8 +32,4 @@ public class Bloque extends Sentencia {
         return this.getEtiqueta();
     }
 
-    @Override
-    public Expresion evaluar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

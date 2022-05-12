@@ -8,7 +8,7 @@ import compilador.ast.expresiones.binarias.MayorIgual;
 import compilador.ast.expresiones.binarias.MenorIgual;
 import compilador.ast.expresiones.binarias.Resta;
 import compilador.ast.expresiones.binarias.Suma;
-import compilador.ast.expresiones.valor.Entero;
+import compilador.ast.expresiones.factor.Entero;
 import java_cup.runtime.ComplexSymbolFactory.Location;
 
 import java.util.ArrayList;
@@ -93,8 +93,4 @@ public class Mientras extends Sentencia {
         this.bloqueSentencias = bloqueSentencias;
     }
 
-    @Override
-    public Expresion evaluar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

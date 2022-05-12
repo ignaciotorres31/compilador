@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package compilador.ast.expresiones.valor;
+package compilador.ast.expresiones.factor;
 
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.Tipo;
@@ -11,13 +11,13 @@ import compilador.ast.expresiones.Tipo;
  *
  * @author facundo
  */
-public abstract class Valor extends Expresion {
+public abstract class Factor extends Expresion {
     
-    public Valor(Tipo tipo) {
+    public Factor(Tipo tipo) {
         super(tipo);
     }
 
-    public Valor(Tipo tipo, String nombre) {
+    public Factor(Tipo tipo, String nombre) {
         super(tipo, nombre);
     }
 }

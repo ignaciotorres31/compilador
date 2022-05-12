@@ -32,13 +32,4 @@ public class Asignacion extends Sentencia {
         return expresion;
     }
 
-    @Override
-    public String getEtiqueta() {
-        return getEtiqueta();
-    }
-
-    @Override
-    public Expresion evaluar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

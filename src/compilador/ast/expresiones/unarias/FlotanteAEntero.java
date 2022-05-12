@@ -2,8 +2,8 @@ package compilador.ast.expresiones.unarias;
 
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.Tipo;
-import compilador.ast.expresiones.valor.Entero;
-import compilador.ast.expresiones.valor.Flotante;
+import compilador.ast.expresiones.factor.Entero;
+import compilador.ast.expresiones.factor.Flotante;
 
 public class FlotanteAEntero extends OperacionUnaria {
     
@@ -11,9 +11,8 @@ public class FlotanteAEntero extends OperacionUnaria {
         super("Flotante a entero", expresion, Tipo.INTEGER);
     }
 
-    @Override
     public Expresion evaluar(){
-        Expresion expr = getExpresion().evaluar();
+        Expresion expr = getExpresion();
         if (!(expr instanceof Flotante)) {
             return this;
         }

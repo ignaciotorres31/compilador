@@ -5,6 +5,7 @@
 package compilador.ast.base;
 
 import compilador.ast.expresiones.Expresion;
+import compilador.ast.base.Programa;
 
 /**
  *
@@ -12,10 +13,10 @@ import compilador.ast.expresiones.Expresion;
  */
 public class Impresion extends Nodo{
     
-    private final Expresion expresion;
+    private final ProgramaCompleto programa;
     
-    public Impresion(Expresion expresion){
-        this.expresion = expresion;
+    public Impresion(ProgramaCompleto programa){
+        this.programa = programa;
     }
     
     public String graficar() {
@@ -24,14 +25,9 @@ public class Impresion extends Nodo{
         StringBuilder resultado = new StringBuilder();
         resultado.append("graph G {");
         resultado.append(this.graficar(null));
-        resultado.append(this.expresion.graficar(this.getId()));
+        resultado.append(this.programa.graficar(this.getId()));
         resultado.append("}");
         return resultado.toString();
-    }
-
-    @Override
-    public Expresion evaluar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

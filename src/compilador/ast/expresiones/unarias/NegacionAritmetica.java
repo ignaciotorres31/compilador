@@ -6,9 +6,9 @@ package compilador.ast.expresiones.unarias;
 
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.Tipo;
-import compilador.ast.expresiones.valor.Entero;
-import compilador.ast.expresiones.valor.Flotante;
-import compilador.ast.expresiones.valor.Literal;
+import compilador.ast.expresiones.factor.Entero;
+import compilador.ast.expresiones.factor.Flotante;
+import compilador.ast.expresiones.factor.Literal;
 
 /**
  *
@@ -21,7 +21,7 @@ public class NegacionAritmetica extends OperacionUnaria {
     }
 
     public Expresion evaluar() {
-        Expresion expresion = getExpresion().evaluar();
+        Expresion expresion = getExpresion();
         if (!(expresion instanceof Literal)) {
             return this;
         }

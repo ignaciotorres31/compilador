@@ -4,13 +4,13 @@
  */
 package compilador.ast.expresiones;
 
-import compilador.ast.expresiones.valor.Valor;
+import compilador.ast.expresiones.factor.Factor;
 
 /**
  *
  * @author facundo
  */
-public class Identificador extends Valor {
+public class Identificador extends Factor {
     public Identificador(String nombre) {
         super(Tipo.UNKNOWN, nombre);
     }
@@ -22,10 +22,6 @@ public class Identificador extends Valor {
     @Override
     public String getEtiqueta() {
         return String.format("%s\\n<%s>", getEtiqueta(), getTipo());
-    }
-
-    public Expresion evaluar() {
-        return this;
     }
 }
 

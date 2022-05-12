@@ -9,11 +9,10 @@ import java.util.*;
 public class Programa extends Nodo {
     
     private Bloque cuerpo;
-    private List<Cadena> arrCadenas = new ArrayList<>();
 
     public Programa(String nombre, Bloque cuerpo) {
         super(nombre);
-        this.cuerpo = cuerpo;      
+        this.cuerpo = cuerpo;
     }
 
     public Bloque getCuerpo() {
@@ -22,19 +21,6 @@ public class Programa extends Nodo {
 
     public void setCuerpo(Bloque cuerpo) {
         this.cuerpo = cuerpo;
-    }
-
-    public List<Cadena> getArrCadenas() {
-        return arrCadenas;
-    }
-
-    public void setArrCadenas(List<Cadena> arrCadenas) {
-        this.arrCadenas = arrCadenas;
-    }
-
-    @Override
-    public Expresion evaluar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

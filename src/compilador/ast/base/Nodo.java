@@ -36,6 +36,6 @@ public abstract class  Nodo {
         return grafico.toString();
     }
     
-    public abstract Expresion evaluar();
+    //public abstract Expresion evaluar();
 
 }

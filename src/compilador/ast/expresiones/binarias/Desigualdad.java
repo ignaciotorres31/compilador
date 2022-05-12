@@ -10,10 +10,15 @@ public class Desigualdad extends Relacion {
 
 
     @Override
-    protected boolean calcularResultado(double litIzq, double litDer) {
-        return litIzq != litDer;
+    protected boolean calcularResultado(double izq, double der) {
+        return izq != der;
     }
 
+    @Override
+    protected boolean calcularResultado(int izq, int der) {
+        return izq != der;
+    }
+    
     @Override
     protected boolean calcularResultado(boolean izq, boolean der) {
         return izq != der;
@@ -21,6 +26,6 @@ public class Desigualdad extends Relacion {
 
     @Override
     protected String getNombreOperacion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "Desigualdad"; 
     }
 }

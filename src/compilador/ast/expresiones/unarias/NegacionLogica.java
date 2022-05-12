@@ -6,7 +6,7 @@ package compilador.ast.expresiones.unarias;
 
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.Tipo;
-import compilador.ast.expresiones.valor.Booleano;
+import compilador.ast.expresiones.factor.Booleano;
 
 /**
  *

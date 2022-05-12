@@ -5,8 +5,10 @@ import compilador.ast.expresiones.Tipo;
 
 public abstract class Declaracion extends Sentencia {
     private Identificador ident;
-
-    public Declaracion(Identificador ident) {
+    private Tipo tipo;
+    
+    public Declaracion(Tipo tipo, Identificador ident){
+        this.tipo = tipo;
         this.ident = ident;
     }
 
