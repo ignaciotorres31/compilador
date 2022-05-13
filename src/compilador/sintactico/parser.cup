@@ -1,5 +1,11 @@
 package compilador.sintactico;
 
+import compilador.ast.base.*;
+import compilador.ast.expresiones.*;
+import compilador.ast.expresiones.binarias.*;
+import compilador.ast.expresiones.factor.*;
+import compilador.ast.expresiones.unarias.*;
+import compilador.ast.sentencias.*;
 import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +13,8 @@ import java.io.FileReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Hashtable;
+import java.util.*;
+
 
 class MiParser;
 
@@ -50,9 +58,9 @@ nonterminal List<String>  tipos_datos_id;
 
 start with impresion;
 
-impresion ::= programa: prog{:
+impresion ::= programa:prog{:
         RESULT = new Impresion(prog);
-        :}
+        :};
 
 programa ::= bloque_declaraciones:bd bloque_programa: bp{:
             RESULT = new ProgramaCompleto(bd,bp);
@@ -79,22 +87,22 @@ declaraciones ::= declaracion:dec declaraciones:decs{:
         :};
 
 
-declaracion ::= FLOAT:f DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
+declaracion ::= FLOAT DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
             for(String i : tdi){
                 ht.put(i,f);}
-            RESULT = new Tipo(f)+"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
+            RESULT = "";
         :}
         | 
-        INTEGER:in DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
+        INTEGER DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
             for(String i : tdi){
                 ht.put(i,in);}
-            RESULT = new Tipo(in) +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
+            RESULT = "";
         :}
         | 
-        BOOLEAN:b DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
+        BOOLEAN DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
             for(String i : tdi){
                 ht.put(i,b);}
-            RESULT = new Tipo(b) +"DOS_PUNTOS"+ tdi +"PUNTOCOMA";
+            RESULT = "";
         :};
 
 tipos_datos_id ::= IDENTIFICADOR:id{:
@@ -263,32 +271,8 @@ lista_expresiones ::= lista_expresiones:le COMA expresion_sr:esr{:
         |
         {::};
 
-sentencia_while ::= WHILE PARENTESISA condicion:c PARENTESISC DO bloque_sentencias:bs END{:
+sentencia_while ::= WHILE PARENTESISA expresion_or:c PARENTESISC DO bloque_sentencias:bs END{:
             RESULT = new Mientras(c,bs);
-        :};
-
-condicion ::= expresion_sr :esr1 MAYOR expresion_sr: esr2{:
-            RESULT = new Mayor(esr1,esr2);
-        :}
-        |
-        expresion_sr :esr1 MAYOR_IGUAL expresion_sr: esr2{:
-            RESULT = new MayorIgual(esr1,esr2);
-        :}
-        |
-        expresion_sr :esr1 MENOR expresion_sr: esr2{:
-            RESULT = new Menor(esr1,esr2);
-        :}
-        |
-        expresion_sr :esr1 MENOR_IGUAL expresion_sr: esr2{:
-            RESULT = new MenorIgual(esr1,esr2);
-        :}
-        |
-        expresion_sr :esr1 IGUAL_IGUAL expresion_sr: esr2{:
-            RESULT = new Igualdad(esr1,esr2);
-        :}
-        |
-        expresion_sr :esr1 DESIGUAL expresion_sr: esr2{:
-            RESULT = new Desigualdad(esr1,esr2);
         :};
 
 sentencia_display ::= display:d {:

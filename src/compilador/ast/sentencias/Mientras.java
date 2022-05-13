@@ -25,10 +25,6 @@ public class Mientras extends Sentencia {
         this.bloqueSentencias = bloqueSentencias;
     }
 
-    private Mientras(Expresion exp1, Expresion exp2, Bloque bloque){
-        
-    }
-
     public Expresion getCondicion() {
         return condicion;
     }
