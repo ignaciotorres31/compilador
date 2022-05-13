@@ -263,8 +263,32 @@ lista_expresiones ::= lista_expresiones:le COMA expresion_sr:esr{:
         |
         {::};
 
-sentencia_while ::= WHILE PARENTESISA expresion_or:eo PARENTESISC DO bloque_sentencias:bs END{:
-            RESULT = "WHILE" + "("+ eo + ")"+"DO"+bs+"END";
+sentencia_while ::= WHILE PARENTESISA condicion:c PARENTESISC DO bloque_sentencias:bs END{:
+            RESULT = new Mientras(c,bs);
+        :};
+
+condicion ::= expresion_sr :esr1 MAYOR expresion_sr: esr2{:
+            RESULT = new Mayor(esr1,esr2);
+        :}
+        |
+        expresion_sr :esr1 MAYOR_IGUAL expresion_sr: esr2{:
+            RESULT = new MayorIgual(esr1,esr2);
+        :}
+        |
+        expresion_sr :esr1 MENOR expresion_sr: esr2{:
+            RESULT = new Menor(esr1,esr2);
+        :}
+        |
+        expresion_sr :esr1 MENOR_IGUAL expresion_sr: esr2{:
+            RESULT = new MenorIgual(esr1,esr2);
+        :}
+        |
+        expresion_sr :esr1 IGUAL_IGUAL expresion_sr: esr2{:
+            RESULT = new Igualdad(esr1,esr2);
+        :}
+        |
+        expresion_sr :esr1 DESIGUAL expresion_sr: esr2{:
+            RESULT = new Desigualdad(esr1,esr2);
         :};
 
 sentencia_display ::= display:d {:
