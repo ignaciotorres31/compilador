@@ -328,9 +328,9 @@ input_bool ::= INPUT_BOOL PARENTESISA PARENTESISC {:
         :};
 
 sentencia_if ::= IF PARENTESISA expresion_or:eo PARENTESISC THEN bloque_sentencias:bs END{:
-            RESULT = "IF" + "("+ eo + ")"+"THEN"+bs+"END";
+            RESULT = new SiEntonces("IF",eo,bs);
         :}
         |
         IF PARENTESISA expresion_or:eo PARENTESISC THEN bloque_sentencias:bs1 ELSE bloque_sentencias:bs2 END{:
-            RESULT = "IF" + "("+ eo + ")"+"THEN"+bs1+"ELSE"+bs2+"END";
+            RESULT = new SiEntoncesSino(eo,bs1,bs2);
         :};
