@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package compilador.ast.expresiones.factor;
 
 import compilador.ast.expresiones.Expresion;
@@ -22,8 +19,6 @@ public abstract class Literal extends Factor {
         return String.format("%s\\n<%s>", this, getTipo());
     }
 
-    // *** Funciones auxiliares para literales numéricos usados por el constant folding ***
-
     public static Number getNumero(Expresion expr) {
         if (expr instanceof Flotante) {
             return ((Flotante) expr).getValor();
@@ -40,7 +35,7 @@ public abstract class Literal extends Factor {
             case INTEGER:
                 return new Entero(valor.intValue());
             case FLOAT:
-                return new Flotante(valor.doubleValue());
+                return new Flotante(valor.floatValue());
             default:
                 throw new IllegalStateException("Tipo de literal inesperado: " + tipo);
                 

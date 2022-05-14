@@ -246,12 +246,13 @@ public class Compilador extends javax.swing.JFrame {
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) throws Exception {                                   
-        FileReader entrada = new FileReader("./entrada.txt");
+        FileReader entrada = new FileReader("./src/compilador/entrada.txt");
         MiLexico lexico = new MiLexico(entrada);
         MiParser sintactico= new MiParser(lexico);
         Impresion impresion = (Impresion) sintactico.parse().value;
      
         try {
+            jTextPane1.setText(impresion.graficar());
             PrintWriter grafico = new PrintWriter(new FileWriter("arbol.dot"));
             grafico.println(impresion.graficar());
             grafico.close();

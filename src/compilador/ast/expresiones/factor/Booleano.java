@@ -24,8 +24,7 @@ public class Booleano extends Literal {
     }
 
     @Override
-    public String toString() {
-        // Usamos las constantes de IR "true" y "false"
+    public String toString() {        
         return valor.toString();
     }
 

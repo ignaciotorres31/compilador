@@ -28,7 +28,7 @@ public class NegacionAritmetica extends OperacionUnaria {
 
         Number valor = Literal.getNumero(expresion);
         if (expresion.getTipo().equals(Tipo.FLOAT)) {
-            return new Flotante(-valor.doubleValue());
+            return new Flotante(-valor.floatValue());
         } else {
             return new Entero(-valor.intValue());
         }

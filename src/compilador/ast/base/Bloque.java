@@ -10,13 +10,9 @@ import java.util.List;
 public class Bloque extends Sentencia {
     private List<Nodo> sentencias;
 
-    public Bloque(String nombre, List<Nodo> sentencias) {
-        super(nombre);
+    public Bloque(List<Nodo> sentencias) {
+        super("Bloque");
         this.sentencias = sentencias;
-    }
-
-    public Bloque(String nombre) {
-        this(nombre, new ArrayList<>());
     }
 
     public void setSentencias(List<Nodo> sentencias) {
@@ -26,10 +22,4 @@ public class Bloque extends Sentencia {
     public List<Nodo> getSentencias() {
         return sentencias;
     }
-
-    @Override
-    public String getEtiqueta() {
-        return this.getEtiqueta();
-    }
-
 }

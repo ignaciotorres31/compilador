@@ -38,6 +38,7 @@ parser code
         System.out.println(" Error en la linea "+ (s.left+1)+ " Columna "+ s.right+ ". Valor simbolo '"
         +s.value+"' . Simbolo n° "+s.sym+ " no reconocido." );
     }
+    public Impresion impresion;
 
 :};
 
@@ -45,21 +46,36 @@ parser code
 terminal SUMA, RESTA, MULTIPLICACION, DIVISION,IGUAL, IGUAL_IGUAL, DESIGUAL, MAYOR, MAYOR_IGUAL, MENOR,
 MENOR_IGUAL, PARENTESISA, PARENTESISC, CORCHETESA, CORCHETESC,  COMA, PUNTOCOMA, DOS_PUNTOS;
 
-terminal String IDENTIFICADOR, BOOLEAN_LITERAL, INTEGER_LITERAL, FLOAT_LITERAL,SUMAIMPAR, INTEGER, FLOAT, BOOLEAN, 
+terminal String IDENTIFICADOR, SUMAIMPAR, INTEGER, FLOAT, BOOLEAN, STRING_LITERAL,
 INPUT_INT, INPUT_FLOAT, INPUT_BOOL, AND, OR, NOT, WHILE, DO, END,IF, THEN, ELSE, DISPLAY, DECLARE_SECTION, 
 ENDDECLARE_SECTION, PROGRAM_SECTION, ENDPROGRAM_SECTION;
+terminal Boolean BOOLEAN_LITERAL;
+terminal Integer INTEGER_LITERAL;
+terminal Float FLOAT_LITERAL;
 
-nonterminal String programa, bloque_declaraciones, bloque_programa, declaraciones,declaracion, 
-bloque_sentencias, sentencia, sentencia_while, sentencia_if, sentencia_asignacion, sentencia_display, factor, 
-expresion_or, expresion_and, expresion_not, comparacion, expresion_sr, expresion_md, menos_unario, funcion_especial,
-lista_expresiones, input, display, input_int, input_float, input_bool, impresion;
+nonterminal Sentencia sentencia_while, sentencia_if,display;
+nonterminal Expresion comparacion,expresion_or,expresion_sr, expresion_md,expresion_and,expresion_not,menos_unario,input,input_int, input_float, input_bool;
+nonterminal ArrayList<Expresion> lista_expresiones;
+nonterminal Expresion funcion_especial;
+nonterminal Asignacion sentencia_asignacion;
+nonterminal Sentencia sentencia_display;
+nonterminal Impresion impresion;
+nonterminal ProgramaCompleto programa;
+nonterminal Bloque bloque_declaraciones;
+nonterminal ArrayList<ArrayList<Declaracion>> declaraciones;
+nonterminal ArrayList<Declaracion> declaracion;
+nonterminal Programa bloque_programa;
+nonterminal ArrayList<Nodo> bloque_sentencias;
+nonterminal Sentencia sentencia;
+nonterminal Factor factor;
 
 nonterminal List<String>  tipos_datos_id;
 
 start with impresion;
 
 impresion ::= programa:prog{:
-        RESULT = new Impresion(prog);
+        Impresion impresion = new Impresion(prog);
+        RESULT = impresion;
         :};
 
 programa ::= bloque_declaraciones:bd bloque_programa: bp{:
@@ -67,42 +83,60 @@ programa ::= bloque_declaraciones:bd bloque_programa: bp{:
         :}
         |
         bloque_declaraciones:bd {:
-            RESULT = new Bloque(bd);
+            RESULT = new ProgramaCompleto(bd);
         :}
         |
         bloque_programa: bp{:
-            RESULT = new Programa(bp);
+            RESULT = new ProgramaCompleto(bp);
         :};
 
 bloque_declaraciones ::= DECLARE_SECTION declaraciones:d ENDDECLARE_SECTION{:
-            RESULT = "DECLARE_SECTION" + d + "ENDDECLARE_SECTION";
+            ArrayList<Nodo> declaracionesFinales = new ArrayList<>();
+            for(ArrayList<Declaracion> declaracion : d){
+                for(Declaracion dec : declaracion){
+                    declaracionesFinales.add(dec);
+                }
+            }
+            RESULT = new Bloque(declaracionesFinales);
         :};
 
 declaraciones ::= declaracion:dec declaraciones:decs{:
-            RESULT = dec + decs;
+            decs.add(dec);
+            RESULT = decs;
         :}
         |
         declaracion:dec{:
-            RESULT = dec;
+            ArrayList<ArrayList<Declaracion>> declaraciones = new ArrayList<>();
+            declaraciones.add(dec);
+            RESULT = declaraciones;
         :};
 
 
 declaracion ::= FLOAT DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
+            ArrayList<Declaracion> declaraciones = new ArrayList<>();
             for(String i : tdi){
-                ht.put(i,f);}
-            RESULT = "";
+                ht.put(i,"FLOAT");
+                declaraciones.add(new Declaracion(Tipo.FLOAT, new Identificador(i)));
+            }
+            RESULT = declaraciones;
         :}
         | 
         INTEGER DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
+            ArrayList<Declaracion> declaraciones = new ArrayList<>();
             for(String i : tdi){
-                ht.put(i,in);}
-            RESULT = "";
+                ht.put(i,"INTEGER");
+                declaraciones.add(new Declaracion(Tipo.INTEGER, new Identificador(i)));
+            }
+            RESULT = declaraciones;
         :}
         | 
         BOOLEAN DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
+            ArrayList<Declaracion> declaraciones = new ArrayList<>();
             for(String i : tdi){
-                ht.put(i,b);}
-            RESULT = "";
+                ht.put(i,"BOOLEAN");
+                declaraciones.add(new Declaracion(Tipo.BOOLEAN, new Identificador(i)));
+            }
+            RESULT = declaraciones;
         :};
 
 tipos_datos_id ::= IDENTIFICADOR:id{:
@@ -118,15 +152,18 @@ tipos_datos_id ::= IDENTIFICADOR:id{:
         :};
 
 bloque_programa ::= PROGRAM_SECTION bloque_sentencias:bs ENDPROGRAM_SECTION{:
-            RESULT = "PROGRAM_SECTION" + bs + "ENDPROGRAM_SECTION";
+            RESULT = new Programa(bs);
         :};
 
 bloque_sentencias ::= bloque_sentencias:bs sentencia:s {:
-            RESULT =bs + s;
+            bs.add(s);
+            RESULT =bs;
         :}
         | 
         sentencia:s {:
-            RESULT = s;
+            ArrayList<Nodo> sentencias = new ArrayList<>();
+            sentencias.add(s);
+            RESULT = sentencias;
         :};  
 
 sentencia ::= sentencia_while: sw{:
@@ -146,11 +183,15 @@ sentencia ::= sentencia_while: sw{:
         :};
 
 sentencia_asignacion ::= IDENTIFICADOR:id IGUAL expresion_or: eo {:
-            RESULT = new Asignacion(id,eo) ;
+            RESULT = new Asignacion(new Identificador(id),eo) ;
         :}
         |
         IDENTIFICADOR:id IGUAL funcion_especial: fe {:
-            RESULT = new Asignacion(id,fe) ;
+            RESULT = new Asignacion(new Identificador(id),fe) ;
+        :}  
+        |   
+        IDENTIFICADOR:id IGUAL input: fe {:
+            RESULT = new Asignacion(new Identificador(id),fe) ;
         :};
 
 expresion_or ::= expresion_or: eo OR expresion_and :ea{:
@@ -249,42 +290,39 @@ factor ::= BOOLEAN_LITERAL:bl{:
             RESULT = new Flotante(fl);
         :}
         |
-        PARENTESISA expresion_or:eo PARENTESISC{:
-            RESULT = "(" + eo + ")";
+        STRING_LITERAL:sl{:
+            RESULT = new StringLiteral(sl);
         :}
         |
         IDENTIFICADOR:id{:
-            RESULT = id;
+            RESULT = new Identificador(id);
         :};
 
 funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORCHETESA lista_expresiones:le CORCHETESC PARENTESISC{:
-            RESULT = sim + "(" + il + ";"+ "[" + le + "]" + ")";
+            RESULT = new SumaImpar(new Entero(il),le);
         :};
 
 lista_expresiones ::= lista_expresiones:le COMA expresion_sr:esr{:
-            RESULT = le + ","+ esr;
+            le.add(esr);
+            RESULT = le;
         :}
         |
         expresion_sr:esr{:
-            RESULT = esr ;
-        :}
-        |
-        {::};
+            ArrayList<Expresion> expresiones = new ArrayList<>();
+            expresiones.add(esr);
+            RESULT = expresiones;
+        :};
 
 sentencia_while ::= WHILE PARENTESISA expresion_or:c PARENTESISC DO bloque_sentencias:bs END{:
-            RESULT = new Mientras(c,bs);
+            RESULT = new Mientras(c,new Bloque(bs));
         :};
 
 sentencia_display ::= display:d {:
             RESULT = d;
-        :}
-        |
-        input:i {:
-            RESULT = i;
         :};
 
 display ::= DISPLAY PARENTESISA expresion_or:eo PARENTESISC{:
-            RESULT = "DISPLAY" +"("+eo+")";
+            RESULT = new Display(eo);
         :};
 
 input ::= input_int:ii {:
@@ -300,21 +338,21 @@ input ::= input_int:ii {:
         :};
 
 input_int ::= INPUT_INT PARENTESISA PARENTESISC {:
-            RESULT = "INPUT_INT"+"(" +")";
+            RESULT = new Input();
         :};
 
 input_float ::= INPUT_FLOAT PARENTESISA PARENTESISC {:
-            RESULT = "INPUT_FLOAT"+"("+")";
+            RESULT = new Input();
         :};
 
 input_bool ::= INPUT_BOOL PARENTESISA PARENTESISC {:
-            RESULT = "INPUT_BOOL"+"("+")";
+            RESULT = new Input();
         :};
 
 sentencia_if ::= IF PARENTESISA expresion_or:eo PARENTESISC THEN bloque_sentencias:bs END{:
-            RESULT = new SiEntonces("IF",eo,bs);
+            RESULT = new SiEntonces(eo,new Bloque(bs));
         :}
         |
         IF PARENTESISA expresion_or:eo PARENTESISC THEN bloque_sentencias:bs1 ELSE bloque_sentencias:bs2 END{:
-            RESULT = new SiEntoncesSino(eo,bs1,bs2);
+            RESULT = new SiEntonces(eo,new Bloque(bs1),new Bloque(bs2));
         :};

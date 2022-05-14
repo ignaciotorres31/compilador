@@ -3,7 +3,7 @@ package compilador.ast.sentencias;
 import compilador.ast.expresiones.Identificador;
 import compilador.ast.expresiones.Tipo;
 
-public abstract class Declaracion extends Sentencia {
+public class Declaracion extends Sentencia {
     private Identificador ident;
     private Tipo tipo;
     

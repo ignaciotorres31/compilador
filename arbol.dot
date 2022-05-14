@@ -1,0 +1,8 @@
+graph G {nodo_2009405535[label="Impresion"]
+nodo_1697189132[label="Programa"]
+nodo_2009405535--nodo_1697189132
+nodo_407407121[label="Bloque"]
+nodo_1697189132--nodo_407407121
+nodo_1502621328[label="Bloque Programa"]
+nodo_1697189132--nodo_1502621328
+}

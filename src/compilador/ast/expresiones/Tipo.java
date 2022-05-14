@@ -12,6 +12,7 @@ public enum Tipo {
     BOOLEAN,
     INTEGER,
     FLOAT,
+    STRING,
     UNKNOWN;
     
     @Override
@@ -28,6 +29,8 @@ public enum Tipo {
                 return Tipo.INTEGER;
             case "FLOAT":
                 return Tipo.FLOAT;
+            case "STRING":
+                return Tipo.STRING;
         }
         return Tipo.UNKNOWN;
     }

@@ -13,11 +13,20 @@ import compilador.ast.expresiones.Tipo;
  */
 public abstract class Factor extends Expresion {
     
-    public Factor(Tipo tipo) {
+   public Factor(Tipo tipo) {
         super(tipo);
     }
 
     public Factor(Tipo tipo, String nombre) {
         super(tipo, nombre);
+    }
+
+    @Override
+    public String graficar(String idPadre){
+        StringBuilder grafico = new StringBuilder();
+        grafico.append(String.format("%1$s[label=\"%2$s : %3$s\"]\n", this.getId(), this.getTipo(), this.getEtiqueta()));
+        if(idPadre != null)
+            grafico.append(String.format("%1$s--%2$s\n", idPadre, this.getId()));
+        return grafico.toString();
     }
 }

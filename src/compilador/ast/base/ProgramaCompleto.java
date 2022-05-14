@@ -13,22 +13,22 @@ import compilador.ast.expresiones.Expresion;
  */
 public class ProgramaCompleto extends Nodo{
     
-    private Bloque bloqueDeclaraciones;
+       private Bloque bloqueDeclaraciones;
     private Programa cuerpo;
 
-    public ProgramaCompleto(String nombre, Bloque bloqueDeclaraciones, Programa cuerpo){
-        super(nombre);
+    public ProgramaCompleto(Bloque bloqueDeclaraciones, Programa cuerpo){
+        super("Programa");
         this.bloqueDeclaraciones = bloqueDeclaraciones;      
         this.cuerpo = cuerpo;
     }
     
-    public ProgramaCompleto(String nombre, Programa cuerpo){
-        super(nombre);
+    public ProgramaCompleto(Programa cuerpo){
+        super("Programa");
         this.cuerpo = cuerpo;
     }
     
-    public ProgramaCompleto(String nombre, Bloque bloqueDeclaraciones){
-        super(nombre);
+    public ProgramaCompleto(Bloque bloqueDeclaraciones){
+        super("Programa");
         this.bloqueDeclaraciones = bloqueDeclaraciones;      
     }
 
@@ -47,6 +47,14 @@ public class ProgramaCompleto extends Nodo{
     public void setCuerpo(Programa cuerpo) {
         this.cuerpo = cuerpo;
     }
-    
+
+    public String graficar(String idPadre){
+        String grafico = super.graficar(idPadre);
+        if(bloqueDeclaraciones != null){
+            grafico += bloqueDeclaraciones.graficar(getId());
+        }
+        grafico += cuerpo.graficar(getId());
+        return grafico;
+    }
     
 }

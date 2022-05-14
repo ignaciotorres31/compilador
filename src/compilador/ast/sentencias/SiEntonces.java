@@ -6,9 +6,17 @@ import compilador.ast.expresiones.Expresion;
 public class SiEntonces extends Seleccion {
     
     private Bloque bloqueSiEntonces;
+    private Bloque bloqueSino;
 
-    public SiEntonces(String nombre, Expresion condicion, Bloque bloqueSiEntonces) {
-        super(nombre, condicion);
+    public SiEntonces(Expresion condicion, Bloque bloqueSiEntonces, Bloque bloqueSino) {
+        super("IF", condicion);
+        bloqueSiEntonces.setNombre("THEN");
+        bloqueSino.setNombre("ELSE");
+        this.bloqueSiEntonces = bloqueSiEntonces;
+        this.bloqueSino = bloqueSino;
+    }
+    public SiEntonces(Expresion condicion, Bloque bloqueSiEntonces) {
+        super("IF", condicion);
         bloqueSiEntonces.setNombre("THEN");
         this.bloqueSiEntonces = bloqueSiEntonces;
     }
@@ -16,9 +24,23 @@ public class SiEntonces extends Seleccion {
     public Bloque getBloqueSiEntonces() {
         return bloqueSiEntonces;
     }
-
     public void setBloqueSiEntonces(Bloque bloqueSiEntonces) {
         this.bloqueSiEntonces = bloqueSiEntonces;
+    }
+
+    public Bloque getBloqueSino() {
+        return bloqueSino;
+    }
+    public void setBloqueSino(Bloque bloqueSino) {
+        this.bloqueSino = bloqueSino;
+    }
+    
+    @Override
+    public String graficar(String idPadre) {
+        final String miId = this.getId();
+        return super.graficar(idPadre) +
+                bloqueSiEntonces.graficar(miId) +
+                bloqueSino.graficar(miId);
     }
 
     

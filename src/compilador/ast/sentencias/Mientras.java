@@ -40,5 +40,13 @@ public class Mientras extends Sentencia {
     public void setBloqueSentencias(Bloque bloqueSentencias) {
         this.bloqueSentencias = bloqueSentencias;
     }
+    
+    @Override
+    public String graficar(String idPadre) {
+        final String miId = this.getId();
+        return super.graficar(idPadre) +
+                condicion.graficar(miId) +
+                bloqueSentencias.graficar(miId);
+    }
 
 }

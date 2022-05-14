@@ -12,14 +12,14 @@ import compilador.ast.expresiones.Tipo;
  * @author facundo
  */
 public class Flotante extends Literal {
-    private final Double valor;
+    private final Float valor;
 
-    public Flotante(Double valor) {
+    public Flotante(Float valor) {
         super(Tipo.FLOAT);
         this.valor = valor;
     }
 
-    public Double getValor() {
+    public Float getValor() {
         return valor;
     }
 
