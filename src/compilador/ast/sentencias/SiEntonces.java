@@ -38,9 +38,13 @@ public class SiEntonces extends Seleccion {
     @Override
     public String graficar(String idPadre) {
         final String miId = this.getId();
-        return super.graficar(idPadre) +
-                bloqueSiEntonces.graficar(miId) +
-                bloqueSino.graficar(miId);
+        String grafico = super.graficar(idPadre) + 
+            super.getCondicion().graficar(miId) +
+            bloqueSiEntonces.graficar(miId);
+        if(getBloqueSino() != null){
+            grafico += getBloqueSino().graficar(getId());
+        }
+        return grafico;
     }
 
     

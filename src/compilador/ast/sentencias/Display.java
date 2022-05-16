@@ -28,5 +28,11 @@ public class Display extends Sentencia{
         this.display = display;
     }
     
+    @Override
+    public String graficar(String idPadre){
+        String grafico = super.graficar(idPadre);
+        grafico += display.graficar(getId());
+        return grafico;
+    }    
     
 }

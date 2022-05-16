@@ -1,8 +1,5 @@
 package compilador.ast.base;
 
-import compilador.ast.base.Nodo;
-import compilador.ast.expresiones.Expresion;
-
 import java.util.*;
 
 public class Programa extends Nodo {
@@ -20,6 +17,15 @@ public class Programa extends Nodo {
 
     public void setCuerpo(ArrayList<Nodo> cuerpo) {
         this.cuerpo = cuerpo;
+    }
+    
+    @Override
+    public String graficar(String idPadre){
+        String grafico = super.graficar(idPadre);
+        for(Nodo prog : getCuerpo()){
+            grafico += prog.graficar(getId());
+        }
+        return grafico;
     }
 
 }

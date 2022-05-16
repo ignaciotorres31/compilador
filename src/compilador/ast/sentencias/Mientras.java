@@ -1,18 +1,7 @@
 package compilador.ast.sentencias;
         
 import compilador.ast.base.Bloque;
-import compilador.ast.base.Nodo;
 import compilador.ast.expresiones.Expresion;
-import compilador.ast.expresiones.Identificador;
-import compilador.ast.expresiones.binarias.MayorIgual;
-import compilador.ast.expresiones.binarias.MenorIgual;
-import compilador.ast.expresiones.binarias.Resta;
-import compilador.ast.expresiones.binarias.Suma;
-import compilador.ast.expresiones.factor.Entero;
-import java_cup.runtime.ComplexSymbolFactory.Location;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Mientras extends Sentencia {
     private Expresion condicion;

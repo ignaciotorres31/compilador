@@ -1,8 +1,60 @@
-graph G {nodo_2009405535[label="Impresion"]
-nodo_1697189132[label="Programa"]
-nodo_2009405535--nodo_1697189132
-nodo_407407121[label="Bloque"]
-nodo_1697189132--nodo_407407121
-nodo_1502621328[label="Bloque Programa"]
-nodo_1697189132--nodo_1502621328
+graph G {nodo_1487136162[label="Impresion"]
+nodo_1911651671[label="Programa"]
+nodo_1487136162--nodo_1911651671
+nodo_1496596897[label="Bloque"]
+nodo_1911651671--nodo_1496596897
+nodo_1708143484[label="Declaracion"]
+nodo_1496596897--nodo_1708143484
+nodo_1028850977[label="Declaracion"]
+nodo_1496596897--nodo_1028850977
+nodo_1202904089[label="Declaracion"]
+nodo_1496596897--nodo_1202904089
+nodo_1022407687[label="Declaracion"]
+nodo_1496596897--nodo_1022407687
+nodo_1491024694[label="Declaracion"]
+nodo_1496596897--nodo_1491024694
+nodo_2097174273[label="Declaracion"]
+nodo_1496596897--nodo_2097174273
+nodo_738401964[label="Bloque Programa"]
+nodo_1911651671--nodo_738401964
+nodo_359319463[label="="]
+nodo_738401964--nodo_359319463
+nodo_877480119[label="ID : a1\n<unknown>"]
+nodo_359319463--nodo_877480119
+nodo_1267378528[label="ID : a2\n<unknown>"]
+nodo_359319463--nodo_1267378528
+nodo_2135435459[label="WHILE"]
+nodo_738401964--nodo_2135435459
+nodo_1012698994[label="ID : condicion1\n<unknown>"]
+nodo_2135435459--nodo_1012698994
+nodo_1644851390[label="DO"]
+nodo_2135435459--nodo_1644851390
+nodo_2094339126[label="IF"]
+nodo_1644851390--nodo_2094339126
+nodo_1122313567[label="ID : b2\n<unknown>"]
+nodo_2094339126--nodo_1122313567
+nodo_437917038[label="THEN"]
+nodo_2094339126--nodo_437917038
+nodo_732170515[label="="]
+nodo_437917038--nodo_732170515
+nodo_2131021045[label="ID : f1\n<unknown>"]
+nodo_732170515--nodo_2131021045
+nodo_346083735[label="+"]
+nodo_732170515--nodo_346083735
+nodo_1583023880[label="ID : f1\n<unknown>"]
+nodo_346083735--nodo_1583023880
+nodo_1430024513[label="ID : f2\n<unknown>"]
+nodo_346083735--nodo_1430024513
+nodo_201747575[label="ELSE"]
+nodo_2094339126--nodo_201747575
+nodo_507000841[label="="]
+nodo_201747575--nodo_507000841
+nodo_417140609[label="ID : f2\n<unknown>"]
+nodo_507000841--nodo_417140609
+nodo_777896866[label="-"]
+nodo_507000841--nodo_777896866
+nodo_294090698[label="ID : f2\n<unknown>"]
+nodo_777896866--nodo_294090698
+nodo_1310780803[label="ID : f1\n<unknown>"]
+nodo_777896866--nodo_1310780803
 }

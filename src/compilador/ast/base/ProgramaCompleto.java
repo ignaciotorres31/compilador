@@ -13,7 +13,7 @@ import compilador.ast.expresiones.Expresion;
  */
 public class ProgramaCompleto extends Nodo{
     
-       private Bloque bloqueDeclaraciones;
+    private Bloque bloqueDeclaraciones;
     private Programa cuerpo;
 
     public ProgramaCompleto(Bloque bloqueDeclaraciones, Programa cuerpo){

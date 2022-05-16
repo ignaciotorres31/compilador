@@ -11,6 +11,9 @@ import compilador.ast.expresiones.factor.Factor;
  * @author facundo
  */
 public class Identificador extends Factor {
+    
+    private String nombreNodo = "ID";
+    
     public Identificador(String nombre) {
         super(Tipo.UNKNOWN, nombre);
     }
@@ -21,7 +24,26 @@ public class Identificador extends Factor {
 
     @Override
     public String getEtiqueta() {
-        return String.format("%s\\n<%s>", getEtiqueta(), getTipo());
+        return String.format("%s\\n<%s>", super.getNombre(), getTipo().toString());
     }
+    
+    @Override
+    public String graficar(String idPadre){
+        StringBuilder grafico = new StringBuilder();
+        grafico.append(String.format("%1$s[label=\"%2$s : %3$s\"]\n", this.getId(), this.nombreNodo, this.getEtiqueta()));
+        if(idPadre != null)
+            grafico.append(String.format("%1$s--%2$s\n", idPadre, this.getId()));
+        return grafico.toString();
+    }
+
+    public String getNombreNodo() {
+        return nombreNodo;
+    }
+
+    public void setNombreNodo(String nombreNodo) {
+        this.nombreNodo = nombreNodo;
+    }
+    
+    
 }
 

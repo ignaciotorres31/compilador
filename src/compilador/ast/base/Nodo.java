@@ -24,6 +24,10 @@ public abstract class  Nodo {
         return name.substring(pos);
     }
     
+    public String getNombre() {
+        return this.nombre;
+    }
+    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -35,7 +39,5 @@ public abstract class  Nodo {
             grafico.append(String.format("%1$s--%2$s\n", idPadre, this.getId()));
         return grafico.toString();
     }
-    
-    //public abstract Expresion evaluar();
 
 }

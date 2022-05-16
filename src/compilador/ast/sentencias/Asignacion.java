@@ -31,5 +31,13 @@ public class Asignacion extends Sentencia {
     public Expresion getExpresion() {
         return expresion;
     }
+    
+    @Override
+    public String graficar(String idPadre){
+        String grafico = super.graficar(idPadre);
+        grafico += ident.graficar(getId());
+        grafico += expresion.graficar(getId());
+        return grafico;
+    }
 
 }

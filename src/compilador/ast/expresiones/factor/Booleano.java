@@ -4,7 +4,6 @@
  */
 package compilador.ast.expresiones.factor;
 
-import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.Tipo;
 
 /**
@@ -27,5 +26,4 @@ public class Booleano extends Literal {
     public String toString() {        
         return valor.toString();
     }
-
 }
