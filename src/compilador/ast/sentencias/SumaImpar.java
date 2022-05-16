@@ -7,6 +7,7 @@ package compilador.ast.sentencias;
 
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.factor.Entero;
+import compilador.ast.expresiones.factor.Constante;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  */
 public class SumaImpar extends Expresion{
     
- private Entero entero;
+    private Entero entero;
     private ArrayList<Expresion> lista;
 
     public SumaImpar(Entero entero, ArrayList<Expresion> lista) {

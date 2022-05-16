@@ -8,7 +8,7 @@ import compilador.ast.expresiones.Tipo;
  *
  * @author facundo
  */
-public abstract class Literal extends Factor {
+public abstract class Literal extends Constante {
     
     public Literal(Tipo tipo) {
         super(tipo);

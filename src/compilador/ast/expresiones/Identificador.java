@@ -4,13 +4,13 @@
  */
 package compilador.ast.expresiones;
 
-import compilador.ast.expresiones.factor.Factor;
+import compilador.ast.expresiones.factor.Constante;
 
 /**
  *
  * @author facundo
  */
-public class Identificador extends Factor {
+public class Identificador extends Constante {
     
     private String nombreNodo = "ID";
     

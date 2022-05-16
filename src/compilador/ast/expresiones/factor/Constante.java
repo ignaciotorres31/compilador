@@ -11,17 +11,19 @@ import compilador.ast.expresiones.Tipo;
  *
  * @author facundo
  */
-public abstract class Factor extends Expresion {
+public abstract class Constante extends Expresion {
     
-   public Factor(Tipo tipo) {
+    private Tipo tipo;
+    
+   public Constante(Tipo tipo) {
         super(tipo);
     }
 
-    public Factor(Tipo tipo, String nombre) {
+    public Constante(Tipo tipo, String nombre) {
         super(tipo, nombre);
     }
     
-    public Factor(String nombre){
+    public Constante(String nombre){
         super(nombre);
     }
 

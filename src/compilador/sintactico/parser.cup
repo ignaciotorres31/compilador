@@ -67,7 +67,8 @@ nonterminal ArrayList<Declaracion> declaracion;
 nonterminal Programa bloque_programa;
 nonterminal ArrayList<Nodo> bloque_sentencias;
 nonterminal Sentencia sentencia;
-nonterminal Factor factor;
+nonterminal Constante constante;
+nonterminal Expresion factor;
 
 nonterminal List<String>  tipos_datos_id;
 
@@ -185,10 +186,6 @@ sentencia ::= sentencia_while: sw{:
 sentencia_asignacion ::= IDENTIFICADOR:id IGUAL expresion_or: eo {:
             RESULT = new Asignacion(new Identificador(id),eo) ;
         :}
-        |
-        IDENTIFICADOR:id IGUAL funcion_especial: fe {:
-            RESULT = new Asignacion(new Identificador(id),fe) ;
-        :}  
         |   
         IDENTIFICADOR:id IGUAL input: fe {:
             RESULT = new Asignacion(new Identificador(id),fe) ;
@@ -278,7 +275,19 @@ menos_unario ::= RESTA menos_unario:mu{:
             RESULT = f ;
         :};
 
-factor ::= BOOLEAN_LITERAL:bl{:
+factor ::= constante: c{:
+            RESULT = c;
+        :}
+        |
+        funcion_especial:fe{:
+            RESULT = fe;
+        :}
+        |
+        PARENTESISA expresion_or:eo PARENTESISC{:
+            RESULT = eo ;
+        :};
+
+constante::= BOOLEAN_LITERAL:bl{:
             RESULT = new Booleano(bl);
         :}
         |
