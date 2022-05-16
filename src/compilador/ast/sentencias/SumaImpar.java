@@ -5,6 +5,7 @@
  */
 package compilador.ast.sentencias;
 
+import compilador.ast.base.Nodo;
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.factor.Entero;
 import compilador.ast.expresiones.factor.Constante;
@@ -38,6 +39,15 @@ public class SumaImpar extends Expresion{
         this.lista = lista;
     }    
     
-   
+    @Override
+    public String graficar(String idPadre) {
+        final String miId = this.getId();
+        String grafico =  super.graficar(idPadre);
+        grafico += entero.graficar(miId);
+        for(Expresion exp : getLista()){
+            grafico += exp.graficar(getId());
+        };
+        return grafico;
+    }
     
 }

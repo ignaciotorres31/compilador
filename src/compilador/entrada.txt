@@ -13,4 +13,5 @@ WHILE(condicion1)DO
 	f2= f2 - f1
     END	
 END
+a2 = SUMAIMPAR(2;[f1+f2,a1,3,5])
 ENDPROGRAM.SECTION
