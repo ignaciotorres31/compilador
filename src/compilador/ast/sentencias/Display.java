@@ -6,6 +6,7 @@
 package compilador.ast.sentencias;
 
 import compilador.ast.expresiones.Expresion;
+import compilador.ast.expresiones.factor.StringLiteral;
 
 /**
  *
@@ -19,6 +20,12 @@ public class Display extends Sentencia{
         super("DISPLAY");
         this.display = display;
     }
+    
+    public Display(StringLiteral display){
+        super("DISPLAY");
+        this.display = display;
+    }
+    
 
     public Expresion getDisplay() {
         return display;

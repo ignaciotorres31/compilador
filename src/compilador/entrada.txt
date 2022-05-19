@@ -5,7 +5,7 @@ float: f1,f2;
 ENDDECLARE.SECTION
 
 PROGRAM.SECTION
-a1 = a2
+f1 = 1.2 + 2.0
 WHILE(condicion1)DO
     IF(b2)THEN
 	f1 = f1 + f2
@@ -13,5 +13,4 @@ WHILE(condicion1)DO
 	f2= f2 - f1
     END	
 END
-a2 = SUMAIMPAR(2;[f1+f2,a1,3,5])
 ENDPROGRAM.SECTION

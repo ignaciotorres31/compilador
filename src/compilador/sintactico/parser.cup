@@ -49,9 +49,9 @@ MENOR_IGUAL, PARENTESISA, PARENTESISC, CORCHETESA, CORCHETESC,  COMA, PUNTOCOMA,
 terminal String IDENTIFICADOR, SUMAIMPAR, INTEGER, FLOAT, BOOLEAN, STRING_LITERAL,
 INPUT_INT, INPUT_FLOAT, INPUT_BOOL, AND, OR, NOT, WHILE, DO, END,IF, THEN, ELSE, DISPLAY, DECLARE_SECTION, 
 ENDDECLARE_SECTION, PROGRAM_SECTION, ENDPROGRAM_SECTION;
-terminal Boolean BOOLEAN_LITERAL;
-terminal Integer INTEGER_LITERAL;
-terminal Float FLOAT_LITERAL;
+terminal String BOOLEAN_LITERAL;
+terminal String INTEGER_LITERAL;
+terminal String FLOAT_LITERAL;
 
 nonterminal Sentencia sentencia_while, sentencia_if,display;
 nonterminal Expresion comparacion,expresion_or,expresion_sr, expresion_md,expresion_and,expresion_not,menos_unario,input,input_int, input_float, input_bool;
@@ -185,10 +185,6 @@ sentencia ::= sentencia_while: sw{:
 
 sentencia_asignacion ::= IDENTIFICADOR:id IGUAL expresion_or: eo {:
             RESULT = new Asignacion(new Identificador(id),eo) ;
-        :}
-        |   
-        IDENTIFICADOR:id IGUAL input: fe {:
-            RESULT = new Asignacion(new Identificador(id),fe) ;
         :};
 
 expresion_or ::= expresion_or: eo OR expresion_and :ea{:
@@ -285,30 +281,42 @@ factor ::= constante: c{:
         |
         PARENTESISA expresion_or:eo PARENTESISC{:
             RESULT = eo ;
+        :}
+        |   
+        IDENTIFICADOR:id IGUAL input: fe {:
+            RESULT = fe;
         :};
 
 constante::= BOOLEAN_LITERAL:bl{:
-            RESULT = new Booleano(bl);
+            RESULT = new Booleano(Boolean.parseBoolean(bl));
         :}
         |
         INTEGER_LITERAL:il{:
-            RESULT = new Entero(il);
+            RESULT = new Entero(Integer.parseInt(il));
         :}
         |
         FLOAT_LITERAL:fl{:
-            RESULT = new Flotante(fl);
-        :}
-        |
-        STRING_LITERAL:sl{:
-            RESULT = new StringLiteral(sl);
+            RESULT = new Flotante(Float.parseFloat(fl));
         :}
         |
         IDENTIFICADOR:id{:
+            
             RESULT = new Identificador(id);
         :};
 
 funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORCHETESA lista_expresiones:le CORCHETESC PARENTESISC{:
-            RESULT = new SumaImpar(new Entero(il),le);
+            Bloque then1 = new Bloque();
+            Bloque else1= new Bloque();
+            Bloque then2 = new Bloque();
+            Bloque else2 = new Bloque();
+            then1.add(new SiEntonces(new MayorIgual(il,1),le))
+            else1.add(new Display(new StringLiteral("El valor debe ser >=1")))
+            then2.add(new SiEntonces(new Menor(le.size(),il),"La lista tiene menos elementos que el indicado"))
+            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)),le);
+        :}
+        |        
+        SUMAIMPAR:sim PARENTESISA IDENTIFICADOR:id PUNTOCOMA CORCHETESA lista_expresiones:le CORCHETESC PARENTESISC{:
+            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)),le);
         :};
 
 lista_expresiones ::= lista_expresiones:le COMA expresion_sr:esr{:
@@ -332,7 +340,12 @@ sentencia_display ::= display:d {:
 
 display ::= DISPLAY PARENTESISA expresion_or:eo PARENTESISC{:
             RESULT = new Display(eo);
-        :};
+        :}
+        |
+         DISPLAY PARENTESISA STRING_LITERAL:sl PARENTESISC{:
+            StringLiteral str = new StringLiteral(sl);
+            RESULT = new Display(str);
+        :}  ;
 
 input ::= input_int:ii {:
             RESULT = ii;
