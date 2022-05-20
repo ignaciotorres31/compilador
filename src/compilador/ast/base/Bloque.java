@@ -1,22 +1,21 @@
 package compilador.ast.base;
         
 import compilador.ast.sentencias.Sentencia;
-
-import java.util.List;
+import java.util.ArrayList;
 
 public class Bloque extends Sentencia {
-    private List<Sentencia> sentencias;
+    private ArrayList<Sentencia> sentencias;
 
-    public Bloque(List<Sentencia> sentencias) {
+    public Bloque(ArrayList<Sentencia> sentencias) {
         super("Bloque");
         this.sentencias = sentencias;
     }
 
-    public void setSentencias(List<Sentencia> sentencias) {
+    public void setSentencias(ArrayList<Sentencia> sentencias) {
         this.sentencias = sentencias;
     }
 
-    public List<Sentencia> getSentencias() {
+    public ArrayList<Sentencia> getSentencias() {
         return sentencias;
     }
     

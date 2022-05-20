@@ -184,6 +184,10 @@ sentencia ::= sentencia_while: sw{:
         :};
 
 sentencia_asignacion ::= IDENTIFICADOR:id IGUAL expresion_or: eo {:
+            Object valueId = ht.get(id);            
+            if(valueId == null) {
+                throw new Exception("No se encuentra el id en tabla de simbolos : " + id);
+            } 
             RESULT = new Asignacion(new Identificador(id),eo) ;
         :};
 
@@ -308,25 +312,38 @@ constante::= BOOLEAN_LITERAL:bl{:
         :};
 
 funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORCHETESA lista_expresiones:le CORCHETESC PARENTESISC{:
-            List<Nodo> then1 = new ArrayList<>();
-            List<Nodo> else1= new ArrayList<>();
-            List<Nodo> then2 = new ArrayList<>();
-            List<Nodo> then3 = new ArrayList<>();
-            Entero impares = new Entero(0);
+            ArrayList<Sentencia> then1 = new ArrayList<>();
+            ArrayList<Sentencia> else1= new ArrayList<>();
+            ArrayList<Sentencia> else2 = new ArrayList<>();
+            ArrayList<Sentencia> then2 = new ArrayList<>();
+            ArrayList<Sentencia> else3 = new ArrayList<>();
 
-            then1.add(new SiEntonces(new MayorIgual(new Entero(Integer.parseInt(il)),new Entero(1)),new Bloque(le)));
             else1.add(new Display(new StringLiteral("El valor debe ser >=1")));
-            then2.add(new SiEntonces(new Menor(le.size(),il),new Display(New StringLiteral("La lista tiene menos elementos que el indicado"))));
-            for(Expresion e : le){
-                if((e % 2) != 0){
-                    impares.setValor(impares.getValor() + 1);
-            }}
-            then3.add(new SiEntonces(new Menor(impares,il),new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"))));
-            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)),le);
+            else2.add(new Display(new StringLiteral("La lista tiene menos elementos que el indicado")));
+            then1.add(new SiEntonces(new Menor(new Entero(le.size()),new Entero(Integer.parseInt(il))),new Bloque(then2),new Bloque(else2)));
+            then2.add(new SiEntonces(new Igualdad(new Entero(le.size()),new Entero(0)),new Bloque(else3)));
+            else3.add(new Display(new StringLiteral("La lista está vacía")));
+            SiEntonces cuerpo = new SiEntonces(new MayorIgual(new Entero(Integer.parseInt(il)),new Entero(1)),new Bloque(then1),new Bloque(else1));
+            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)),cuerpo.getBloqueSiEntonces().getSentencias());
         :}
         |        
         SUMAIMPAR:sim PARENTESISA IDENTIFICADOR:id PUNTOCOMA CORCHETESA lista_expresiones:le CORCHETESC PARENTESISC{:
-            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)),le);
+            List<Sentencia> then1 = new ArrayList<>();
+            List<Sentencia> else1= new ArrayList<>();
+            List<Sentencia> else2 = new ArrayList<>();
+            List<Sentencia> then2 = new ArrayList<>();
+
+            else1.add(new Display(new StringLiteral("El valor debe ser >=1")));
+            else2.add(new Display(new StringLiteral("La lista tiene menos elementos que el indicado")));
+            then1.add(new SiEntonces(new Menor(new Entero(le.size()),new Entero(Integer.parseInt(il))),new Bloque(then2),new Bloque(else2)));
+            then2.add(new SiEntonces(new Igualdad(new Entero(le.size()),new Entero(0))),new Display(new StringLiteral("La lista está vacía")));
+            Object valueId = ht.get(id);            
+            if(valueId == null) {
+                throw new Exception("No se encuentra el id en tabla de simbolos : " + id);
+            }
+            Identificador ident = new Identificador(id)  
+            ArrayList<Sentencia> cuerpo = new SiEntonces(new MayorIgual(new Identificador(id),new Entero(1)),new Bloque(then1),new Bloque(else1));
+            RESULT = new SumaImpar(new Identificador(ident)),cuerpo.getBloqueSiEntonces().getSentencias().toArrayList());
         :};
 
 lista_expresiones ::= lista_expresiones:le COMA expresion_sr:esr{:
@@ -335,7 +352,7 @@ lista_expresiones ::= lista_expresiones:le COMA expresion_sr:esr{:
         :}
         |
         expresion_sr:esr{:
-            ArrayList<Expresion> expresiones = new ArrayList<>();
+            ArrayList<Sentencia> expresiones = new ArrayList<>();
             expresiones.add(esr);
             RESULT = expresiones;
         :};
