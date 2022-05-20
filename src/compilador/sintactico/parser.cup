@@ -300,7 +300,10 @@ constante::= BOOLEAN_LITERAL:bl{:
         :}
         |
         IDENTIFICADOR:id{:
-            
+            Object valueId = ht.get(id);            
+            if(valueId == null) {
+                throw new Exception("No se encuentra el id en tabla de simbolos : " + id);
+            } 
             RESULT = new Identificador(id);
         :};
 

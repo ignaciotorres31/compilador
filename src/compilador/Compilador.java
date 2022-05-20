@@ -245,9 +245,11 @@ public class Compilador extends javax.swing.JFrame {
         }
     }
     
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) throws Exception {                                   
-        FileReader entrada = new FileReader("./src/compilador/entrada.txt");
-        MiLexico lexico = new MiLexico(entrada);
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) throws Exception {
+        String textArea = jTextArea.getText() == null ? "" : jTextArea.getText();
+        InputStream is = new ByteArrayInputStream(textArea.getBytes());
+        InputStreamReader reader = new InputStreamReader(is);
+        MiLexico lexico = new MiLexico(reader);
         MiParser sintactico= new MiParser(lexico);
         Impresion impresion = (Impresion) sintactico.parse().value;
      
