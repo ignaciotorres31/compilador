@@ -4,7 +4,6 @@
  */
 package compilador.ast.expresiones.factor;
 
-import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.Tipo;
 
 /**
@@ -12,7 +11,8 @@ import compilador.ast.expresiones.Tipo;
  * @author facundo
  */
 public class Entero extends Literal {
-    private final Integer valor;
+    
+    private Integer valor;
 
     public Entero(Integer valor) {
         super(Tipo.INTEGER);
@@ -21,6 +21,10 @@ public class Entero extends Literal {
 
     public Integer getValor() {
         return valor;
+    }
+    
+    public void setValor(Integer valor) {
+        this.valor = valor;
     }
 
     @Override

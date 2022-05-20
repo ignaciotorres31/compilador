@@ -1,21 +1,22 @@
 package compilador.ast.base;
 
+import compilador.ast.sentencias.Sentencia;
 import java.util.*;
 
 public class Programa extends Nodo {
     
-    private ArrayList<Nodo> cuerpo;
+    private ArrayList<Sentencia> cuerpo;
 
-    public Programa(ArrayList<Nodo> cuerpo) {
+    public Programa(ArrayList<Sentencia> cuerpo) {
         super("Bloque Programa");
         this.cuerpo = cuerpo;
     }
 
-    public ArrayList<Nodo> getCuerpo() {
+    public ArrayList<Sentencia> getCuerpo() {
         return this.cuerpo;
     }
 
-    public void setCuerpo(ArrayList<Nodo> cuerpo) {
+    public void setCuerpo(ArrayList<Sentencia> cuerpo) {
         this.cuerpo = cuerpo;
     }
     

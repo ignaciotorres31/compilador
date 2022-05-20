@@ -55,7 +55,7 @@ terminal String FLOAT_LITERAL;
 
 nonterminal Sentencia sentencia_while, sentencia_if,display;
 nonterminal Expresion comparacion,expresion_or,expresion_sr, expresion_md,expresion_and,expresion_not,menos_unario,input,input_int, input_float, input_bool;
-nonterminal ArrayList<Expresion> lista_expresiones;
+nonterminal ArrayList<Sentencia> lista_expresiones;
 nonterminal Expresion funcion_especial;
 nonterminal Asignacion sentencia_asignacion;
 nonterminal Sentencia sentencia_display;
@@ -65,7 +65,7 @@ nonterminal Bloque bloque_declaraciones;
 nonterminal ArrayList<ArrayList<Declaracion>> declaraciones;
 nonterminal ArrayList<Declaracion> declaracion;
 nonterminal Programa bloque_programa;
-nonterminal ArrayList<Nodo> bloque_sentencias;
+nonterminal ArrayList<Sentencia> bloque_sentencias;
 nonterminal Sentencia sentencia;
 nonterminal Constante constante;
 nonterminal Expresion factor;
@@ -92,7 +92,7 @@ programa ::= bloque_declaraciones:bd bloque_programa: bp{:
         :};
 
 bloque_declaraciones ::= DECLARE_SECTION declaraciones:d ENDDECLARE_SECTION{:
-            ArrayList<Nodo> declaracionesFinales = new ArrayList<>();
+            ArrayList<Sentencia> declaracionesFinales = new ArrayList<>();
             for(ArrayList<Declaracion> declaracion : d){
                 for(Declaracion dec : declaracion){
                     declaracionesFinales.add(dec);
@@ -162,7 +162,7 @@ bloque_sentencias ::= bloque_sentencias:bs sentencia:s {:
         :}
         | 
         sentencia:s {:
-            ArrayList<Nodo> sentencias = new ArrayList<>();
+            ArrayList<Sentencia> sentencias = new ArrayList<>();
             sentencias.add(s);
             RESULT = sentencias;
         :};  
@@ -308,20 +308,20 @@ constante::= BOOLEAN_LITERAL:bl{:
         :};
 
 funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORCHETESA lista_expresiones:le CORCHETESC PARENTESISC{:
-            Bloque then1 = new Bloque();
-            Bloque else1= new Bloque();
-            Bloque then2 = new Bloque();
-            Bloque then3 = new Bloque();
-            Entero impares = new Entero();
+            List<Nodo> then1 = new ArrayList<>();
+            List<Nodo> else1= new ArrayList<>();
+            List<Nodo> then2 = new ArrayList<>();
+            List<Nodo> then3 = new ArrayList<>();
+            Entero impares = new Entero(0);
 
-            then1.add(new SiEntonces(new MayorIgual(il,new Entero(1)),le))
-            else1.add(new Display(new StringLiteral("El valor debe ser >=1")))
-            then2.add(new SiEntonces(new Menor(le.size(),il),new Display(New StringLiteral("La lista tiene menos elementos que el indicado"))))
+            then1.add(new SiEntonces(new MayorIgual(new Entero(Integer.parseInt(il)),new Entero(1)),new Bloque(le)));
+            else1.add(new Display(new StringLiteral("El valor debe ser >=1")));
+            then2.add(new SiEntonces(new Menor(le.size(),il),new Display(New StringLiteral("La lista tiene menos elementos que el indicado"))));
             for(Expresion e : le){
                 if((e % 2) != 0){
-                    impares +=1;
+                    impares.setValor(impares.getValor() + 1);
             }}
-            then3.add(new SiEntonces(new Menor(impares,il),new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"))))
+            then3.add(new SiEntonces(new Menor(impares,il),new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"))));
             RESULT = new SumaImpar(new Entero(Integer.parseInt(il)),le);
         :}
         |        

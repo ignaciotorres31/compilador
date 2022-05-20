@@ -5,18 +5,18 @@ import compilador.ast.sentencias.Sentencia;
 import java.util.List;
 
 public class Bloque extends Sentencia {
-    private List<Nodo> sentencias;
+    private List<Sentencia> sentencias;
 
-    public Bloque(List<Nodo> sentencias) {
+    public Bloque(List<Sentencia> sentencias) {
         super("Bloque");
         this.sentencias = sentencias;
     }
 
-    public void setSentencias(List<Nodo> sentencias) {
+    public void setSentencias(List<Sentencia> sentencias) {
         this.sentencias = sentencias;
     }
 
-    public List<Nodo> getSentencias() {
+    public List<Sentencia> getSentencias() {
         return sentencias;
     }
     
