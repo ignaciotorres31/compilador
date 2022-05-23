@@ -5,7 +5,7 @@
  */
 package compilador;
 
-import compilador.ast.base.Impresion;
+import compilador.ast.base.ProgramaCompleto;
 import compilador.sintactico.MiParser;
 import compilador.lexico.MiLexico;
 import java.io.BufferedReader;
@@ -251,12 +251,12 @@ public class Compilador extends javax.swing.JFrame {
         InputStreamReader reader = new InputStreamReader(is);
         MiLexico lexico = new MiLexico(reader);
         MiParser sintactico= new MiParser(lexico);
-        Impresion impresion = (Impresion) sintactico.parse().value;
+        ProgramaCompleto programa = (ProgramaCompleto) sintactico.parse().value;
      
         try {
-            jTextPane1.setText(impresion.graficar());
+            jTextPane1.setText(programa.graficar());
             PrintWriter grafico = new PrintWriter(new FileWriter("arbol.dot"));
-            grafico.println(impresion.graficar());
+            grafico.println(programa.graficar());
             grafico.close();
             String cmdDot = "dot -Tpng arbol.dot -o arbol.png";
             Runtime.getRuntime().exec(cmdDot);

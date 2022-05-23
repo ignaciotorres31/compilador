@@ -48,13 +48,15 @@ public class ProgramaCompleto extends Nodo{
         this.cuerpo = cuerpo;
     }
 
-    public String graficar(String idPadre){
-        String grafico = super.graficar(idPadre);
-        if(bloqueDeclaraciones != null){
-            grafico += bloqueDeclaraciones.graficar(getId());
-        }
-        grafico += cuerpo.graficar(getId());
-        return grafico;
+    public String graficar() {
+        // Acá se dispara la invocación a los métodos graficar() de los nodos.
+        // Como la Impresion no tiene padre, se inicia pasando null.  
+        StringBuilder resultado = new StringBuilder();
+        resultado.append("graph G {");
+        resultado.append(this.graficar(null));
+        resultado.append(this.cuerpo.graficar(this.getId()));
+        resultado.append("}");
+        return resultado.toString();
     }
     
 }

@@ -8,7 +8,6 @@ public class Programa extends Nodo {
     private ArrayList<Sentencia> cuerpo;
 
     public Programa(ArrayList<Sentencia> cuerpo) {
-        super("Bloque Programa");
         this.cuerpo = cuerpo;
     }
 

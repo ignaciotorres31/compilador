@@ -59,7 +59,6 @@ nonterminal ArrayList<Sentencia> lista_expresiones;
 nonterminal Expresion funcion_especial;
 nonterminal Asignacion sentencia_asignacion;
 nonterminal Sentencia sentencia_display;
-nonterminal Impresion impresion;
 nonterminal ProgramaCompleto programa;
 nonterminal Bloque bloque_declaraciones;
 nonterminal ArrayList<ArrayList<Declaracion>> declaraciones;
@@ -72,12 +71,7 @@ nonterminal Expresion factor;
 
 nonterminal List<String>  tipos_datos_id;
 
-start with impresion;
-
-impresion ::= programa:prog{:
-        Impresion impresion = new Impresion(prog);
-        RESULT = impresion;
-        :};
+start with programa;
 
 programa ::= bloque_declaraciones:bd bloque_programa: bp{:
             RESULT = new ProgramaCompleto(bd,bp);
