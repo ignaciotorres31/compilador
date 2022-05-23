@@ -39,5 +39,7 @@ public abstract class Expresion extends Nodo {
         this.tipo = tipo;
     }
     
-    
+    public Integer getValorEntero(){
+        return 2;
+    }
 }

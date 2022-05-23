@@ -43,7 +43,5 @@ public class Identificador extends Constante {
     public void setNombreNodo(String nombreNodo) {
         this.nombreNodo = nombreNodo;
     }
-    
-    
 }
 

@@ -5,7 +5,6 @@
  */
 package compilador.ast.sentencias;
 
-import compilador.ast.base.Nodo;
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.Identificador;
 import compilador.ast.expresiones.factor.Entero;
@@ -18,25 +17,23 @@ import java.util.ArrayList;
  */
 public class SumaImpar extends Expresion{
     
-    private Entero entero;
+    private Constante pivot;
     private ArrayList<Sentencia> lista;
-    private Identificador id; 
+    private Asignacion contador;
+    private Asignacion suma;
 
-    public SumaImpar(Entero entero, ArrayList<Sentencia> lista) {
-        this.entero = entero;
+    public SumaImpar(Constante pivot, ArrayList<Sentencia> lista){
+        this.pivot = pivot;
         this.lista = lista;
-    }
-
-     public SumaImpar(Identificador id, ArrayList<Sentencia> lista) {
-        this.id = id;
-        this.lista = lista;
+        this.contador = new Asignacion(new Identificador("aux"),new Entero(0));
+        this.suma = new Asignacion(new Identificador("suma"),new Entero(0));
     }
     
-    public Entero getEntero() {
-        return entero;
+    public Constante getPivot() {
+        return pivot;
     }
-    public void setEntero(Entero entero) {
-        this.entero = entero;
+    public void setPivot(Constante pivot) {
+        this.pivot = pivot;
     }
 
     public ArrayList<Sentencia> getLista() {
@@ -44,16 +41,31 @@ public class SumaImpar extends Expresion{
     }
     public void setLista(ArrayList<Sentencia> lista) {
         this.lista = lista;
-    }    
+    }
+
+    public Asignacion getContador() {
+        return contador;
+    }
+    public void setContador(Asignacion contador) {
+        this.contador = contador;
+    }
+
+    public Asignacion getSuma() {
+        return suma;
+    }
+    public void setSuma(Asignacion suma) {
+        this.suma = suma;
+    }
     
     @Override
     public String graficar(String idPadre) {
         final String miId = this.getId();
         String grafico =  super.graficar(idPadre);
-        grafico += entero.graficar(miId);
+        grafico += contador.graficar(miId);
+        grafico += suma.graficar(miId);
         for(Sentencia exp : getLista()){
             grafico += exp.graficar(getId());
-        };
+        }
         return grafico;
     }
     

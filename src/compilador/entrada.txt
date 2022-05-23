@@ -13,4 +13,5 @@ WHILE(condicion1)DO
 	f2= f2 - f1
     END	
 END
+num1 = sumaimpar(5;[1,2,3])
 ENDPROGRAM.SECTION

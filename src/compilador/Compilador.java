@@ -261,8 +261,9 @@ public class Compilador extends javax.swing.JFrame {
             String cmdDot = "dot -Tpng arbol.dot -o arbol.png";
             Runtime.getRuntime().exec(cmdDot);
 
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Error e) {
+            System.out.println("Error: " + e.getMessage());
+            jTextPane1.setText("Error: " + e.getMessage());
         }
     }
     

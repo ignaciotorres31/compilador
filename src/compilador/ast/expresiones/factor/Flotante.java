@@ -17,6 +17,7 @@ public class Flotante extends Literal {
     public Flotante(Float valor) {
         super(Tipo.FLOAT);
         this.valor = valor;
+        setNombre("Float");
     }
 
     public Float getValor() {
