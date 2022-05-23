@@ -8,7 +8,7 @@ import compilador.ast.expresiones.Expresion;
 
 /**
  *
- * @author facundo
+ * @author Nacho
  */
 public class Conjuncion extends OperacionBinaria {
     

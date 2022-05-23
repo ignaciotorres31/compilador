@@ -8,7 +8,7 @@ import compilador.ast.base.Nodo;
 
 /**
  *
- * @author facundo
+ * @author Nacho
  */
 public abstract class Expresion extends Nodo {
 

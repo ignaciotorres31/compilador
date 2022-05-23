@@ -51,19 +51,19 @@ public class MiParser extends java_cup.runtime.lr_parser {
     "\030\005\000\002\031\004\000\002\031\003\000\002\032" +
     "\003\000\002\032\003\000\002\032\003\000\002\032\003" +
     "\000\002\022\005\000\002\006\005\000\002\006\003\000" +
-    "\002\011\005\000\002\011\003\000\002\012\004\000\002" +
-    "\012\003\000\002\005\005\000\002\005\005\000\002\005" +
+    "\002\010\005\000\002\010\003\000\002\011\004\000\002" +
+    "\011\003\000\002\005\005\000\002\005\005\000\002\005" +
     "\005\000\002\005\005\000\002\005\005\000\002\005\005" +
-    "\000\002\005\003\000\002\007\005\000\002\007\005\000" +
-    "\002\007\003\000\002\010\005\000\002\010\005\000\002" +
-    "\010\003\000\002\013\004\000\002\013\003\000\002\034" +
+    "\000\002\005\003\000\002\020\005\000\002\020\005\000" +
+    "\002\020\003\000\002\007\005\000\002\007\005\000\002" +
+    "\007\003\000\002\012\004\000\002\012\003\000\002\034" +
     "\003\000\002\034\003\000\002\034\005\000\002\034\005" +
     "\000\002\033\003\000\002\033\003\000\002\033\003\000" +
     "\002\033\003\000\002\021\012\000\002\021\012\000\002" +
-    "\020\005\000\002\020\003\000\002\002\011\000\002\023" +
-    "\003\000\002\004\006\000\002\004\006\000\002\014\003" +
-    "\000\002\014\003\000\002\014\003\000\002\015\005\000" +
-    "\002\016\005\000\002\017\005\000\002\003\011\000\002" +
+    "\017\005\000\002\017\003\000\002\002\011\000\002\023" +
+    "\003\000\002\004\006\000\002\004\006\000\002\013\003" +
+    "\000\002\013\003\000\002\013\003\000\002\014\005\000" +
+    "\002\015\005\000\002\016\005\000\002\003\011\000\002" +
     "\003\013" });
 
   /** Access to production table. */
@@ -301,51 +301,51 @@ public class MiParser extends java_cup.runtime.lr_parser {
     "\001\001\000\002\001\001\000\002\001\001\000\016\002" +
     "\034\003\044\004\043\022\037\023\040\032\164\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\026\005\062\006\047\007\055\010\061\011\054\012\060" +
-    "\013\056\021\067\033\052\034\057\001\001\000\002\001" +
-    "\001\000\022\005\062\007\055\010\061\012\162\013\056" +
+    "\026\005\062\006\047\007\061\010\054\011\060\012\056" +
+    "\020\055\021\067\033\052\034\057\001\001\000\002\001" +
+    "\001\000\022\005\062\007\061\011\162\012\056\020\055" +
     "\021\067\033\052\034\057\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\026\005\062\006" +
-    "\072\007\055\010\061\011\054\012\060\013\056\021\067" +
-    "\033\052\034\057\001\001\000\002\001\001\000\012\013" +
+    "\072\007\061\010\054\011\060\012\056\020\055\021\067" +
+    "\033\052\034\057\001\001\000\002\001\001\000\012\012" +
     "\071\021\067\033\052\034\057\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\024\005\062\007" +
-    "\055\010\061\011\075\012\060\013\056\021\067\033\052" +
+    "\061\010\075\011\060\012\056\020\055\021\067\033\052" +
     "\034\057\001\001\000\002\001\001\000\022\005\062\007" +
-    "\055\010\061\012\077\013\056\021\067\033\052\034\057" +
-    "\001\001\000\002\001\001\000\012\014\102\015\104\016" +
-    "\101\017\106\001\001\000\002\001\001\000\002\001\001" +
+    "\061\011\077\012\056\020\055\021\067\033\052\034\057" +
+    "\001\001\000\002\001\001\000\012\013\102\014\104\015" +
+    "\101\016\106\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\012\013\121\021\067\033\052" +
-    "\034\057\001\001\000\012\013\120\021\067\033\052\034" +
+    "\001\000\002\001\001\000\012\012\121\021\067\033\052" +
+    "\034\057\001\001\000\012\012\120\021\067\033\052\034" +
     "\057\001\001\000\002\001\001\000\002\001\001\000\014" +
-    "\010\141\013\056\021\067\033\052\034\057\001\001\000" +
-    "\016\007\140\010\061\013\056\021\067\033\052\034\057" +
-    "\001\001\000\016\007\137\010\061\013\056\021\067\033" +
-    "\052\034\057\001\001\000\014\010\136\013\056\021\067" +
-    "\033\052\034\057\001\001\000\016\007\135\010\061\013" +
-    "\056\021\067\033\052\034\057\001\001\000\016\007\134" +
-    "\010\061\013\056\021\067\033\052\034\057\001\001\000" +
-    "\016\007\133\010\061\013\056\021\067\033\052\034\057" +
-    "\001\001\000\016\007\132\010\061\013\056\021\067\033" +
+    "\007\141\012\056\021\067\033\052\034\057\001\001\000" +
+    "\016\007\061\012\056\020\140\021\067\033\052\034\057" +
+    "\001\001\000\016\007\061\012\056\020\137\021\067\033" +
+    "\052\034\057\001\001\000\014\007\136\012\056\021\067" +
+    "\033\052\034\057\001\001\000\016\007\061\012\056\020" +
+    "\135\021\067\033\052\034\057\001\001\000\016\007\061" +
+    "\012\056\020\134\021\067\033\052\034\057\001\001\000" +
+    "\016\007\061\012\056\020\133\021\067\033\052\034\057" +
+    "\001\001\000\016\007\061\012\056\020\132\021\067\033" +
     "\052\034\057\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\020\007\147\010\061\013\056\020\150\021\067" +
+    "\001\000\020\007\061\012\056\017\150\020\147\021\067" +
     "\033\052\034\057\001\001\000\002\001\001\000\002\001" +
-    "\001\000\016\007\154\010\061\013\056\021\067\033\052" +
+    "\001\000\016\007\061\012\056\020\154\021\067\033\052" +
     "\034\057\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\020\007\147\010\061" +
-    "\013\056\020\157\021\067\033\052\034\057\001\001\000" +
+    "\002\001\001\000\002\001\001\000\020\007\061\012\056" +
+    "\017\157\020\147\021\067\033\052\034\057\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\026\005" +
-    "\062\006\166\007\055\010\061\011\054\012\060\013\056" +
+    "\062\006\166\007\061\010\054\011\060\012\056\020\055" +
     "\021\067\033\052\034\057\001\001\000\002\001\001\000" +
     "\002\001\001\000\020\002\034\003\044\004\043\022\037" +
     "\023\040\031\171\032\035\001\001\000\016\002\034\003" +
@@ -353,11 +353,11 @@ public class MiParser extends java_cup.runtime.lr_parser {
     "\002\034\003\044\004\043\022\037\023\040\031\174\032" +
     "\035\001\001\000\002\001\001\000\016\002\034\003\044" +
     "\004\043\022\037\023\040\032\164\001\001\000\002\001" +
-    "\001\000\026\005\062\006\177\007\055\010\061\011\054" +
-    "\012\060\013\056\021\067\033\052\034\057\001\001\000" +
+    "\001\000\026\005\062\006\177\007\061\010\054\011\060" +
+    "\012\056\020\055\021\067\033\052\034\057\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\026\005\062\006\204\007\055\010\061\011" +
-    "\054\012\060\013\056\021\067\033\052\034\057\001\001" +
+    "\001\001\000\026\005\062\006\204\007\061\010\054\011" +
+    "\060\012\056\020\055\021\067\033\052\034\057\001\001" +
     "\000\002\001\001\000\002\001\001\000\020\002\034\003" +
     "\044\004\043\022\037\023\040\031\207\032\035\001\001" +
     "\000\016\002\034\003\044\004\043\022\037\023\040\032" +
@@ -418,7 +418,6 @@ public class MiParser extends java_cup.runtime.lr_parser {
         System.out.println(" Error en la linea "+ (s.left+1)+ " Columna "+ s.right+ ". Valor simbolo '"
         +s.value+"' . Simbolo n° "+s.sym+ " no reconocido." );
     }
-    public Impresion impresion;
 
 
 
@@ -820,7 +819,7 @@ class CUP$MiParser$actions {
 		
             RESULT = new Disyuncion(ea,en);
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_and",7, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_and",6, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -834,7 +833,7 @@ class CUP$MiParser$actions {
 		
             RESULT = en;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_and",7, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_and",6, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -848,7 +847,7 @@ class CUP$MiParser$actions {
 		
             RESULT =new NegacionLogica(en);
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_not",8, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_not",7, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -862,7 +861,7 @@ class CUP$MiParser$actions {
 		
             RESULT = c;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_not",8, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_not",7, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -995,7 +994,7 @@ class CUP$MiParser$actions {
 		
             RESULT = new Suma(esr,emd);
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_sr",5, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_sr",14, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1012,7 +1011,7 @@ class CUP$MiParser$actions {
 		
             RESULT = new Resta(esr,emd);
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_sr",5, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_sr",14, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1026,7 +1025,7 @@ class CUP$MiParser$actions {
 		
             RESULT = emd;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_sr",5, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_sr",14, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1043,7 +1042,7 @@ class CUP$MiParser$actions {
 		
             RESULT = new Multiplicacion(emd,mu);
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_md",6, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_md",5, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1060,7 +1059,7 @@ class CUP$MiParser$actions {
 		
             RESULT = new Division(emd,mu) ;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_md",6, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_md",5, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1074,7 +1073,7 @@ class CUP$MiParser$actions {
 		
             RESULT = mu;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_md",6, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("expresion_md",5, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1088,7 +1087,7 @@ class CUP$MiParser$actions {
 		
             RESULT =  new NegacionAritmetica(mu) ;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("menos_unario",9, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("menos_unario",8, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1102,7 +1101,7 @@ class CUP$MiParser$actions {
 		
             RESULT = f ;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("menos_unario",9, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("menos_unario",8, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1217,7 +1216,7 @@ class CUP$MiParser$actions {
 		
             Object valueId = ht.get(id);            
             if(valueId == null) {
-                throw new Exception("No se encuentra el id en tabla de simbolos : " + id);
+                throw new Error("No se encuentra el id en tabla de simbolos : " + id);
             } 
             RESULT = new Identificador(id);
         
@@ -1237,21 +1236,76 @@ class CUP$MiParser$actions {
 		String il = (String)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-5)).value;
 		int leleft = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).left;
 		int leright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).right;
-		ArrayList<Sentencia> le = (ArrayList<Sentencia>)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).value;
+		ArrayList<Expresion> le = (ArrayList<Expresion>)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).value;
 		
             ArrayList<Sentencia> then1 = new ArrayList<>();
-            ArrayList<Sentencia> else1= new ArrayList<>();
-            ArrayList<Sentencia> else2 = new ArrayList<>();
-            ArrayList<Sentencia> then2 = new ArrayList<>();
-            ArrayList<Sentencia> else3 = new ArrayList<>();
+            ArrayList<Sentencia> else1 = new ArrayList<>();
+            Igualdad condicionListaVacia = new Igualdad(new Entero(le.size()), new Entero(0));
 
-            else1.add(new Display(new StringLiteral("El valor debe ser >=1")));
-            else2.add(new Display(new StringLiteral("La lista tiene menos elementos que el indicado")));
-            then1.add(new SiEntonces(new Menor(new Entero(le.size()),new Entero(Integer.parseInt(il))),new Bloque(then2),new Bloque(else2)));
-            then2.add(new SiEntonces(new Igualdad(new Entero(le.size()),new Entero(0)),new Bloque(else3)));
-            else3.add(new Display(new StringLiteral("La lista está vacía")));
-            SiEntonces cuerpo = new SiEntonces(new MayorIgual(new Entero(Integer.parseInt(il)),new Entero(1)),new Bloque(then1),new Bloque(else1));
-            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)),cuerpo.getBloqueSiEntonces().getSentencias());
+            Display listaVacia = new Display(new StringLiteral("La lista está vacía"));
+            then1.add(listaVacia);
+
+
+            ArrayList<Sentencia> then2 = new ArrayList<>();
+            ArrayList<Sentencia> else2 = new ArrayList<>();
+            MenorIgual condicionPivotNegativo = new MenorIgual(new Entero(Integer.parseInt(il)), new Entero(0));
+
+            Display pivotNegativo = new Display(new StringLiteral("El valor debe ser >=1"));
+            then2.add(pivotNegativo);
+
+
+            ArrayList<Sentencia> then3 = new ArrayList<>();
+            ArrayList<Sentencia> else3 = new ArrayList<>();
+            Mayor condicionPivotSize = new Mayor(new Entero(Integer.parseInt(il)), new Entero(le.size()));
+
+            Display pivotSize = new Display(new StringLiteral("La lista tiene menos elementos que el indicado"));
+            then3.add(pivotSize);
+
+
+            for(Expresion elemento : le){
+                MenorIgual cantidadContada = new MenorIgual(new Identificador("aux"), new Entero(Integer.parseInt(il)));
+
+                Igualdad condicionFor = new Igualdad(new Entero(elemento.getValorEntero()%2), new Entero(1));
+                ArrayList<Sentencia> thenFor = new ArrayList<>();   
+                Suma sumaFor = new Suma(new Identificador("suma"), new Entero(elemento.getValorEntero()));
+                Asignacion asignacion = new Asignacion(new Identificador("suma"), sumaFor);
+                thenFor.add(asignacion);
+                Suma sumaAux = new Suma(new Identificador("aux"), new Entero(1));
+                Asignacion asignacionAux = new Asignacion(new Identificador("aux"), sumaAux);
+                thenFor.add(asignacionAux);
+                SiEntonces nodoIfImpar = new SiEntonces(condicionFor, new Bloque(thenFor));
+
+                ArrayList<Sentencia> thenFor2 = new ArrayList<>();
+                thenFor2.add(nodoIfImpar);
+
+                SiEntonces nodoIf = new SiEntonces(cantidadContada, new Bloque(thenFor2));
+                else3.add(nodoIf);
+            }
+
+            Menor condicionUltimo = new Menor(new Identificador("aux"), new Entero(Integer.parseInt(il)));
+            ArrayList<Sentencia> thenUltimo = new ArrayList<>();
+            Display displayUltimo = new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"));
+            Asignacion sumaUltimo = new Asignacion(new Identificador("suma"), new Entero(0));
+            thenUltimo.add(displayUltimo);
+            thenUltimo.add(sumaUltimo);
+            SiEntonces ifUltimo = new SiEntonces(condicionUltimo, new Bloque(thenUltimo));
+            else3.add(ifUltimo);
+
+            SiEntonces if3 = new SiEntonces(condicionPivotSize, new Bloque(then3), new Bloque(else3));
+            ArrayList<Sentencia> lista3 = new ArrayList<>();
+            lista3.add(if3);
+            else2.add(new Bloque(lista3));
+            
+            SiEntonces if2 = new SiEntonces(condicionPivotNegativo, new Bloque(then2), new Bloque(else2));
+            ArrayList<Sentencia> lista2 = new ArrayList<>();
+            lista2.add(if2);
+            else1.add(new Bloque(lista2));
+
+            SiEntonces if1 = new SiEntonces(condicionListaVacia, new Bloque(then1), new Bloque(else1));
+            ArrayList<Sentencia> lista1 = new ArrayList<>();
+            lista1.add(if1);
+
+            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)), lista1);
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("funcion_especial",15, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-7)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -1264,29 +1318,88 @@ class CUP$MiParser$actions {
 		int simleft = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-7)).left;
 		int simright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-7)).right;
 		String sim = (String)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-7)).value;
-		int idleft = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-5)).left;
-		int idright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-5)).right;
-		String id = (String)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-5)).value;
+		int illeft = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-5)).left;
+		int ilright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-5)).right;
+		String il = (String)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-5)).value;
 		int leleft = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).left;
 		int leright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).right;
-		ArrayList<Sentencia> le = (ArrayList<Sentencia>)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).value;
+		ArrayList<Expresion> le = (ArrayList<Expresion>)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).value;
 		
-            List<Sentencia> then1 = new ArrayList<>();
-            List<Sentencia> else1= new ArrayList<>();
-            List<Sentencia> else2 = new ArrayList<>();
-            List<Sentencia> then2 = new ArrayList<>();
+            ArrayList<Sentencia> then1 = new ArrayList<>();
+            ArrayList<Sentencia> else1 = new ArrayList<>();
+            Igualdad condicionListaVacia = new Igualdad(new Entero(le.size()), new Entero(0));
 
-            else1.add(new Display(new StringLiteral("El valor debe ser >=1")));
-            else2.add(new Display(new StringLiteral("La lista tiene menos elementos que el indicado")));
-            then1.add(new SiEntonces(new Menor(new Entero(le.size()),new Entero(Integer.parseInt(il))),new Bloque(then2),new Bloque(else2)));
-            then2.add(new SiEntonces(new Igualdad(new Entero(le.size()),new Entero(0))),new Display(new StringLiteral("La lista está vacía")));
-            Object valueId = ht.get(id);            
-            if(valueId == null) {
-                throw new Exception("No se encuentra el id en tabla de simbolos : " + id);
+            Display listaVacia = new Display(new StringLiteral("La lista está vacía"));
+            then1.add(listaVacia);
+
+
+            ArrayList<Sentencia> then2 = new ArrayList<>();
+            ArrayList<Sentencia> else2 = new ArrayList<>();
+            MenorIgual condicionPivotNegativo = new MenorIgual(new Entero(Integer.parseInt(il)), new Entero(0));
+
+            Display pivotNegativo = new Display(new StringLiteral("El valor debe ser >=1"));
+            then2.add(pivotNegativo);
+
+
+            ArrayList<Sentencia> then3 = new ArrayList<>();
+            ArrayList<Sentencia> else3 = new ArrayList<>();
+            Mayor condicionPivotSize = new Mayor(new Entero(Integer.parseInt(il)), new Entero(le.size()));
+
+            Display pivotSize = new Display(new StringLiteral("La lista tiene menos elementos que el indicado"));
+            then3.add(pivotSize);
+
+
+            for(Expresion elemento : le){
+                MenorIgual cantidadContada = new MenorIgual(new Identificador("aux"), new Entero(Integer.parseInt(il)));
+
+                Igualdad condicionFor = new Igualdad(new Entero(elemento.getValorEntero()%2), new Entero(1));
+                ArrayList<Sentencia> thenFor = new ArrayList<>();   
+                Suma sumaFor = new Suma(new Identificador("suma"), new Entero(elemento.getValorEntero()));
+                Asignacion asignacion = new Asignacion(new Identificador("suma"), sumaFor);
+                thenFor.add(asignacion);
+                Suma sumaAux = new Suma(new Identificador("aux"), new Entero(1));
+                Asignacion asignacionAux = new Asignacion(new Identificador("aux"), sumaAux);
+                thenFor.add(asignacionAux);
+                SiEntonces nodoIfImpar = new SiEntonces(condicionFor, new Bloque(thenFor));
+
+                ArrayList<Sentencia> thenFor2 = new ArrayList<>();
+                thenFor2.add(nodoIfImpar);
+
+                SiEntonces nodoIf = new SiEntonces(cantidadContada, new Bloque(thenFor2));
+                else3.add(nodoIf);
             }
-            Identificador ident = new Identificador(id)  
-            ArrayList<Sentencia> cuerpo = new SiEntonces(new MayorIgual(new Identificador(id),new Entero(1)),new Bloque(then1),new Bloque(else1));
-            RESULT = new SumaImpar(new Identificador(ident)),cuerpo.getBloqueSiEntonces().getSentencias().toArrayList());
+
+            Menor condicionUltimo = new Menor(new Identificador("aux"), new Entero(Integer.parseInt(il)));
+            ArrayList<Sentencia> thenUltimo = new ArrayList<>();
+            Display displayUltimo = new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"));
+            Asignacion sumaUltimo = new Asignacion(new Identificador("suma"), new Entero(0));
+            thenUltimo.add(displayUltimo);
+            thenUltimo.add(sumaUltimo);
+            SiEntonces ifUltimo = new SiEntonces(condicionUltimo, new Bloque(thenUltimo));
+            else3.add(ifUltimo);
+
+            SiEntonces if3 = new SiEntonces(condicionPivotSize, new Bloque(then3), new Bloque(else3));
+            ArrayList<Sentencia> lista3 = new ArrayList<>();
+            lista3.add(if3);
+            else2.add(new Bloque(lista3));
+            
+            SiEntonces if2 = new SiEntonces(condicionPivotNegativo, new Bloque(then2), new Bloque(else2));
+            ArrayList<Sentencia> lista2 = new ArrayList<>();
+            lista2.add(if2);
+            else1.add(new Bloque(lista2));
+
+            SiEntonces if1 = new SiEntonces(condicionListaVacia, new Bloque(then1), new Bloque(else1));
+            ArrayList<Sentencia> lista1 = new ArrayList<>();
+            lista1.add(if1);
+
+            Object valueId = ht.get(il);            
+            if(valueId == null) {
+                throw new Exception("No se encuentra el id en tabla de simbolos : " + il);
+            }
+            if(valueId != Tipo.INTEGER){
+                throw new Exception("El identificador no es una variable de tipo entero.");
+            }
+            RESULT = new SumaImpar(new Identificador(il), lista1);
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("funcion_especial",15, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-7)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -1295,10 +1408,10 @@ class CUP$MiParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 51: // lista_expresiones ::= lista_expresiones COMA expresion_sr 
             {
-              ArrayList<Sentencia> RESULT =null;
+              ArrayList<Expresion> RESULT =null;
 		int leleft = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).left;
 		int leright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).right;
-		ArrayList<Sentencia> le = (ArrayList<Sentencia>)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).value;
+		ArrayList<Expresion> le = (ArrayList<Expresion>)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)).value;
 		int esrleft = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).left;
 		int esrright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		Expresion esr = (Expresion)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
@@ -1306,23 +1419,23 @@ class CUP$MiParser$actions {
             le.add(esr);
             RESULT = le;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("lista_expresiones",14, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("lista_expresiones",13, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 52: // lista_expresiones ::= expresion_sr 
             {
-              ArrayList<Sentencia> RESULT =null;
+              ArrayList<Expresion> RESULT =null;
 		int esrleft = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).left;
 		int esrright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		Expresion esr = (Expresion)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
-            ArrayList<Sentencia> expresiones = new ArrayList<>();
+            ArrayList<Expresion> expresiones = new ArrayList<>();
             expresiones.add(esr);
             RESULT = expresiones;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("lista_expresiones",14, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("lista_expresiones",13, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1396,7 +1509,7 @@ class CUP$MiParser$actions {
 		
             RESULT = ii;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",10, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",9, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1410,7 +1523,7 @@ class CUP$MiParser$actions {
 		
             RESULT = ifl;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",10, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",9, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1424,7 +1537,7 @@ class CUP$MiParser$actions {
 		
             RESULT = ib;
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",10, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",9, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1435,7 +1548,7 @@ class CUP$MiParser$actions {
 		
             RESULT = new Input();
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_int",11, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_int",10, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1446,7 +1559,7 @@ class CUP$MiParser$actions {
 		
             RESULT = new Input();
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_float",12, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_float",11, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 
@@ -1457,7 +1570,7 @@ class CUP$MiParser$actions {
 		
             RESULT = new Input();
         
-              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_bool",13, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
+              CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input_bool",12, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
           return CUP$MiParser$result;
 

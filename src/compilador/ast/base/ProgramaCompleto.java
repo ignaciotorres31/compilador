@@ -5,8 +5,6 @@
  */
 package compilador.ast.base;
 
-import compilador.ast.expresiones.Expresion;
-
 /**
  *
  * @author Nacho

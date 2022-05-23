@@ -8,7 +8,7 @@ import compilador.ast.expresiones.Tipo;
 
 /**
  *
- * @author facundo
+ * @author Nacho
  */
 public class Entero extends Literal {
     

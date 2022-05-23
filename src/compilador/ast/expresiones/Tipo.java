@@ -6,7 +6,7 @@ package compilador.ast.expresiones;
 
 /**
  *
- * @author facundo
+ * @author Nacho
  */
 public enum Tipo {
     BOOLEAN,

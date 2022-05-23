@@ -9,7 +9,7 @@ import compilador.ast.expresiones.Tipo;
 
 /**
  *
- * @author facundo
+ * @author Nacho
  */
 public class Flotante extends Literal {
     private final Float valor;

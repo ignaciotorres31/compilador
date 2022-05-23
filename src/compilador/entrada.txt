@@ -1,6 +1,6 @@
 DECLARE.SECTION
-INTEGER: a1,a2;
-Boolean: b1 , b2;
+INTEGER: a1,a2,num1;
+Boolean: b1 , b2,condicion1;
 float: f1,f2;
 ENDDECLARE.SECTION
 

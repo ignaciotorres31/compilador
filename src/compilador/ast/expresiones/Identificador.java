@@ -8,7 +8,7 @@ import compilador.ast.expresiones.factor.Constante;
 
 /**
  *
- * @author facundo
+ * @author Nacho
  */
 public class Identificador extends Constante {
     
