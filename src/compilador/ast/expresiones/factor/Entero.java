@@ -17,10 +17,11 @@ public class Entero extends Literal {
     public Entero(Integer valor) {
         super(Tipo.INTEGER);
         this.valor = valor;
+        setNombre("Integer");
     }
 
     public Integer getValor() {
-        return valor;
+        return this.valor;
     }
     
     public void setValor(Integer valor) {
@@ -32,4 +33,8 @@ public class Entero extends Literal {
         return valor.toString();
     }
 
+    @Override
+    public Integer getValorEntero() {
+        return this.valor;
+    }
 }

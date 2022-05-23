@@ -17,6 +17,7 @@ public class StringLiteral extends Literal{
     public StringLiteral(String valor) {
         super(Tipo.STRING);
         this.valor = valor;
+        setNombre("String");
     }
 
     public String getValor() {

@@ -54,8 +54,9 @@ terminal String INTEGER_LITERAL;
 terminal String FLOAT_LITERAL;
 
 nonterminal Sentencia sentencia_while, sentencia_if,display;
-nonterminal Expresion comparacion,expresion_or,expresion_sr, expresion_md,expresion_and,expresion_not,menos_unario,input,input_int, input_float, input_bool;
-nonterminal ArrayList<Sentencia> lista_expresiones;
+nonterminal Expresion comparacion,expresion_or, expresion_md,expresion_and,expresion_not,menos_unario,input,input_int, input_float, input_bool;
+nonterminal ArrayList<Expresion> lista_expresiones;
+nonterminal Expresion expresion_sr;
 nonterminal Expresion funcion_especial;
 nonterminal Asignacion sentencia_asignacion;
 nonterminal Sentencia sentencia_display;
@@ -300,44 +301,158 @@ constante::= BOOLEAN_LITERAL:bl{:
         IDENTIFICADOR:id{:
             Object valueId = ht.get(id);            
             if(valueId == null) {
-                throw new Exception("No se encuentra el id en tabla de simbolos : " + id);
+                throw new Error("No se encuentra el id en tabla de simbolos : " + id);
             } 
             RESULT = new Identificador(id);
         :};
 
 funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORCHETESA lista_expresiones:le CORCHETESC PARENTESISC{:
             ArrayList<Sentencia> then1 = new ArrayList<>();
-            ArrayList<Sentencia> else1= new ArrayList<>();
-            ArrayList<Sentencia> else2 = new ArrayList<>();
-            ArrayList<Sentencia> then2 = new ArrayList<>();
-            ArrayList<Sentencia> else3 = new ArrayList<>();
+            ArrayList<Sentencia> else1 = new ArrayList<>();
+            Igualdad condicionListaVacia = new Igualdad(new Entero(le.size()), new Entero(0));
 
-            else1.add(new Display(new StringLiteral("El valor debe ser >=1")));
-            else2.add(new Display(new StringLiteral("La lista tiene menos elementos que el indicado")));
-            then1.add(new SiEntonces(new Menor(new Entero(le.size()),new Entero(Integer.parseInt(il))),new Bloque(then2),new Bloque(else2)));
-            then2.add(new SiEntonces(new Igualdad(new Entero(le.size()),new Entero(0)),new Bloque(else3)));
-            else3.add(new Display(new StringLiteral("La lista está vacía")));
-            SiEntonces cuerpo = new SiEntonces(new MayorIgual(new Entero(Integer.parseInt(il)),new Entero(1)),new Bloque(then1),new Bloque(else1));
-            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)),cuerpo.getBloqueSiEntonces().getSentencias());
+            Display listaVacia = new Display(new StringLiteral("La lista está vacía"));
+            then1.add(listaVacia);
+
+
+            ArrayList<Sentencia> then2 = new ArrayList<>();
+            ArrayList<Sentencia> else2 = new ArrayList<>();
+            MenorIgual condicionPivotNegativo = new MenorIgual(new Entero(Integer.parseInt(il)), new Entero(0));
+
+            Display pivotNegativo = new Display(new StringLiteral("El valor debe ser >=1"));
+            then2.add(pivotNegativo);
+
+
+            ArrayList<Sentencia> then3 = new ArrayList<>();
+            ArrayList<Sentencia> else3 = new ArrayList<>();
+            Mayor condicionPivotSize = new Mayor(new Entero(Integer.parseInt(il)), new Entero(le.size()));
+
+            Display pivotSize = new Display(new StringLiteral("La lista tiene menos elementos que el indicado"));
+            then3.add(pivotSize);
+
+
+            for(Expresion elemento : le){
+                MenorIgual cantidadContada = new MenorIgual(new Identificador("aux"), new Entero(Integer.parseInt(il)));
+
+                Igualdad condicionFor = new Igualdad(new Entero(elemento.getValorEntero()%2), new Entero(1));
+                ArrayList<Sentencia> thenFor = new ArrayList<>();   
+                Suma sumaFor = new Suma(new Identificador("suma"), new Entero(elemento.getValorEntero()));
+                Asignacion asignacion = new Asignacion(new Identificador("suma"), sumaFor);
+                thenFor.add(asignacion);
+                Suma sumaAux = new Suma(new Identificador("aux"), new Entero(1));
+                Asignacion asignacionAux = new Asignacion(new Identificador("aux"), sumaAux);
+                thenFor.add(asignacionAux);
+                SiEntonces nodoIfImpar = new SiEntonces(condicionFor, new Bloque(thenFor));
+
+                ArrayList<Sentencia> thenFor2 = new ArrayList<>();
+                thenFor2.add(nodoIfImpar);
+
+                SiEntonces nodoIf = new SiEntonces(cantidadContada, new Bloque(thenFor2));
+                else3.add(nodoIf);
+            }
+
+            Menor condicionUltimo = new Menor(new Identificador("aux"), new Entero(Integer.parseInt(il)));
+            ArrayList<Sentencia> thenUltimo = new ArrayList<>();
+            Display displayUltimo = new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"));
+            Asignacion sumaUltimo = new Asignacion(new Identificador("suma"), new Entero(0));
+            thenUltimo.add(displayUltimo);
+            thenUltimo.add(sumaUltimo);
+            SiEntonces ifUltimo = new SiEntonces(condicionUltimo, new Bloque(thenUltimo));
+            else3.add(ifUltimo);
+
+            SiEntonces if3 = new SiEntonces(condicionPivotSize, new Bloque(then3), new Bloque(else3));
+            ArrayList<Sentencia> lista3 = new ArrayList<>();
+            lista3.add(if3);
+            else2.add(new Bloque(lista3));
+            
+            SiEntonces if2 = new SiEntonces(condicionPivotNegativo, new Bloque(then2), new Bloque(else2));
+            ArrayList<Sentencia> lista2 = new ArrayList<>();
+            lista2.add(if2);
+            else1.add(new Bloque(lista2));
+
+            SiEntonces if1 = new SiEntonces(condicionListaVacia, new Bloque(then1), new Bloque(else1));
+            ArrayList<Sentencia> lista1 = new ArrayList<>();
+            lista1.add(if1);
+
+            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)), lista1);
         :}
         |        
-        SUMAIMPAR:sim PARENTESISA IDENTIFICADOR:id PUNTOCOMA CORCHETESA lista_expresiones:le CORCHETESC PARENTESISC{:
-            List<Sentencia> then1 = new ArrayList<>();
-            List<Sentencia> else1= new ArrayList<>();
-            List<Sentencia> else2 = new ArrayList<>();
-            List<Sentencia> then2 = new ArrayList<>();
+        SUMAIMPAR:sim PARENTESISA IDENTIFICADOR:il PUNTOCOMA CORCHETESA lista_expresiones:le CORCHETESC PARENTESISC{:
+            ArrayList<Sentencia> then1 = new ArrayList<>();
+            ArrayList<Sentencia> else1 = new ArrayList<>();
+            Igualdad condicionListaVacia = new Igualdad(new Entero(le.size()), new Entero(0));
 
-            else1.add(new Display(new StringLiteral("El valor debe ser >=1")));
-            else2.add(new Display(new StringLiteral("La lista tiene menos elementos que el indicado")));
-            then1.add(new SiEntonces(new Menor(new Entero(le.size()),new Entero(Integer.parseInt(il))),new Bloque(then2),new Bloque(else2)));
-            then2.add(new SiEntonces(new Igualdad(new Entero(le.size()),new Entero(0))),new Display(new StringLiteral("La lista está vacía")));
-            Object valueId = ht.get(id);            
-            if(valueId == null) {
-                throw new Exception("No se encuentra el id en tabla de simbolos : " + id);
+            Display listaVacia = new Display(new StringLiteral("La lista está vacía"));
+            then1.add(listaVacia);
+
+
+            ArrayList<Sentencia> then2 = new ArrayList<>();
+            ArrayList<Sentencia> else2 = new ArrayList<>();
+            MenorIgual condicionPivotNegativo = new MenorIgual(new Entero(Integer.parseInt(il)), new Entero(0));
+
+            Display pivotNegativo = new Display(new StringLiteral("El valor debe ser >=1"));
+            then2.add(pivotNegativo);
+
+
+            ArrayList<Sentencia> then3 = new ArrayList<>();
+            ArrayList<Sentencia> else3 = new ArrayList<>();
+            Mayor condicionPivotSize = new Mayor(new Entero(Integer.parseInt(il)), new Entero(le.size()));
+
+            Display pivotSize = new Display(new StringLiteral("La lista tiene menos elementos que el indicado"));
+            then3.add(pivotSize);
+
+
+            for(Expresion elemento : le){
+                MenorIgual cantidadContada = new MenorIgual(new Identificador("aux"), new Entero(Integer.parseInt(il)));
+
+                Igualdad condicionFor = new Igualdad(new Entero(elemento.getValorEntero()%2), new Entero(1));
+                ArrayList<Sentencia> thenFor = new ArrayList<>();   
+                Suma sumaFor = new Suma(new Identificador("suma"), new Entero(elemento.getValorEntero()));
+                Asignacion asignacion = new Asignacion(new Identificador("suma"), sumaFor);
+                thenFor.add(asignacion);
+                Suma sumaAux = new Suma(new Identificador("aux"), new Entero(1));
+                Asignacion asignacionAux = new Asignacion(new Identificador("aux"), sumaAux);
+                thenFor.add(asignacionAux);
+                SiEntonces nodoIfImpar = new SiEntonces(condicionFor, new Bloque(thenFor));
+
+                ArrayList<Sentencia> thenFor2 = new ArrayList<>();
+                thenFor2.add(nodoIfImpar);
+
+                SiEntonces nodoIf = new SiEntonces(cantidadContada, new Bloque(thenFor2));
+                else3.add(nodoIf);
             }
-            Identificador ident = new Identificador(id)  
-            ArrayList<Sentencia> cuerpo = new SiEntonces(new MayorIgual(new Identificador(id),new Entero(1)),new Bloque(then1),new Bloque(else1));
-            RESULT = new SumaImpar(new Identificador(ident)),cuerpo.getBloqueSiEntonces().getSentencias().toArrayList());
+
+            Menor condicionUltimo = new Menor(new Identificador("aux"), new Entero(Integer.parseInt(il)));
+            ArrayList<Sentencia> thenUltimo = new ArrayList<>();
+            Display displayUltimo = new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"));
+            Asignacion sumaUltimo = new Asignacion(new Identificador("suma"), new Entero(0));
+            thenUltimo.add(displayUltimo);
+            thenUltimo.add(sumaUltimo);
+            SiEntonces ifUltimo = new SiEntonces(condicionUltimo, new Bloque(thenUltimo));
+            else3.add(ifUltimo);
+
+            SiEntonces if3 = new SiEntonces(condicionPivotSize, new Bloque(then3), new Bloque(else3));
+            ArrayList<Sentencia> lista3 = new ArrayList<>();
+            lista3.add(if3);
+            else2.add(new Bloque(lista3));
+            
+            SiEntonces if2 = new SiEntonces(condicionPivotNegativo, new Bloque(then2), new Bloque(else2));
+            ArrayList<Sentencia> lista2 = new ArrayList<>();
+            lista2.add(if2);
+            else1.add(new Bloque(lista2));
+
+            SiEntonces if1 = new SiEntonces(condicionListaVacia, new Bloque(then1), new Bloque(else1));
+            ArrayList<Sentencia> lista1 = new ArrayList<>();
+            lista1.add(if1);
+
+            Object valueId = ht.get(il);            
+            if(valueId == null) {
+                throw new Exception("No se encuentra el id en tabla de simbolos : " + il);
+            }
+            if(valueId != Tipo.INTEGER){
+                throw new Exception("El identificador no es una variable de tipo entero.");
+            }
+            RESULT = new SumaImpar(new Identificador(il), lista1);
         :};
 
 lista_expresiones ::= lista_expresiones:le COMA expresion_sr:esr{:
@@ -346,7 +461,7 @@ lista_expresiones ::= lista_expresiones:le COMA expresion_sr:esr{:
         :}
         |
         expresion_sr:esr{:
-            ArrayList<Sentencia> expresiones = new ArrayList<>();
+            ArrayList<Expresion> expresiones = new ArrayList<>();
             expresiones.add(esr);
             RESULT = expresiones;
         :};

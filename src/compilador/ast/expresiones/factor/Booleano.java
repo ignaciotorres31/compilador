@@ -16,6 +16,7 @@ public class Booleano extends Literal {
     public Booleano(Boolean valor) {
         super(Tipo.BOOLEAN);
         this.valor = valor;
+        setNombre("Boolean");
     }
 
     public Boolean getValor() {
