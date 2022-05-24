@@ -2,6 +2,7 @@ package compilador.ast.expresiones.binarias;
 
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.Tipo;
+import compilador.llvm.CodeGeneratorHelper;
 
 public abstract class OperacionBinaria extends Expresion {
     
@@ -49,5 +50,19 @@ public abstract class OperacionBinaria extends Expresion {
 
     public Expresion getDerecha() {
         return derecha;
+    }
+    
+    public abstract String get_llvm_op_code();
+    
+    @Override
+    public String generarCodigo(){
+        StringBuilder resultado = new StringBuilder();        
+        resultado.append(this.getIzquierda().generarCodigo());
+        resultado.append(this.getDerecha().generarCodigo());
+        this.setIr_ref(CodeGeneratorHelper.getNewPointer());
+        resultado.append(String.format("%1$s = %2$s i32 %3$s, %4$s\n", this.getIr_ref(), 
+                this.get_llvm_op_code(), this.getIzquierda().getIr_ref(), 
+                this.getDerecha().getIr_ref()));
+        return resultado.toString();
     }
 }
