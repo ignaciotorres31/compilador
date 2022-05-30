@@ -42,7 +42,7 @@ parser code
     public NombreIncremental ni; 
     public String incrementar() {
         ni = new NombreIncremental();
-        return ni.increment().toString();
+        return ni.incrementar().toString();
     }
 
 :};
@@ -59,7 +59,7 @@ terminal String INTEGER_LITERAL;
 terminal String FLOAT_LITERAL;
 
 nonterminal Sentencia sentencia_while, sentencia_if,display;
-nonterminal Expresion comparacion,expresion_or, expresion_md,expresion_and,expresion_not,menos_unario,input,input_int, input_float, input_bool;
+nonterminal Expresion comparacion,expresion_or, expresion_md,expresion_and,expresion_not,menos_unario,input;
 nonterminal ArrayList<Expresion> lista_expresiones;
 nonterminal Expresion expresion_sr;
 nonterminal Expresion funcion_especial;
@@ -337,16 +337,35 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
 
 
             for(Expresion elemento : le){
-                MenorIgual cantidadContada = new MenorIgual(variablesFuncionEspecial("var",Tipo.INTEGER), new Entero(Integer.parseInt(il)));
-                ht.put("aux","INTEGER");
-
-                Igualdad condicionFor = new Igualdad(new Entero(elemento.getValorEntero()%2), new Entero(1));
+                MenorIgual cantidadContada = new MenorIgual(new Identificador("_aux"+ni.incrementar()), new Entero(Integer.parseInt(il)));
+                
+                Object valueId = ht.get(elemento);            
+                if(valueId == null) {
+                    throw new Exception("No se encuentra el id en tabla de simbolos : " + elemento);
+                }
+                if(valueId != Tipo.INTEGER){
+                    throw new Exception("El identificador no es una variable de tipo entero.");
+                }
+                
+                Asignacion asignacionVariableWhile = new Asignacion(new Identificador("_temp"+ni.incrementar()),elemento); 
+                Igualdad condicionIfWhile = new Igualdad(asignacionVariableWhile.getExpresion(),new Entero(1));
+                ArrayList<Sentencia> thenIfWhile = new ArrayList<>();
+                Display displayBool = new Display(new Booleano(true));
+                thenIfWhile.add(displayBool);
+                Asignacion asignacionWhile = new Asignacion(new Identificador("_temp"+ni.incrementar()),new Resta(asignacionVariableWhile.getExpresion(),new Entero(2)));
+                ArrayList<Sentencia> thenWhile = new ArrayList<>();
+                thenWhile.add(asignacionWhile);
+                Mayor condicionWhile = new Mayor(asignacionVariableWhile.getExpresion(),new Entero(1));
+                SiEntonces ifWhileImpar = new SiEntonces(condicionIfWhile, new Bloque(thenIfWhile));
+                Mientras whileInterno = new Mientras(condicionWhile,new Bloque(thenWhile)); 
+                
+                Igualdad condicionFor = new Igualdad(displayBool.getDisplay(), new Booleano(true));
                 ArrayList<Sentencia> thenFor = new ArrayList<>();   
-                Suma sumaFor = new Suma(new Identificador("suma"), new Entero(elemento.getValorEntero()));
-                Asignacion asignacion = new Asignacion(new Identificador("suma"), sumaFor);
+                Suma sumaFor = new Suma(new Identificador("_suma"+ni.incrementar()), new Entero(elemento.getValorEntero()));
+                Asignacion asignacion = new Asignacion(new Identificador("_suma"+ni.incrementar()), sumaFor);
                 thenFor.add(asignacion);
-                Suma sumaAux = new Suma(new Identificador("aux"), new Entero(1));
-                Asignacion asignacionAux = new Asignacion(new Identificador("aux"), sumaAux);
+                Suma sumaAux = new Suma(new Identificador("_aux"+ni.incrementar()), new Entero(1));
+                Asignacion asignacionAux = new Asignacion(new Identificador("_aux"+ni.incrementar()), sumaAux);
                 thenFor.add(asignacionAux);
                 SiEntonces nodoIfImpar = new SiEntonces(condicionFor, new Bloque(thenFor));
 
@@ -357,10 +376,10 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
                 else3.add(nodoIf);
             }
 
-            Menor condicionUltimo = new Menor(new Identificador("aux"), new Entero(Integer.parseInt(il)));
+            Menor condicionUltimo = new Menor(new Identificador("_aux"+ni.incrementar()), new Entero(Integer.parseInt(il)));
             ArrayList<Sentencia> thenUltimo = new ArrayList<>();
             Display displayUltimo = new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"));
-            Asignacion sumaUltimo = new Asignacion(new Identificador("suma"), new Entero(0));
+            Asignacion sumaUltimo = new Asignacion(new Identificador("_suma"+ni.incrementar()), new Entero(0));
             thenUltimo.add(displayUltimo);
             thenUltimo.add(sumaUltimo);
             SiEntonces ifUltimo = new SiEntonces(condicionUltimo, new Bloque(thenUltimo));
@@ -409,15 +428,34 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
 
 
             for(Expresion elemento : le){
-                MenorIgual cantidadContada = new MenorIgual(new Identificador("aux"), new Entero(Integer.parseInt(il)));
-
-                Igualdad condicionFor = new Igualdad(new Entero(elemento.getValorEntero()%2), new Entero(1));
+                MenorIgual cantidadContada = new MenorIgual(new Identificador("_aux"+ni.incrementar()), new Entero(Integer.parseInt(il)));                
+                Object valueId = ht.get(elemento);            
+                if(valueId == null) {
+                    throw new Exception("No se encuentra el id en tabla de simbolos : " + elemento);
+                }
+                if(valueId != Tipo.INTEGER){
+                    throw new Exception("El identificador no es una variable de tipo entero.");
+                }
+                
+                Asignacion asignacionVariableWhile = new Asignacion(new Identificador("_temp"+ni.incrementar()),elemento); 
+                Igualdad condicionIfWhile = new Igualdad(asignacionVariableWhile.getExpresion(),new Entero(1));
+                ArrayList<Sentencia> thenIfWhile = new ArrayList<>();
+                Display displayBool = new Display(new Booleano(true));
+                thenIfWhile.add(displayBool);
+                Asignacion asignacionWhile = new Asignacion(new Identificador("_temp"+ni.incrementar()),new Resta(asignacionVariableWhile.getExpresion(),new Entero(2)));
+                ArrayList<Sentencia> thenWhile = new ArrayList<>();
+                thenWhile.add(asignacionWhile);
+                Mayor condicionWhile = new Mayor(asignacionVariableWhile.getExpresion(),new Entero(1));
+                SiEntonces ifWhileImpar = new SiEntonces(condicionIfWhile, new Bloque(thenIfWhile));
+                Mientras whileInterno = new Mientras(condicionWhile,new Bloque(thenWhile)); 
+                
+                Igualdad condicionFor = new Igualdad(displayBool.getDisplay(), new Booleano(true));
                 ArrayList<Sentencia> thenFor = new ArrayList<>();   
-                Suma sumaFor = new Suma(new Identificador("suma"), new Entero(elemento.getValorEntero()));
-                Asignacion asignacion = new Asignacion(new Identificador("suma"), sumaFor);
+                Suma sumaFor = new Suma(new Identificador("_suma"+ni.incrementar()), new Entero(elemento.getValorEntero()));
+                Asignacion asignacion = new Asignacion(new Identificador("_suma"+ni.incrementar()), sumaFor);
                 thenFor.add(asignacion);
-                Suma sumaAux = new Suma(new Identificador("aux"), new Entero(1));
-                Asignacion asignacionAux = new Asignacion(new Identificador("aux"), sumaAux);
+                Suma sumaAux = new Suma(new Identificador("_aux"+ni.incrementar()), new Entero(1));
+                Asignacion asignacionAux = new Asignacion(new Identificador("_aux"+ni.incrementar()), sumaAux);
                 thenFor.add(asignacionAux);
                 SiEntonces nodoIfImpar = new SiEntonces(condicionFor, new Bloque(thenFor));
 
@@ -428,10 +466,10 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
                 else3.add(nodoIf);
             }
 
-            Menor condicionUltimo = new Menor(new Identificador("aux"), new Entero(Integer.parseInt(il)));
+            Menor condicionUltimo = new Menor(new Identificador("_aux"+ni.incrementar()), new Entero(Integer.parseInt(il)));
             ArrayList<Sentencia> thenUltimo = new ArrayList<>();
             Display displayUltimo = new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"));
-            Asignacion sumaUltimo = new Asignacion(new Identificador("suma"), new Entero(0));
+            Asignacion sumaUltimo = new Asignacion(new Identificador("_suma"+ni.incrementar()), new Entero(0));
             thenUltimo.add(displayUltimo);
             thenUltimo.add(sumaUltimo);
             SiEntonces ifUltimo = new SiEntonces(condicionUltimo, new Bloque(thenUltimo));
@@ -459,6 +497,14 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
                 throw new Exception("El identificador no es una variable de tipo entero.");
             }
             RESULT = new SumaImpar(new Identificador(il), lista1);
+        :}
+        |
+        SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORCHETESA CORCHETESC PARENTESISC{:
+            RESULT = new Display(new StringLiteral("La lista esta vacia"));
+        :}
+        |        
+        SUMAIMPAR:sim PARENTESISA IDENTIFICADOR:il PUNTOCOMA CORCHETESA CORCHETESC PARENTESISC{:
+            RESULT = new Display(new StringLiteral("La lista esta vacia"));
         :};
 
 lista_expresiones ::= lista_expresiones:le COMA expresion_sr:esr{:
