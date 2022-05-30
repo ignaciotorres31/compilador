@@ -39,16 +39,9 @@ parser code
         +s.value+"' . Simbolo n° "+s.sym+ " no reconocido." );
     }
 
-    public Identificador variablesFuncionEspecial(String var, Tipo tipo){
-        Entero num = new Entero(1);
-        Identificador variable = new Identificador(new StringLiteral("_") + new StringLiteral(var) + new StringLiteral("_") + new StringLiteral(num.toString());
-        num.setValor(new Suma(num,new Entero(1)));
-        return variable;
-    }
-
     public Integer incrementar(Integer numero) {
         NombreIncremental nombreIncremental = new NombreIncremental(numero);
-        return nombreIncremental.increment();
+        return nombreIncremental.incrementar();
     }
 
 :};

@@ -7,7 +7,6 @@ public class Bloque extends Sentencia {
     private ArrayList<Sentencia> sentencias;
 
     public Bloque(ArrayList<Sentencia> sentencias) {
-        super("Bloque");
         this.sentencias = sentencias;
     }
 

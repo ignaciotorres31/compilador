@@ -24,7 +24,7 @@ public class NombreIncremental {
         this.numero = numero;
     }
     
-    public Integer increment(){
+    public Integer incrementar(){
         return this.numero += 1;
     }
     
