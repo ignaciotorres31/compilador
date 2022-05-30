@@ -46,6 +46,11 @@ parser code
         return variable;
     }
 
+    public Integer incrementar(Integer numero) {
+        NombreIncremental nombreIncremental = new NombreIncremental(numero);
+        return nombreIncremental.increment();
+    }
+
 :};
 
 
