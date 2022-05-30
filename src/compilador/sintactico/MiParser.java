@@ -1284,8 +1284,8 @@ class CUP$MiParser$actions {
                 Asignacion asignacionVariableWhile = new Asignacion(new Identificador("_temp"+ni.incrementar()),elemento); 
                 Igualdad condicionIfWhile = new Igualdad(asignacionVariableWhile.getExpresion(),new Entero(1));
                 ArrayList<Sentencia> thenIfWhile = new ArrayList<>();
-                Booleano boolIf = new Booleano(true);
-                thenIfWhile.add(boolIf);
+                Display displayBool = new Display(new Booleano(true));
+                thenIfWhile.add(displayBool);
                 Asignacion asignacionWhile = new Asignacion(new Identificador("_temp"+ni.incrementar()),new Resta(asignacionVariableWhile.getExpresion(),new Entero(2)));
                 ArrayList<Sentencia> thenWhile = new ArrayList<>();
                 thenWhile.add(asignacionWhile);
@@ -1293,7 +1293,7 @@ class CUP$MiParser$actions {
                 SiEntonces ifWhileImpar = new SiEntonces(condicionIfWhile, new Bloque(thenIfWhile));
                 Mientras whileInterno = new Mientras(condicionWhile,new Bloque(thenWhile)); 
                 
-                Igualdad condicionFor = new Igualdad(new Entero(elemento.getValorEntero()%2), new Entero(1));
+                Igualdad condicionFor = new Igualdad(displayBool.getDisplay(), new Booleano(true));
                 ArrayList<Sentencia> thenFor = new ArrayList<>();   
                 Suma sumaFor = new Suma(new Identificador("_suma"+ni.incrementar()), new Entero(elemento.getValorEntero()));
                 Asignacion asignacion = new Asignacion(new Identificador("_suma"+ni.incrementar()), sumaFor);
