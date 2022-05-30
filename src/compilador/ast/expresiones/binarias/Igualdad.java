@@ -1,7 +1,7 @@
 package compilador.ast.expresiones.binarias;
 
 import compilador.ast.expresiones.Expresion;
-import compilador.ast.expresiones.Tipo;
+import compilador.ast.base.Tipo;
 
 
 public class Igualdad extends Relacion {
@@ -27,5 +27,10 @@ public class Igualdad extends Relacion {
     @Override
     protected String getNombreOperacion() {
         return "Igualdad";
+    }
+
+    @Override
+    public String get_llvm_op_code() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

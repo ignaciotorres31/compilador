@@ -5,7 +5,7 @@
 package compilador.ast.expresiones.factor;
 
 import compilador.ast.expresiones.Expresion;
-import compilador.ast.expresiones.Tipo;
+import compilador.ast.base.Tipo;
 
 /**
  *

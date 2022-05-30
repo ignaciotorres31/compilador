@@ -1,7 +1,7 @@
 package compilador.ast.sentencias;
         
 import compilador.ast.expresiones.Identificador;
-import compilador.ast.expresiones.Tipo;
+import compilador.ast.base.Tipo;
 
 public class Declaracion extends Sentencia {
     private Identificador ident;
@@ -36,5 +36,10 @@ public class Declaracion extends Sentencia {
     @Override
     public String getEtiqueta() {
         return getClass().getSimpleName();
+    }
+
+    @Override
+    public String generarCodigo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

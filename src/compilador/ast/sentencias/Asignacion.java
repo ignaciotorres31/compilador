@@ -40,4 +40,9 @@ public class Asignacion extends Sentencia {
         return grafico;
     }
 
+    @Override
+    public String generarCodigo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

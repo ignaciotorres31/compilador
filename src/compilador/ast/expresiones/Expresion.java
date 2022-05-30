@@ -4,6 +4,7 @@
  */
 package compilador.ast.expresiones;
 
+import compilador.ast.base.Tipo;
 import compilador.ast.base.Nodo;
 
 /**

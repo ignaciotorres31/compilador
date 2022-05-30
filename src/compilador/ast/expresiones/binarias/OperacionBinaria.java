@@ -1,7 +1,7 @@
 package compilador.ast.expresiones.binarias;
 
 import compilador.ast.expresiones.Expresion;
-import compilador.ast.expresiones.Tipo;
+import compilador.ast.base.Tipo;
 import compilador.llvm.CodeGeneratorHelper;
 
 public abstract class OperacionBinaria extends Expresion {

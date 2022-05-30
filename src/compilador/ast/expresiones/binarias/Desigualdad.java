@@ -28,4 +28,9 @@ public class Desigualdad extends Relacion {
     protected String getNombreOperacion() {
         return "Desigualdad"; 
     }
+
+    @Override
+    public String get_llvm_op_code() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

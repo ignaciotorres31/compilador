@@ -5,7 +5,7 @@
 package compilador.ast.expresiones.unarias;
 
 import compilador.ast.expresiones.Expresion;
-import compilador.ast.expresiones.Tipo;
+import compilador.ast.base.Tipo;
 import compilador.ast.expresiones.factor.Entero;
 import compilador.ast.expresiones.factor.Flotante;
 import compilador.ast.expresiones.factor.Literal;
@@ -32,6 +32,11 @@ public class NegacionAritmetica extends OperacionUnaria {
         } else {
             return new Entero(-valor.intValue());
         }
+    }
+
+    @Override
+    public String generarCodigo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

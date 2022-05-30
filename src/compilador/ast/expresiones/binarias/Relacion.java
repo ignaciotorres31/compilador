@@ -1,8 +1,8 @@
 package compilador.ast.expresiones.binarias;
 
 import compilador.ast.expresiones.Expresion;
-import compilador.ast.expresiones.OperadorComparacion;
-import compilador.ast.expresiones.Tipo;
+import compilador.ast.base.OperadorComparacion;
+import compilador.ast.base.Tipo;
 import compilador.ast.expresiones.factor.Booleano;
 import compilador.ast.expresiones.factor.Literal;
         

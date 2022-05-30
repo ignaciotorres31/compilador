@@ -16,16 +16,11 @@ public class ProgramaCompleto extends Nodo{
     
     private Bloque bloqueDeclaraciones;
     private Programa cuerpo;
-    private final Expresion expresion;
 
     public ProgramaCompleto(Bloque bloqueDeclaraciones, Programa cuerpo){
         super("Programa");
         this.bloqueDeclaraciones = bloqueDeclaraciones;      
         this.cuerpo = cuerpo;
-    }
-    
-    public ProgramaCompleto(Expresion expresion){
-        this.expresion = expresion;
     }
     
     public ProgramaCompleto(Programa cuerpo){
@@ -54,10 +49,6 @@ public class ProgramaCompleto extends Nodo{
         this.cuerpo = cuerpo;
     }
 
-    public Expresion getExpresion() {
-        return expresion;
-    }
-
     public String graficar() {
         // Acá se dispara la invocación a los métodos graficar() de los nodos.
         // Como la Impresion no tiene padre, se inicia pasando null.  
@@ -84,12 +75,12 @@ public class ProgramaCompleto extends Nodo{
         
         StringBuilder resultado_programa = new StringBuilder();
 
-        resultado_programa.append(this.getExpresion().generarCodigo());
+        resultado_programa.append(this.getCuerpo().generarCodigo());
         
         resultado.append(resultado_programa.toString().replaceAll("\n", "\n\t"));
         
         resultado.append(String.format("%1$s = call i32 (i8*, ...) @printf(i8* getelementptr([4 x i8], [4 x i8]* @.integer, i32 0, i32 0), i32 %2$s)\n", 
-                    CodeGeneratorHelper.getNewPointer(), this.getExpresion().getIr_ref()));   
+                    CodeGeneratorHelper.getNewPointer(), this.getCuerpo().getIr_ref()));   
         
         resultado.append("\tret i32 0\n");
         resultado.append("}\n\n");

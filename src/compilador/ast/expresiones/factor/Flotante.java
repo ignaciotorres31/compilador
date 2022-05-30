@@ -5,7 +5,7 @@
 package compilador.ast.expresiones.factor;
 
 import compilador.ast.expresiones.Expresion;
-import compilador.ast.expresiones.Tipo;
+import compilador.ast.base.Tipo;
 
 /**
  *
@@ -27,5 +27,10 @@ public class Flotante extends Literal {
     @Override
     public String toString() {
         return valor.toString();
+    }
+
+    @Override
+    public String generarCodigo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

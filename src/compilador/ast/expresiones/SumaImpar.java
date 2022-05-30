@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package compilador.ast.sentencias;
+package compilador.ast.expresiones;
 
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.Identificador;
 import compilador.ast.expresiones.factor.Entero;
 import compilador.ast.expresiones.factor.Constante;
+import compilador.ast.sentencias.Asignacion;
+import compilador.ast.sentencias.Sentencia;
 import java.util.ArrayList;
 
 /**
@@ -67,6 +69,11 @@ public class SumaImpar extends Expresion{
             grafico += exp.graficar(getId());
         }
         return grafico;
+    }
+
+    @Override
+    public String generarCodigo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

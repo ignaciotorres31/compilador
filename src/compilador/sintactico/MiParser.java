@@ -5,6 +5,8 @@
 
 package compilador.sintactico;
 
+import compilador.ast.base.Tipo;
+import compilador.ast.expresiones.SumaImpar;
 import compilador.ast.base.*;
 import compilador.ast.expresiones.*;
 import compilador.ast.expresiones.binarias.*;
@@ -1263,15 +1265,23 @@ class CUP$MiParser$actions {
 
 
             for(Expresion elemento : le){
-                MenorIgual cantidadContada = new MenorIgual(new Identificador("aux"), new Entero(Integer.parseInt(il)));
-
+                MenorIgual cantidadContada = new MenorIgual(new Identificador("_aux"), new Entero(Integer.parseInt(il)));
+                
+                Object valueId = ht.get(elemento);            
+                if(valueId == null) {
+                    throw new Exception("No se encuentra el id en tabla de simbolos : " + elemento);
+                }
+                if(valueId != Tipo.INTEGER){
+                    throw new Exception("El identificador no es una variable de tipo entero.");
+                }
+                
                 Igualdad condicionFor = new Igualdad(new Entero(elemento.getValorEntero()%2), new Entero(1));
                 ArrayList<Sentencia> thenFor = new ArrayList<>();   
-                Suma sumaFor = new Suma(new Identificador("suma"), new Entero(elemento.getValorEntero()));
-                Asignacion asignacion = new Asignacion(new Identificador("suma"), sumaFor);
+                Suma sumaFor = new Suma(new Identificador("_suma"), new Entero(elemento.getValorEntero()));
+                Asignacion asignacion = new Asignacion(new Identificador("_suma"), sumaFor);
                 thenFor.add(asignacion);
-                Suma sumaAux = new Suma(new Identificador("aux"), new Entero(1));
-                Asignacion asignacionAux = new Asignacion(new Identificador("aux"), sumaAux);
+                Suma sumaAux = new Suma(new Identificador("_aux"), new Entero(1));
+                Asignacion asignacionAux = new Asignacion(new Identificador("_aux"), sumaAux);
                 thenFor.add(asignacionAux);
                 SiEntonces nodoIfImpar = new SiEntonces(condicionFor, new Bloque(thenFor));
 

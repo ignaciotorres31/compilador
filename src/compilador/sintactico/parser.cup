@@ -39,6 +39,13 @@ parser code
         +s.value+"' . Simbolo n° "+s.sym+ " no reconocido." );
     }
 
+    public Identificador variablesFuncionEspecial(String var, Tipo tipo){
+        Entero num = new Entero(1);
+        Identificador variable = new Identificador(new StringLiteral("_") + new StringLiteral(var) + new StringLiteral("_") + new StringLiteral(num.toString());
+        num.setValor(new Suma(num,new Entero(1)));
+        return variable;
+    }
+
 :};
 
 
@@ -331,7 +338,8 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
 
 
             for(Expresion elemento : le){
-                MenorIgual cantidadContada = new MenorIgual(new Identificador("aux"), new Entero(Integer.parseInt(il)));
+                MenorIgual cantidadContada = new MenorIgual(variablesFuncionEspecial("var",Tipo.INTEGER), new Entero(Integer.parseInt(il)));
+                ht.put("aux","INTEGER");
 
                 Igualdad condicionFor = new Igualdad(new Entero(elemento.getValorEntero()%2), new Entero(1));
                 ArrayList<Sentencia> thenFor = new ArrayList<>();   
@@ -482,27 +490,15 @@ display ::= DISPLAY PARENTESISA expresion_or:eo PARENTESISC{:
             RESULT = new Display(str);
         :}  ;
 
-input ::= input_int:ii {:
-            RESULT = ii;
+input ::= INPUT_INT PARENTESISA PARENTESISC {:
+            RESULT = new Input();
         :}
         |
-        input_float:ifl {:
-            RESULT = ifl;
+        INPUT_FLOAT PARENTESISA PARENTESISC {:
+            RESULT = new Input();
         :}
         |
-        input_bool:ib {:
-            RESULT = ib;
-        :};
-
-input_int ::= INPUT_INT PARENTESISA PARENTESISC {:
-            RESULT = new Input();
-        :};
-
-input_float ::= INPUT_FLOAT PARENTESISA PARENTESISC {:
-            RESULT = new Input();
-        :};
-
-input_bool ::= INPUT_BOOL PARENTESISA PARENTESISC {:
+        INPUT_BOOL PARENTESISA PARENTESISC {:
             RESULT = new Input();
         :};
 

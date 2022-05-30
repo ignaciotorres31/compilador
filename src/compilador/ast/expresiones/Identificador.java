@@ -4,6 +4,7 @@
  */
 package compilador.ast.expresiones;
 
+import compilador.ast.base.Tipo;
 import compilador.ast.expresiones.factor.Constante;
 
 /**
@@ -42,6 +43,11 @@ public class Identificador extends Constante {
 
     public void setNombreNodo(String nombreNodo) {
         this.nombreNodo = nombreNodo;
+    }
+
+    @Override
+    public String generarCodigo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 

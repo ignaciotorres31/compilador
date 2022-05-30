@@ -1,7 +1,7 @@
 package compilador.ast.expresiones.unarias;
 
 import compilador.ast.expresiones.Expresion;
-import compilador.ast.expresiones.Tipo;
+import compilador.ast.base.Tipo;
 
 /**
  *
