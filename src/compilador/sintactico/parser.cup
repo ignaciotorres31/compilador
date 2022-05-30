@@ -39,9 +39,10 @@ parser code
         +s.value+"' . Simbolo n° "+s.sym+ " no reconocido." );
     }
 
-    public Integer incrementar(Integer numero) {
-        NombreIncremental nombreIncremental = new NombreIncremental(numero);
-        return nombreIncremental.incrementar();
+    public NombreIncremental ni; 
+    public String incrementar() {
+        ni = new NombreIncremental();
+        return ni.increment().toString();
     }
 
 :};

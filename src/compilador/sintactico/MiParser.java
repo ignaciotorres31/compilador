@@ -420,6 +420,12 @@ public class MiParser extends java_cup.runtime.lr_parser {
         System.out.println(" Error en la linea "+ (s.left+1)+ " Columna "+ s.right+ ". Valor simbolo '"
         +s.value+"' . Simbolo n° "+s.sym+ " no reconocido." );
     }
+    
+    public NombreIncremental ni; 
+    public String incrementar() {
+        ni = new NombreIncremental();
+        return ni.incrementar().toString();
+    }
 
 
 
@@ -1265,7 +1271,7 @@ class CUP$MiParser$actions {
 
 
             for(Expresion elemento : le){
-                MenorIgual cantidadContada = new MenorIgual(new Identificador("_aux"), new Entero(Integer.parseInt(il)));
+                MenorIgual cantidadContada = new MenorIgual(new Identificador("_aux"+ni.incrementar()), new Entero(Integer.parseInt(il)));
                 
                 Object valueId = ht.get(elemento);            
                 if(valueId == null) {
@@ -1275,12 +1281,12 @@ class CUP$MiParser$actions {
                     throw new Exception("El identificador no es una variable de tipo entero.");
                 }
                 
-                Asignacion asignacionVariableWhile = new Asignacion(new Identificador("_temp"),elemento); 
+                Asignacion asignacionVariableWhile = new Asignacion(new Identificador("_temp"+ni.incrementar()),elemento); 
                 Igualdad condicionIfWhile = new Igualdad(asignacionVariableWhile.getExpresion(),new Entero(1));
                 ArrayList<Sentencia> thenIfWhile = new ArrayList<>();
                 Booleano boolIf = new Booleano(true);
                 thenIfWhile.add(boolIf);
-                Asignacion asignacionWhile = new Asignacion(new Identificador("_temp"),new Resta(asignacionVariableWhile.getExpresion(),new Entero(2)));
+                Asignacion asignacionWhile = new Asignacion(new Identificador("_temp"+ni.incrementar()),new Resta(asignacionVariableWhile.getExpresion(),new Entero(2)));
                 ArrayList<Sentencia> thenWhile = new ArrayList<>();
                 thenWhile.add(asignacionWhile);
                 Mayor condicionWhile = new Mayor(asignacionVariableWhile.getExpresion(),new Entero(1));
@@ -1289,11 +1295,11 @@ class CUP$MiParser$actions {
                 
                 Igualdad condicionFor = new Igualdad(new Entero(elemento.getValorEntero()%2), new Entero(1));
                 ArrayList<Sentencia> thenFor = new ArrayList<>();   
-                Suma sumaFor = new Suma(new Identificador("_suma"), new Entero(elemento.getValorEntero()));
-                Asignacion asignacion = new Asignacion(new Identificador("_suma"), sumaFor);
+                Suma sumaFor = new Suma(new Identificador("_suma"+ni.incrementar()), new Entero(elemento.getValorEntero()));
+                Asignacion asignacion = new Asignacion(new Identificador("_suma"+ni.incrementar()), sumaFor);
                 thenFor.add(asignacion);
-                Suma sumaAux = new Suma(new Identificador("_aux"), new Entero(1));
-                Asignacion asignacionAux = new Asignacion(new Identificador("_aux"), sumaAux);
+                Suma sumaAux = new Suma(new Identificador("_aux"+ni.incrementar()), new Entero(1));
+                Asignacion asignacionAux = new Asignacion(new Identificador("_aux"+ni.incrementar()), sumaAux);
                 thenFor.add(asignacionAux);
                 SiEntonces nodoIfImpar = new SiEntonces(condicionFor, new Bloque(thenFor));
 
@@ -1304,10 +1310,10 @@ class CUP$MiParser$actions {
                 else3.add(nodoIf);
             }
 
-            Menor condicionUltimo = new Menor(new Identificador("_aux"), new Entero(Integer.parseInt(il)));
+            Menor condicionUltimo = new Menor(new Identificador("_aux"+ni.incrementar()), new Entero(Integer.parseInt(il)));
             ArrayList<Sentencia> thenUltimo = new ArrayList<>();
             Display displayUltimo = new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"));
-            Asignacion sumaUltimo = new Asignacion(new Identificador("_suma"), new Entero(0));
+            Asignacion sumaUltimo = new Asignacion(new Identificador("_suma"+ni.incrementar()), new Entero(0));
             thenUltimo.add(displayUltimo);
             thenUltimo.add(sumaUltimo);
             SiEntonces ifUltimo = new SiEntonces(condicionUltimo, new Bloque(thenUltimo));
@@ -1372,15 +1378,15 @@ class CUP$MiParser$actions {
 
 
             for(Expresion elemento : le){
-                MenorIgual cantidadContada = new MenorIgual(new Identificador("_aux"), new Entero(Integer.parseInt(il)));
+                MenorIgual cantidadContada = new MenorIgual(new Identificador("_aux"+ni.incrementar()), new Entero(Integer.parseInt(il)));
 
                 Igualdad condicionFor = new Igualdad(new Entero(elemento.getValorEntero()%2), new Entero(1));
                 ArrayList<Sentencia> thenFor = new ArrayList<>();   
-                Suma sumaFor = new Suma(new Identificador("_suma"), new Entero(elemento.getValorEntero()));
-                Asignacion asignacion = new Asignacion(new Identificador("_suma"), sumaFor);
+                Suma sumaFor = new Suma(new Identificador("_suma"+ni.incrementar()), new Entero(elemento.getValorEntero()));
+                Asignacion asignacion = new Asignacion(new Identificador("_suma"+ni.incrementar()), sumaFor);
                 thenFor.add(asignacion);
-                Suma sumaAux = new Suma(new Identificador("_aux"), new Entero(1));
-                Asignacion asignacionAux = new Asignacion(new Identificador("_aux"), sumaAux);
+                Suma sumaAux = new Suma(new Identificador("_aux"+ni.incrementar()), new Entero(1));
+                Asignacion asignacionAux = new Asignacion(new Identificador("_aux"+ni.incrementar()), sumaAux);
                 thenFor.add(asignacionAux);
                 SiEntonces nodoIfImpar = new SiEntonces(condicionFor, new Bloque(thenFor));
 
@@ -1391,10 +1397,10 @@ class CUP$MiParser$actions {
                 else3.add(nodoIf);
             }
 
-            Menor condicionUltimo = new Menor(new Identificador("_aux"), new Entero(Integer.parseInt(il)));
+            Menor condicionUltimo = new Menor(new Identificador("_aux"+ni.incrementar()), new Entero(Integer.parseInt(il)));
             ArrayList<Sentencia> thenUltimo = new ArrayList<>();
             Display displayUltimo = new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"));
-            Asignacion sumaUltimo = new Asignacion(new Identificador("_suma"), new Entero(0));
+            Asignacion sumaUltimo = new Asignacion(new Identificador("_suma"+ni.incrementar()), new Entero(0));
             thenUltimo.add(displayUltimo);
             thenUltimo.add(sumaUltimo);
             SiEntonces ifUltimo = new SiEntonces(condicionUltimo, new Bloque(thenUltimo));
