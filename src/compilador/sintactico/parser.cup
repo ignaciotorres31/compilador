@@ -39,9 +39,8 @@ parser code
         +s.value+"' . Simbolo n° "+s.sym+ " no reconocido." );
     }
 
-    public NombreIncremental ni; 
+    public NombreIncremental ni = new NombreIncremental(); 
     public String incrementar() {
-        ni = new NombreIncremental();
         return ni.incrementar().toString();
     }
 
@@ -339,12 +338,14 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
             for(Expresion elemento : le){
                 MenorIgual cantidadContada = new MenorIgual(new Identificador("_aux"+ni.incrementar()), new Entero(Integer.parseInt(il)));
                 
-                Object valueId = ht.get(elemento);            
-                if(valueId == null) {
-                    throw new Exception("No se encuentra el id en tabla de simbolos : " + elemento);
-                }
-                if(valueId != Tipo.INTEGER){
-                    throw new Exception("El identificador no es una variable de tipo entero.");
+                if(elemento instanceof Identificador){
+                    Object valueId = ht.get(elemento);            
+                    if(valueId == null) {
+                        throw new Exception("No se encuentra el id en tabla de simbolos : " + elemento);
+                    }
+                    if(valueId != Tipo.INTEGER.toString()){
+                        throw new Exception("El identificador no es una variable de tipo entero.");
+                    }
                 }
                 
                 Asignacion asignacionVariableWhile = new Asignacion(new Identificador("_temp"+ni.incrementar()),elemento); 
@@ -429,12 +430,15 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
 
             for(Expresion elemento : le){
                 MenorIgual cantidadContada = new MenorIgual(new Identificador("_aux"+ni.incrementar()), new Entero(Integer.parseInt(il)));                
-                Object valueId = ht.get(elemento);            
-                if(valueId == null) {
-                    throw new Exception("No se encuentra el id en tabla de simbolos : " + elemento);
-                }
-                if(valueId != Tipo.INTEGER){
-                    throw new Exception("El identificador no es una variable de tipo entero.");
+                        
+                if(elemento instanceof Identificador){
+                    Object valueId = ht.get(elemento);            
+                    if(valueId == null) {
+                        throw new Exception("No se encuentra el id en tabla de simbolos : " + elemento);
+                    }
+                    if(valueId != Tipo.INTEGER.toString()){
+                        throw new Exception("El identificador no es una variable de tipo entero.");
+                    }
                 }
                 
                 Asignacion asignacionVariableWhile = new Asignacion(new Identificador("_temp"+ni.incrementar()),elemento); 
@@ -493,18 +497,31 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
             if(valueId == null) {
                 throw new Exception("No se encuentra el id en tabla de simbolos : " + il);
             }
-            if(valueId != Tipo.INTEGER){
+            if(valueId != Tipo.INTEGER.toString()){
                 throw new Exception("El identificador no es una variable de tipo entero.");
             }
             RESULT = new SumaImpar(new Identificador(il), lista1);
         :}
         |
         SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORCHETESA CORCHETESC PARENTESISC{:
-            RESULT = new Display(new StringLiteral("La lista esta vacia"));
+            ArrayList<Sentencia> sentenciaDisplay = new ArrayList<>();
+            Display displayListaVacia = new Display(new StringLiteral("La lista esta vacia"));
+            sentenciaDisplay.add(displayListaVacia);
+            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)), sentenciaDisplay);
         :}
         |        
         SUMAIMPAR:sim PARENTESISA IDENTIFICADOR:il PUNTOCOMA CORCHETESA CORCHETESC PARENTESISC{:
-            RESULT = new Display(new StringLiteral("La lista esta vacia"));
+            Object valueId = ht.get(il);            
+            if(valueId == null) {
+                throw new Exception("No se encuentra el id en tabla de simbolos : " + il);
+            }
+            if(valueId != Tipo.INTEGER.toString()){
+                throw new Exception("El identificador no es una variable de tipo entero.");
+            }		
+            ArrayList<Sentencia> sentenciaDisplay = new ArrayList<>();
+            Display displayListaVacia = new Display(new StringLiteral("La lista esta vacia"));
+            sentenciaDisplay.add(displayListaVacia);
+            RESULT = new SumaImpar(new Identificador(il), sentenciaDisplay);        
         :};
 
 lista_expresiones ::= lista_expresiones:le COMA expresion_sr:esr{:

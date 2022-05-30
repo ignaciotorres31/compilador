@@ -15,11 +15,6 @@ public enum Tipo {
     STRING,
     UNKNOWN;
     
-    @Override
-    public String toString() {
-        return name().toLowerCase();
-    }
-    
     public static Tipo getTipoDato(String tipoStr) {
         
         switch (tipoStr.toUpperCase()){

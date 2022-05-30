@@ -10,7 +10,11 @@ package compilador.ast.base;
  */
 public class NombreIncremental {
     
-    private Integer numero = 1;
+    private Integer numero;
+    
+    public NombreIncremental(){
+        this.numero = 1;
+    }
 
     public Integer getNumero() {
         return numero;
