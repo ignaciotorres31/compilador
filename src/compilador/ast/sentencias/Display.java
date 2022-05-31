@@ -7,6 +7,7 @@ package compilador.ast.sentencias;
 
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.factor.StringLiteral;
+import compilador.llvm.CodeGeneratorHelper;
 
 /**
  *
@@ -48,7 +49,12 @@ public class Display extends Sentencia{
 
     @Override
     public String generarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder resultado = new StringBuilder();        
+        resultado.append(this.getDisplay().generarCodigo());
+        this.setIr_ref(CodeGeneratorHelper.getNewPointer());
+        resultado.append(String.format("%1$s = call i32 @puts(i8* getelementptr ([11 x i8], [11 x i8] * %2$s, i32 0, i32 0))\n", this.getIr_ref(), 
+                this.getDisplay().getIr_ref()));
+        return resultado.toString();
     }
     
 }

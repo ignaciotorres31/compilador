@@ -6,6 +6,7 @@
 package compilador.ast.expresiones.factor;
 
 import compilador.ast.base.Tipo;
+import compilador.llvm.CodeGeneratorHelper;
 
 /**
  *
@@ -34,7 +35,12 @@ public class StringLiteral extends Literal{
 
     @Override
     public String generarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder resultado = new StringBuilder();        
+        this.setIr_ref(CodeGeneratorHelper.getNewPointer());
+        resultado.append(String.format("@str = private constant [11 x i8] c %1$s \00\"\n", 
+                this.getValor()));
+        return resultado.toString();
+        
     }
     
 }

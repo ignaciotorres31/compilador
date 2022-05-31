@@ -5,6 +5,7 @@
 package compilador.ast.expresiones.factor;
 
 import compilador.ast.base.Tipo;
+import compilador.llvm.CodeGeneratorHelper;
 
 /**
  *
@@ -39,6 +40,12 @@ public class Entero extends Literal {
 
     @Override
     public String generarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder resultado = new StringBuilder();        
+        this.setIr_ref(CodeGeneratorHelper.getNewPointer());
+        resultado.append(String.format("%1$s = call i32 (i8*, ...) @printf(i8* getelementptr([4 x i8], [4 x i8]* @.integer,"+
+                "i32 0, i32 0), i32 %2$s\n",this.getIr_ref(),  
+                this.getValor()));
+        return resultado.toString();
+        
     }
 }

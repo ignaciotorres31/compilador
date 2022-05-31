@@ -254,16 +254,17 @@ public class Compilador extends javax.swing.JFrame {
         ProgramaCompleto programa = (ProgramaCompleto) sintactico.parse().value;
      
         try {
-            jTextPane1.setText(programa.graficar());
+            /*jTextPane1.setText(programa.graficar());
             PrintWriter grafico = new PrintWriter(new FileWriter("arbol.dot"));
             grafico.println(programa.graficar());
             grafico.close();
             String cmdDot = "dot -Tpng arbol.dot -o arbol.png";
             Runtime.getRuntime().exec(cmdDot);
-            
+            */
             
             //generar codigo IR para el LLVM
-            /*grafico = new PrintWriter(new FileWriter("programa.ll"));
+            jTextPane1.setText(programa.generarCodigo());
+            /*PrintWriter grafico = new PrintWriter(new FileWriter("programa.ll"));
             grafico.println(programa.generarCodigo());
             grafico.close();
             System.out.println("Código generado");
@@ -284,7 +285,6 @@ public class Compilador extends javax.swing.JFrame {
                 System.out.println(line2);
             }
             System.out.println("Ejecutable generado");*/
-
         } catch (Error e) {
             System.out.println("Error: " + e.getMessage());
             jTextPane1.setText("Error: " + e.getMessage());

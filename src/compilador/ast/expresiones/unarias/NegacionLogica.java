@@ -7,6 +7,7 @@ package compilador.ast.expresiones.unarias;
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.base.Tipo;
 import compilador.ast.expresiones.factor.Booleano;
+import compilador.llvm.CodeGeneratorHelper;
 
 /**
  *
@@ -24,8 +25,18 @@ public class NegacionLogica extends OperacionUnaria {
     }
 
     @Override
-    public String generarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String get_llvm_op_code() {
+        return "xor";
     }
     
+    @Override
+    public String generarCodigo() {
+        StringBuilder resultado = new StringBuilder();        
+        resultado.append(this.getExpresion().generarCodigo());
+        this.setIr_ref(CodeGeneratorHelper.getNewPointer());
+        resultado.append(String.format("%1$s = %2$s i32 %3$s, 1\n", this.getIr_ref(), 
+                this.get_llvm_op_code(), this.getExpresion().getIr_ref()));
+        return resultado.toString();
+    }
+   
 }

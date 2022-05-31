@@ -6,6 +6,7 @@ package compilador.ast.expresiones;
 
 import compilador.ast.base.Tipo;
 import compilador.ast.expresiones.factor.Constante;
+import compilador.llvm.CodeGeneratorHelper;
 
 /**
  *
@@ -43,7 +44,11 @@ public class Identificador extends Constante {
 
     @Override
     public String generarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder resultado = new StringBuilder();        
+        this.setIr_ref(CodeGeneratorHelper.getNewPointer());
+        resultado.append(String.format("%1$s = load i32,132* %2$s\n", this.getIr_ref(), 
+                this.getNombre()));
+        return resultado.toString();
     }
     
     public Identificador clonar(){

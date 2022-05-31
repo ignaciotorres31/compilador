@@ -2,6 +2,7 @@ package compilador.ast.expresiones.unarias;
 
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.base.Tipo;
+import compilador.llvm.CodeGeneratorHelper;
 
 /**
  *
@@ -32,6 +33,19 @@ public abstract class OperacionUnaria extends Expresion {
     public String toString() {
         return String.format("%s %s", getEtiqueta(), getExpresion());
     }
+    
+    public abstract String get_llvm_op_code();
+    
+    @Override
+    public String generarCodigo() {
+        StringBuilder resultado = new StringBuilder();        
+        resultado.append(this.getExpresion().generarCodigo());
+        this.setIr_ref(CodeGeneratorHelper.getNewPointer());
+        resultado.append(String.format("%1$s = %2$s i32 %3$s, %3$s\n", this.getIr_ref(), 
+                this.get_llvm_op_code(), this.getExpresion().getIr_ref()));
+        return resultado.toString();
+    }
+    
     
     @Override
     public String graficar(String idPadre){
