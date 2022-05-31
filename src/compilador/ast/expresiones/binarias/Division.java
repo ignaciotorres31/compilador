@@ -4,6 +4,7 @@
  */
 package compilador.ast.expresiones.binarias;
 
+import compilador.ast.base.Tipo;
 import compilador.ast.expresiones.Expresion;
 
 /**
@@ -23,7 +24,7 @@ public class Division extends OperacionBinaria {
 
     @Override
     public String get_llvm_op_code() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.getTipo().equals(Tipo.FLOAT) ? "fdiv" : "sdiv"; 
     }
 
 }

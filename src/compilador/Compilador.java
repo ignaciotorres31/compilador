@@ -260,6 +260,30 @@ public class Compilador extends javax.swing.JFrame {
             grafico.close();
             String cmdDot = "dot -Tpng arbol.dot -o arbol.png";
             Runtime.getRuntime().exec(cmdDot);
+            
+            
+            //generar codigo IR para el LLVM
+            grafico = new PrintWriter(new FileWriter("programa.ll"));
+            grafico.println(programa.generarCodigo());
+            grafico.close();
+            System.out.println("Código generado");
+
+            
+            Process process = Runtime.getRuntime().exec("clang -c -o programa.o programa.ll");
+            BufferedReader reader1 = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+            while ((line = reader1.readLine()) != null) {
+                System.out.println(line);
+            }
+            System.out.println("Archivo objeto generado");
+
+            Process process2 = Runtime.getRuntime().exec("clang -o programa.exe programa.o");
+            BufferedReader reader2 = new BufferedReader(new InputStreamReader(process2.getInputStream()));
+            String line2;
+            while ((line2 = reader2.readLine()) != null) {
+                System.out.println(line2);
+            }
+            System.out.println("Ejecutable generado");
 
         } catch (Error e) {
             System.out.println("Error: " + e.getMessage());

@@ -7,6 +7,8 @@ package compilador.ast.expresiones.factor;
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.base.Tipo;
 
+import compilador.llvm.CodeGeneratorHelper;
+
 /**
  *
  * @author facundo
@@ -34,5 +36,13 @@ public abstract class Constante extends Expresion {
         if(idPadre != null)
             grafico.append(String.format("%1$s--%2$s\n", idPadre, this.getId()));
         return grafico.toString();
+    }
+    
+    @Override
+    public String generarCodigo() {
+        StringBuilder resultado = new StringBuilder();
+        this.setIr_ref(CodeGeneratorHelper.getNewPointer());
+        resultado.append(String.format("%1$s = add i32 0, %2$s\n", this.getIr_ref(), /*this.getValor()*/this.getNombre()));
+        return resultado.toString();
     }
 }
