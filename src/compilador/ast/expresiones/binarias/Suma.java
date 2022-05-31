@@ -13,13 +13,19 @@ import compilador.ast.expresiones.Expresion;
  */
 public class Suma extends OperacionBinaria {
 
-    public Suma(Expresion izquierda, Expresion derecha) {
+    
+    public Suma(Expresion izquierda, Expresion derecha, Tipo tipo) {
         super(izquierda, derecha);
+        super.setTipo(tipo);
     }
 
     @Override
     protected String getNombreOperacion() {
         return "+";
+    }
+    
+    public Suma clonar(){
+        return new Suma(getIzquierda().clonar(), getDerecha().clonar(), getTipo());
     }
 
     @Override

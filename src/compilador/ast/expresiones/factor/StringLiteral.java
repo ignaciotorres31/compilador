@@ -27,6 +27,10 @@ public class StringLiteral extends Literal{
     public String toString() {
         return valor.toString();
     }
+    
+    public StringLiteral clonar(){
+        return new StringLiteral(getValor());
+    }
 
     @Override
     public String generarCodigo() {

@@ -28,6 +28,8 @@ public abstract class Constante extends Expresion {
     public Constante(String nombre){
         super(nombre);
     }
+    
+    public abstract Constante clonar();
 
     @Override
     public String graficar(String idPadre){

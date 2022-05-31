@@ -263,7 +263,7 @@ public class Compilador extends javax.swing.JFrame {
             
             
             //generar codigo IR para el LLVM
-            grafico = new PrintWriter(new FileWriter("programa.ll"));
+            /*grafico = new PrintWriter(new FileWriter("programa.ll"));
             grafico.println(programa.generarCodigo());
             grafico.close();
             System.out.println("Código generado");
@@ -283,7 +283,7 @@ public class Compilador extends javax.swing.JFrame {
             while ((line2 = reader2.readLine()) != null) {
                 System.out.println(line2);
             }
-            System.out.println("Ejecutable generado");
+            System.out.println("Ejecutable generado");*/
 
         } catch (Error e) {
             System.out.println("Error: " + e.getMessage());

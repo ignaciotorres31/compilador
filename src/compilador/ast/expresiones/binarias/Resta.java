@@ -13,15 +13,19 @@ import compilador.ast.expresiones.Expresion;
  */
 public class Resta extends OperacionBinaria {
 
-    public Resta(Expresion izquierda, Expresion derecha) {
+    public Resta(Expresion izquierda, Expresion derecha, Tipo tipo) {
         super(izquierda, derecha);
+        super.setTipo(tipo);
     }
 
     @Override
     protected String getNombreOperacion() {
         return "-";
     }
-
+    
+    public Resta clonar(){
+        return new Resta(getIzquierda().clonar(), getDerecha().clonar(), getTipo());
+    }
     @Override
     public String get_llvm_op_code() {
         return getTipo().equals(Tipo.FLOAT) ? "fsub" : "sub";

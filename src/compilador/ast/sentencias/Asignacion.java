@@ -7,7 +7,7 @@ import compilador.ast.expresiones.Identificador;
 
 public class Asignacion extends Sentencia {
     
-    private Identificador ident;
+   private Identificador ident;
     private Expresion expresion;
 
     public Asignacion(Identificador ident, Expresion e) {
@@ -39,10 +39,15 @@ public class Asignacion extends Sentencia {
         grafico += expresion.graficar(getId());
         return grafico;
     }
+    
+    public Asignacion clonar(){
+        return new Asignacion(getIdent().clonar(), getExpresion().clonar());
+    }
 
     @Override
     public String generarCodigo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
 }

@@ -14,10 +14,6 @@ import compilador.ast.expresiones.factor.Constante;
 public class Identificador extends Constante {
     
     private String nombreNodo = "ID";
-    
-    public Identificador(String nombre) {
-        super(Tipo.UNKNOWN, nombre);
-    }
 
     public Identificador(String nombre, Tipo tipo) {
         super(tipo, nombre);
@@ -48,6 +44,10 @@ public class Identificador extends Constante {
     @Override
     public String generarCodigo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Identificador clonar(){
+        return new Identificador(getNombre(), getTipo());
     }
 }
 

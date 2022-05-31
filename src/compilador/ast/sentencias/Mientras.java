@@ -30,6 +30,10 @@ public class Mientras extends Sentencia {
         this.bloqueSentencias = bloqueSentencias;
     }
     
+    public Mientras clonar(){
+        return new Mientras(getCondicion().clonar(), getBloqueSentencias().clonar());
+    }
+    
     @Override
     public String graficar(String idPadre) {
         final String miId = this.getId();

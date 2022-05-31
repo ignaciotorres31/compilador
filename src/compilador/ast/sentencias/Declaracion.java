@@ -37,6 +37,10 @@ public class Declaracion extends Sentencia {
     public String getEtiqueta() {
         return getClass().getSimpleName();
     }
+    
+    public Declaracion clonar(){
+        return new Declaracion(getTipo(), getIdent().clonar());
+    }
 
     @Override
     public String generarCodigo() {

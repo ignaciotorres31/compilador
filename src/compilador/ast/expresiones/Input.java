@@ -11,9 +11,12 @@ package compilador.ast.expresiones;
  */
 public class Input extends Expresion{
 
-    @Override
+   @Override
     public String generarCodigo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public Input clonar(){
+        return new Input();
+    }
 }

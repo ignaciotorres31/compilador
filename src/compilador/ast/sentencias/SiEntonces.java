@@ -5,7 +5,7 @@ import compilador.ast.expresiones.Expresion;
 
 public class SiEntonces extends Seleccion {
     
-    private Bloque bloqueSiEntonces;
+     private Bloque bloqueSiEntonces;
     private Bloque bloqueSino;
 
     public SiEntonces(Expresion condicion, Bloque bloqueSiEntonces, Bloque bloqueSino) {
@@ -34,6 +34,14 @@ public class SiEntonces extends Seleccion {
     public void setBloqueSino(Bloque bloqueSino) {
         this.bloqueSino = bloqueSino;
     }
+    
+    public SiEntonces clonar(){
+        if(getBloqueSino() != null){
+            return new SiEntonces(getCondicion().clonar(), getBloqueSiEntonces().clonar(), getBloqueSino().clonar());   
+        }
+        return new SiEntonces(getCondicion().clonar(), getBloqueSiEntonces().clonar());
+    }
+    
     
     @Override
     public String graficar(String idPadre) {

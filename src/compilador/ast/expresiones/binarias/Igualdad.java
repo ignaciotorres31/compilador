@@ -4,29 +4,19 @@ import compilador.ast.expresiones.Expresion;
 import compilador.ast.base.Tipo;
 
 
-public class Igualdad extends Relacion {
+public class Igualdad extends OperacionBinaria {
     public Igualdad(Expresion izquierda, Expresion derecha) {
         super(izquierda, derecha, "==");
-    }
-
-    @Override
-    protected boolean calcularResultado(double izq, double der) {
-        return izq == der;
-    }
-    
-    @Override
-    protected boolean calcularResultado(int izq, int der) {
-        return izq == der;
-    }
-
-    @Override
-    protected boolean calcularResultado(boolean izq, boolean der) {
-        return izq == der;
+        super.setTipo(Tipo.BOOLEAN);
     }
 
     @Override
     protected String getNombreOperacion() {
         return "Igualdad";
+    }
+    
+    public Igualdad clonar(){
+        return new Igualdad(getIzquierda().clonar(), getDerecha().clonar());
     }
 
     @Override

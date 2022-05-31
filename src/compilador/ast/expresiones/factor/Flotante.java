@@ -28,6 +28,10 @@ public class Flotante extends Literal {
     public String toString() {
         return valor.toString();
     }
+    
+    public Flotante clonar(){
+        return new Flotante(getValor());
+    }
 
     @Override
     public String generarCodigo() {

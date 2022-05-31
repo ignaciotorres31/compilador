@@ -40,7 +40,11 @@ public class Display extends Sentencia{
         String grafico = super.graficar(idPadre);
         grafico += display.graficar(getId());
         return grafico;
-    }    
+    }   
+    
+    public Display clonar(){
+        return new Display(getDisplay().clonar());
+    }
 
     @Override
     public String generarCodigo() {

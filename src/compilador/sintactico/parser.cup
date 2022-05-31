@@ -116,7 +116,7 @@ declaracion ::= FLOAT DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
             ArrayList<Declaracion> declaraciones = new ArrayList<>();
             for(String i : tdi){
                 ht.put(i,"FLOAT");
-                declaraciones.add(new Declaracion(Tipo.FLOAT, new Identificador(i)));
+                declaraciones.add(new Declaracion(Tipo.FLOAT, new Identificador(i, Tipo.FLOAT)));
             }
             RESULT = declaraciones;
         :}
@@ -125,7 +125,7 @@ declaracion ::= FLOAT DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
             ArrayList<Declaracion> declaraciones = new ArrayList<>();
             for(String i : tdi){
                 ht.put(i,"INTEGER");
-                declaraciones.add(new Declaracion(Tipo.INTEGER, new Identificador(i)));
+                declaraciones.add(new Declaracion(Tipo.INTEGER, new Identificador(i, Tipo.INTEGER)));
             }
             RESULT = declaraciones;
         :}
@@ -134,7 +134,7 @@ declaracion ::= FLOAT DOS_PUNTOS tipos_datos_id:tdi PUNTOCOMA{:
             ArrayList<Declaracion> declaraciones = new ArrayList<>();
             for(String i : tdi){
                 ht.put(i,"BOOLEAN");
-                declaraciones.add(new Declaracion(Tipo.BOOLEAN, new Identificador(i)));
+                declaraciones.add(new Declaracion(Tipo.BOOLEAN, new Identificador(i, Tipo.BOOLEAN)));
             }
             RESULT = declaraciones;
         :};
@@ -187,7 +187,38 @@ sentencia_asignacion ::= IDENTIFICADOR:id IGUAL expresion_or: eo {:
             if(valueId == null) {
                 throw new Exception("No se encuentra el id en tabla de simbolos : " + id);
             } 
-            RESULT = new Asignacion(new Identificador(id),eo) ;
+            if(valueId.toString() == "INTEGER"){
+                RESULT = new Asignacion(new Identificador(id, Tipo.INTEGER),eo) ;
+            }
+            else if(valueId.toString() == "BOOLEAN"){
+                RESULT = new Asignacion(new Identificador(id, Tipo.BOOLEAN),eo) ;
+            }
+            else if(valueId.toString() == "FLOAT"){
+                RESULT = new Asignacion(new Identificador(id, Tipo.FLOAT),eo) ;
+            }
+            else{
+                RESULT = new Asignacion(new Identificador(id, Tipo.UNKNOWN),eo) ;
+            }
+        :}|
+        IDENTIFICADOR:id IGUAL input: fe {:
+            Identificador nodoId;
+            Object valueId = ht.get(id);            
+            if(valueId == null) {
+                throw new Error("No se encuentra el id en tabla de simbolos : " + id);
+            } 
+            if(valueId.toString() == "INTEGER"){
+                nodoId = new Identificador(id, Tipo.INTEGER);
+            }
+            else if(valueId.toString() == "BOOLEAN"){
+                nodoId = new Identificador(id, Tipo.BOOLEAN);
+            }
+            else if(valueId.toString() == "FLOAT"){
+                nodoId = new Identificador(id, Tipo.FLOAT);
+            }
+            else{
+                nodoId = new Identificador(id, Tipo.UNKNOWN);
+            }
+            RESULT = new Asignacion(nodoId, fe);
         :};
 
 expresion_or ::= expresion_or: eo OR expresion_and :ea{:
@@ -243,11 +274,39 @@ comparacion ::= expresion_sr :esr1 MAYOR expresion_sr: esr2{:
         :};
 
 expresion_sr ::= expresion_sr :esr SUMA expresion_md: emd{:
-            RESULT = new Suma(esr,emd);
+            if(esr.getTipo() == Tipo.INTEGER && emd.getTipo() == Tipo.INTEGER){
+                    RESULT = new Suma(esr,emd , Tipo.INTEGER);
+                }
+                else if(esr.getTipo() == Tipo.FLOAT && emd.getTipo() == Tipo.INTEGER){
+                    RESULT = new Suma(esr,emd, Tipo.FLOAT);
+                }
+                else if(esr.getTipo() == Tipo.INTEGER && emd.getTipo() == Tipo.FLOAT){
+                    RESULT = new Suma(esr,emd, Tipo.FLOAT);
+                }
+                else if(esr.getTipo() == Tipo.FLOAT && emd.getTipo() == Tipo.FLOAT){
+                    RESULT = new Suma(esr,emd, Tipo.FLOAT);
+                }
+                else{
+                    throw new Exception("No se puede restar entre una variable de tipo "+esr.getTipo().toString()+" y una variable de tipo "+emd.getTipo().toString());
+                }
         :}
         |
         expresion_sr :esr RESTA expresion_md: emd{:
-            RESULT = new Resta(esr,emd);
+                if(esr.getTipo() == Tipo.INTEGER && emd.getTipo() == Tipo.INTEGER){
+                    RESULT = new Resta(esr,emd , Tipo.INTEGER);
+                }
+                else if(esr.getTipo() == Tipo.FLOAT && emd.getTipo() == Tipo.INTEGER){
+                    RESULT = new Resta(esr,emd, Tipo.FLOAT);
+                }
+                else if(esr.getTipo() == Tipo.INTEGER && emd.getTipo() == Tipo.FLOAT){
+                    RESULT = new Resta(esr,emd, Tipo.FLOAT);
+                }
+                else if(esr.getTipo() == Tipo.FLOAT && emd.getTipo() == Tipo.FLOAT){
+                    RESULT = new Resta(esr,emd, Tipo.FLOAT);
+                }
+                else{
+                    throw new Exception("No se puede restar entre una variable de tipo "+esr.getTipo().toString()+" y una variable de tipo "+emd.getTipo().toString());
+                }
         :}
         |
         expresion_md :emd{:
@@ -255,11 +314,39 @@ expresion_sr ::= expresion_sr :esr SUMA expresion_md: emd{:
         :};
 
 expresion_md ::= expresion_md :emd MULTIPLICACION menos_unario:mu{:
-            RESULT = new Multiplicacion(emd,mu);
+            if(emd.getTipo() == Tipo.INTEGER && mu.getTipo() == Tipo.INTEGER){
+                    RESULT = new Multiplicacion(emd,mu, Tipo.INTEGER);
+                }
+                else if(emd.getTipo() == Tipo.FLOAT && mu.getTipo() == Tipo.INTEGER){
+                    RESULT = new Multiplicacion(emd,mu, Tipo.FLOAT);
+                }
+                else if(emd.getTipo() == Tipo.INTEGER && mu.getTipo() == Tipo.FLOAT){
+                    RESULT = new Multiplicacion(emd,mu, Tipo.FLOAT);
+                }
+                else if(emd.getTipo() == Tipo.FLOAT && mu.getTipo() == Tipo.FLOAT){
+                    RESULT = new Multiplicacion(emd,mu, Tipo.FLOAT);
+                }
+                else{
+                    throw new Exception("No se puede multiplicar entre una variable de tipo "+emd.getTipo().toString()+" y una variable de tipo "+mu.getTipo().toString());
+                }
         :}
         |
         expresion_md :emd DIVISION menos_unario:mu{:
-            RESULT = new Division(emd,mu) ;
+            if(emd.getTipo() == Tipo.INTEGER && mu.getTipo() == Tipo.INTEGER){
+                    RESULT = new Division(emd,mu, Tipo.INTEGER);
+                }
+                else if(emd.getTipo() == Tipo.FLOAT && mu.getTipo() == Tipo.INTEGER){
+                    RESULT = new Division(emd,mu, Tipo.FLOAT);
+                }
+                else if(emd.getTipo() == Tipo.INTEGER && mu.getTipo() == Tipo.FLOAT){
+                    RESULT = new Division(emd,mu, Tipo.FLOAT);
+                }
+                else if(emd.getTipo() == Tipo.FLOAT && mu.getTipo() == Tipo.FLOAT){
+                    RESULT = new Division(emd,mu, Tipo.FLOAT);
+                }
+                else{
+                    throw new Exception("No se puede dividir entre una variable de tipo "+emd.getTipo().toString()+" y una variable de tipo "+mu.getTipo().toString());
+                }
         :}
         |
         menos_unario:mu{:
@@ -284,10 +371,6 @@ factor ::= constante: c{:
         |
         PARENTESISA expresion_or:eo PARENTESISC{:
             RESULT = eo ;
-        :}
-        |   
-        IDENTIFICADOR:id IGUAL input: fe {:
-            RESULT = fe;
         :};
 
 constante::= BOOLEAN_LITERAL:bl{:
@@ -307,10 +390,29 @@ constante::= BOOLEAN_LITERAL:bl{:
             if(valueId == null) {
                 throw new Error("No se encuentra el id en tabla de simbolos : " + id);
             } 
-            RESULT = new Identificador(id);
+            if(valueId.toString() == "INTEGER"){
+                RESULT = new Identificador(id, Tipo.INTEGER);
+            }
+            else if(valueId.toString() == "BOOLEAN"){
+                RESULT = new Identificador(id, Tipo.BOOLEAN);
+            }
+            else if(valueId.toString() == "FLOAT"){
+                RESULT = new Identificador(id, Tipo.FLOAT);
+            }
+            else{
+                RESULT = new Identificador(id, Tipo.UNKNOWN);
+            }
         :};
 
 funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORCHETESA lista_expresiones:le CORCHETESC PARENTESISC{:
+            String nombreId = incrementar();
+            String nombreAux = "_aux"+nombreId;
+            String nombreSuma = "_suma"+nombreId;
+            String nombreTemp = "_temp"+nombreId;
+            ht.put(nombreAux, Tipo.INTEGER);
+            ht.put(nombreSuma, Tipo.INTEGER);
+            ht.put(nombreTemp, Tipo.INTEGER);
+            
             ArrayList<Sentencia> then1 = new ArrayList<>();
             ArrayList<Sentencia> else1 = new ArrayList<>();
             Igualdad condicionListaVacia = new Igualdad(new Entero(le.size()), new Entero(0));
@@ -336,74 +438,74 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
 
 
             for(Expresion elemento : le){
-                MenorIgual cantidadContada = new MenorIgual(new Identificador("_aux"+ni.incrementar()), new Entero(Integer.parseInt(il)));
-                
-                if(elemento instanceof Identificador){
-                    Object valueId = ht.get(elemento);            
-                    if(valueId == null) {
-                        throw new Exception("No se encuentra el id en tabla de simbolos : " + elemento);
-                    }
-                    if(valueId != Tipo.INTEGER.toString()){
-                        throw new Exception("El identificador no es una variable de tipo entero.");
-                    }
+                if(elemento.getTipo() != Tipo.INTEGER){
+                    throw new Exception("El identificador no es una variable de tipo entero");
                 }
+
+
+                MenorIgual cantidadContada = new MenorIgual(new Identificador(nombreAux, Tipo.INTEGER), new Entero(Integer.parseInt(il)));
                 
-                Asignacion asignacionVariableWhile = new Asignacion(new Identificador("_temp"+ni.incrementar()),elemento); 
-                Igualdad condicionIfWhile = new Igualdad(asignacionVariableWhile.getExpresion(),new Entero(1));
-                ArrayList<Sentencia> thenIfWhile = new ArrayList<>();
-                Display displayBool = new Display(new Booleano(true));
-                thenIfWhile.add(displayBool);
-                Asignacion asignacionWhile = new Asignacion(new Identificador("_temp"+ni.incrementar()),new Resta(asignacionVariableWhile.getExpresion(),new Entero(2)));
+                Asignacion elementoTemp = new Asignacion(new Identificador(nombreTemp, Tipo.INTEGER), elemento);
+                
+                
+                Mayor condicionWhile = new Mayor(new Identificador(nombreTemp, Tipo.INTEGER),new Entero(1));
                 ArrayList<Sentencia> thenWhile = new ArrayList<>();
+                Asignacion asignacionWhile = new Asignacion(new Identificador(nombreTemp, Tipo.INTEGER),new Resta(new Identificador(nombreTemp, Tipo.INTEGER),new Entero(2), Tipo.INTEGER));
                 thenWhile.add(asignacionWhile);
-                Mayor condicionWhile = new Mayor(asignacionVariableWhile.getExpresion(),new Entero(1));
-                SiEntonces ifWhileImpar = new SiEntonces(condicionIfWhile, new Bloque(thenIfWhile));
-                Mientras whileInterno = new Mientras(condicionWhile,new Bloque(thenWhile)); 
+                Mientras whileInterno = new Mientras(condicionWhile, new Bloque(thenWhile));
+
+                Igualdad condicionFor = new Igualdad(new Identificador(nombreTemp, Tipo.INTEGER), new Entero(1));
                 
-                Igualdad condicionFor = new Igualdad(displayBool.getDisplay(), new Booleano(true));
                 ArrayList<Sentencia> thenFor = new ArrayList<>();   
-                Suma sumaFor = new Suma(new Identificador("_suma"+ni.incrementar()), new Entero(elemento.getValorEntero()));
-                Asignacion asignacion = new Asignacion(new Identificador("_suma"+ni.incrementar()), sumaFor);
+                Expresion elemento2 = elemento.clonar();
+                Suma sumaFor = new Suma(new Identificador(nombreSuma, Tipo.INTEGER), elemento2, Tipo.INTEGER);
+                Asignacion asignacion = new Asignacion(new Identificador(nombreSuma, Tipo.INTEGER), sumaFor);
                 thenFor.add(asignacion);
-                Suma sumaAux = new Suma(new Identificador("_aux"+ni.incrementar()), new Entero(1));
-                Asignacion asignacionAux = new Asignacion(new Identificador("_aux"+ni.incrementar()), sumaAux);
+                Suma sumaAux = new Suma(new Identificador(nombreAux, Tipo.INTEGER), new Entero(1), Tipo.INTEGER);
+                Asignacion asignacionAux = new Asignacion(new Identificador(nombreAux, Tipo.INTEGER), sumaAux);
                 thenFor.add(asignacionAux);
                 SiEntonces nodoIfImpar = new SiEntonces(condicionFor, new Bloque(thenFor));
 
                 ArrayList<Sentencia> thenFor2 = new ArrayList<>();
+                thenFor2.add(elementoTemp);
+                thenFor2.add(whileInterno);
                 thenFor2.add(nodoIfImpar);
 
                 SiEntonces nodoIf = new SiEntonces(cantidadContada, new Bloque(thenFor2));
                 else3.add(nodoIf);
             }
 
-            Menor condicionUltimo = new Menor(new Identificador("_aux"+ni.incrementar()), new Entero(Integer.parseInt(il)));
+            Menor condicionUltimo = new Menor(new Identificador(nombreAux, Tipo.INTEGER), new Entero(Integer.parseInt(il)));
             ArrayList<Sentencia> thenUltimo = new ArrayList<>();
             Display displayUltimo = new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"));
-            Asignacion sumaUltimo = new Asignacion(new Identificador("_suma"+ni.incrementar()), new Entero(0));
+            Asignacion sumaUltimo = new Asignacion(new Identificador(nombreSuma, Tipo.INTEGER), new Entero(0));
             thenUltimo.add(displayUltimo);
             thenUltimo.add(sumaUltimo);
             SiEntonces ifUltimo = new SiEntonces(condicionUltimo, new Bloque(thenUltimo));
             else3.add(ifUltimo);
 
             SiEntonces if3 = new SiEntonces(condicionPivotSize, new Bloque(then3), new Bloque(else3));
-            ArrayList<Sentencia> lista3 = new ArrayList<>();
-            lista3.add(if3);
-            else2.add(new Bloque(lista3));
+            else2.add(if3);
             
             SiEntonces if2 = new SiEntonces(condicionPivotNegativo, new Bloque(then2), new Bloque(else2));
-            ArrayList<Sentencia> lista2 = new ArrayList<>();
-            lista2.add(if2);
-            else1.add(new Bloque(lista2));
+            else1.add(if2);
 
             SiEntonces if1 = new SiEntonces(condicionListaVacia, new Bloque(then1), new Bloque(else1));
             ArrayList<Sentencia> lista1 = new ArrayList<>();
             lista1.add(if1);
 
-            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)), lista1);
+            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)), lista1, nombreAux, nombreSuma);
         :}
         |        
         SUMAIMPAR:sim PARENTESISA IDENTIFICADOR:il PUNTOCOMA CORCHETESA lista_expresiones:le CORCHETESC PARENTESISC{:
+            String nombreId = incrementar();
+            String nombreAux = "_aux"+nombreId;
+            String nombreSuma = "_suma"+nombreId;
+            String nombreTemp = "_temp"+nombreId;
+            ht.put(nombreAux, Tipo.INTEGER);
+            ht.put(nombreSuma, Tipo.INTEGER);
+            ht.put(nombreTemp, Tipo.INTEGER);
+
             ArrayList<Sentencia> then1 = new ArrayList<>();
             ArrayList<Sentencia> else1 = new ArrayList<>();
             Igualdad condicionListaVacia = new Igualdad(new Entero(le.size()), new Entero(0));
@@ -429,65 +531,57 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
 
 
             for(Expresion elemento : le){
-                MenorIgual cantidadContada = new MenorIgual(new Identificador("_aux"+ni.incrementar()), new Entero(Integer.parseInt(il)));                
-                        
-                if(elemento instanceof Identificador){
-                    Object valueId = ht.get(elemento);            
-                    if(valueId == null) {
-                        throw new Exception("No se encuentra el id en tabla de simbolos : " + elemento);
-                    }
-                    if(valueId != Tipo.INTEGER.toString()){
-                        throw new Exception("El identificador no es una variable de tipo entero.");
-                    }
+                if(elemento.getTipo() != Tipo.INTEGER){
+                    throw new Exception("El identificador no es una variable de tipo entero");
                 }
+
+
+                MenorIgual cantidadContada = new MenorIgual(new Identificador(nombreAux, Tipo.INTEGER), new Entero(Integer.parseInt(il)));
                 
-                Asignacion asignacionVariableWhile = new Asignacion(new Identificador("_temp"+ni.incrementar()),elemento); 
-                Igualdad condicionIfWhile = new Igualdad(asignacionVariableWhile.getExpresion(),new Entero(1));
-                ArrayList<Sentencia> thenIfWhile = new ArrayList<>();
-                Display displayBool = new Display(new Booleano(true));
-                thenIfWhile.add(displayBool);
-                Asignacion asignacionWhile = new Asignacion(new Identificador("_temp"+ni.incrementar()),new Resta(asignacionVariableWhile.getExpresion(),new Entero(2)));
+                Asignacion elementoTemp = new Asignacion(new Identificador(nombreTemp, Tipo.INTEGER), elemento);
+                
+                
+                Mayor condicionWhile = new Mayor(new Identificador(nombreTemp, Tipo.INTEGER),new Entero(1));
                 ArrayList<Sentencia> thenWhile = new ArrayList<>();
+                Asignacion asignacionWhile = new Asignacion(new Identificador(nombreTemp, Tipo.INTEGER),new Resta(new Identificador(nombreTemp, Tipo.INTEGER),new Entero(2), Tipo.INTEGER));
                 thenWhile.add(asignacionWhile);
-                Mayor condicionWhile = new Mayor(asignacionVariableWhile.getExpresion(),new Entero(1));
-                SiEntonces ifWhileImpar = new SiEntonces(condicionIfWhile, new Bloque(thenIfWhile));
-                Mientras whileInterno = new Mientras(condicionWhile,new Bloque(thenWhile)); 
+                Mientras whileInterno = new Mientras(condicionWhile, new Bloque(thenWhile));
+
+                Igualdad condicionFor = new Igualdad(new Identificador(nombreTemp, Tipo.INTEGER), new Entero(1));
                 
-                Igualdad condicionFor = new Igualdad(displayBool.getDisplay(), new Booleano(true));
                 ArrayList<Sentencia> thenFor = new ArrayList<>();   
-                Suma sumaFor = new Suma(new Identificador("_suma"+ni.incrementar()), new Entero(elemento.getValorEntero()));
-                Asignacion asignacion = new Asignacion(new Identificador("_suma"+ni.incrementar()), sumaFor);
+                Expresion elemento2 = elemento.clonar();
+                Suma sumaFor = new Suma(new Identificador(nombreSuma, Tipo.INTEGER), elemento2, Tipo.INTEGER);
+                Asignacion asignacion = new Asignacion(new Identificador(nombreSuma, Tipo.INTEGER), sumaFor);
                 thenFor.add(asignacion);
-                Suma sumaAux = new Suma(new Identificador("_aux"+ni.incrementar()), new Entero(1));
-                Asignacion asignacionAux = new Asignacion(new Identificador("_aux"+ni.incrementar()), sumaAux);
+                Suma sumaAux = new Suma(new Identificador(nombreAux, Tipo.INTEGER), new Entero(1), Tipo.INTEGER);
+                Asignacion asignacionAux = new Asignacion(new Identificador(nombreAux, Tipo.INTEGER), sumaAux);
                 thenFor.add(asignacionAux);
                 SiEntonces nodoIfImpar = new SiEntonces(condicionFor, new Bloque(thenFor));
 
                 ArrayList<Sentencia> thenFor2 = new ArrayList<>();
+                thenFor2.add(elementoTemp);
+                thenFor2.add(whileInterno);
                 thenFor2.add(nodoIfImpar);
 
                 SiEntonces nodoIf = new SiEntonces(cantidadContada, new Bloque(thenFor2));
                 else3.add(nodoIf);
             }
 
-            Menor condicionUltimo = new Menor(new Identificador("_aux"+ni.incrementar()), new Entero(Integer.parseInt(il)));
+            Menor condicionUltimo = new Menor(new Identificador(nombreAux, Tipo.INTEGER), new Entero(Integer.parseInt(il)));
             ArrayList<Sentencia> thenUltimo = new ArrayList<>();
             Display displayUltimo = new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"));
-            Asignacion sumaUltimo = new Asignacion(new Identificador("_suma"+ni.incrementar()), new Entero(0));
+            Asignacion sumaUltimo = new Asignacion(new Identificador(nombreSuma, Tipo.INTEGER), new Entero(0));
             thenUltimo.add(displayUltimo);
             thenUltimo.add(sumaUltimo);
             SiEntonces ifUltimo = new SiEntonces(condicionUltimo, new Bloque(thenUltimo));
             else3.add(ifUltimo);
 
             SiEntonces if3 = new SiEntonces(condicionPivotSize, new Bloque(then3), new Bloque(else3));
-            ArrayList<Sentencia> lista3 = new ArrayList<>();
-            lista3.add(if3);
-            else2.add(new Bloque(lista3));
+            else2.add(if3);
             
             SiEntonces if2 = new SiEntonces(condicionPivotNegativo, new Bloque(then2), new Bloque(else2));
-            ArrayList<Sentencia> lista2 = new ArrayList<>();
-            lista2.add(if2);
-            else1.add(new Bloque(lista2));
+            else1.add(if2);
 
             SiEntonces if1 = new SiEntonces(condicionListaVacia, new Bloque(then1), new Bloque(else1));
             ArrayList<Sentencia> lista1 = new ArrayList<>();
@@ -500,7 +594,7 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
             if(valueId != Tipo.INTEGER.toString()){
                 throw new Exception("El identificador no es una variable de tipo entero.");
             }
-            RESULT = new SumaImpar(new Identificador(il), lista1);
+            RESULT = new SumaImpar(new Identificador(il, Tipo.INTEGER), lista1, nombreAux, nombreSuma);
         :}
         |
         SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORCHETESA CORCHETESC PARENTESISC{:
@@ -521,7 +615,7 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
             ArrayList<Sentencia> sentenciaDisplay = new ArrayList<>();
             Display displayListaVacia = new Display(new StringLiteral("La lista esta vacia"));
             sentenciaDisplay.add(displayListaVacia);
-            RESULT = new SumaImpar(new Identificador(il), sentenciaDisplay);        
+            RESULT = new SumaImpar(new Identificador(il, Tipo.INTEGER), sentenciaDisplay);        
         :};
 
 lista_expresiones ::= lista_expresiones:le COMA expresion_sr:esr{:

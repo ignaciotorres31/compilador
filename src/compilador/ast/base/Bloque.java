@@ -26,6 +26,15 @@ public class Bloque extends Sentencia {
         }
         return grafico;
     }
+    
+    public Bloque clonar(){
+        ArrayList<Sentencia> sentencias = new ArrayList<>();
+        for(Sentencia sen : getSentencias()){
+            Sentencia senCopia = sen.clonar();
+            sentencias.add(senCopia);
+        }
+        return new Bloque(sentencias);
+    }
 
     @Override
     public String generarCodigo() {

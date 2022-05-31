@@ -14,23 +14,13 @@ import compilador.ast.expresiones.factor.Booleano;
  */
 public class NegacionLogica extends OperacionUnaria {
     
+    
     public NegacionLogica(Expresion expresion) {
         super("NOT", expresion, Tipo.BOOLEAN);
     }
-
-    public Expresion evaluar() {
-        Expresion expr = getExpresion();
-        if (expr instanceof NegacionLogica) {
-            // cancelar "not not"
-            return ((NegacionLogica) expr).getExpresion();
-        }
-
-        if (!(expr instanceof Booleano)) {
-            return this;
-        }
-
-        boolean valorNegado = !((Booleano) getExpresion()).getValor();
-        return new Booleano(valorNegado);
+    
+    public NegacionLogica clonar(){
+        return new NegacionLogica(getExpresion().clonar());
     }
 
     @Override

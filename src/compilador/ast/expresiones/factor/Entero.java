@@ -32,10 +32,9 @@ public class Entero extends Literal {
     public String toString() {
         return valor.toString();
     }
-
-    @Override
-    public Integer getValorEntero() {
-        return this.valor;
+    
+    public Entero clonar(){
+        return new Entero(getValor());
     }
 
     @Override

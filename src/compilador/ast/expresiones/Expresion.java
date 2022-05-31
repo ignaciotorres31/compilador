@@ -13,7 +13,7 @@ import compilador.ast.base.Nodo;
  */
 public abstract class Expresion extends Nodo {
 
-    private Tipo tipo;
+     private Tipo tipo;
     private String ir_ref;
 
     public Expresion() {
@@ -48,8 +48,6 @@ public abstract class Expresion extends Nodo {
     public void setIr_ref(String ir_ref) {
         this.ir_ref = ir_ref;
     }
-    
-    public Integer getValorEntero(){
-        return 2;
-    }
+
+    public abstract Expresion clonar();
 }

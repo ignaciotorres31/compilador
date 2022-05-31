@@ -5,6 +5,7 @@
  */
 package compilador.ast.expresiones;
 
+import compilador.ast.base.Tipo;
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.Identificador;
 import compilador.ast.expresiones.factor.Entero;
@@ -23,12 +24,22 @@ public class SumaImpar extends Expresion{
     private ArrayList<Sentencia> lista;
     private Asignacion contador;
     private Asignacion suma;
+    private String nombreAux;
+    private String nombreSuma;
 
+    public SumaImpar(Constante pivot, ArrayList<Sentencia> lista, String nombreAux, String nombreSuma){
+        this.pivot = pivot;
+        this.lista = lista;
+        this.nombreAux = nombreAux;
+        this.nombreSuma = nombreSuma;
+        this.contador = new Asignacion(new Identificador(nombreAux, Tipo.INTEGER),new Entero(0));
+        this.suma = new Asignacion(new Identificador(nombreSuma, Tipo.INTEGER),new Entero(0));
+        super.setTipo(Tipo.INTEGER);
+    }
+    
     public SumaImpar(Constante pivot, ArrayList<Sentencia> lista){
         this.pivot = pivot;
         this.lista = lista;
-        this.contador = new Asignacion(new Identificador("aux"),new Entero(0));
-        this.suma = new Asignacion(new Identificador("suma"),new Entero(0));
     }
     
     public Constante getPivot() {
@@ -69,6 +80,15 @@ public class SumaImpar extends Expresion{
             grafico += exp.graficar(getId());
         }
         return grafico;
+    }
+    
+    public SumaImpar clonar(){
+        ArrayList<Sentencia> sentencias = new ArrayList<>();
+        for(Sentencia sen : getLista()){
+            Sentencia senCopia = sen.clonar();
+            sentencias.add(senCopia);
+        }
+        return new SumaImpar(getPivot().clonar(), sentencias, this.nombreAux, this.nombreSuma);
     }
 
     @Override

@@ -11,7 +11,7 @@ import compilador.ast.base.Tipo;
  * @author Nacho
  */
 public class Booleano extends Literal {
-    private final Boolean valor;
+     private final Boolean valor;
 
     public Booleano(Boolean valor) {
         super(Tipo.BOOLEAN);
@@ -26,6 +26,10 @@ public class Booleano extends Literal {
     @Override
     public String toString() {        
         return valor.toString();
+    }
+    
+    public Booleano clonar(){
+        return new Booleano(getValor());
     }
 
     @Override

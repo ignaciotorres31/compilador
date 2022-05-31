@@ -13,7 +13,7 @@ public class NombreIncremental {
     private Integer numero;
     
     public NombreIncremental(){
-        this.numero = 1;
+        this.numero = 0;
     }
 
     public Integer getNumero() {
