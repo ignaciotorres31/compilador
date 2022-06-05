@@ -14,9 +14,8 @@ import compilador.ast.expresiones.Expresion;
 public class Suma extends OperacionBinaria {
 
     
-    public Suma(Expresion izquierda, Expresion derecha, Tipo tipo) {
-        super(izquierda, derecha);
-        super.setTipo(tipo);
+    public Suma(Expresion izquierda, Expresion derecha, Tipo tipo, String idVar) {
+        super(izquierda, derecha, tipo, idVar);
     }
 
     @Override
@@ -25,7 +24,7 @@ public class Suma extends OperacionBinaria {
     }
     
     public Suma clonar(){
-        return new Suma(getIzquierda().clonar(), getDerecha().clonar(), getTipo());
+        return new Suma(getIzquierda().clonar(), getDerecha().clonar(), getTipo(), getIdVar());
     }
 
     @Override

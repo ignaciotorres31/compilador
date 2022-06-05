@@ -13,9 +13,8 @@ import compilador.ast.expresiones.Expresion;
  */
 public class Division extends OperacionBinaria {
 
-    public Division(Expresion izquierda, Expresion derecha, Tipo tipo) {
-        super(izquierda, derecha);
-        super.setTipo(tipo);
+    public Division(Expresion izquierda, Expresion derecha, Tipo tipo, String idVar) {
+        super(izquierda, derecha, tipo, idVar);
     }
 
     @Override
@@ -24,7 +23,7 @@ public class Division extends OperacionBinaria {
     }
     
     public Division clonar(){
-        return new Division(getIzquierda().clonar(), getDerecha().clonar(), getTipo());
+        return new Division(getIzquierda().clonar(), getDerecha().clonar(), getTipo(), getIdVar());
     }
     
     @Override

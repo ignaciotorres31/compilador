@@ -13,9 +13,8 @@ import compilador.ast.expresiones.Expresion;
  */
 public class Disyuncion extends OperacionBinaria {
     
-       public Disyuncion(Expresion izquierda, Expresion derecha) {
-        super(izquierda, derecha);
-        super.setTipo(Tipo.BOOLEAN);
+    public Disyuncion(Expresion izquierda, Expresion derecha , Tipo tipo, String idVar) {
+        super(izquierda, derecha, Tipo.BOOLEAN, idVar);
     }
     
     @Override
@@ -24,12 +23,11 @@ public class Disyuncion extends OperacionBinaria {
     }
     
     public Disyuncion clonar(){
-        return new Disyuncion(getIzquierda().clonar(), getDerecha().clonar());
+        return new Disyuncion(getIzquierda().clonar(), getDerecha().clonar(), Tipo.BOOLEAN, getIdVar());
     }
 
     @Override
     public String get_llvm_op_code() {
         return "or";
     }
-
 }

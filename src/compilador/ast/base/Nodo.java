@@ -1,14 +1,18 @@
 package compilador.ast.base;
 
-import compilador.ast.expresiones.Expresion;
-
 public abstract class  Nodo {
     private String nombre;
+    private String idVar;
+    private Tipo tipo;
 
     public Nodo() {}
 
     public Nodo(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String get_llvm_type_code() {
+        return getTipo().equals(Tipo.FLOAT) ? "double" : (getTipo().equals(Tipo.INTEGER) ? "i32" : "i1");
     }
 
     protected String getId() {
@@ -30,6 +34,22 @@ public abstract class  Nodo {
     
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getIdVar() {
+        return idVar;
+    }
+
+    public void setIdVar(String idVar) {
+        this.idVar = idVar;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
     
     public String graficar(String idPadre){

@@ -7,7 +7,6 @@ package compilador.ast.sentencias;
 
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.factor.StringLiteral;
-import compilador.llvm.CodeGeneratorHelper;
 
 /**
  *
@@ -49,12 +48,25 @@ public class Display extends Sentencia{
 
     @Override
     public String generarCodigo() {
-        StringBuilder resultado = new StringBuilder();        
-        resultado.append(this.getDisplay().generarCodigo());
-        this.setIr_ref(CodeGeneratorHelper.getNewPointer());
-        resultado.append(String.format("%1$s = call i32 @puts(i8* getelementptr ([11 x i8], [11 x i8] * %2$s, i32 0, i32 0))\n", this.getIr_ref(), 
-                this.getDisplay().getIr_ref()));
-        return resultado.toString();
+        String codigo = "";
+        switch (getDisplay().get_llvm_type_code()) {
+            case "INTEGER":
+                codigo += "%dest"+getIdVar()+"= call i32 (i8*, ...) @printf(i8* getelementptr([4 x i8], [4 x i8]* @.integer, i32 0, i32 0), integer"
+                        + "%"+ getIdVar();
+                break;
+            case "FLOAT":
+                codigo += "%dest"+getIdVar()+"= call i32 (i8*, ...) @printf(i8* getelementptr([4 x i8], [4 x i8]* @.double, i32 0, i32 0), double"
+                        + "%"+ getIdVar();
+                break;
+            case "BOOLEAN":
+                codigo += "%dest"+getIdVar()+"= call i32 (i8*, ...) @printf(i8* getelementptr([4 x i8], [4 x i8]* @.boolean, i32 0, i32 0), boolean"
+                        + "%"+ getIdVar();
+                break;
+            default:
+                codigo += "%dest"+getIdVar()+"= call i32 @puts(i8* getelementptr ([11 x i8], [11 x i8] * @"+getIdVar()+", i32 0, i32 0))";
+                break;
+        }
+        return codigo;
     }
     
 }

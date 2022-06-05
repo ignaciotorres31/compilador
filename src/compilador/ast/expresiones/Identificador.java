@@ -6,7 +6,6 @@ package compilador.ast.expresiones;
 
 import compilador.ast.base.Tipo;
 import compilador.ast.expresiones.factor.Constante;
-import compilador.llvm.CodeGeneratorHelper;
 
 /**
  *
@@ -44,11 +43,7 @@ public class Identificador extends Constante {
 
     @Override
     public String generarCodigo() {
-        StringBuilder resultado = new StringBuilder();        
-        this.setIr_ref(CodeGeneratorHelper.getNewPointer());
-        resultado.append(String.format("%1$s = load i32,132* %2$s\n", this.getIr_ref(), 
-                this.getNombre()));
-        return resultado.toString();
+        return "%dest"+getIdVar()+" = load "+get_llvm_type_code()+", "+get_llvm_type_code()+"* @"+getNombre()+"\n";
     }
     
     public Identificador clonar(){

@@ -275,16 +275,16 @@ comparacion ::= expresion_sr :esr1 MAYOR expresion_sr: esr2{:
 
 expresion_sr ::= expresion_sr :esr SUMA expresion_md: emd{:
             if(esr.getTipo() == Tipo.INTEGER && emd.getTipo() == Tipo.INTEGER){
-                    RESULT = new Suma(esr,emd , Tipo.INTEGER);
+                    RESULT = new Suma(esr,emd , Tipo.INTEGER, incrementar());
                 }
                 else if(esr.getTipo() == Tipo.FLOAT && emd.getTipo() == Tipo.INTEGER){
-                    RESULT = new Suma(esr,emd, Tipo.FLOAT);
+                    RESULT = new Suma(esr,emd, Tipo.FLOAT, incrementar());
                 }
                 else if(esr.getTipo() == Tipo.INTEGER && emd.getTipo() == Tipo.FLOAT){
-                    RESULT = new Suma(esr,emd, Tipo.FLOAT);
+                    RESULT = new Suma(esr,emd, Tipo.FLOAT, incrementar());
                 }
                 else if(esr.getTipo() == Tipo.FLOAT && emd.getTipo() == Tipo.FLOAT){
-                    RESULT = new Suma(esr,emd, Tipo.FLOAT);
+                    RESULT = new Suma(esr,emd, Tipo.FLOAT, incrementar());
                 }
                 else{
                     throw new Exception("No se puede restar entre una variable de tipo "+esr.getTipo().toString()+" y una variable de tipo "+emd.getTipo().toString());

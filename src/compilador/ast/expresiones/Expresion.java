@@ -13,40 +13,21 @@ import compilador.ast.base.Nodo;
  */
 public abstract class Expresion extends Nodo {
 
-     private Tipo tipo;
-    private String ir_ref;
-
-    public Expresion() {
-        this.tipo = Tipo.UNKNOWN;
+   public Expresion() {
+        super.setTipo(Tipo.UNKNOWN);
     }
 
     public Expresion(Tipo tipo) {
-        this.tipo = tipo;
+        super.setTipo(tipo);
     }
 
     public Expresion(Tipo tipo, String nombre) {
         super(nombre);
-        this.tipo = tipo;
+        super.setTipo(tipo);
     }
     
     public Expresion(String nombre){
         super(nombre);
-    }
-
-    public Tipo getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getIr_ref() {
-        return ir_ref;
-    }
-
-    public void setIr_ref(String ir_ref) {
-        this.ir_ref = ir_ref;
     }
 
     public abstract Expresion clonar();

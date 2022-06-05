@@ -13,8 +13,8 @@ import compilador.ast.expresiones.Expresion;
  */
 public class Multiplicacion extends OperacionBinaria {
 
-    public Multiplicacion(Expresion izquierda, Expresion derecha, Tipo tipo) {
-        super(izquierda, derecha);
+    public Multiplicacion(Expresion izquierda, Expresion derecha, Tipo tipo, String idVar) {
+        super(izquierda, derecha, tipo, idVar);
         super.setTipo(tipo);
     }
 
@@ -24,7 +24,7 @@ public class Multiplicacion extends OperacionBinaria {
     }
     
     public Multiplicacion clonar(){
-        return new Multiplicacion(getIzquierda().clonar(), getDerecha().clonar(), getTipo());
+        return new Multiplicacion(getIzquierda().clonar(), getDerecha().clonar(), getTipo(), getIdVar());
     }
 
     @Override

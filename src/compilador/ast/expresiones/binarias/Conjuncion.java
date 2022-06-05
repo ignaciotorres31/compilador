@@ -13,9 +13,8 @@ import compilador.ast.expresiones.Expresion;
  */
 public class Conjuncion extends OperacionBinaria {
     
-    public Conjuncion(Expresion izquierda, Expresion derecha) {
-        super(izquierda, derecha);
-        super.setTipo(Tipo.BOOLEAN);
+    public Conjuncion(Expresion izquierda, Expresion derecha , Tipo tipo, String idVar) {
+        super(izquierda, derecha, Tipo.BOOLEAN, idVar);
     }
     
     @Override
@@ -24,7 +23,7 @@ public class Conjuncion extends OperacionBinaria {
     }
     
     public Conjuncion clonar(){
-        return new Conjuncion(getIzquierda().clonar(), getDerecha().clonar());
+        return new Conjuncion(getIzquierda().clonar(), getDerecha().clonar(), Tipo.BOOLEAN, getIdVar());
     }
 
     @Override

@@ -2,22 +2,17 @@ package compilador.ast.expresiones.binarias;
 
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.base.Tipo;
-import compilador.llvm.CodeGeneratorHelper;
 
 public abstract class OperacionBinaria extends Expresion {
     
-    private Expresion izquierda;
+   private Expresion izquierda;
     private Expresion derecha;
 
-    public OperacionBinaria(Expresion izquierda, Expresion derecha) {
+    public OperacionBinaria(Expresion izquierda, Expresion derecha, Tipo tipo, String idVar) {
         this.izquierda = izquierda;
         this.derecha = derecha;
-    }
-    
-    public OperacionBinaria(Expresion izquierda, Expresion derecha, String nombre) {
-        super(Tipo.UNKNOWN, nombre);
-        this.izquierda = izquierda;
-        this.derecha = derecha;
+        super.setTipo(tipo);
+        super.setIdVar(idVar);
     }
 
 
@@ -53,16 +48,16 @@ public abstract class OperacionBinaria extends Expresion {
     }
     
     public abstract String get_llvm_op_code();
+
+    public String get_llvm_arithmetic_op_code() {
+        return getIzquierda().getTipo().equals(Tipo.FLOAT) ? "fcmp" : "icmp";
+    }
     
     @Override
     public String generarCodigo(){
-        StringBuilder resultado = new StringBuilder();        
-        resultado.append(this.getIzquierda().generarCodigo());
-        resultado.append(this.getDerecha().generarCodigo());
-        this.setIr_ref(CodeGeneratorHelper.getNewPointer());
-        resultado.append(String.format("%1$s = %2$s i32 %3$s, %4$s\n", this.getIr_ref(), 
-                this.get_llvm_op_code(), this.getIzquierda().getIr_ref(), 
-                this.getDerecha().getIr_ref()));
-        return resultado.toString();
+        String codigo = getIzquierda().generarCodigo();
+        codigo += getDerecha().generarCodigo();
+        codigo += "%dest"+getIdVar()+" = "+get_llvm_op_code()+" "+get_llvm_type_code()+" %dest"+getIzquierda().getIdVar()+", %dest"+getDerecha().getIdVar()+"\n";
+        return codigo;
     }
 }

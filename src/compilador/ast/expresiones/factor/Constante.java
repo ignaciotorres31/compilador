@@ -7,7 +7,6 @@ package compilador.ast.expresiones.factor;
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.base.Tipo;
 
-import compilador.llvm.CodeGeneratorHelper;
 
 /**
  *
@@ -15,7 +14,7 @@ import compilador.llvm.CodeGeneratorHelper;
  */
 public abstract class Constante extends Expresion {
     
-    private Tipo tipo;
+   private Tipo tipo;
     
    public Constante(Tipo tipo) {
         super(tipo);

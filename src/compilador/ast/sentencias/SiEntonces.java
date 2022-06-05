@@ -57,7 +57,14 @@ public class SiEntonces extends Seleccion {
 
     @Override
     public String generarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String codigo = "br %etif"+getIdVar()+"\n";
+        codigo += "etif"+getIdVar()+":\n";
+        codigo +="";
+        codigo += "br %etthen"+getIdVar()+"\n";
+        codigo += "etthen"+getIdVar()+":\n";
+        codigo += "";
+        
+        return codigo;
     }
 
     

@@ -46,7 +46,11 @@ public class Asignacion extends Sentencia {
 
     @Override
     public String generarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String codigo = "br %etasig"+getIdVar()+"\n";
+        codigo += "etasig"+getIdVar()+":\n";
+        codigo += getIdent().generarCodigo();
+        codigo += getExpresion().generarCodigo();
+        return codigo;
     }
 
 

@@ -13,9 +13,8 @@ import compilador.ast.expresiones.Expresion;
  */
 public class Resta extends OperacionBinaria {
 
-    public Resta(Expresion izquierda, Expresion derecha, Tipo tipo) {
-        super(izquierda, derecha);
-        super.setTipo(tipo);
+    public Resta(Expresion izquierda, Expresion derecha, Tipo tipo, String idVar) {
+        super(izquierda, derecha, tipo, idVar);
     }
 
     @Override
@@ -24,7 +23,7 @@ public class Resta extends OperacionBinaria {
     }
     
     public Resta clonar(){
-        return new Resta(getIzquierda().clonar(), getDerecha().clonar(), getTipo());
+        return new Resta(getIzquierda().clonar(), getDerecha().clonar(), getTipo(), getIdVar());
     }
     @Override
     public String get_llvm_op_code() {
