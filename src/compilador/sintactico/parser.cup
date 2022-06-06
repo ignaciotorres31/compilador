@@ -79,15 +79,15 @@ nonterminal List<String>  tipos_datos_id;
 start with programa;
 
 programa ::= bloque_declaraciones:bd bloque_programa: bp{:
-            RESULT = new ProgramaCompleto(bd,bp);
+            RESULT = new ProgramaCompleto(bd,bp,ht);
         :}
         |
         bloque_declaraciones:bd {:
-            RESULT = new ProgramaCompleto(bd);
+            RESULT = new ProgramaCompleto(bd,ht);
         :}
         |
         bloque_programa: bp{:
-            RESULT = new ProgramaCompleto(bp);
+            RESULT = new ProgramaCompleto(bp,ht);
         :};
 
 bloque_declaraciones ::= DECLARE_SECTION declaraciones:d ENDDECLARE_SECTION{:

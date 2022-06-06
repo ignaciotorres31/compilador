@@ -39,12 +39,6 @@ public class Entero extends Literal {
 
     @Override
     public String generarCodigo() {
-        StringBuilder resultado = new StringBuilder();        
-        this.setIr_ref(CodeGeneratorHelper.getNewPointer());
-        resultado.append(String.format("%1$s = call i32 (i8*, ...) @printf(i8* getelementptr([4 x i8], [4 x i8]* @.integer,"+
-                "i32 0, i32 0), i32 %2$s\n",this.getIr_ref(),  
-                this.getValor()));
-        return resultado.toString();
-        
+        return "";
     }
 }

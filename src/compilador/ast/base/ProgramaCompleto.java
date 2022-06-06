@@ -6,6 +6,10 @@
 package compilador.ast.base;
 
 
+import java.util.Hashtable;
+
+
+
 /**
  *
  * @author Nacho
@@ -14,23 +18,35 @@ public class ProgramaCompleto extends Nodo{
     
     private Bloque bloqueDeclaraciones;
     private Programa cuerpo;
-
-    public ProgramaCompleto(Bloque bloqueDeclaraciones, Programa cuerpo){
+    private Hashtable tablaSimbolos;
+    
+    public ProgramaCompleto(Bloque bloqueDeclaraciones, Programa cuerpo, Hashtable tablaSimbolos){
         super("Programa");
         this.bloqueDeclaraciones = bloqueDeclaraciones;      
         this.cuerpo = cuerpo;
+        this.tablaSimbolos = tablaSimbolos;
     }
     
-    public ProgramaCompleto(Programa cuerpo){
+    public ProgramaCompleto(Programa cuerpo, Hashtable tablaSimbolos){
         super("Programa");
         this.cuerpo = cuerpo;
+        this.tablaSimbolos = tablaSimbolos;
     }
     
-    public ProgramaCompleto(Bloque bloqueDeclaraciones){
+    public ProgramaCompleto(Bloque bloqueDeclaraciones,Hashtable tablaSimbolos){
         super("Programa");
         this.bloqueDeclaraciones = bloqueDeclaraciones;      
+        this.tablaSimbolos = tablaSimbolos;
     }
 
+    public Hashtable getTablaSimbolos() {
+        return tablaSimbolos;
+    }
+
+    public void setTablaSimbolos(Hashtable tablaSimbolos) {
+        this.tablaSimbolos = tablaSimbolos;
+    }
+    
     public Bloque getBloqueDeclaraciones() {
         return this.bloqueDeclaraciones;
     }
@@ -71,6 +87,10 @@ public class ProgramaCompleto extends Nodo{
         resultado.append("\n");
         resultado.append("@.integer = private constant [4 x i8] c\"%d\\0A\\00\"\n");
         resultado.append("@.float = private constant [5 x i8] c\"%lf\\0A\\00\"\n");
+        resultado.append("\n");
+        for(String ts : tablaSimbolos){
+            
+        }
         resultado.append("\n");
         resultado.append("define i32 @main(i32, i8**) {\n\t");
         
