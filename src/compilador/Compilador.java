@@ -34,6 +34,7 @@ public class Compilador extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -67,6 +68,7 @@ public class Compilador extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -90,6 +92,7 @@ public class Compilador extends javax.swing.JFrame {
         jButton1.setText("Análisis lexico");
         jButton2.setText("Análisis sintactico");
         jButton3.setText("AST");
+        jButton4.setText("LLVM");
         
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,6 +119,16 @@ public class Compilador extends javax.swing.JFrame {
                 }
             }
         });
+        
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    jButton4ActionPerformed(evt);
+                } catch (Exception ex) {
+                    Logger.getLogger(Compilador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
 
         jTextArea.setColumns(20);
         jTextArea.setRows(5);
@@ -134,6 +147,8 @@ public class Compilador extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jToggleButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -161,7 +176,8 @@ public class Compilador extends javax.swing.JFrame {
                     .addComponent(jToggleButton1)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addContainerGap())
         );
 
@@ -246,6 +262,29 @@ public class Compilador extends javax.swing.JFrame {
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) throws Exception {
+        String textArea = jTextArea.getText() == null ? "" : jTextArea.getText();
+        InputStream is = new ByteArrayInputStream(textArea.getBytes());
+        InputStreamReader reader = new InputStreamReader(is);
+        MiLexico lexico = new MiLexico(reader);
+        MiParser sintactico= new MiParser(lexico);
+        ProgramaCompleto programa = (ProgramaCompleto) sintactico.parse().value;
+     
+        try {
+            jTextPane1.setText(programa.graficar());
+            PrintWriter grafico = new PrintWriter(new FileWriter("arbol.dot"));
+            grafico.println(programa.graficar());
+            grafico.close();
+            String cmdDot = "dot -Tpng arbol.dot -o arbol.png";
+            Runtime.getRuntime().exec(cmdDot);            
+            
+        } catch (Error e) {
+            System.out.println("Error: " + e.getMessage());
+            jTextPane1.setText("Error: " + e.getMessage());
+        }
+    }
+    
+    
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) throws Exception {
         String textArea = jTextArea.getText() == null ? "" : jTextArea.getText();
         InputStream is = new ByteArrayInputStream(textArea.getBytes());
         InputStreamReader reader = new InputStreamReader(is);
