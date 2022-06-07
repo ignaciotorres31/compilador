@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package compilador.ast.expresiones;
 
+import compilador.ast.base.CodeGeneratorHelper;
 import compilador.ast.base.Tipo;
 import compilador.ast.expresiones.factor.Constante;
 
@@ -16,7 +13,8 @@ public class Identificador extends Constante {
     private String nombreNodo = "ID";
 
     public Identificador(String nombre, Tipo tipo) {
-        super(tipo, nombre);
+        setTipo(tipo);
+        setNombre(nombre);
     }
 
     @Override
@@ -43,7 +41,8 @@ public class Identificador extends Constante {
 
     @Override
     public String generarCodigo() {
-        return "%dest"+getIdVar()+" = load "+get_llvm_type_code()+", "+get_llvm_type_code()+"* @"+getNombre()+"\n";
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
+        return "%var"+getIdVar()+" = load "+get_llvm_type_code()+", "+get_llvm_type_code()+"* @"+getNombre()+"\n";
     }
     
     public Identificador clonar(){

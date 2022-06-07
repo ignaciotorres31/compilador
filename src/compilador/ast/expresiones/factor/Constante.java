@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package compilador.ast.expresiones.factor;
 
 import compilador.ast.expresiones.Expresion;
@@ -16,18 +12,7 @@ public abstract class Constante extends Expresion {
     
    private Tipo tipo;
     
-   public Constante(Tipo tipo) {
-        super(tipo);
-    }
-
-    public Constante(Tipo tipo, String nombre) {
-        super(tipo, nombre);
-    }
-    
-    public Constante(String nombre){
-        super(nombre);
-    }
-    
+   @Override
     public abstract Constante clonar();
 
     @Override

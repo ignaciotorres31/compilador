@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package compilador.ast.expresiones.factor;
 
+import compilador.ast.base.CodeGeneratorHelper;
 import compilador.ast.base.Tipo;
 
 /**
@@ -15,7 +12,7 @@ public class Entero extends Literal {
     private Integer valor;
 
     public Entero(Integer valor) {
-        super(Tipo.INTEGER);
+        setTipo(Tipo.INTEGER);
         this.valor = valor;
         setNombre("Integer");
     }
@@ -38,7 +35,8 @@ public class Entero extends Literal {
     }
 
     @Override
-    public String generarCodigo() {
-        return "";
+    public String generarCodigo(){
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
+        return "%var"+getIdVar()+" = add i32 0, "+getValor()+"\n";
     }
 }

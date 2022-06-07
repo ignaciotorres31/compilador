@@ -1,11 +1,12 @@
 package compilador.ast.expresiones.binarias;
 
+import compilador.ast.base.CodeGeneratorHelper;
 import compilador.ast.base.Tipo;
 import compilador.ast.expresiones.Expresion;
 
 public class MenorIgual extends OperacionBinaria {
-    public MenorIgual(Expresion izquierda, Expresion derecha, String idVar) {
-        super(izquierda, derecha, Tipo.BOOLEAN, idVar);
+    public MenorIgual(Expresion izquierda, Expresion derecha) {
+        super(izquierda, derecha, Tipo.BOOLEAN);
     }
     
     @Override
@@ -14,7 +15,7 @@ public class MenorIgual extends OperacionBinaria {
     }
     
     public MenorIgual clonar(){
-        return new MenorIgual(getIzquierda().clonar(), getDerecha().clonar(), getIdVar());
+        return new MenorIgual(getIzquierda().clonar(), getDerecha().clonar());
     }
     
 
@@ -23,12 +24,17 @@ public class MenorIgual extends OperacionBinaria {
         return getIzquierda().getTipo().equals(Tipo.FLOAT) ? "ole" : "sle";
     }
 
-    public String get_llvm_arithmetic_op_code() {
-        return getIzquierda().getTipo().equals(Tipo.FLOAT) ? "fcmp" : "icmp";
+    @Override
+    public String get_llvm_type_code(){
+        return getIzquierda().getTipo().equals(Tipo.FLOAT) ? "double" : "i32";
     }
 
     @Override
     public String generarCodigo(){
-        return "%dest"+getIdVar()+" = "+get_llvm_arithmetic_op_code()+" "+get_llvm_op_code()+" "+get_llvm_type_code()+"  %dest"+getIzquierda().getIdVar()+", %dest"+getDerecha().getIdVar()+"\n";
+        String codigo = getIzquierda().generarCodigo();
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
+        codigo += getDerecha().generarCodigo();
+        codigo += "%var"+getIdVar()+" = "+get_llvm_arithmetic_op_code()+" "+get_llvm_op_code()+" "+get_llvm_type_code()+"  %var"+getIzquierda().getIdVar()+", %var"+getDerecha().getIdVar()+"\n";
+        return codigo;
     }
 }

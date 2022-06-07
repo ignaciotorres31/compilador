@@ -1,18 +1,18 @@
 package compilador.ast.expresiones.binarias;
 
+import compilador.ast.base.CodeGeneratorHelper;
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.base.Tipo;
 
 public abstract class OperacionBinaria extends Expresion {
     
-   private Expresion izquierda;
+    private Expresion izquierda;
     private Expresion derecha;
 
-    public OperacionBinaria(Expresion izquierda, Expresion derecha, Tipo tipo, String idVar) {
+    public OperacionBinaria(Expresion izquierda, Expresion derecha, Tipo tipo) {
         this.izquierda = izquierda;
         this.derecha = derecha;
         super.setTipo(tipo);
-        super.setIdVar(idVar);
     }
 
 
@@ -56,8 +56,9 @@ public abstract class OperacionBinaria extends Expresion {
     @Override
     public String generarCodigo(){
         String codigo = getIzquierda().generarCodigo();
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         codigo += getDerecha().generarCodigo();
-        codigo += "%dest"+getIdVar()+" = "+get_llvm_op_code()+" "+get_llvm_type_code()+" %dest"+getIzquierda().getIdVar()+", %dest"+getDerecha().getIdVar()+"\n";
+        codigo += "%var"+getIdVar()+" = "+get_llvm_op_code()+" "+get_llvm_type_code()+" %var"+getIzquierda().getIdVar()+", %var"+getDerecha().getIdVar()+"\n";
         return codigo;
     }
 }

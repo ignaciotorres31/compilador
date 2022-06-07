@@ -1,22 +1,41 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package compilador.ast.expresiones;
+ package compilador.ast.expresiones;
+
+import compilador.ast.base.CodeGeneratorHelper;
+import compilador.ast.base.Tipo;
 
 /**
  *
  * @author Nacho
  */
 public class Input extends Expresion{
-
-   @Override
-    public String generarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public Input(Tipo tipo){
+        setTipo(tipo);
     }
     
+    @Override
     public Input clonar(){
-        return new Input();
+        return new Input(getTipo());
+    }
+    
+    private String getTipo_llvm(String tipo){
+        return (tipo == "INTEGER") ? "i32" : ((tipo == "FLOAT") ? "double" : "i1");
+    }
+    
+    @Override
+    public String generarCodigo(){
+        StringBuilder codigo = new StringBuilder();
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
+        codigo.append(String.format("%%temp%s = alloca %s\n", getIdVar(), getTipo_llvm(getTipo().toString())));
+        if(getTipo()==Tipo.INTEGER){
+            codigo.append(String.format("%%dest%s = call i32 (i8*, ...) @scanf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.int_read_format, i64 0, i64 0), i32* %%temp%s)\n", getIdVar(), getIdVar()));
+        }else if(getTipo()==Tipo.FLOAT){
+            codigo.append(String.format("%%dest%s = call i32 (i8*, ...) @scanf(i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.double_read_format, i64 0, i64 0), double* %%temp%s)\n", getIdVar(), getIdVar()));
+        }
+        else if(getTipo()==Tipo.BOOLEAN){
+            codigo.append(String.format("%%dest%s = call i32 (i8*, ...) @scanf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.int_read_format, i64 0, i64 0), i1* %%temp%s)\n", getIdVar(), getIdVar()));
+        }
+        codigo.append(String.format("%%var%s = load %s, %s* %%temp%s\n", getIdVar(), getTipo_llvm(getTipo().toString()), getTipo_llvm(getTipo().toString()), getIdVar()));
+        return codigo.toString();
     }
 }

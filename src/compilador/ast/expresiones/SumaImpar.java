@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package compilador.ast.expresiones;
 
+import compilador.ast.base.CodeGeneratorHelper;
 import compilador.ast.base.Tipo;
-import compilador.ast.expresiones.Expresion;
-import compilador.ast.expresiones.Identificador;
-import compilador.ast.expresiones.factor.Entero;
 import compilador.ast.expresiones.factor.Constante;
 import compilador.ast.sentencias.Asignacion;
 import compilador.ast.sentencias.Sentencia;
@@ -20,20 +13,20 @@ import java.util.ArrayList;
  */
 public class SumaImpar extends Expresion{
     
-    private Constante pivot;
+     private Constante pivot;
     private ArrayList<Sentencia> lista;
     private Asignacion contador;
     private Asignacion suma;
     private String nombreAux;
     private String nombreSuma;
 
-    public SumaImpar(Constante pivot, ArrayList<Sentencia> lista, String nombreAux, String nombreSuma){
+    public SumaImpar(Constante pivot, ArrayList<Sentencia> lista, String nombreAux, String nombreSuma, Asignacion contador, Asignacion suma){
         this.pivot = pivot;
         this.lista = lista;
         this.nombreAux = nombreAux;
         this.nombreSuma = nombreSuma;
-        this.contador = new Asignacion(new Identificador(nombreAux, Tipo.INTEGER),new Entero(0));
-        this.suma = new Asignacion(new Identificador(nombreSuma, Tipo.INTEGER),new Entero(0));
+        this.contador = contador;
+        this.suma = suma;
         super.setTipo(Tipo.INTEGER);
     }
     
@@ -88,12 +81,20 @@ public class SumaImpar extends Expresion{
             Sentencia senCopia = sen.clonar();
             sentencias.add(senCopia);
         }
-        return new SumaImpar(getPivot().clonar(), sentencias, this.nombreAux, this.nombreSuma);
+        return new SumaImpar(getPivot().clonar(), sentencias, this.nombreAux, this.nombreSuma, getContador().clonar(), getSuma().clonar());
     }
 
     @Override
     public String generarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder codigo = new StringBuilder();
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
+        codigo.append(getSuma().generarCodigo());
+        codigo.append(getContador().generarCodigo());
+        for(Sentencia sen : getLista()){
+            codigo.append(sen.generarCodigo());
+        }
+        codigo.append(String.format("%%var%s = load i32, i32* @%s\n", getIdVar(), this.nombreSuma));
+        return codigo.toString();
     }
     
 }

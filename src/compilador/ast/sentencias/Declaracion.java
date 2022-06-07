@@ -38,12 +38,13 @@ public class Declaracion extends Sentencia {
         return getClass().getSimpleName();
     }
     
+    @Override
     public Declaracion clonar(){
         return new Declaracion(getTipo(), getIdent().clonar());
     }
 
     @Override
     public String generarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "";
     }
 }

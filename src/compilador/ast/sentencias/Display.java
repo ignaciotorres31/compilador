@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package compilador.ast.sentencias;
 
+import compilador.ast.base.CodeGeneratorHelper;
 import compilador.ast.expresiones.Expresion;
-import compilador.ast.expresiones.factor.StringLiteral;
 
 /**
  *
@@ -15,17 +10,17 @@ import compilador.ast.expresiones.factor.StringLiteral;
 public class Display extends Sentencia{
     
     private Expresion display;
+    private Integer cantidadDigitos;
     
+    public Display(Expresion display, Integer cantidadDigitos){
+        setNombre("DISPLAY");
+        this.display = display;
+        setCantidadDigitos(cantidadDigitos);
+    }
     public Display(Expresion display){
-        super("DISPLAY");
+        setNombre("DISPLAY");
         this.display = display;
-    }
-    
-    public Display(StringLiteral display){
-        super("DISPLAY");
-        this.display = display;
-    }
-    
+    }   
 
     public Expresion getDisplay() {
         return display;
@@ -33,6 +28,14 @@ public class Display extends Sentencia{
 
     public void setDisplay(Expresion display) {
         this.display = display;
+    }
+
+    public Integer getCantidadDigitos() {
+        return cantidadDigitos;
+    }
+    
+    public void setCantidadDigitos(Integer cantidadDigitos) {
+        this.cantidadDigitos = cantidadDigitos;
     }
     
     @Override
@@ -42,28 +45,35 @@ public class Display extends Sentencia{
         return grafico;
     }   
     
+    @Override
     public Display clonar(){
-        return new Display(getDisplay().clonar());
+        return new Display(getDisplay().clonar(), getCantidadDigitos());
     }
 
     @Override
     public String generarCodigo() {
         String codigo = "";
-        switch (getDisplay().get_llvm_type_code()) {
-            case "INTEGER":
-                codigo += "%dest"+getIdVar()+"= call i32 (i8*, ...) @printf(i8* getelementptr([4 x i8], [4 x i8]* @.integer, i32 0, i32 0), integer"
-                        + "%"+ getIdVar();
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
+        switch (getDisplay().getTipo()){
+            case INTEGER:
+                codigo += getDisplay().generarCodigo();
+                codigo += "%dest"+getIdVar()+" = call i32 (i8*, ...) @printf(i8* getelementptr([4 x i8], [4 x i8]* @.integer, i32 0, i32 0), i32"
+                        + " %var"+ getDisplay().getIdVar()+")\n";
                 break;
-            case "FLOAT":
-                codigo += "%dest"+getIdVar()+"= call i32 (i8*, ...) @printf(i8* getelementptr([4 x i8], [4 x i8]* @.double, i32 0, i32 0), double"
-                        + "%"+ getIdVar();
+            case FLOAT:
+                codigo += getDisplay().generarCodigo();
+                codigo += "%dest"+getIdVar()+" = call i32 (i8*, ...) @printf(i8* getelementptr([5 x i8], [5 x i8]* @.float, i32 0, i32 0), double"
+                        + " %var"+ getDisplay().getIdVar()+")\n";
                 break;
-            case "BOOLEAN":
-                codigo += "%dest"+getIdVar()+"= call i32 (i8*, ...) @printf(i8* getelementptr([4 x i8], [4 x i8]* @.boolean, i32 0, i32 0), boolean"
-                        + "%"+ getIdVar();
+            case BOOLEAN:
+                codigo += getDisplay().generarCodigo();
+                codigo += "%dest"+getIdVar()+" = call i32 (i8*, ...) @printf(i8* getelementptr([4 x i8], [4 x i8]* @.integer, i32 0, i32 0), i1"
+                        + " %var"+ getDisplay().getIdVar()+")\n";
                 break;
             default:
-                codigo += "%dest"+getIdVar()+"= call i32 @puts(i8* getelementptr ([11 x i8], [11 x i8] * @"+getIdVar()+", i32 0, i32 0))";
+                codigo += getDisplay().generarCodigo();
+                codigo += "%dest"+getIdVar()+" = call i32 @puts(i8* getelementptr (["+(getCantidadDigitos()+1)+" x i8], ["+(getCantidadDigitos()+1)
+                        +" x i8] * @str"+getDisplay().getIdVar()+", i32 0, i32 0))\n";
                 break;
         }
         return codigo;

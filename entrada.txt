@@ -1,0 +1,25 @@
+(* Prueba de codigo para compiladores*)
+DECLARE.SECTION
+INTEGER: a1,a2,num1;
+Boolean: b1 , b2;
+float: f1,f2;
+ENDDECLARE.SECTION
+
+PROGRAM.SECTION
+f1 = 1.2 + 2.0
+DISPLAY(f1)
+DISPLAY("Esto es compiladores")
+WHILE(a1 < 10)DO
+    a1 = input_int()	
+    IF(f1 + 0.8 == -2*-2.0)THEN
+	f2 = 3
+	f1 = f1 + f2
+	DISPLAY(f1)
+    ELSE
+	f2 = 5
+	f2= f2 - f1
+	DISPLAY(f2)
+    END	
+END
+num1 = sumaimpar(5;[1,2,3])
+ENDPROGRAM.SECTION

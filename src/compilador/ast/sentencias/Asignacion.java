@@ -1,8 +1,8 @@
 package compilador.ast.sentencias;
 
+import compilador.ast.base.CodeGeneratorHelper;
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.expresiones.Identificador;
-
 
 
 public class Asignacion extends Sentencia {
@@ -11,7 +11,7 @@ public class Asignacion extends Sentencia {
     private Expresion expresion;
 
     public Asignacion(Identificador ident, Expresion e) {
-        super("=");
+        setNombre("=");
         this.ident = ident;
         this.expresion = e;
     }
@@ -46,10 +46,9 @@ public class Asignacion extends Sentencia {
 
     @Override
     public String generarCodigo() {
-        String codigo = "br %etasig"+getIdVar()+"\n";
-        codigo += "etasig"+getIdVar()+":\n";
-        codigo += getIdent().generarCodigo();
-        codigo += getExpresion().generarCodigo();
+        String codigo = getExpresion().generarCodigo();
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
+        codigo += "store "+getExpresion().get_llvm_type_code()+" %var"+getExpresion().getIdVar()+", "+getIdent().get_llvm_type_code()+"* @"+getIdent().getNombre()+"\n";
         return codigo;
     }
 

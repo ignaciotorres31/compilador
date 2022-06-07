@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package compilador.ast.expresiones.factor;
 
+import compilador.ast.base.CodeGeneratorHelper;
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.base.Tipo;
 
@@ -15,7 +12,7 @@ public class Flotante extends Literal {
     private final Float valor;
 
     public Flotante(Float valor) {
-        super(Tipo.FLOAT);
+        setTipo(Tipo.FLOAT);
         this.valor = valor;
         setNombre("Float");
     }
@@ -34,7 +31,8 @@ public class Flotante extends Literal {
     }
 
     @Override
-    public String generarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String generarCodigo(){
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
+        return "%var"+getIdVar()+" = fadd double 0.0, "+getValor()+"\n";
     }
 }

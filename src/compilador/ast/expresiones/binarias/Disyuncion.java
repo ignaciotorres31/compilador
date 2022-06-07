@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package compilador.ast.expresiones.binarias;
 
 import compilador.ast.base.Tipo;
@@ -13,8 +9,8 @@ import compilador.ast.expresiones.Expresion;
  */
 public class Disyuncion extends OperacionBinaria {
     
-    public Disyuncion(Expresion izquierda, Expresion derecha , Tipo tipo, String idVar) {
-        super(izquierda, derecha, Tipo.BOOLEAN, idVar);
+    public Disyuncion(Expresion izquierda, Expresion derecha) {
+        super(izquierda, derecha, Tipo.BOOLEAN);
     }
     
     @Override
@@ -23,7 +19,7 @@ public class Disyuncion extends OperacionBinaria {
     }
     
     public Disyuncion clonar(){
-        return new Disyuncion(getIzquierda().clonar(), getDerecha().clonar(), Tipo.BOOLEAN, getIdVar());
+        return new Disyuncion(getIzquierda().clonar(), getDerecha().clonar());
     }
 
     @Override

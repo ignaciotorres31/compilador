@@ -6,7 +6,6 @@ import java.util.*;
 public class Programa extends Nodo {
     
     private ArrayList<Sentencia> cuerpo;
-    private String ir_ref;
 
     public Programa(ArrayList<Sentencia> cuerpo) {
         super("Bloque Programa");
@@ -20,15 +19,6 @@ public class Programa extends Nodo {
     public void setCuerpo(ArrayList<Sentencia> cuerpo) {
         this.cuerpo = cuerpo;
     }
-
-    public String getIr_ref() {
-        return ir_ref;
-    }
-
-    public void setIr_ref(String ir_ref) {
-        this.ir_ref = ir_ref;
-    }
-    
     
     @Override
     public String graficar(String idPadre){
@@ -41,11 +31,12 @@ public class Programa extends Nodo {
 
     @Override
     public String generarCodigo() {
-        String codigo = "";
+        StringBuilder codigo = new StringBuilder();
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         for(Nodo prog : getCuerpo()){
-            codigo += prog.generarCodigo();
+            codigo.append(prog.generarCodigo());
         }
-        return codigo;
+        return codigo.toString();
     }
 
 }

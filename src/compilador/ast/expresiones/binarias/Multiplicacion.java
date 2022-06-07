@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package compilador.ast.expresiones.binarias;
 
 import compilador.ast.base.Tipo;
@@ -13,8 +9,8 @@ import compilador.ast.expresiones.Expresion;
  */
 public class Multiplicacion extends OperacionBinaria {
 
-    public Multiplicacion(Expresion izquierda, Expresion derecha, Tipo tipo, String idVar) {
-        super(izquierda, derecha, tipo, idVar);
+    public Multiplicacion(Expresion izquierda, Expresion derecha, Tipo tipo) {
+        super(izquierda, derecha, tipo);
         super.setTipo(tipo);
     }
 
@@ -24,7 +20,7 @@ public class Multiplicacion extends OperacionBinaria {
     }
     
     public Multiplicacion clonar(){
-        return new Multiplicacion(getIzquierda().clonar(), getDerecha().clonar(), getTipo(), getIdVar());
+        return new Multiplicacion(getIzquierda().clonar(), getDerecha().clonar(), getTipo());
     }
 
     @Override

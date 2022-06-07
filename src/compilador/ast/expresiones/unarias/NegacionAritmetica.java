@@ -1,33 +1,44 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package compilador.ast.expresiones.unarias;
 
+import compilador.ast.base.CodeGeneratorHelper;
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.base.Tipo;
-import compilador.ast.expresiones.factor.Entero;
-import compilador.ast.expresiones.factor.Flotante;
-import compilador.ast.expresiones.factor.Literal;
 
 /**
  *
  * @author facundo
  */
 public class NegacionAritmetica extends OperacionUnaria {
+    private String operacion;
     
-   public NegacionAritmetica(Expresion expresion) {
-        super("-", expresion);
+   public NegacionAritmetica(Expresion expresion, String operacion, Tipo tipo) {
+        super("-", expresion, tipo);
+        this.operacion = operacion;
     }
     
     public NegacionAritmetica clonar(){
-        return new NegacionAritmetica(getExpresion().clonar());
+        return new NegacionAritmetica(getExpresion().clonar(), getOperacion(), getTipo());
     }
 
+    public String getOperacion() {
+        return operacion;
+    }
 
+    public void setOperacion(String operacion) {
+        this.operacion = operacion;
+    }
+    
     @Override
-    public String generarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String generarCodigo(){
+        StringBuilder codigo = new StringBuilder();
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());        
+        codigo.append(this.getExpresion().generarCodigo());
+        if(getExpresion().getTipo() == Tipo.INTEGER){
+            codigo.append(String.format("%%var%s = %s %s 0, %%var%s\n", getIdVar(), getOperacion(), get_llvm_type_code(), getExpresion().getIdVar()));
+        }else if(getTipo() == Tipo.FLOAT){
+            codigo.append(String.format("%%var%s = %s %s 0.0,%%var%s\n", getIdVar(), getOperacion(), get_llvm_type_code(), getExpresion().getIdVar()));
+        }
+        return codigo.toString();
     }
 
     @Override

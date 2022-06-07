@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package compilador.ast.expresiones.factor;
 
+import compilador.ast.base.CodeGeneratorHelper;
 import compilador.ast.base.Tipo;
 
 /**
@@ -15,7 +11,7 @@ public class StringLiteral extends Literal{
     private final String valor;
 
     public StringLiteral(String valor) {
-        super(Tipo.STRING);
+        setTipo(Tipo.STRING);
         this.valor = valor;
         setNombre("String");
     }
@@ -34,12 +30,11 @@ public class StringLiteral extends Literal{
 
     @Override
     public String generarCodigo() {
-        StringBuilder resultado = new StringBuilder();        
-        this.setIr_ref(CodeGeneratorHelper.getNewPointer());
-        resultado.append(String.format("@str = private constant [11 x i8] c %1$s \00\"\n", 
-                this.getValor()));
-        return resultado.toString();
-        
+        StringBuilder codigo = new StringBuilder();
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
+        codigo.append(String.format("@str%1$s = private constant [%2$s x i8] c\"%3$s\\00\"\n", 
+                getIdVar(), (getValor().length()+1), getValor()));
+        return codigo.toString();
     }
     
 }

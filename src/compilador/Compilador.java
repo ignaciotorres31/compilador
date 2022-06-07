@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package compilador;
 
 import compilador.ast.base.ProgramaCompleto;
@@ -17,6 +12,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import java_cup.runtime.Symbol;
@@ -26,7 +24,7 @@ import java_cup.runtime.Scanner;
 
 /**
  *
- * @author Merce
+ * @author Nacho
  */
 public class Compilador extends javax.swing.JFrame {
     
@@ -295,12 +293,19 @@ public class Compilador extends javax.swing.JFrame {
         try {
             
             //generar codigo IR para el LLVM
-            jTextPane1.setText(programa.generarCodigo());
-            /*PrintWriter grafico = new PrintWriter(new FileWriter("programa.ll"));
-            grafico.println(programa.generarCodigo());
+            String codigo = programa.generarCodigo();
+            jTextPane1.setText(codigo);
+            PrintWriter grafico = new PrintWriter(new FileWriter("programa.ll"));
+            grafico.println(codigo);
             grafico.close();
             System.out.println("Código generado");
 
+            File file = new File("programa.ll");
+            if (!file.exists()) {
+                file.delete();
+                file.createNewFile();
+            }
+            Files.write(Paths.get("programa.ll"), codigo.getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
             
             Process process = Runtime.getRuntime().exec("clang -c -o programa.o programa.ll");
             BufferedReader reader1 = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -310,13 +315,13 @@ public class Compilador extends javax.swing.JFrame {
             }
             System.out.println("Archivo objeto generado");
 
-            Process process2 = Runtime.getRuntime().exec("clang -o programa.exe programa.o");
+            Process process2 = Runtime.getRuntime().exec("clang -o programa.exe programa.o scanf.o");
             BufferedReader reader2 = new BufferedReader(new InputStreamReader(process2.getInputStream()));
             String line2;
             while ((line2 = reader2.readLine()) != null) {
                 System.out.println(line2);
             }
-            System.out.println("Ejecutable generado");*/
+            System.out.println("Ejecutable generado");
         } catch (Error e) {
             System.out.println("Error: " + e.getMessage());
             jTextPane1.setText("Error: " + e.getMessage());

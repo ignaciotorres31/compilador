@@ -1,13 +1,14 @@
 package compilador.ast.expresiones.binarias;
 
+import compilador.ast.base.CodeGeneratorHelper;
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.base.Tipo;
 
 
 public class Igualdad extends OperacionBinaria {
     
-    public Igualdad(Expresion izquierda, Expresion derecha, String idVar) {
-        super(izquierda, derecha, Tipo.BOOLEAN, idVar);
+    public Igualdad(Expresion izquierda, Expresion derecha) {
+        super(izquierda, derecha, Tipo.BOOLEAN);
     }
 
     @Override
@@ -16,7 +17,7 @@ public class Igualdad extends OperacionBinaria {
     }
     
     public Igualdad clonar(){
-        return new Igualdad(getIzquierda().clonar(), getDerecha().clonar(), getIdVar());
+        return new Igualdad(getIzquierda().clonar(), getDerecha().clonar());
     }
 
     @Override
@@ -25,7 +26,16 @@ public class Igualdad extends OperacionBinaria {
     }
 
     @Override
+    public String get_llvm_type_code(){
+        return getIzquierda().getTipo().equals(Tipo.FLOAT) ? "double" : "i32";
+    }
+
+    @Override
     public String generarCodigo(){
-        return "%dest"+getIdVar()+" = "+get_llvm_arithmetic_op_code()+" "+get_llvm_op_code()+" "+get_llvm_type_code()+"  %dest"+getIzquierda().getIdVar()+", %dest"+getDerecha().getIdVar()+"\n";
+        String codigo = getIzquierda().generarCodigo();
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
+        codigo += getDerecha().generarCodigo();
+        codigo += "%var"+getIdVar()+" = "+get_llvm_arithmetic_op_code()+" "+get_llvm_op_code()+" "+get_llvm_type_code()+"  %var"+getIzquierda().getIdVar()+", %var"+getDerecha().getIdVar()+"\n";
+        return codigo;
     }
 }

@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package compilador.ast.expresiones.factor;
 
+import compilador.ast.base.CodeGeneratorHelper;
 import compilador.ast.base.Tipo;
 
 /**
@@ -14,7 +11,7 @@ public class Booleano extends Literal {
      private final Boolean valor;
 
     public Booleano(Boolean valor) {
-        super(Tipo.BOOLEAN);
+        setTipo(Tipo.BOOLEAN);
         this.valor = valor;
         setNombre("Boolean");
     }
@@ -28,12 +25,14 @@ public class Booleano extends Literal {
         return valor.toString();
     }
     
+     @Override
     public Booleano clonar(){
         return new Booleano(getValor());
     }
 
     @Override
-    public String generarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String generarCodigo(){
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
+        return (getValor()) ? "%var"+getIdVar()+" = add i1 0, 1\n" : "%var"+getIdVar()+" = add i1 0, 0\n";
     }
 }

@@ -38,6 +38,11 @@ public class Bloque extends Sentencia {
 
     @Override
     public String generarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder codigo = new StringBuilder();
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
+        for(Sentencia sen : getSentencias()){
+            codigo.append(sen.generarCodigo());
+        }
+        return codigo.toString();
     }
 }

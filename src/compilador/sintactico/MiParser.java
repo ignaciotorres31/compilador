@@ -410,6 +410,8 @@ public class MiParser extends java_cup.runtime.lr_parser {
         return ni.incrementar().toString();
     }
 
+    public ArrayList<String> variablesString = new ArrayList<>();
+
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -461,7 +463,7 @@ class CUP$MiParser$actions {
 		int bpright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		Programa bp = (Programa)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
-            RESULT = new ProgramaCompleto(bd,bp);
+            RESULT = new ProgramaCompleto(bd,bp,ht, variablesString);
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("programa",15, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -475,7 +477,7 @@ class CUP$MiParser$actions {
 		int bdright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		Bloque bd = (Bloque)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
-            RESULT = new ProgramaCompleto(bd);
+            RESULT = new ProgramaCompleto(bd,ht, variablesString);
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("programa",15, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -489,7 +491,7 @@ class CUP$MiParser$actions {
 		int bpright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		Programa bp = (Programa)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
-            RESULT = new ProgramaCompleto(bp);
+            RESULT = new ProgramaCompleto(bp,ht, variablesString);
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("programa",15, ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -767,7 +769,13 @@ class CUP$MiParser$actions {
                 RESULT = new Asignacion(new Identificador(id, Tipo.BOOLEAN),eo) ;
             }
             else if(valueId.toString() == "FLOAT"){
-                RESULT = new Asignacion(new Identificador(id, Tipo.FLOAT),eo) ;
+                if(eo.getTipo() == Tipo.INTEGER){
+                    EnteroAFlotante flotante = new EnteroAFlotante(eo);
+                    RESULT = new Asignacion(new Identificador(id, Tipo.FLOAT),flotante) ;
+                }
+                else{
+                    RESULT = new Asignacion(new Identificador(id, Tipo.FLOAT),eo) ;
+                }
             }
             else{
                 RESULT = new Asignacion(new Identificador(id, Tipo.UNKNOWN),eo) ;
@@ -912,7 +920,23 @@ class CUP$MiParser$actions {
 		int esr2right = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		Expresion esr2 = (Expresion)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
-            RESULT = new Mayor(esr1,esr2);
+            if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.INTEGER){
+                    RESULT = new Mayor(esr1,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.INTEGER){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr2);
+                    RESULT = new Mayor(esr1,flotante);
+                }
+                else if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.FLOAT){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr1);
+                    RESULT = new Mayor(flotante,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.FLOAT){
+                    RESULT = new Mayor(esr1,esr2);
+                }
+                else{
+                    throw new Exception("No se puede restar entre una variable de tipo "+esr1.getTipo().toString()+" y una variable de tipo "+esr2.getTipo().toString());
+                }
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",3, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -929,7 +953,23 @@ class CUP$MiParser$actions {
 		int esr2right = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		Expresion esr2 = (Expresion)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
-            RESULT = new MayorIgual(esr1,esr2);
+                if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.INTEGER){
+                    RESULT = new MayorIgual(esr1,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.INTEGER){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr2);
+                    RESULT = new MayorIgual(esr1,flotante);
+                }
+                else if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.FLOAT){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr1);
+                    RESULT = new MayorIgual(flotante,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.FLOAT){
+                    RESULT = new MayorIgual(esr1,esr2);
+                }
+                else{
+                    throw new Exception("No se puede restar entre una variable de tipo "+esr1.getTipo().toString()+" y una variable de tipo "+esr2.getTipo().toString());
+                }
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",3, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -946,7 +986,23 @@ class CUP$MiParser$actions {
 		int esr2right = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		Expresion esr2 = (Expresion)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
-            RESULT = new Menor(esr1,esr2);
+            if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.INTEGER){
+                    RESULT = new Menor(esr1,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.INTEGER){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr2);
+                    RESULT = new Menor(esr1,flotante);
+                }
+                else if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.FLOAT){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr1);
+                    RESULT = new Menor(flotante,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.FLOAT){
+                    RESULT = new Menor(esr1,esr2);
+                }
+                else{
+                    throw new Exception("No se puede restar entre una variable de tipo "+esr1.getTipo().toString()+" y una variable de tipo "+esr2.getTipo().toString());
+                }
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",3, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -963,7 +1019,23 @@ class CUP$MiParser$actions {
 		int esr2right = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		Expresion esr2 = (Expresion)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
-            RESULT = new MenorIgual(esr1,esr2);
+            if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.INTEGER){
+                    RESULT = new MenorIgual(esr1,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.INTEGER){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr2);
+                    RESULT = new MenorIgual(esr1,flotante);
+                }
+                else if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.FLOAT){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr1);
+                    RESULT = new MenorIgual(flotante,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.FLOAT){
+                    RESULT = new MenorIgual(esr1,esr2);
+                }
+                else{
+                    throw new Exception("No se puede restar entre una variable de tipo "+esr1.getTipo().toString()+" y una variable de tipo "+esr2.getTipo().toString());
+                }
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",3, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -980,7 +1052,23 @@ class CUP$MiParser$actions {
 		int esr2right = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		Expresion esr2 = (Expresion)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
-            RESULT = new Igualdad(esr1,esr2);
+            if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.INTEGER){
+                    RESULT = new Igualdad(esr1,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.INTEGER){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr2);
+                    RESULT = new Igualdad(esr1,flotante);
+                }
+                else if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.FLOAT){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr1);
+                    RESULT = new Igualdad(flotante,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.FLOAT){
+                    RESULT = new Igualdad(esr1,esr2);
+                }
+                else{
+                    throw new Exception("No se puede restar entre una variable de tipo "+esr1.getTipo().toString()+" y una variable de tipo "+esr2.getTipo().toString());
+                }
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",3, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -997,7 +1085,23 @@ class CUP$MiParser$actions {
 		int esr2right = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		Expresion esr2 = (Expresion)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
-            RESULT = new Desigualdad(esr1,esr2);
+            if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.INTEGER){
+                    RESULT = new Desigualdad(esr1,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.INTEGER){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr2);
+                    RESULT = new Desigualdad(esr1,flotante);
+                }
+                else if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.FLOAT){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr1);
+                    RESULT = new Desigualdad(flotante,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.FLOAT){
+                    RESULT = new Desigualdad(esr1,esr2);
+                }
+                else{
+                    throw new Exception("No se puede restar entre una variable de tipo "+esr1.getTipo().toString()+" y una variable de tipo "+esr2.getTipo().toString());
+                }
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("comparacion",3, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -1032,10 +1136,12 @@ class CUP$MiParser$actions {
                     RESULT = new Suma(esr,emd , Tipo.INTEGER);
                 }
                 else if(esr.getTipo() == Tipo.FLOAT && emd.getTipo() == Tipo.INTEGER){
-                    RESULT = new Suma(esr,emd, Tipo.FLOAT);
+                    EnteroAFlotante flotante = new EnteroAFlotante(emd);
+                    RESULT = new Suma(esr,flotante, Tipo.FLOAT);
                 }
                 else if(esr.getTipo() == Tipo.INTEGER && emd.getTipo() == Tipo.FLOAT){
-                    RESULT = new Suma(esr,emd, Tipo.FLOAT);
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr);
+                    RESULT = new Suma(flotante,emd, Tipo.FLOAT);
                 }
                 else if(esr.getTipo() == Tipo.FLOAT && emd.getTipo() == Tipo.FLOAT){
                     RESULT = new Suma(esr,emd, Tipo.FLOAT);
@@ -1063,10 +1169,12 @@ class CUP$MiParser$actions {
                     RESULT = new Resta(esr,emd , Tipo.INTEGER);
                 }
                 else if(esr.getTipo() == Tipo.FLOAT && emd.getTipo() == Tipo.INTEGER){
-                    RESULT = new Resta(esr,emd, Tipo.FLOAT);
+                    EnteroAFlotante flotante = new EnteroAFlotante(emd);
+                    RESULT = new Resta(esr,flotante, Tipo.FLOAT);
                 }
                 else if(esr.getTipo() == Tipo.INTEGER && emd.getTipo() == Tipo.FLOAT){
-                    RESULT = new Resta(esr,emd, Tipo.FLOAT);
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr);
+                    RESULT = new Resta(flotante,emd, Tipo.FLOAT);
                 }
                 else if(esr.getTipo() == Tipo.FLOAT && emd.getTipo() == Tipo.FLOAT){
                     RESULT = new Resta(esr,emd, Tipo.FLOAT);
@@ -1108,10 +1216,12 @@ class CUP$MiParser$actions {
                     RESULT = new Multiplicacion(emd,mu, Tipo.INTEGER);
                 }
                 else if(emd.getTipo() == Tipo.FLOAT && mu.getTipo() == Tipo.INTEGER){
-                    RESULT = new Multiplicacion(emd,mu, Tipo.FLOAT);
+                    EnteroAFlotante flotante = new EnteroAFlotante(mu);
+                    RESULT = new Multiplicacion(emd,flotante, Tipo.FLOAT);
                 }
                 else if(emd.getTipo() == Tipo.INTEGER && mu.getTipo() == Tipo.FLOAT){
-                    RESULT = new Multiplicacion(emd,mu, Tipo.FLOAT);
+                    EnteroAFlotante flotante = new EnteroAFlotante(emd);
+                    RESULT = new Multiplicacion(flotante,mu, Tipo.FLOAT);
                 }
                 else if(emd.getTipo() == Tipo.FLOAT && mu.getTipo() == Tipo.FLOAT){
                     RESULT = new Multiplicacion(emd,mu, Tipo.FLOAT);
@@ -1139,10 +1249,12 @@ class CUP$MiParser$actions {
                     RESULT = new Division(emd,mu, Tipo.INTEGER);
                 }
                 else if(emd.getTipo() == Tipo.FLOAT && mu.getTipo() == Tipo.INTEGER){
-                    RESULT = new Division(emd,mu, Tipo.FLOAT);
+                    EnteroAFlotante flotante = new EnteroAFlotante(mu);
+                    RESULT = new Division(emd,flotante, Tipo.FLOAT);
                 }
                 else if(emd.getTipo() == Tipo.INTEGER && mu.getTipo() == Tipo.FLOAT){
-                    RESULT = new Division(emd,mu, Tipo.FLOAT);
+                    EnteroAFlotante flotante = new EnteroAFlotante(emd);
+                    RESULT = new Division(flotante,mu, Tipo.FLOAT);
                 }
                 else if(emd.getTipo() == Tipo.FLOAT && mu.getTipo() == Tipo.FLOAT){
                     RESULT = new Division(emd,mu, Tipo.FLOAT);
@@ -1177,7 +1289,14 @@ class CUP$MiParser$actions {
 		int muright = ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()).right;
 		Expresion mu = (Expresion)((java_cup.runtime.Symbol) CUP$MiParser$stack.peek()).value;
 		
-            RESULT =  new NegacionAritmetica(mu) ;
+            if(mu.getTipo() == Tipo.INTEGER){
+                RESULT =  new NegacionAritmetica(mu,"sub",Tipo.INTEGER);
+            }else if(mu.getTipo() == Tipo.FLOAT){
+                RESULT =  new NegacionAritmetica(mu,"fsub",Tipo.FLOAT);
+            }
+            else{
+                throw new Exception("No se puede negar una variable de tipo "+mu.getTipo().toString());
+            }
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("menos_unario",8, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -1335,8 +1454,9 @@ class CUP$MiParser$actions {
             ArrayList<Sentencia> then1 = new ArrayList<>();
             ArrayList<Sentencia> else1 = new ArrayList<>();
             Igualdad condicionListaVacia = new Igualdad(new Entero(le.size()), new Entero(0));
-
-            Display listaVacia = new Display(new StringLiteral("La lista está vacía"));
+            StringLiteral str = new StringLiteral("La lista esta vacia");
+            variablesString.add(str.generarCodigo());
+            Display listaVacia = new Display(str, str.getValor().length());
             then1.add(listaVacia);
 
 
@@ -1344,7 +1464,9 @@ class CUP$MiParser$actions {
             ArrayList<Sentencia> else2 = new ArrayList<>();
             MenorIgual condicionPivotNegativo = new MenorIgual(new Entero(Integer.parseInt(il)), new Entero(0));
 
-            Display pivotNegativo = new Display(new StringLiteral("El valor debe ser >=1"));
+            StringLiteral str2 = new StringLiteral("El valor debe ser >=1");
+            variablesString.add(str2.generarCodigo());
+            Display pivotNegativo = new Display(str2, str2.getValor().length());
             then2.add(pivotNegativo);
 
 
@@ -1352,7 +1474,9 @@ class CUP$MiParser$actions {
             ArrayList<Sentencia> else3 = new ArrayList<>();
             Mayor condicionPivotSize = new Mayor(new Entero(Integer.parseInt(il)), new Entero(le.size()));
 
-            Display pivotSize = new Display(new StringLiteral("La lista tiene menos elementos que el indicado"));
+            StringLiteral str3 = new StringLiteral("La lista tiene menos elementos que el indicado");
+            variablesString.add(str3.generarCodigo());
+            Display pivotSize = new Display(str3, str3.getValor().length());
             then3.add(pivotSize);
 
 
@@ -1396,7 +1520,9 @@ class CUP$MiParser$actions {
 
             Menor condicionUltimo = new Menor(new Identificador(nombreAux, Tipo.INTEGER), new Entero(Integer.parseInt(il)));
             ArrayList<Sentencia> thenUltimo = new ArrayList<>();
-            Display displayUltimo = new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"));
+            StringLiteral str4 = new StringLiteral("No existen suficientes elementos impares para el calculo");
+            variablesString.add(str4.generarCodigo());
+            Display displayUltimo = new Display(str4, str4.getValor().length());
             Asignacion sumaUltimo = new Asignacion(new Identificador(nombreSuma, Tipo.INTEGER), new Entero(0));
             thenUltimo.add(displayUltimo);
             thenUltimo.add(sumaUltimo);
@@ -1413,7 +1539,8 @@ class CUP$MiParser$actions {
             ArrayList<Sentencia> lista1 = new ArrayList<>();
             lista1.add(if1);
 
-            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)), lista1, nombreAux, nombreSuma);
+            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)), lista1, nombreAux, nombreSuma, new Asignacion(new Identificador(nombreAux, Tipo.INTEGER),new Entero(1)), new Asignacion(new Identificador(nombreSuma, Tipo.INTEGER),new Entero(0)));
+        
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("funcion_especial",12, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-7)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -1445,7 +1572,9 @@ class CUP$MiParser$actions {
             ArrayList<Sentencia> else1 = new ArrayList<>();
             Igualdad condicionListaVacia = new Igualdad(new Entero(le.size()), new Entero(0));
 
-            Display listaVacia = new Display(new StringLiteral("La lista está vacía"));
+            StringLiteral str = new StringLiteral("La lista esta vacia");
+            variablesString.add(str.generarCodigo());
+            Display listaVacia = new Display(str, str.getValor().length());
             then1.add(listaVacia);
 
 
@@ -1453,7 +1582,9 @@ class CUP$MiParser$actions {
             ArrayList<Sentencia> else2 = new ArrayList<>();
             MenorIgual condicionPivotNegativo = new MenorIgual(new Entero(Integer.parseInt(il)), new Entero(0));
 
-            Display pivotNegativo = new Display(new StringLiteral("El valor debe ser >=1"));
+            StringLiteral str2 = new StringLiteral("El valor debe ser >=1");
+            variablesString.add(str2.generarCodigo());
+            Display pivotNegativo = new Display(str2, str2.getValor().length());
             then2.add(pivotNegativo);
 
 
@@ -1461,7 +1592,9 @@ class CUP$MiParser$actions {
             ArrayList<Sentencia> else3 = new ArrayList<>();
             Mayor condicionPivotSize = new Mayor(new Entero(Integer.parseInt(il)), new Entero(le.size()));
 
-            Display pivotSize = new Display(new StringLiteral("La lista tiene menos elementos que el indicado"));
+            StringLiteral str3 = new StringLiteral("La lista tiene menos elementos que el indicado");
+            variablesString.add(str3.generarCodigo());
+            Display pivotSize = new Display(str3, str3.getValor().length());
             then3.add(pivotSize);
 
 
@@ -1505,7 +1638,9 @@ class CUP$MiParser$actions {
 
             Menor condicionUltimo = new Menor(new Identificador(nombreAux, Tipo.INTEGER), new Entero(Integer.parseInt(il)));
             ArrayList<Sentencia> thenUltimo = new ArrayList<>();
-            Display displayUltimo = new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"));
+            StringLiteral str4= new StringLiteral("No existen suficientes elementos impares para el calculo");
+            variablesString.add(str4.generarCodigo());
+            Display displayUltimo = new Display(str4, str4.getValor().length());
             Asignacion sumaUltimo = new Asignacion(new Identificador(nombreSuma, Tipo.INTEGER), new Entero(0));
             thenUltimo.add(displayUltimo);
             thenUltimo.add(sumaUltimo);
@@ -1529,7 +1664,8 @@ class CUP$MiParser$actions {
             if(valueId != Tipo.INTEGER.toString()){
                 throw new Exception("El identificador no es una variable de tipo entero.");
             }
-            RESULT = new SumaImpar(new Identificador(il, Tipo.INTEGER), lista1, nombreAux, nombreSuma);
+            RESULT = new SumaImpar(new Identificador(il, Tipo.INTEGER), lista1, nombreAux, nombreSuma, new Asignacion(new Identificador(nombreAux, Tipo.INTEGER),new Entero(1)), new Asignacion(new Identificador(nombreSuma, Tipo.INTEGER),new Entero(0)));
+        
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("funcion_especial",12, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-7)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -1547,7 +1683,9 @@ class CUP$MiParser$actions {
 		String il = (String)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-4)).value;
 		
             ArrayList<Sentencia> sentenciaDisplay = new ArrayList<>();
-            Display displayListaVacia = new Display(new StringLiteral("La lista esta vacia"));
+            StringLiteral str = new StringLiteral("La lista esta vacia");
+            variablesString.add(str.generarCodigo());
+            Display displayListaVacia = new Display(str, str.getValor().length());
             sentenciaDisplay.add(displayListaVacia);
             RESULT = new SumaImpar(new Entero(Integer.parseInt(il)), sentenciaDisplay);
         
@@ -1574,7 +1712,9 @@ class CUP$MiParser$actions {
                 throw new Exception("El identificador no es una variable de tipo entero.");
             }		
             ArrayList<Sentencia> sentenciaDisplay = new ArrayList<>();
-            Display displayListaVacia = new Display(new StringLiteral("La lista esta vacia"));
+            StringLiteral str = new StringLiteral("La lista esta vacia");
+            variablesString.add(str.generarCodigo());
+            Display displayListaVacia = new Display(str, str.getValor().length());
             sentenciaDisplay.add(displayListaVacia);
             RESULT = new SumaImpar(new Identificador(il, Tipo.INTEGER), sentenciaDisplay);        
         
@@ -1670,7 +1810,8 @@ class CUP$MiParser$actions {
 		String sl = (String)((java_cup.runtime.Symbol) CUP$MiParser$stack.elementAt(CUP$MiParser$top-1)).value;
 		
             StringLiteral str = new StringLiteral(sl);
-            RESULT = new Display(str);
+            variablesString.add(str.generarCodigo());
+            RESULT = new Display(str, str.getValor().length());
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("display",2, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-3)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -1681,7 +1822,7 @@ class CUP$MiParser$actions {
             {
               Expresion RESULT =null;
 		
-            RESULT = new Input();
+            RESULT = new Input(Tipo.INTEGER);
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",9, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -1692,7 +1833,7 @@ class CUP$MiParser$actions {
             {
               Expresion RESULT =null;
 		
-            RESULT = new Input();
+            RESULT = new Input(Tipo.FLOAT);
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",9, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }
@@ -1703,7 +1844,7 @@ class CUP$MiParser$actions {
             {
               Expresion RESULT =null;
 		
-            RESULT = new Input();
+            RESULT = new Input(Tipo.BOOLEAN);
         
               CUP$MiParser$result = parser.getSymbolFactory().newSymbol("input",9, ((java_cup.runtime.Symbol)CUP$MiParser$stack.elementAt(CUP$MiParser$top-2)), ((java_cup.runtime.Symbol)CUP$MiParser$stack.peek()), RESULT);
             }

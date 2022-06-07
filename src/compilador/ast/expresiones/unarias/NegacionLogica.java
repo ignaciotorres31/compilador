@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package compilador.ast.expresiones.unarias;
 
+import compilador.ast.base.CodeGeneratorHelper;
 import compilador.ast.expresiones.Expresion;
 import compilador.ast.base.Tipo;
-import compilador.ast.expresiones.factor.Booleano;
-import compilador.llvm.CodeGeneratorHelper;
 
 /**
  *
@@ -20,6 +15,7 @@ public class NegacionLogica extends OperacionUnaria {
         super("NOT", expresion, Tipo.BOOLEAN);
     }
     
+    @Override
     public NegacionLogica clonar(){
         return new NegacionLogica(getExpresion().clonar());
     }
@@ -31,12 +27,10 @@ public class NegacionLogica extends OperacionUnaria {
     
     @Override
     public String generarCodigo() {
-        StringBuilder resultado = new StringBuilder();        
+        StringBuilder resultado = new StringBuilder();
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());        
         resultado.append(this.getExpresion().generarCodigo());
-        this.setIr_ref(CodeGeneratorHelper.getNewPointer());
-        resultado.append(String.format("%1$s = %2$s i32 %3$s, 1\n", this.getIr_ref(), 
-                this.get_llvm_op_code(), this.getExpresion().getIr_ref()));
+        resultado.append(String.format("%%var%s = xor i1 %%var%s, 1\n", getIdVar(), getExpresion().getIdVar()));
         return resultado.toString();
-    }
-   
+    }   
 }

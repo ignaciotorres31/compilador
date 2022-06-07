@@ -44,6 +44,8 @@ parser code
         return ni.incrementar().toString();
     }
 
+    public ArrayList<String> variablesString = new ArrayList<>();
+
 :};
 
 
@@ -79,15 +81,15 @@ nonterminal List<String>  tipos_datos_id;
 start with programa;
 
 programa ::= bloque_declaraciones:bd bloque_programa: bp{:
-            RESULT = new ProgramaCompleto(bd,bp,ht);
+            RESULT = new ProgramaCompleto(bd,bp,ht, variablesString);
         :}
         |
         bloque_declaraciones:bd {:
-            RESULT = new ProgramaCompleto(bd,ht);
+            RESULT = new ProgramaCompleto(bd,ht, variablesString);
         :}
         |
         bloque_programa: bp{:
-            RESULT = new ProgramaCompleto(bp,ht);
+            RESULT = new ProgramaCompleto(bp,ht, variablesString);
         :};
 
 bloque_declaraciones ::= DECLARE_SECTION declaraciones:d ENDDECLARE_SECTION{:
@@ -194,7 +196,13 @@ sentencia_asignacion ::= IDENTIFICADOR:id IGUAL expresion_or: eo {:
                 RESULT = new Asignacion(new Identificador(id, Tipo.BOOLEAN),eo) ;
             }
             else if(valueId.toString() == "FLOAT"){
-                RESULT = new Asignacion(new Identificador(id, Tipo.FLOAT),eo) ;
+                if(eo.getTipo() == Tipo.INTEGER){
+                    EnteroAFlotante flotante = new EnteroAFlotante(eo);
+                    RESULT = new Asignacion(new Identificador(id, Tipo.FLOAT),flotante) ;
+                }
+                else{
+                    RESULT = new Asignacion(new Identificador(id, Tipo.FLOAT),eo) ;
+                }
             }
             else{
                 RESULT = new Asignacion(new Identificador(id, Tipo.UNKNOWN),eo) ;
@@ -246,27 +254,123 @@ expresion_not ::= NOT expresion_not :en{:
         :};
 
 comparacion ::= expresion_sr :esr1 MAYOR expresion_sr: esr2{:
-            RESULT = new Mayor(esr1,esr2);
+            if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.INTEGER){
+                    RESULT = new Mayor(esr1,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.INTEGER){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr2);
+                    RESULT = new Mayor(esr1,flotante);
+                }
+                else if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.FLOAT){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr1);
+                    RESULT = new Mayor(flotante,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.FLOAT){
+                    RESULT = new Mayor(esr1,esr2);
+                }
+                else{
+                    throw new Exception("No se puede restar entre una variable de tipo "+esr1.getTipo().toString()+" y una variable de tipo "+esr2.getTipo().toString());
+                }
         :}
         |
         expresion_sr :esr1 MAYOR_IGUAL expresion_sr: esr2{:
-            RESULT = new MayorIgual(esr1,esr2);
+                if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.INTEGER){
+                    RESULT = new MayorIgual(esr1,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.INTEGER){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr2);
+                    RESULT = new MayorIgual(esr1,flotante);
+                }
+                else if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.FLOAT){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr1);
+                    RESULT = new MayorIgual(flotante,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.FLOAT){
+                    RESULT = new MayorIgual(esr1,esr2);
+                }
+                else{
+                    throw new Exception("No se puede restar entre una variable de tipo "+esr1.getTipo().toString()+" y una variable de tipo "+esr2.getTipo().toString());
+                }
         :}
         |
         expresion_sr :esr1 MENOR expresion_sr: esr2{:
-            RESULT = new Menor(esr1,esr2);
+            if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.INTEGER){
+                    RESULT = new Menor(esr1,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.INTEGER){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr2);
+                    RESULT = new Menor(esr1,flotante);
+                }
+                else if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.FLOAT){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr1);
+                    RESULT = new Menor(flotante,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.FLOAT){
+                    RESULT = new Menor(esr1,esr2);
+                }
+                else{
+                    throw new Exception("No se puede restar entre una variable de tipo "+esr1.getTipo().toString()+" y una variable de tipo "+esr2.getTipo().toString());
+                }
         :}
         |
         expresion_sr :esr1 MENOR_IGUAL expresion_sr: esr2{:
-            RESULT = new MenorIgual(esr1,esr2);
+            if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.INTEGER){
+                    RESULT = new MenorIgual(esr1,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.INTEGER){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr2);
+                    RESULT = new MenorIgual(esr1,flotante);
+                }
+                else if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.FLOAT){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr1);
+                    RESULT = new MenorIgual(flotante,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.FLOAT){
+                    RESULT = new MenorIgual(esr1,esr2);
+                }
+                else{
+                    throw new Exception("No se puede restar entre una variable de tipo "+esr1.getTipo().toString()+" y una variable de tipo "+esr2.getTipo().toString());
+                }
         :}
         |
         expresion_sr :esr1 IGUAL_IGUAL expresion_sr: esr2{:
-            RESULT = new Igualdad(esr1,esr2);
+            if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.INTEGER){
+                    RESULT = new Igualdad(esr1,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.INTEGER){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr2);
+                    RESULT = new Igualdad(esr1,flotante);
+                }
+                else if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.FLOAT){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr1);
+                    RESULT = new Igualdad(flotante,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.FLOAT){
+                    RESULT = new Igualdad(esr1,esr2);
+                }
+                else{
+                    throw new Exception("No se puede restar entre una variable de tipo "+esr1.getTipo().toString()+" y una variable de tipo "+esr2.getTipo().toString());
+                }
         :}
         |
         expresion_sr :esr1 DESIGUAL expresion_sr: esr2{:
-            RESULT = new Desigualdad(esr1,esr2);
+            if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.INTEGER){
+                    RESULT = new Desigualdad(esr1,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.INTEGER){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr2);
+                    RESULT = new Desigualdad(esr1,flotante);
+                }
+                else if(esr1.getTipo() == Tipo.INTEGER && esr2.getTipo() == Tipo.FLOAT){
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr1);
+                    RESULT = new Desigualdad(flotante,esr2);
+                }
+                else if(esr1.getTipo() == Tipo.FLOAT && esr2.getTipo() == Tipo.FLOAT){
+                    RESULT = new Desigualdad(esr1,esr2);
+                }
+                else{
+                    throw new Exception("No se puede restar entre una variable de tipo "+esr1.getTipo().toString()+" y una variable de tipo "+esr2.getTipo().toString());
+                }
         :}
         |
         expresion_sr :esr{:
@@ -275,16 +379,18 @@ comparacion ::= expresion_sr :esr1 MAYOR expresion_sr: esr2{:
 
 expresion_sr ::= expresion_sr :esr SUMA expresion_md: emd{:
             if(esr.getTipo() == Tipo.INTEGER && emd.getTipo() == Tipo.INTEGER){
-                    RESULT = new Suma(esr,emd , Tipo.INTEGER, incrementar());
+                    RESULT = new Suma(esr,emd , Tipo.INTEGER);
                 }
                 else if(esr.getTipo() == Tipo.FLOAT && emd.getTipo() == Tipo.INTEGER){
-                    RESULT = new Suma(esr,emd, Tipo.FLOAT, incrementar());
+                    EnteroAFlotante flotante = new EnteroAFlotante(emd);
+                    RESULT = new Suma(esr,flotante, Tipo.FLOAT);
                 }
                 else if(esr.getTipo() == Tipo.INTEGER && emd.getTipo() == Tipo.FLOAT){
-                    RESULT = new Suma(esr,emd, Tipo.FLOAT, incrementar());
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr);
+                    RESULT = new Suma(flotante,emd, Tipo.FLOAT);
                 }
                 else if(esr.getTipo() == Tipo.FLOAT && emd.getTipo() == Tipo.FLOAT){
-                    RESULT = new Suma(esr,emd, Tipo.FLOAT, incrementar());
+                    RESULT = new Suma(esr,emd, Tipo.FLOAT);
                 }
                 else{
                     throw new Exception("No se puede restar entre una variable de tipo "+esr.getTipo().toString()+" y una variable de tipo "+emd.getTipo().toString());
@@ -296,10 +402,12 @@ expresion_sr ::= expresion_sr :esr SUMA expresion_md: emd{:
                     RESULT = new Resta(esr,emd , Tipo.INTEGER);
                 }
                 else if(esr.getTipo() == Tipo.FLOAT && emd.getTipo() == Tipo.INTEGER){
-                    RESULT = new Resta(esr,emd, Tipo.FLOAT);
+                    EnteroAFlotante flotante = new EnteroAFlotante(emd);
+                    RESULT = new Resta(esr,flotante, Tipo.FLOAT);
                 }
                 else if(esr.getTipo() == Tipo.INTEGER && emd.getTipo() == Tipo.FLOAT){
-                    RESULT = new Resta(esr,emd, Tipo.FLOAT);
+                    EnteroAFlotante flotante = new EnteroAFlotante(esr);
+                    RESULT = new Resta(flotante,emd, Tipo.FLOAT);
                 }
                 else if(esr.getTipo() == Tipo.FLOAT && emd.getTipo() == Tipo.FLOAT){
                     RESULT = new Resta(esr,emd, Tipo.FLOAT);
@@ -318,10 +426,12 @@ expresion_md ::= expresion_md :emd MULTIPLICACION menos_unario:mu{:
                     RESULT = new Multiplicacion(emd,mu, Tipo.INTEGER);
                 }
                 else if(emd.getTipo() == Tipo.FLOAT && mu.getTipo() == Tipo.INTEGER){
-                    RESULT = new Multiplicacion(emd,mu, Tipo.FLOAT);
+                    EnteroAFlotante flotante = new EnteroAFlotante(mu);
+                    RESULT = new Multiplicacion(emd,flotante, Tipo.FLOAT);
                 }
                 else if(emd.getTipo() == Tipo.INTEGER && mu.getTipo() == Tipo.FLOAT){
-                    RESULT = new Multiplicacion(emd,mu, Tipo.FLOAT);
+                    EnteroAFlotante flotante = new EnteroAFlotante(emd);
+                    RESULT = new Multiplicacion(flotante,mu, Tipo.FLOAT);
                 }
                 else if(emd.getTipo() == Tipo.FLOAT && mu.getTipo() == Tipo.FLOAT){
                     RESULT = new Multiplicacion(emd,mu, Tipo.FLOAT);
@@ -336,10 +446,12 @@ expresion_md ::= expresion_md :emd MULTIPLICACION menos_unario:mu{:
                     RESULT = new Division(emd,mu, Tipo.INTEGER);
                 }
                 else if(emd.getTipo() == Tipo.FLOAT && mu.getTipo() == Tipo.INTEGER){
-                    RESULT = new Division(emd,mu, Tipo.FLOAT);
+                    EnteroAFlotante flotante = new EnteroAFlotante(mu);
+                    RESULT = new Division(emd,flotante, Tipo.FLOAT);
                 }
                 else if(emd.getTipo() == Tipo.INTEGER && mu.getTipo() == Tipo.FLOAT){
-                    RESULT = new Division(emd,mu, Tipo.FLOAT);
+                    EnteroAFlotante flotante = new EnteroAFlotante(emd);
+                    RESULT = new Division(flotante,mu, Tipo.FLOAT);
                 }
                 else if(emd.getTipo() == Tipo.FLOAT && mu.getTipo() == Tipo.FLOAT){
                     RESULT = new Division(emd,mu, Tipo.FLOAT);
@@ -354,7 +466,14 @@ expresion_md ::= expresion_md :emd MULTIPLICACION menos_unario:mu{:
         :};
 
 menos_unario ::= RESTA menos_unario:mu{:
-            RESULT =  new NegacionAritmetica(mu) ;
+            if(mu.getTipo() == Tipo.INTEGER){
+                RESULT =  new NegacionAritmetica(mu,"sub",Tipo.INTEGER);
+            }else if(mu.getTipo() == Tipo.FLOAT){
+                RESULT =  new NegacionAritmetica(mu,"fsub",Tipo.FLOAT);
+            }
+            else{
+                throw new Exception("No se puede negar una variable de tipo "+mu.getTipo().toString());
+            }
         :}
         |
         factor:f {:
@@ -416,8 +535,9 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
             ArrayList<Sentencia> then1 = new ArrayList<>();
             ArrayList<Sentencia> else1 = new ArrayList<>();
             Igualdad condicionListaVacia = new Igualdad(new Entero(le.size()), new Entero(0));
-
-            Display listaVacia = new Display(new StringLiteral("La lista está vacía"));
+            StringLiteral str = new StringLiteral("La lista esta vacia");
+            variablesString.add(str.generarCodigo());
+            Display listaVacia = new Display(str, str.getValor().length());
             then1.add(listaVacia);
 
 
@@ -425,7 +545,9 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
             ArrayList<Sentencia> else2 = new ArrayList<>();
             MenorIgual condicionPivotNegativo = new MenorIgual(new Entero(Integer.parseInt(il)), new Entero(0));
 
-            Display pivotNegativo = new Display(new StringLiteral("El valor debe ser >=1"));
+            StringLiteral str2 = new StringLiteral("El valor debe ser >=1");
+            variablesString.add(str2.generarCodigo());
+            Display pivotNegativo = new Display(str2, str2.getValor().length());
             then2.add(pivotNegativo);
 
 
@@ -433,7 +555,9 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
             ArrayList<Sentencia> else3 = new ArrayList<>();
             Mayor condicionPivotSize = new Mayor(new Entero(Integer.parseInt(il)), new Entero(le.size()));
 
-            Display pivotSize = new Display(new StringLiteral("La lista tiene menos elementos que el indicado"));
+            StringLiteral str3 = new StringLiteral("La lista tiene menos elementos que el indicado");
+            variablesString.add(str3.generarCodigo());
+            Display pivotSize = new Display(str3, str3.getValor().length());
             then3.add(pivotSize);
 
 
@@ -477,7 +601,9 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
 
             Menor condicionUltimo = new Menor(new Identificador(nombreAux, Tipo.INTEGER), new Entero(Integer.parseInt(il)));
             ArrayList<Sentencia> thenUltimo = new ArrayList<>();
-            Display displayUltimo = new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"));
+            StringLiteral str4 = new StringLiteral("No existen suficientes elementos impares para el calculo");
+            variablesString.add(str4.generarCodigo());
+            Display displayUltimo = new Display(str4, str4.getValor().length());
             Asignacion sumaUltimo = new Asignacion(new Identificador(nombreSuma, Tipo.INTEGER), new Entero(0));
             thenUltimo.add(displayUltimo);
             thenUltimo.add(sumaUltimo);
@@ -494,7 +620,8 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
             ArrayList<Sentencia> lista1 = new ArrayList<>();
             lista1.add(if1);
 
-            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)), lista1, nombreAux, nombreSuma);
+            RESULT = new SumaImpar(new Entero(Integer.parseInt(il)), lista1, nombreAux, nombreSuma, new Asignacion(new Identificador(nombreAux, Tipo.INTEGER),new Entero(1)), new Asignacion(new Identificador(nombreSuma, Tipo.INTEGER),new Entero(0)));
+        
         :}
         |        
         SUMAIMPAR:sim PARENTESISA IDENTIFICADOR:il PUNTOCOMA CORCHETESA lista_expresiones:le CORCHETESC PARENTESISC{:
@@ -510,7 +637,9 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
             ArrayList<Sentencia> else1 = new ArrayList<>();
             Igualdad condicionListaVacia = new Igualdad(new Entero(le.size()), new Entero(0));
 
-            Display listaVacia = new Display(new StringLiteral("La lista está vacía"));
+            StringLiteral str = new StringLiteral("La lista esta vacia");
+            variablesString.add(str.generarCodigo());
+            Display listaVacia = new Display(str, str.getValor().length());
             then1.add(listaVacia);
 
 
@@ -518,7 +647,9 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
             ArrayList<Sentencia> else2 = new ArrayList<>();
             MenorIgual condicionPivotNegativo = new MenorIgual(new Entero(Integer.parseInt(il)), new Entero(0));
 
-            Display pivotNegativo = new Display(new StringLiteral("El valor debe ser >=1"));
+            StringLiteral str2 = new StringLiteral("El valor debe ser >=1");
+            variablesString.add(str2.generarCodigo());
+            Display pivotNegativo = new Display(str2, str2.getValor().length());
             then2.add(pivotNegativo);
 
 
@@ -526,7 +657,9 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
             ArrayList<Sentencia> else3 = new ArrayList<>();
             Mayor condicionPivotSize = new Mayor(new Entero(Integer.parseInt(il)), new Entero(le.size()));
 
-            Display pivotSize = new Display(new StringLiteral("La lista tiene menos elementos que el indicado"));
+            StringLiteral str3 = new StringLiteral("La lista tiene menos elementos que el indicado");
+            variablesString.add(str3.generarCodigo());
+            Display pivotSize = new Display(str3, str3.getValor().length());
             then3.add(pivotSize);
 
 
@@ -570,7 +703,9 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
 
             Menor condicionUltimo = new Menor(new Identificador(nombreAux, Tipo.INTEGER), new Entero(Integer.parseInt(il)));
             ArrayList<Sentencia> thenUltimo = new ArrayList<>();
-            Display displayUltimo = new Display(new StringLiteral("No existen suficientes elementos impares para el cálculo"));
+            StringLiteral str4= new StringLiteral("No existen suficientes elementos impares para el calculo");
+            variablesString.add(str4.generarCodigo());
+            Display displayUltimo = new Display(str4, str4.getValor().length());
             Asignacion sumaUltimo = new Asignacion(new Identificador(nombreSuma, Tipo.INTEGER), new Entero(0));
             thenUltimo.add(displayUltimo);
             thenUltimo.add(sumaUltimo);
@@ -594,12 +729,15 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
             if(valueId != Tipo.INTEGER.toString()){
                 throw new Exception("El identificador no es una variable de tipo entero.");
             }
-            RESULT = new SumaImpar(new Identificador(il, Tipo.INTEGER), lista1, nombreAux, nombreSuma);
+            RESULT = new SumaImpar(new Identificador(il, Tipo.INTEGER), lista1, nombreAux, nombreSuma, new Asignacion(new Identificador(nombreAux, Tipo.INTEGER),new Entero(1)), new Asignacion(new Identificador(nombreSuma, Tipo.INTEGER),new Entero(0)));
+        
         :}
         |
         SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORCHETESA CORCHETESC PARENTESISC{:
             ArrayList<Sentencia> sentenciaDisplay = new ArrayList<>();
-            Display displayListaVacia = new Display(new StringLiteral("La lista esta vacia"));
+            StringLiteral str = new StringLiteral("La lista esta vacia");
+            variablesString.add(str.generarCodigo());
+            Display displayListaVacia = new Display(str, str.getValor().length());
             sentenciaDisplay.add(displayListaVacia);
             RESULT = new SumaImpar(new Entero(Integer.parseInt(il)), sentenciaDisplay);
         :}
@@ -613,7 +751,9 @@ funcion_especial ::= SUMAIMPAR:sim PARENTESISA INTEGER_LITERAL:il PUNTOCOMA CORC
                 throw new Exception("El identificador no es una variable de tipo entero.");
             }		
             ArrayList<Sentencia> sentenciaDisplay = new ArrayList<>();
-            Display displayListaVacia = new Display(new StringLiteral("La lista esta vacia"));
+            StringLiteral str = new StringLiteral("La lista esta vacia");
+            variablesString.add(str.generarCodigo());
+            Display displayListaVacia = new Display(str, str.getValor().length());
             sentenciaDisplay.add(displayListaVacia);
             RESULT = new SumaImpar(new Identificador(il, Tipo.INTEGER), sentenciaDisplay);        
         :};
@@ -643,19 +783,20 @@ display ::= DISPLAY PARENTESISA expresion_or:eo PARENTESISC{:
         |
          DISPLAY PARENTESISA STRING_LITERAL:sl PARENTESISC{:
             StringLiteral str = new StringLiteral(sl);
-            RESULT = new Display(str);
+            variablesString.add(str.generarCodigo());
+            RESULT = new Display(str, str.getValor().length());
         :}  ;
 
 input ::= INPUT_INT PARENTESISA PARENTESISC {:
-            RESULT = new Input();
+            RESULT = new Input(Tipo.INTEGER);
         :}
         |
         INPUT_FLOAT PARENTESISA PARENTESISC {:
-            RESULT = new Input();
+            RESULT = new Input(Tipo.FLOAT);
         :}
         |
         INPUT_BOOL PARENTESISA PARENTESISC {:
-            RESULT = new Input();
+            RESULT = new Input(Tipo.BOOLEAN);
         :};
 
 sentencia_if ::= IF PARENTESISA expresion_or:eo PARENTESISC THEN bloque_sentencias:bs END{:
