@@ -13,6 +13,7 @@ public abstract class OperacionBinaria extends Expresion {
         this.izquierda = izquierda;
         this.derecha = derecha;
         super.setTipo(tipo);
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
 
 
@@ -56,7 +57,6 @@ public abstract class OperacionBinaria extends Expresion {
     @Override
     public String generarCodigo(){
         String codigo = getIzquierda().generarCodigo();
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         codigo += getDerecha().generarCodigo();
         codigo += "%var"+getIdVar()+" = "+get_llvm_op_code()+" "+get_llvm_type_code()+" %var"+getIzquierda().getIdVar()+", %var"+getDerecha().getIdVar()+"\n";
         return codigo;

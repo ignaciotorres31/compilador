@@ -8,6 +8,7 @@ public class Bloque extends Sentencia {
 
     public Bloque(ArrayList<Sentencia> sentencias) {
         this.sentencias = sentencias;
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
 
     public void setSentencias(ArrayList<Sentencia> sentencias) {
@@ -39,7 +40,6 @@ public class Bloque extends Sentencia {
     @Override
     public String generarCodigo() {
         StringBuilder codigo = new StringBuilder();
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         for(Sentencia sen : getSentencias()){
             codigo.append(sen.generarCodigo());
         }

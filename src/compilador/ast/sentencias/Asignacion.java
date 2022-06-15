@@ -14,6 +14,7 @@ public class Asignacion extends Sentencia {
         setNombre("=");
         this.ident = ident;
         this.expresion = e;
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
 
     public Identificador getIdent() {
@@ -47,7 +48,6 @@ public class Asignacion extends Sentencia {
     @Override
     public String generarCodigo() {
         String codigo = getExpresion().generarCodigo();
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         codigo += "store "+getExpresion().get_llvm_type_code()+" %var"+getExpresion().getIdVar()+", "+getIdent().get_llvm_type_code()+"* @"+getIdent().getNombre()+"\n";
         return codigo;
     }

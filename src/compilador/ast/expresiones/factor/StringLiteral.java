@@ -14,6 +14,7 @@ public class StringLiteral extends Literal{
         setTipo(Tipo.STRING);
         this.valor = valor;
         setNombre("String");
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
 
     public String getValor() {
@@ -25,13 +26,16 @@ public class StringLiteral extends Literal{
     }
     
     public StringLiteral clonar(){
-        return new StringLiteral(getValor());
+        StringLiteral str = new StringLiteral(getValor());
+        if(getIdVar() == ".listavacia" | getIdVar() == ".cantinsuficiente" | getIdVar() == ".cantidadimpares" | getIdVar() == ".pivotpositivo"){
+            str.setIdVar(getIdVar());
+        }
+        return str;
     }
 
     @Override
     public String generarCodigo() {
         StringBuilder codigo = new StringBuilder();
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         codigo.append(String.format("@str%1$s = private constant [%2$s x i8] c\"%3$s\\00\"\n", 
                 getIdVar(), (getValor().length()+1), getValor()));
         return codigo.toString();

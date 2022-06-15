@@ -17,6 +17,7 @@ public class EnteroAFlotante extends Expresion {
         setEntero(entero);
         setTipo(Tipo.FLOAT);
         setNombre("IntegerToFloat");
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
 
     public Expresion getEntero() {
@@ -34,7 +35,6 @@ public class EnteroAFlotante extends Expresion {
 
     public String generarCodigo(){
         String codigo = getEntero().generarCodigo();
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         codigo += "%var"+getIdVar()+" = sitofp i32 %var"+getEntero().getIdVar()+" to double\n";
         return codigo;
     }

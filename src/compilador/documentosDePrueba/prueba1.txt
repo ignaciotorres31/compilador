@@ -1,0 +1,14 @@
+(* Prueba de codigo para compiladores*)
+DECLARE.SECTION
+INTEGER: num1;
+float: f1;
+ENDDECLARE.SECTION
+
+PROGRAM.SECTION
+f1 = 1.2 + 2.0
+DISPLAY(f1)
+DISPLAY("Esto es compiladores")
+num1 = sumaimpar(5;[1,2,sumaimpar(3;[1,3,5]),3,4,5,7,8,9])
+DISPLAY("Resultado de la sumaimpar es:")
+DISPLAY(num1)
+ENDPROGRAM.SECTION

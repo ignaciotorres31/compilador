@@ -16,10 +16,12 @@ public class Display extends Sentencia{
         setNombre("DISPLAY");
         this.display = display;
         setCantidadDigitos(cantidadDigitos);
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
     public Display(Expresion display){
         setNombre("DISPLAY");
         this.display = display;
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }   
 
     public Expresion getDisplay() {
@@ -53,7 +55,6 @@ public class Display extends Sentencia{
     @Override
     public String generarCodigo() {
         String codigo = "";
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         switch (getDisplay().getTipo()){
             case INTEGER:
                 codigo += getDisplay().generarCodigo();
@@ -71,7 +72,6 @@ public class Display extends Sentencia{
                         + " %var"+ getDisplay().getIdVar()+")\n";
                 break;
             default:
-                codigo += getDisplay().generarCodigo();
                 codigo += "%dest"+getIdVar()+" = call i32 @puts(i8* getelementptr (["+(getCantidadDigitos()+1)+" x i8], ["+(getCantidadDigitos()+1)
                         +" x i8] * @str"+getDisplay().getIdVar()+", i32 0, i32 0))\n";
                 break;

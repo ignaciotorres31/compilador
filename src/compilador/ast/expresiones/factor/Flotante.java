@@ -15,6 +15,7 @@ public class Flotante extends Literal {
         setTipo(Tipo.FLOAT);
         this.valor = valor;
         setNombre("Float");
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
 
     public Float getValor() {
@@ -32,7 +33,6 @@ public class Flotante extends Literal {
 
     @Override
     public String generarCodigo(){
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         return "%var"+getIdVar()+" = fadd double 0.0, "+getValor()+"\n";
     }
 }

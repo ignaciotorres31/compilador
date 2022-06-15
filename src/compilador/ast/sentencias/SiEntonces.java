@@ -16,12 +16,14 @@ public class SiEntonces extends Seleccion {
         bloqueSino.setNombre("ELSE");
         this.bloqueSiEntonces = bloqueSiEntonces;
         this.bloqueSino = bloqueSino;
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
     public SiEntonces(Expresion condicion, Bloque bloqueSiEntonces) {
         setNombre("IF");
         setCondicion(condicion);
         bloqueSiEntonces.setNombre("THEN");
         this.bloqueSiEntonces = bloqueSiEntonces;
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
 
     public Bloque getBloqueSiEntonces() {
@@ -62,7 +64,6 @@ public class SiEntonces extends Seleccion {
     @Override
     public String generarCodigo() {
         StringBuilder codigo = new StringBuilder();
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         codigo.append(getCondicion().generarCodigo());
         if(getBloqueSino() == null){
             codigo.append(String.format("br i1 %%var%s, label %%etthen%s, label %%etfinif%s\n", getCondicion().getIdVar(), getIdVar(), getIdVar()));

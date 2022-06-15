@@ -28,11 +28,20 @@ public class SumaImpar extends Expresion{
         this.contador = contador;
         this.suma = suma;
         super.setTipo(Tipo.INTEGER);
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
     
     public SumaImpar(Constante pivot, ArrayList<Sentencia> lista){
         this.pivot = pivot;
         this.lista = lista;
+        super.setTipo(Tipo.INTEGER);
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());        
+    }
+    
+    public SumaImpar(ArrayList<Sentencia> lista){
+        this.lista = lista;
+        super.setTipo(Tipo.INTEGER);
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
     
     public Constante getPivot() {
@@ -67,8 +76,10 @@ public class SumaImpar extends Expresion{
     public String graficar(String idPadre) {
         final String miId = this.getId();
         String grafico =  super.graficar(idPadre);
-        grafico += contador.graficar(miId);
-        grafico += suma.graficar(miId);
+        if(getSuma() != null){
+            grafico += contador.graficar(miId);
+            grafico += suma.graficar(miId);
+        }
         for(Sentencia exp : getLista()){
             grafico += exp.graficar(getId());
         }
@@ -87,13 +98,20 @@ public class SumaImpar extends Expresion{
     @Override
     public String generarCodigo() {
         StringBuilder codigo = new StringBuilder();
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
-        codigo.append(getSuma().generarCodigo());
-        codigo.append(getContador().generarCodigo());
-        for(Sentencia sen : getLista()){
-            codigo.append(sen.generarCodigo());
+        if(getSuma() != null){
+            codigo.append(getSuma().generarCodigo());
+            codigo.append(getContador().generarCodigo());
+            for(Sentencia sen : getLista()){
+                codigo.append(sen.generarCodigo());
+            }
+            codigo.append(String.format("%%var%s = load i32, i32* @%s\n", getIdVar(), this.nombreSuma));
         }
-        codigo.append(String.format("%%var%s = load i32, i32* @%s\n", getIdVar(), this.nombreSuma));
+        else{
+            for(Sentencia sen : getLista()){
+                codigo.append(sen.generarCodigo());
+            }
+            codigo.append(String.format("%%var%s = add i32 0,0\n", getIdVar()));
+        }
         return codigo.toString();
     }
     

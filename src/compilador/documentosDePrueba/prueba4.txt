@@ -1,0 +1,24 @@
+(* Prueba de codigo para compiladores*)
+DECLARE.SECTION
+INTEGER: num1,a1;
+BOOLEAN: b1,b2;
+float: f1;
+ENDDECLARE.SECTION
+
+PROGRAM.SECTION
+DISPLAY("Ingrese 0(false) o 1(true) para b1:")
+b1 = input_bool()
+DISPLAY("Ingrese 0(false) o 1(true) para b2:")
+b2 = input_bool()
+DISPLAY(b1)
+DISPLAY(b2)
+IF(b1 and b2)THEN 
+	num1 = sumaimpar(5;[])
+ELSE 
+	f1 = 2+3*3-4/2-sumaimpar(2;[1,3])*5.0
+	DISPLAY(f1)
+END  
+a1 = sumaimpar(2;[1,input_int()])
+DISPLAY("resultado de la suma impar: ")
+DISPLAY(a1)
+ENDPROGRAM.SECTION

@@ -14,6 +14,7 @@ public class Mientras extends Sentencia {
         this.condicion = condicion;
         bloqueSentencias.setNombre("DO");
         this.bloqueSentencias = bloqueSentencias;
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
 
     public Expresion getCondicion() {
@@ -46,7 +47,6 @@ public class Mientras extends Sentencia {
 
     @Override
     public String generarCodigo() {
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         StringBuilder codigo = new StringBuilder();
         codigo.append(String.format("br label %%etwhile%s\n", getIdVar()));
         codigo.append(String.format("etwhile%s:\n", getIdVar()));

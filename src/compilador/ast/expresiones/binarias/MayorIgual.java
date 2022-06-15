@@ -10,6 +10,7 @@ public class MayorIgual extends OperacionBinaria {
     
     public MayorIgual(Expresion izquierda, Expresion derecha) {
         super(izquierda, derecha, Tipo.BOOLEAN);
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
 
     @Override
@@ -26,17 +27,16 @@ public class MayorIgual extends OperacionBinaria {
         return getIzquierda().getTipo().equals(Tipo.FLOAT) ? "oge" : "sge";
     }
 
-   @Override
+    @Override
     public String get_llvm_type_code(){
-        return getIzquierda().getTipo().equals(Tipo.FLOAT) ? "double" : "i32";
+        return getIzquierda().getTipo().equals(Tipo.INTEGER) ? "i32" : "double";
     }
 
     @Override
     public String generarCodigo(){
         String codigo = getIzquierda().generarCodigo();
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         codigo += getDerecha().generarCodigo();
-        codigo += "%var"+getIdVar()+" = "+get_llvm_arithmetic_op_code()+" "+get_llvm_op_code()+" "+get_llvm_type_code()+"  %var"+getIzquierda().getIdVar()+", %var"+getDerecha().getIdVar()+"\n";
+        codigo += "%var"+getIdVar()+" = "+get_llvm_arithmetic_op_code()+" "+get_llvm_op_code()+" "+get_llvm_type_code()+" %var"+getIzquierda().getIdVar()+", %var"+getDerecha().getIdVar()+"\n";
         return codigo;
     }
 }

@@ -1,13 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package compilador.ast.base;
 
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.text.Normalizer;
+import java.util.Iterator;
+import java.util.Map;
 
 
 
@@ -28,6 +26,7 @@ public class ProgramaCompleto extends Nodo{
         this.cuerpo = cuerpo;
         this.tablaSimbolos = tablaSimbolos;
         this.valoresString = valoresString;
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
     
     public ProgramaCompleto(Programa cuerpo, Hashtable tablaSimbolos, ArrayList<String> valoresString){
@@ -35,6 +34,7 @@ public class ProgramaCompleto extends Nodo{
         this.cuerpo = cuerpo;
         this.tablaSimbolos = tablaSimbolos;
         this.valoresString = valoresString;
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
     
     public ProgramaCompleto(Bloque bloqueDeclaraciones,Hashtable tablaSimbolos, ArrayList<String> valoresString){
@@ -42,6 +42,7 @@ public class ProgramaCompleto extends Nodo{
         this.bloqueDeclaraciones = bloqueDeclaraciones;      
         this.tablaSimbolos = tablaSimbolos;
         this.valoresString = valoresString;
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
 
     public Hashtable getTablaSimbolos() {
@@ -86,7 +87,6 @@ public class ProgramaCompleto extends Nodo{
      @Override
     public String generarCodigo() {
         StringBuilder resultado = new StringBuilder();
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         resultado.append(";Programa: Prueba\n");
         resultado.append("source_filename = \"Prueba.txt\"\n");
         resultado.append("target datalayout = \"e-m:w-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128\"\n");
@@ -95,6 +95,10 @@ public class ProgramaCompleto extends Nodo{
         resultado.append("declare i32 @puts(i8*)\n");
         resultado.append("declare i32 @scanf(i8* %0, ...)\n");
         resultado.append("\n");
+        resultado.append("@str.listavacia = private constant [20 x i8] c\"La lista esta vacia\\00\"\n");
+        resultado.append("@str.pivotpositivo = private constant [22 x i8] c\"El valor debe ser >=1\\00\"\n");
+        resultado.append("@str.cantinsuficiente = private constant [47 x i8] c\"La lista tiene menos elementos que el indicado\\00\"\n");
+        resultado.append("@str.cantidadimpares = private constant [57 x i8] c\"No existen suficientes elementos impares para el calculo\\00\"\n");
         resultado.append("@.integer = private constant [4 x i8] c\"%d\\0A\\00\"\n");
         resultado.append("@.float = private constant [5 x i8] c\"%lf\\0A\\00\"\n");
         resultado.append("@.int_read_format = unnamed_addr constant [3 x i8] c\"%d\\00\"\n");
@@ -104,6 +108,17 @@ public class ProgramaCompleto extends Nodo{
         for(String str : valoresString){
             resultado.append(str);
         }        
+        
+//        for (Iterator it = tablaSimbolos.entrySet().iterator(); it.hasNext();) {
+//            Map.Entry<String,String> set = (Map.Entry<String,String>) it.next();
+//            resultado.append(String.format("@%s = global %s ", set.getKey().toString(), getTipo_llvm(set.getValue().toString())));
+//            if(getTipo_llvm(set.getValue().toString()) == "double"){
+//                resultado.append("0.0\n");
+//            }
+//            else{
+//                resultado.append("0\n");
+//            }
+//        }
         
         tablaSimbolos.forEach((k, v) -> {
             resultado.append(String.format("@%s = global %s ", k.toString(), getTipo_llvm(v.toString())));
@@ -125,7 +140,7 @@ public class ProgramaCompleto extends Nodo{
         
         resultado.append("\n\tret i32 0\n");
         resultado.append("}");
-        
+//        resultado = new StringBuilder(Normalizer.normalize(resultado.toString(), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
 
         return resultado.toString();    
     }

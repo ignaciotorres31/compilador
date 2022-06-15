@@ -15,6 +15,7 @@ public class Entero extends Literal {
         setTipo(Tipo.INTEGER);
         this.valor = valor;
         setNombre("Integer");
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
 
     public Integer getValor() {
@@ -36,7 +37,6 @@ public class Entero extends Literal {
 
     @Override
     public String generarCodigo(){
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         return "%var"+getIdVar()+" = add i32 0, "+getValor()+"\n";
     }
 }

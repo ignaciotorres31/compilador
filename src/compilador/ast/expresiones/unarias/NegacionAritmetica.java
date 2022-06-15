@@ -14,6 +14,7 @@ public class NegacionAritmetica extends OperacionUnaria {
    public NegacionAritmetica(Expresion expresion, String operacion, Tipo tipo) {
         super("-", expresion, tipo);
         this.operacion = operacion;
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
     
     public NegacionAritmetica clonar(){
@@ -30,8 +31,7 @@ public class NegacionAritmetica extends OperacionUnaria {
     
     @Override
     public String generarCodigo(){
-        StringBuilder codigo = new StringBuilder();
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());        
+        StringBuilder codigo = new StringBuilder();      
         codigo.append(this.getExpresion().generarCodigo());
         if(getExpresion().getTipo() == Tipo.INTEGER){
             codigo.append(String.format("%%var%s = %s %s 0, %%var%s\n", getIdVar(), getOperacion(), get_llvm_type_code(), getExpresion().getIdVar()));

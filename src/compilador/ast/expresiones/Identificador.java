@@ -15,6 +15,7 @@ public class Identificador extends Constante {
     public Identificador(String nombre, Tipo tipo) {
         setTipo(tipo);
         setNombre(nombre);
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
 
     @Override
@@ -41,7 +42,6 @@ public class Identificador extends Constante {
 
     @Override
     public String generarCodigo() {
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         return "%var"+getIdVar()+" = load "+get_llvm_type_code()+", "+get_llvm_type_code()+"* @"+getNombre()+"\n";
     }
     

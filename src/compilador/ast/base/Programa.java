@@ -8,8 +8,8 @@ public class Programa extends Nodo {
     private ArrayList<Sentencia> cuerpo;
 
     public Programa(ArrayList<Sentencia> cuerpo) {
-        super("Bloque Programa");
         this.cuerpo = cuerpo;
+        this.setIdVar(CodeGeneratorHelper.getNewPointer());
     }
 
     public ArrayList<Sentencia> getCuerpo() {
@@ -32,7 +32,6 @@ public class Programa extends Nodo {
     @Override
     public String generarCodigo() {
         StringBuilder codigo = new StringBuilder();
-        this.setIdVar(CodeGeneratorHelper.getNewPointer());
         for(Nodo prog : getCuerpo()){
             codigo.append(prog.generarCodigo());
         }
